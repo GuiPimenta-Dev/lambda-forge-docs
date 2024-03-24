@@ -1,0 +1,1227 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Getting Started - Lambda Forge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lambda Forge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lambda Forge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-configure-aws-cdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and Configure AWS CDK
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new directory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new virtual environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-lambda-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install lambda-forge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install lambda-forge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify Installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-github-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new Github Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new project:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a new project:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-hello-world-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your First Hello World Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Your First Hello World Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-function-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Function Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the Function Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-structure-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Structure Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-your-lambda-function-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Your Lambda Function Dependencies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Your Lambda Function Dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Services Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilizing-the-services-class-in-configpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizing the Services Class in config.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-the-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Lambda Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-your-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying Your Lambda Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying Your Lambda Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-github-personal-access-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a GitHub Personal Access Token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#store-the-token-on-aws-secrets-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store the token on AWS Secrets Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-your-code-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push Your Code To Github
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploying-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the Stacks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying the Stacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-pipeline-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Pipeline Steps
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-your-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Your Lambda Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-base-url-for-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the BASE URL for Integration Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-updated-code-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pushing Updated Code to GitHub
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-configure-aws-cdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and Configure AWS CDK
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new directory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new virtual environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-lambda-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install lambda-forge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install lambda-forge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify Installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-github-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new Github Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a new project:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a new project:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-hello-world-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your First Hello World Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Your First Hello World Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-function-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Function Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the Function Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-structure-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Structure Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-your-lambda-function-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Your Lambda Function Dependencies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Your Lambda Function Dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Services Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilizing-the-services-class-in-configpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizing the Services Class in config.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-the-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Lambda Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-your-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying Your Lambda Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying Your Lambda Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-github-personal-access-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a GitHub Personal Access Token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#store-the-token-on-aws-secrets-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store the token on AWS Secrets Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-your-code-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push Your Code To Github
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploying-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the Stacks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying the Stacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-pipeline-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Pipeline Steps
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-your-lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Your Lambda Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-base-url-for-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the BASE URL for Integration Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-updated-code-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pushing Updated Code to GitHub
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="getting-started">Getting Started</h1>
+<h3 id="install-and-configure-aws-cdk">Install and Configure AWS CDK</h3>
+<p>Lambda Forge is built on top of AWS Cloud Development Kit (CDK) and it's essential for defining cloud infrastructure in code and provisioning it through AWS CloudFormation. Execute the following commands to install the AWS CDK globally and set up your AWS credentials:</p>
+<div class="highlight"><pre><span></span><code>npm install -g aws-cdk
+aws configure
+</code></pre></div>
+<p>During the configuration, you will be prompted to enter your AWS Access Key ID, Secret Access Key, default region name, and output format.</p>
+<h3 id="create-a-new-directory">Create a new directory</h3>
+<div class="highlight"><pre><span></span><code>mkdir lambda_forge_demo
+cd lambda_forge_demo
+</code></pre></div>
+<h3 id="create-a-new-virtual-environment">Create a new virtual environment</h3>
+<div class="highlight"><pre><span></span><code>python3 -m venv venv
+source venv/bin/activate
+</code></pre></div>
+<h3 id="install-lambda-forge">Install lambda-forge</h3>
+<div class="highlight"><pre><span></span><code>pip install lambda-forge --extra-index-url https://pypi.org/simple --extra-index-url https://test.pypi.org/simple/
+</code></pre></div>
+<h4 id="verify-installation">Verify Installation</h4>
+<p>Having successfully installed Lambda Forge, you are now ready to explore the capabilities of the Forge Command Line Interface (CLI). Begin by entering the following command to access the comprehensive list of available options and commands:</p>
+<div class="highlight"><pre><span></span><code>forge --help
+</code></pre></div>
+<h2 id="create-a-new-github-repository">Create a new Github Repository</h2>
+<p>Lambda Forge simplifies your workflow by automatically configuring a CI/CD pipeline within a GitHub repository. Therefore, our next step is to create a new repository on GitHub. This foundational setup enables Lambda Forge to seamlessly integrate and automate the development, testing, and deployment processes for your projects.</p>
+<h2 id="create-a-new-project">Create a new project:</h2>
+<p>Let's start a new project without generating docs initially.</p>
+<div class="highlight"><pre><span></span><code>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-USER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
+</code></pre></div>
+<p>Make sure to replace <strong>$GITHUB-USER</strong> and <strong>$GITHUB-REPO</strong> with your actual GitHub username and the repository name you established in the previous step.</p>
+<h3 id="project-structure">Project Structure</h3>
+<p>Upon forging your project, several directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
+<p>In the upcoming sections of this tutorial, we'll explore each of these components in detail. For now, familiarize yourself with the foundational structure that should resemble the following:</p>
+<div class="highlight"><pre><span></span><code>.
+├── authorizers
+│   └── __init__.py
+├── functions
+│   └── __init__.py
+├── infra
+│   ├── __init__.py
+│   ├── services
+│   │   ├── __init__.py
+│   │   ├── api_gateway.py
+│   │   └── aws_lambda.py
+│   ├── stacks
+│   │   ├── __init__.py
+│   │   ├── dev_stack.py
+│   │   ├── lambda_stack.py
+│   │   ├── prod_stack.py
+│   │   └── staging_stack.py
+│   └── stages
+│       ├── __init__.py
+│       └── deploy.py
+├── .coveragerc
+├── .gitignore
+├── app.py
+├── cdk.json
+├── pytest.ini
+└── requirements.txt
+</code></pre></div>
+<h2 id="creating-your-first-hello-world-function">Creating Your First Hello World Function</h2>
+<p>Embarking on the journey with Lambda Forge, creating a public "Hello World" function is a fantastic way to get started. This function will serve as a simple demonstration of Lambda Forge's ability to quickly deploy serverless functions accessible via an HTTP endpoint. Here's how you can create your very first public Hello World function.</p>
+<div class="highlight"><pre><span></span><code>forge function hello_world --method &quot;GET&quot; --description &quot;A simple hello world&quot; --public
+</code></pre></div>
+<p>This command instructs Lambda Forge to generate a new lambda function named hello_world. The --method "GET" parameter specifies that this function will be accessible via an HTTP GET request. The --description provides a brief explanation of the function's purpose, and --public makes the function publicly accessible, allowing anyone with the URL to invoke it.</p>
+<h3 id="understanding-the-function-structure">Understanding the Function Structure</h3>
+<p>When you create a new function with Lambda Forge, it not only simplifies the creation process but also sets up a robust and organized file structure for your function. This structure is designed to support best practices in software development, including separation of concerns, configuration management, and testing. Let's break down the structure of the automatically generated hello_world function:</p>
+<div class="highlight"><pre><span></span><code>functions/
+└── hello_world/
+    ├── __init__.py
+    ├── config.py
+    ├── integration.py
+    ├── main.py
+    └── unit.py
+</code></pre></div>
+<ul>
+<li><code>functions/</code> This directory is the root folder for all your Lambda functions. Each function has its own subdirectory within this folder.</li>
+<li><code>hello_world/</code> The hello_world subdirectory contains all the necessary files for your function to run, be configured, and tested.</li>
+<li><code>__init__.py</code> This file marks the directory as a Python package, allowing its modules to be imported elsewhere. It's a standard practice in Python to facilitate package organization.</li>
+<li><code>config.py</code> Holds the configuration settings for the function. These might include environment variables, resource identifiers, and other parameters critical for the function's operation. Keeping configuration separate from code is a best practice, as it enhances maintainability and scalability.</li>
+<li><code>integration.py</code> Contains integration tests that simulate the interaction of your function with external services or resources. These tests ensure that your function integrates correctly with other parts of the system and external dependencies.</li>
+<li><code>main.py</code> This is where the core logic of your Lambda function resides. The handler function, which AWS Lambda invokes when the function is executed, is defined here. You'll implement the functionality of your "Hello World" response in this file.</li>
+<li><code>unit.py</code> Contains unit tests for your function. Unit tests focus on testing individual parts of the function's code in isolation, ensuring that each component behaves as expected. This is crucial for identifying and fixing bugs early in the development process.</li>
+</ul>
+<h4 id="why-this-structure-matters">Why This Structure Matters</h4>
+<p>This organized approach offers several benefits:</p>
+<ul>
+<li><strong>Maintainability:</strong> Separating different aspects of the function (such as configuration, testing, and core logic) makes it easier to manage and update the code.</li>
+<li><strong>Scalability:</strong> As your application grows, having a consistent structure across functions allows for easier scaling and integration of new features or services.</li>
+<li><strong>Testing:</strong> Including both unit and integration tests from the outset encourages a testing culture, leading to more robust and reliable code.</li>
+</ul>
+<p>As you continue to develop with Lambda Forge, this structure will help keep your projects organized and maintainable, regardless of their complexity or scale.</p>
+<h3 id="configuring-your-lambda-function-dependencies">Configuring Your Lambda Function Dependencies</h3>
+<h4 id="the-services-class">The Services Class</h4>
+<p>Within the <code>infra/services/__init__.py</code> file, you'll find the Services class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources directly from your <code>config.py</code> files.</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+
+<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="utilizing-the-services-class-in-configpy">Utilizing the Services Class in config.py</h4>
+<p>In our Lambda Forge projects, the <code>config.py</code> file plays a crucial role in defining and configuring the dependencies required by a Lambda function. This includes everything from AWS Lambda layers, permissions to environment variables and DynamoDB tables. By passing an instance of Services to our configuration classes, we can seamlessly create and manage resources such as Lambda functions and API Gateway endpoints.</p>
+<div class="highlight"><span class="filename">functions/hello_world/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+<span class="k">class</span> <span class="nc">HelloWorldConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A simple hello world&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/hello_world&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="implementing-the-lambda-function">Implementing the Lambda Function</h3>
+<p>Your Lambda function's implementation should be in the <code>main.py</code> file. Below is an example showcasing our simple HelloWorld function:</p>
+<div class="highlight"><span class="filename">functions/hello_world/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>The <code>Input</code> and <code>Output</code> data classes define the structure for each endpoint, laying the groundwork for generating the comprehensive Swagger documentation. This documentation precisely outlines the expected input and output data for every endpoint.</p>
+<p>Considering the project was initiated with the <code>--no-docs</code> flag, let's temporarily skip this documentation generation phase. However, we intend to revisit and implement documentation generation at a future point in this tutorial.</p>
+<h2 id="deploying-your-lambda-function">Deploying Your Lambda Function</h2>
+<p>To deploy your Lambda function, you should integrate the Config class within the <code>infra/stacks/lambda_stack.py</code> file.</p>
+<p>The Forge CLI streamlines this process by automatically incorporating it for you.</p>
+<div class="highlight"><span class="filename">infra/stacks/lambda_stack.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">Stack</span>
+<span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">release</span>
+<span class="kn">from</span> <span class="nn">functions.hello_world.config</span> <span class="kn">import</span> <span class="n">HelloWorldConfig</span>
+
+
+<span class="nd">@release</span>
+<span class="k">class</span> <span class="nc">LambdaStack</span><span class="p">(</span><span class="n">Stack</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">-CDK&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># HelloWorld</span>
+        <span class="n">HelloWorldConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="create-a-github-personal-access-token">Create a GitHub Personal Access Token</h3>
+<p>Lambda Forge uses CodePipeline to interact with your GitHub repository. To enable this, generate a GitHub personal access token by following these steps:</p>
+<ol>
+<li>Navigate to "Developer Settings" in your GitHub account.</li>
+<li>Select "Personal access tokens," then "Tokens (classic)."</li>
+<li>Click "Generate new token," ensuring the "repo" scope is selected for full control of private repositories.</li>
+<li>Complete the token generation process.</li>
+</ol>
+<p>Your token will follow this format: <code>ghp_********************************</code></p>
+<h3 id="store-the-token-on-aws-secrets-manager">Store the token on AWS Secrets Manager</h3>
+<p>Save this token in AWS Secrets Manager as <code>plain text</code> using the precise name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
+<h3 id="push-your-code-to-github">Push Your Code To Github</h3>
+<p>With all the required settings now in place, we're ready to upload our code to the GitHub repository.</p>
+<p>Lambda Forge is designed to support a multi-stage deployment process, automatically creating environments for Production, Staging and Development. These environments correspond to the <code>main</code>, <code>staging</code>, and <code>dev</code> branches, respectively.</p>
+<p>Let's proceed by setting up these branches:</p>
+<div class="highlight"><pre><span></span><code># Initialize the Git repository
+git init
+git add .
+
+# Commit the changes
+git commit -m &quot;Initial commit&quot;
+
+# Set the remote repository
+git remote add origin git@github.com:$GITHUB_USER/$GITHUB_REPO.git
+
+# Create, checkout, and push the &#39;main&#39; branch
+git checkout -b main
+git push -u origin main
+
+# Create, checkout, and push the &#39;staging&#39; branch
+git checkout -b staging
+git push -u origin staging
+
+# Create and push the &#39;dev&#39; branch
+git branch -M dev
+git push -u origin dev
+</code></pre></div>
+<h3 id="deploying-the-stacks">Deploying the Stacks</h3>
+<p>After pushing your code to GitHub, the next step is deploying your stacks to AWS using the AWS Cloud Development Kit (CDK). Deploy your stacks by running the following commands in your terminal:</p>
+<div class="highlight"><pre><span></span><code>cdk<span class="w"> </span>synth
+cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> </span>--require-approval<span class="w"> </span>never
+</code></pre></div>
+<p>These commands kick off the creation of three separate stacks in AWS CloudFormation:</p>
+<ul>
+<li><strong>Dev-Lambda-Forge-Demo-Stack</strong>: For the development stage.</li>
+<li><strong>Staging-Lambda-Forge-Demo-Stack</strong>: For the staging stage.</li>
+<li><strong>Prod-Lambda-Forge-Demo-Stack</strong>: For the production stage.</li>
+</ul>
+<p>The stacks are named following a convention that includes the stage of deployment and the project name, as configured in the cdk.json file.</p>
+<p>Following a successful deployment, three corresponding pipelines are automatically generated for each stage:</p>
+<ul>
+<li><strong>Dev-Lambda-Forge-Demo-Pipeline</strong></li>
+<li><strong>Staging-Lambda-Forge-Demo-Pipeline</strong></li>
+<li><strong>Prod-Lambda-Forge-Demo-Pipeline</strong></li>
+</ul>
+<p>You can view these pipelines by navigating to the AWS CodePipeline dashboard.
+<br></p>
+<p><img alt="Pipelines" src="../three_pipelines.png" /></p>
+<h4 id="customizing-pipeline-steps">Customizing Pipeline Steps</h4>
+<p>In Lambda Forge, pipelines are defined within their specific stack files located at <code>infra/stacks/dev_stack.py</code>, <code>infra/stacks/staging_stack.py</code>, and <code>infra/stacks/prod_stack.py</code>. Below is an outline of the default steps included in each pipeline, along with details on how they function and how you can interact with them.</p>
+<ul>
+<li>
+<p><strong>Coverage</strong>: Measures the percentage of your production code covered by unit tests, failing if coverage falls below 80% as default. To view the coverage report, navigate to <code>Details -&gt; Reports</code> in CodePipeline.</p>
+</li>
+<li>
+<p><strong>Unit Tests</strong>: Runs unit tests to validate the functionality of individual components within your code. Access the unit test report via <code>Details -&gt; Reports</code> in CodePipeline.</p>
+</li>
+<li>
+<p><strong>Validate Docs</strong>: Verifies that all Lambda functions invoked by API Gateway have their Input and Output data classes correctly defined in the <code>main.py</code> file.</p>
+</li>
+<li>
+<p><strong>Validate Integration Tests</strong>: This step ensures that all endpoints triggered by the API Gateway are covered by at least one integration test. To achieve this, use the custom decorator <code>@pytest.mark.integration</code> and specify the method and endpoint arguments to declare that the test covers a specific endpoint.</p>
+</li>
+<li>
+<p><strong>Generate Docs</strong>: Automatically produces Swagger documentation for all API Gateway endpoints. This requires <code>Input</code> and <code>Output</code> data classes for each Lambda function in the <code>main.py</code> file. Documentation is deployed directly to API Gateway and is accessible at the <code>/docs</code> endpoint.</p>
+</li>
+<li>
+<p><strong>Integration Tests</strong>: Performs integration testing to assess the system's overall functionality. Access the integration test report through <code>Details -&gt; Reports</code> in CodePipeline.</p>
+</li>
+</ul>
+<p>Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, or reordering them, the framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.</p>
+<p>After the pipelines have executed, you may notice that while the Development pipeline succeeds, the Staging and Production pipelines fail.</p>
+<p><img alt="Failed Prod and Staging but Dev success" src="../failed-pipelines.png" /></p>
+<p><strong>The failure is expected</strong>, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.</p>
+<div class="highlight"><span class="filename">functions/hello_world/integration.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lambda_forge.constants</span> <span class="kn">import</span> <span class="n">BASE_URL</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">integration</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/hello_world&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello_world_status_code_is_200</span><span class="p">():</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/hello_world&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre></div>
+<h3 id="accessing-your-lambda-function">Accessing Your Lambda Function</h3>
+<p>Note that the <code>Integration_Test</code> step failed <strong>after</strong> the deployment in the staging pipeline.</p>
+<p><img alt="alt text" src="../integration-tests-failed.png" /></p>
+<p>This means that both Dev and the Staging Lambda function are successfully deployed.</p>
+<p>In this tutorial, we will use the staging URL to test our endpoints, considering it as a pre-production layer. Feel free to utilize the development URL instead if it suits your case better.</p>
+<p>Navigate to the AWS Lambda section on AWS and search for the <strong>Staging-Lambda-Forge-Demo-HelloWorld</strong> function in the list of Lambda functions.
+<br></p>
+<p><img alt="Staging Hello World Lambda Function" src="../staging-hello-world.png" /></p>
+<p>Once you've found your function, click on it to view its details. Proceed by selecting the Configuration tab, followed by Triggers to uncover the integration points.</p>
+<p><img alt="Api Gateway Trigger" src="../api-gateway-trigger.png" /></p>
+<p>In this tutorial, the generated URL is:</p>
+<p><a href="https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world</a>.</p>
+<p>By following the link provided, you should be greeted by a simple "Hello World" message in your web browser, indicating that your Lambda function is operational and accessible via the URL generated by API Gateway.</p>
+<h3 id="configuring-the-base-url-for-integration-tests">Configuring the BASE URL for Integration Tests</h3>
+<p>With the Lambda function's URL at hand, we identify that the segment before <code>/hello_world</code> acts as the BASE URL. For the purposes of this tutorial, the BASE URL is <code>https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging</code>. This is the URL you need to copy.</p>
+<p><strong>Proceed to incorporate this URL into your project's configuration by setting it as the value for <code>base_url</code> in your <code>cdk.json</code> file</strong>.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">...</span>
+<span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+<span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
+<span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
+<span class="p">},</span>
+<span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="hll"><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging&quot;</span>
+</span><span class="err">...</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="pushing-updated-code-to-github">Pushing Updated Code to GitHub</h3>
+<p>With the BASE URL configured for our integration tests, it's time to push the updated code to GitHub and aim for successful integration test outcomes across all deployment stages.</p>
+<p>Follow these steps to commit your changes and deploy them across the development, staging, and production branches:</p>
+<div class="highlight"><pre><span></span><code># Add changes to the staging area
+git add .
+
+# Commit the changes with a descriptive message
+git commit -m &quot;Configure BASE URL for integration tests&quot;
+
+# Push changes to the &#39;dev&#39; branch.
+git push origin dev
+
+# Switch to the &#39;staging&#39; branch, merge changes from &#39;dev&#39;, and push
+git checkout staging
+git merge dev
+git push origin staging
+
+# Switch to the &#39;main&#39; branch, merge changes from &#39;staging&#39;, and push
+git checkout main
+git merge staging
+git push origin main
+</code></pre></div>
+<p>After executing these commands, all associated pipelines should be triggered once again.</p>
+<p><img alt="alt text" src="../three_pipelines.png" /></p>
+<p>Once the execution of all pipelines is complete, you should observe that all stages have successfully passed.</p>
+<p><img alt="alt text" src="../success-pipelines.png" /></p>
+<p><img alt="alt text" src="../functions-deployed.png" /></p>
+<p>Congratulations! 🎉 You've successfully deployed your very first Lambda function across three distinct stages using Lambda Forge! 🚀</p>
+<p>In this tutorial, the links are:</p>
+<ul>
+<li>Dev: <a href="https://rlb7cyuqfh.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://rlb7cyuqfh.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
+<li>Staging: <a href="https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
+<li>Prod: <a href="https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
