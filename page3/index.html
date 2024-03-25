@@ -294,9 +294,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#activating-documentation-generation" class="md-nav__link">
+  <a href="#activating-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Activating Documentation Generation
+      Activating Docs
     </span>
   </a>
   
@@ -366,9 +366,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#activating-documentation-generation" class="md-nav__link">
+  <a href="#activating-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Activating Documentation Generation
+      Activating Docs
     </span>
   </a>
   
@@ -392,7 +392,15 @@
 <h1 id="docs-generation">Docs Generation</h1>
 <p>With our Lambda Function now deployed across three distinct stages, the next step involves creating documentation for our endpoints.</p>
 <h2 id="setting-up-a-s3-bucket-for-documentation">Setting Up a S3 Bucket for Documentation</h2>
-<p>Begin by creating a S3 Bucket, which will serve as the storage location for your documentation files.</p>
+<p>Create an Amazon S3 bucket to serve as the primary storage for your documentation files. Follow these steps to create your S3 bucket:</p>
+<ol>
+<li><strong>Access the AWS Management Console</strong>: Open the Amazon S3 console at <a href="https://console.aws.amazon.com/s3/">https://console.aws.amazon.com/s3/</a>.</li>
+<li><strong>Create a New Bucket</strong>: Click on the "Create bucket" button. It's important to note that each bucket's name must be globally unique across all of Amazon S3.</li>
+<li><strong>Set Bucket Name</strong>: Choose a unique and descriptive name for your bucket. This name will be crucial for accessing your documentation files. Remember, once a bucket name is set, it cannot be changed.</li>
+<li><strong>Choose a Region</strong>: Select an AWS Region for your bucket. Choose the same region defined in your <code>cdk.json</code>.</li>
+<li><strong>Configure Options</strong>: You may leave the default settings or configure additional options like versioning, logging, or add tags according to your needs.</li>
+<li><strong>Review and Create</strong>: Before creating the bucket, review your settings. Once everything is confirmed, click "Create bucket".</li>
+</ol>
 <p>Once the bucket is created, update your <code>cdk.json</code> file with the bucket's name as shown below:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
 <span class="normal">41</span>
@@ -405,18 +413,18 @@
 <span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">...</span>
-<span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
-<span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="hll"><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+</span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
 <span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
 <span class="p">},</span>
-<span class="hll"><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$S3-BUCKET&quot;</span><span class="p">,</span>
+<span class="hll"><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$S3-BUCKET-NAME&quot;</span><span class="p">,</span>
 </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
 <span class="err">...</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="activating-documentation-generation">Activating Documentation Generation</h2>
+<h2 id="activating-docs">Activating Docs</h2>
 <p>To activate documentation generation, navigate to the <code>deploy.py</code> file located at <code>infra/stages/deploy.py</code>. Modify the <code>enabled</code> parameter by setting it from <code>False</code> to <code>True</code> on line 13, as demonstrated below:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stages/deploy.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -445,9 +453,9 @@
 <span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p><strong>By default, Lambda Forge does not include documentation for the Development stage.</strong></p>
-<p>Since the project was initiated using the <code>--no-docs</code> flag, the documentation generation step is absent from the PostDeployment phase in both the Staging and Production stacks.</p>
+<p>Since the project was initiated using the <code>--no-docs</code> flag, the generate docs step is absent from the post deployment phase in both the Staging and Production stacks.</p>
 <p>To activate the docs, update the relevant sections in your stack configurations as follows:</p>
-<p>In your Staging stack, enable documentation generation by including it in the <code>post</code> array of the pipeline configuration. The updated section should look like this:</p>
+<p>In your Staging stack, enable generate docs by including it in the <code>post</code> array of the pipeline configuration. The updated section should look like this:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/staging_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
@@ -473,10 +481,10 @@
             <span class="n">validate_integration_tests</span><span class="p">,</span>
             <span class="n">validate_docs</span><span class="p">,</span>
         <span class="p">],</span>
-<span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">integration_tests</span><span class="p">,</span> <span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Documentation generation enabled</span>
+<span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">integration_tests</span><span class="p">,</span> <span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
 </span>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Similarly, for the Production stack, ensure that documentation generation is enabled by adding it to the post section of your pipeline setup:</p>
+<p>Similarly, for the Production stack, ensure that generate docs is enabled by adding it to the post section of your pipeline setup:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/prod_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
@@ -488,10 +496,10 @@
 
     <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
         <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
-<span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Documentation generation enabled</span>
+<span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
 </span>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>At this point, we have all the necessary components to generate our documentation.</p>
+<p>At this point, we have all the necessary components to automatically generate our docs.</p>
 <p>To proceed, commit your changes and push them to GitHub using the following commands:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.
 
@@ -513,10 +521,10 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <p>Upon successful completion of the pipeline, the Swagger documentation for your endpoints can be accessed via the <code>/docs</code> path. This documentation provides comprehensive details about the available endpoints, including request formats, response structures, and query parameters.</p>
 <p>You can view the Swagger documentation at the following URLs for each environment:</p>
 <ul>
-<li><strong>Staging Environment</strong>: <a href="https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/docs">https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
-<li><strong>Production Environment</strong>: <a href="https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/docs">https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/docs</a></li>
+<li><strong>Staging Environment</strong>: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
+<li><strong>Production Environment</strong>: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a></li>
 </ul>
-<p>The documentation includes information on all supported features, structured as follows:</p>
+<p>This code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Literal</span>
 
@@ -544,7 +552,6 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
     <span class="k">pass</span>
 </code></pre></div>
-<p>This code snippet demonstrates the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.</p>
 <p>You may have observed that our documentation endpoint is currently public. While in some scenarios, having public documentation is desirable, in others, it can pose a significant security risk. In the following section, we will explore methods to secure this and other endpoints, making them accessible only through an authorizer.</p>
 
 
