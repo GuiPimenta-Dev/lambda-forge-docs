@@ -913,9 +913,9 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
             <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
-<span class="hll">        <span class="c1"># Specify the &#39;docs&#39; authorizer for the &#39;/private&#39; endpoint</span>
-</span>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;docs&quot;</span><span class="p">)</span>
-</code></pre></div>
+        <span class="c1"># Specify the &#39;docs&#39; authorizer for the &#39;/private&#39; endpoint</span>
+<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;docs&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <p>By implementing this configuration, the <code>/private</code> function would be secured using the same authorizer as the <code>/docs</code> endpoints.</p>
 <p>Please note, this change is presented for illustrative purposes to demonstrate how to apply a non-default authorizer. Consequently, we will not commit this alteration and will continue to secure the <code>/private</code> endpoint with the default authorizer.</p>
 
