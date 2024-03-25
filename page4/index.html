@@ -1,0 +1,684 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../page3/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Private Endpoints - Lambda Forge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#private-endpoints" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lambda Forge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Private Endpoints
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lambda Forge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Private Endpoints
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoints
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authorizer-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorizer Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorizer Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-your-authorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Your Authorizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-the-authorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing The Authorizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attaching-the-authorizer-to-the-docs-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attaching The Authorizer To The Docs Endpoints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-your-changes-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish Your Changes to GitHub
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authorizer-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorizer Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorizer Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-your-authorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Your Authorizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-the-authorizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing The Authorizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attaching-the-authorizer-to-the-docs-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attaching The Authorizer To The Docs Endpoints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-your-changes-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish Your Changes to GitHub
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="private-endpoints">Private Endpoints</h1>
+<p>Given our current setup, all endpoints are accessible via the internet, which may or may not align with the intended use case of your application.</p>
+<p>Let's proceed to learn how to configure these endpoints to be private.</p>
+<p>First, let's begin by creating a new authorizer function with the following command:</p>
+<div class="highlight"><pre><span></span><code>forge authorizer docs --description &quot;Authorizer for Swagger Documentation&quot;
+</code></pre></div>
+<p>This command instructs the forge CLI tool to create a new authorizer function named docs.</p>
+<h2 id="authorizer-structure">Authorizer Structure</h2>
+<p>Authorizers, while closely resembling Lambda Functions in structure, fulfill a distinct role. Their primary function is to act as an intermediary layer that authenticates requests made to Lambda Functions, ensuring that only authorized requests are processed.</p>
+<p>Let's examine the structure of an authorizer more closely:</p>
+<div class="highlight"><pre><span></span><code>authorizers
+├── __init__.py
+├── docs
+│   ├── __init__.py
+│   ├── config.py
+│   ├── main.py
+│   └── unit.py
+└── utils
+    └── __init__.py
+</code></pre></div>
+<ul>
+<li><code>authorizers/</code> This directory serves as the central hub for all authorizer functions, analogous to how the <code>functions/</code> directory houses Lambda functions. Each distinct authorizer is allocated its own subdirectory within this folder.</li>
+<li><code>docs/</code> The <code>docs</code> subdirectory is specifically designed for the authorizer related to the 'docs' endpoint. It includes everything needed for the authorizer to authenticate requests, manage configurations, and perform testing.</li>
+<li><code>__init__.py</code> Marks the directory as a Python package, enabling its modules to be imported elsewhere within the project.</li>
+<li><code>config.py</code> Contains the configuration settings for the authorizer, such as environmental variables and access control parameters. Keeping the configuration separate from the core logic is a best practice that enhances code maintainability and adaptability.</li>
+<li><code>main.py</code> Houses the main logic for the authorizer, detailing how incoming requests are verified. This file is where you define the procedures for credential validation and access authorization.</li>
+<li><code>unit.py</code> Focused on unit testing for the authorizer, these tests ensure that each part of the authorizer's code operates as expected independently, which is essential for early bug detection and reliable functionality.</li>
+<li><code>utils/</code> Provides utility functions that are used by the authorizers, offering common functionalities or resources that can be leveraged across various authorizers to facilitate development and maintenance.</li>
+</ul>
+<h3 id="configuring-your-authorizer">Configuring Your Authorizer</h3>
+<p>Similar to lambda functions in terms of setup, authorizers diverge in their application. Instead of establishing an endpoint on API Gateway, an authorizer is configured to control access to one or more endpoints.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">authorizers/docs/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+<span class="k">class</span> <span class="nc">DocsAuthorizerConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;DocsAuthorizer&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./authorizers/docs&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authorizer for Swagger Documentation&quot;</span>
+        <span class="p">)</span>
+
+<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_authorizer</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;docs&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Actually, Lambda Forge treats all lambda functions as <strong>private</strong> by default. That's why we had to use the <code>--public</code> flag in our initial forge command to make the function accessible without authentication. Without this flag, we would have been required to implement an authorizer for user authentication.</p>
+<h3 id="implementing-the-authorizer">Implementing The Authorizer</h3>
+<p>The following code snippet illustrates a basic implementation of an AWS Lambda authorizer function generated automatically by Forge. This example is intended solely for demonstration and learning purposes, and it is critical to devise a comprehensive and secure authentication mechanism suitable for your application's specific security needs. For demonstration, the authorizer checks a custom header for a specific secret value to decide on granting or denying access.</p>
+<p><strong>Important Note</strong>: The example below employs a simple secret key for authorization, which is not recommended for production environments. It is crucial to replace this logic with a robust, secure authorization strategy before deploying your application.</p>
+<div class="highlight"><span class="filename">authorizers/docs/main.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+
+    <span class="c1"># ATTENTION: The example provided below is strictly for demonstration purposes and should NOT be deployed in a production environment.</span>
+    <span class="c1"># It&#39;s crucial to develop and integrate your own robust authorization mechanism tailored to your application&#39;s security requirements.</span>
+    <span class="c1"># To utilize the example authorizer as a temporary placeholder, ensure to include the following header in your requests:</span>
+
+    <span class="c1"># Header:</span>
+    <span class="c1"># secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8</span>
+
+    <span class="c1"># Remember, security is paramount. This placeholder serves as a guide to help you understand the kind of information your custom authorizer should authenticate.</span>
+    <span class="c1"># Please replace it with your secure, proprietary logic before going live. Happy coding!</span>
+
+    <span class="n">secret</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">)</span>
+
+    <span class="n">SECRET</span> <span class="o">=</span> <span class="s2">&quot;CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&quot;</span>
+    <span class="n">effect</span> <span class="o">=</span> <span class="s2">&quot;allow&quot;</span> <span class="k">if</span> <span class="n">secret</span> <span class="o">==</span> <span class="n">SECRET</span> <span class="k">else</span> <span class="s2">&quot;deny&quot;</span>
+
+    <span class="n">policy</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;policyDocument&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;execute-api:Invoke&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="n">effect</span><span class="p">,</span>
+                    <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">policy</span>
+</code></pre></div>
+<p>As illustrated in the code snippet above, the authorizer is designed to check for a specific header named <code>secret</code>, expecting it to contain the key <code>CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8</code>.</p>
+<p>This key serves as a simple form of authentication, granting or denying access based on its presence and accuracy in the request headers.</p>
+<p>The token mentioned is automatically generated by Forge, meaning the specific token you encounter during your implementation will differ from the example provided. Please be mindful of this distinction as you proceed.</p>
+<h2 id="attaching-the-authorizer-to-the-docs-endpoints">Attaching The Authorizer To The Docs Endpoints</h2>
+<p>Given that the resources developed in this tutorial serve as public demonstrations of the deployment process, we will not secure the previously created endpoint, allowing it to remain accessible to other readers. Instead, we'll introduce protection by setting up a new Swagger documentation under a separate endpoint.</p>
+<p>However, if you prefer, you're welcome to secure the original documentation endpoint instead of establishing a new one.</p>
+<p>To integrate the new authorizer or to update an existing docs endpoint to include authorization, navigate to your <code>infra/stages/deploy.py</code> file. Here, you will either add a new endpoint for the docs with authorization enabled or update the current one.</p>
+<p>The example below shows how to add a new endpoint <code>/swagger</code> that is protected by the docs authorizer, while keeping the original docs endpoint public for demonstration purposes:</p>
+<div class="highlight"><span class="filename">infra/stages/deploy.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
+<span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+
+<span class="kn">from</span> <span class="nn">infra.stacks.lambda_stack</span> <span class="kn">import</span> <span class="n">LambdaStack</span>
+
+
+<span class="k">class</span> <span class="nc">DeployStage</span><span class="p">(</span><span class="n">cdk</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">stage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">lambda_stack</span> <span class="o">=</span> <span class="n">LambdaStack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># Keep the original docs endpoint public</span>
+        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Add a new, private docs endpoint at /swagger</span>
+<span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;docs&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/swagger&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Keep in mind that the authorizer name you specify when enabling the docs endpoint must match the exact name assigned to the authorizer within the authorizer configuration class created previously.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">authorizers/docs/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;DocsAuthorizer&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./authorizers/docs&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authorizer to be used by swagger&quot;</span>
+        <span class="p">)</span>
+
+<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_authorizer</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;docs&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="publish-your-changes-to-github">Publish Your Changes to GitHub</h2>
+<p>With all components now properly configured, the next step is to publish your updates to GitHub. Execute the following commands to add, commit, and push your changes across the various branches, ensuring your repository reflects the latest state of your project:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Stage all changes for commit</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+
+<span class="c1"># Commit your changes with a descriptive message</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Implemented private documentation endpoint&quot;</span>
+
+<span class="c1"># Push the changes to the &#39;dev&#39; branch</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
+
+<span class="c1"># Switch to the &#39;staging&#39; branch, merge changes from &#39;dev&#39;, and push</span>
+git<span class="w"> </span>checkout<span class="w"> </span>staging
+git<span class="w"> </span>merge<span class="w"> </span>dev
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
+
+<span class="c1"># Switch to the &#39;main&#39; branch, merge changes from &#39;staging&#39;, and push, completing the workflow</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>staging
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>Once the deployment pipelines conclude, you'll have access to the newly secured documentation endpoint, protected by the authorizer.</p>
+<ul>
+<li>Staging: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/swagger">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/swagger</a></li>
+<li>Prod: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/swagger">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/swagger</a></li>
+</ul>
+<p>Attempting to access the above URLs directly will result in the following message:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User is not authorized to access this resource with an explicit deny&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This response confirms that the authorizer is operational, effectively restricting access to unauthorized requests.</p>
+<p>However, by including the appropriate secret in your request headers, you can gain access to the documentation. Here's how you can use curl to view the docs:</p>
+<p>For Staging:</p>
+<div class="highlight"><span class="filename">staging</span><pre><span></span><code>curl --request GET \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/swagger \
+  --header &#39;secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&#39; \
+</code></pre></div>
+<p>For Production:</p>
+<div class="highlight"><span class="filename">prod</span><pre><span></span><code>curl --request GET \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/swagger \
+  --header &#39;secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&#39;
+</code></pre></div>
+<p>This process demonstrates the effectiveness of the authorizer in safeguarding your documentation, allowing only those with the correct secret to view it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
