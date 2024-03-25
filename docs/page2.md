@@ -244,7 +244,7 @@ Lambda Forge is designed to support a multi-stage deployment process, automatica
 
 Let's proceed by setting up these branches:
 
-```
+```bash
 # Initialize the Git repository
 git init
 git add .
@@ -272,7 +272,7 @@ git push -u origin dev
 
 After pushing your code to GitHub, the next step is deploying your stacks to AWS using the AWS Cloud Development Kit (CDK). Deploy your stacks by running the following commands in your terminal:
 
-```bash
+```
 cdk synth
 cdk deploy --all --require-approval never
 ```
@@ -283,7 +283,19 @@ These commands kick off the creation of three separate stacks in AWS CloudFormat
 - **Staging-Lambda-Forge-Demo-Stack**: For the staging stage.
 - **Prod-Lambda-Forge-Demo-Stack**: For the production stage.
 
-The stacks are named following a convention that includes the stage of deployment and the project name, as configured in the cdk.json file.
+Every resource created on AWS by Lambda Forge adhere to a convention that incorporates the deployment stage, project name and the resource name, ensuring a clear and systematic identification across the project. The project name, a central element of this naming convention, is specified in the `cdk.json` file, which Forge automatically configured.
+
+```{.json hl_lines="4" title="cdk.json"}
+...
+    "region": "us-east-2",
+    "account": "",
+    "name": "Lambda-Forge-Demo",
+    "repo": {
+      "owner": "$GITHUB-USER",
+      "name": "$GITHUB-REPO"
+    },
+...
+```
 
 Following a successful deployment, three corresponding pipelines are automatically generated for each stage:
 
@@ -294,7 +306,7 @@ Following a successful deployment, three corresponding pipelines are automatical
 You can view these pipelines by navigating to the AWS CodePipeline dashboard.
 <br>
 
-![Pipelines](three_pipelines.png)
+![Pipelines](images/three_pipelines.png)
 
 #### Customizing Pipeline Steps
 
@@ -316,9 +328,9 @@ Lambda Forge provides a suggested pipeline configuration, emphasizing flexibilit
 
 After the pipelines have executed, you may notice that while the Development pipeline succeeds, the Staging and Production pipelines fail.
 
-![Failed Prod and Staging but Dev success](failed-pipelines.png)
+![Failed Prod and Staging but Dev success](images/failed-pipelines.png)
 
-**The failure is expected**, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.
+This failure is expected, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.
 
 ```python title="functions/hello_world/integration.py"
 import pytest
@@ -337,7 +349,7 @@ def test_hello_world_status_code_is_200():
 
 Note that the `Integration_Test` step failed **after** the deployment in the staging pipeline.
 
-![alt text](integration-tests-failed.png)
+![alt text](images/integration-tests-failed.png)
 
 This means that both Dev and the Staging Lambda function are successfully deployed.
 
@@ -346,11 +358,11 @@ In this tutorial, we will use the staging URL to test our endpoints, considering
 Navigate to the AWS Lambda section on AWS and search for the **Staging-Lambda-Forge-Demo-HelloWorld** function in the list of Lambda functions.
 <br>
 
-![Staging Hello World Lambda Function](staging-hello-world.png)
+![Staging Hello World Lambda Function](images/staging-hello-world.png)
 
 Once you've found your function, click on it to view its details. Proceed by selecting the Configuration tab, followed by Triggers to uncover the integration points.
 
-![Api Gateway Trigger](api-gateway-trigger.png)
+![Api Gateway Trigger](images/api-gateway-trigger.png)
 
 In this tutorial, the generated URL is:
 
@@ -385,7 +397,7 @@ With the BASE URL configured for our integration tests, it's time to push the up
 
 Follow these steps to commit your changes and deploy them across the development, staging, and production branches:
 
-```
+```bash
 # Add changes to the staging area
 git add .
 
@@ -408,13 +420,13 @@ git push origin main
 
 After executing these commands, all associated pipelines should be triggered once again.
 
-![alt text](three_pipelines.png)
+![alt text](images/three_pipelines.png)
 
 Once the execution of all pipelines is complete, you should observe that all stages have successfully passed.
 
-![alt text](success-pipelines.png)
+![alt text](images/success-pipelines.png)
 
-![alt text](functions-deployed.png)
+![alt text](images/functions-deployed.png)
 
 Congratulations! 🎉 You've successfully deployed your very first Lambda function across three distinct stages using Lambda Forge! 🚀
 

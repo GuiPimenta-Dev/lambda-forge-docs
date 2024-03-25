@@ -3,7 +3,6 @@ site_name: Lambda Forge
 theme:
   name: material
   palette:
-    - scheme: slate
       primary: black
 
 
