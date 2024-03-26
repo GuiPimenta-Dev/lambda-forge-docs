@@ -359,16 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#detailed-breakdown-of-the-create-user-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      Detailed Breakdown of the Create User Endpoint
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Detailed Breakdown of the Create User Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#core-logic" class="md-nav__link">
     <span class="md-ellipsis">
       Core Logic
@@ -401,11 +391,6 @@
       Integration Tests
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -611,16 +596,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#detailed-breakdown-of-the-create-user-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      Detailed Breakdown of the Create User Endpoint
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Detailed Breakdown of the Create User Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#core-logic" class="md-nav__link">
     <span class="md-ellipsis">
       Core Logic
@@ -653,11 +628,6 @@
       Integration Tests
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -922,8 +892,7 @@
 <li><code>create_user/</code> This subdirectory is dedicated to the function for creating users, equipped with all necessary files for its execution, configuration, and testing.</li>
 <li><code>utils/</code> A utility directory for shared functions or helpers that support the operations within the users functions, enhancing code reuse and maintainability.</li>
 </ul>
-<h3 id="detailed-breakdown-of-the-create-user-endpoint">Detailed Breakdown of the Create User Endpoint</h3>
-<h4 id="core-logic">Core Logic</h4>
+<h3 id="core-logic">Core Logic</h3>
 <p>The Create User endpoint serves as the gateway for adding new users to our system. It processes incoming data from the request body, assigns a unique UUID to each user, and then stores this information in DynamoDB.
 Now, let's delve into the details of the function implementation.</p>
 <div class="highlight"><span class="filename">functions/users/create_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
@@ -966,7 +935,7 @@ Now, let's delve into the details of the function implementation.</p>
     <span class="c1"># Return a successful response with the newly created user ID.</span>
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})}</span>
 </code></pre></div>
-<h4 id="configuration-class">Configuration Class</h4>
+<h3 id="configuration-class">Configuration Class</h3>
 <p>Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables are easily configurable and securely accessed within the lambda function.</p>
 <div class="highlight"><span class="filename">functions/users/create_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 
@@ -988,7 +957,7 @@ Now, let's delve into the details of the function implementation.</p>
 
 <span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </span></code></pre></div>
-<h4 id="unit-tests">Unit Tests</h4>
+<h3 id="unit-tests">Unit Tests</h3>
 <p>Integrating AWS resources directly into our Lambda function introduces complexities when it comes to testing. Utilizing actual AWS services for unit testing is not optimal due to several reasons: it can incur unnecessary costs, lead to potential side effects on production data, and slow down testing due to reliance on internet connectivity and service response times. To address these challenges and ensure our tests are both efficient and isolated from real-world side effects, we'll simulate AWS resources using mock implementations. This approach allows us to control both the input and output, creating a more predictable and controlled testing environment.</p>
 <p>To facilitate this, we'll employ the moto library, which is specifically designed for mocking AWS services. This enables us to replicate AWS service responses without the need to interact with the actual services themselves.</p>
 <p>To get started with moto, install it using the following command:</p>
@@ -1078,7 +1047,7 @@ functions/users/create_user/unit.py .                                    [100%]
 =========================== 1 passed, 1 deselected in 2.45s ===================
 </code></pre></div>
 <p>As evidenced, our unit test has successfully passed.</p>
-<h4 id="integration-tests">Integration Tests</h4>
+<h3 id="integration-tests">Integration Tests</h3>
 <p>Unlike unit tests, which are isolated and focused on individual components, integration tests play a critical role in our testing strategy by utilizing actual resources. This approach allows us to verify the effective interaction between various parts of our application, particularly the endpoints and the resources they rely on. Integration testing uncovers issues that may not be apparent during unit testing, such as:</p>
 <ul>
 <li>Incorrect or insufficient permissions that prevent functions from accessing databases</li>
