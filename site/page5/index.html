@@ -1,0 +1,900 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../page4/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Building a CRUD Application - Lambda Forge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-a-crud-application" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lambda Forge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building a CRUD Application
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lambda Forge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generating Docs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Building a CRUD Application
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Building a CRUD Application
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-an-api-key-on-behind-the-name-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating an API Key on Behind The Name API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating an API Key on Behind The Name API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#store-the-api-key-on-aws-secrets-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store the API Key on AWS Secrets Manager
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-secrets-manager-into-your-lambda-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating Secrets Manager into Your Lambda Service
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-dynamodb-tables-for-different-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up DynamoDB Tables for Different Stages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up DynamoDB Tables for Different Stages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integrating-dynamodb-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating DynamoDB Service
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-requests-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating The Requests Layer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developing-the-create-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developing the Create Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developing the Create Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-overview-of-create-name-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Overview of Create Name Endpoint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-an-api-key-on-behind-the-name-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating an API Key on Behind The Name API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating an API Key on Behind The Name API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#store-the-api-key-on-aws-secrets-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store the API Key on AWS Secrets Manager
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-secrets-manager-into-your-lambda-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating Secrets Manager into Your Lambda Service
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-dynamodb-tables-for-different-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up DynamoDB Tables for Different Stages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up DynamoDB Tables for Different Stages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integrating-dynamodb-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating DynamoDB Service
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-requests-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating The Requests Layer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developing-the-create-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developing the Create Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developing the Create Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-overview-of-create-name-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Overview of Create Name Endpoint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="building-a-crud-application">Building a CRUD Application</h1>
+<p>Diving deeper into AWS Resources, we're setting out to build a CRUD application that records names and their possible nicknames.</p>
+<p>After the user submit a name, the application, through the <a href="https://www.behindthename.com/api/help.php">Behind The Name API</a>, will search for potential nicknames and save them on Dynamo DB.</p>
+<h2 id="creating-an-api-key-on-behind-the-name-api">Creating an API Key on Behind The Name API</h2>
+<p>To utilize the Behind The Name API, which enables retrieval of detailed information on names, users must first generate an API key. This key is obtained by registering on the Behind The Name website and requesting access.</p>
+<p>Following registration, navigate to <a href="https://www.behindthename.com/api/gateway.php">https://www.behindthename.com/api/gateway.php</a> to create your API key.</p>
+<h3 id="store-the-api-key-on-aws-secrets-manager">Store the API Key on AWS Secrets Manager</h3>
+<p>Store the API key in <strong>AWS Secrets Manager</strong> to prevent the key from being hard-coded into your application's source code, enhancing security and maintaining the confidentiality of your API key.</p>
+<h2 id="integrating-secrets-manager-into-your-lambda-service">Integrating Secrets Manager into Your Lambda Service</h2>
+<p>To enable interaction with AWS Secrets Manager within our Lambda functions, it's essential to incorporate it into our Service class. This ensures accessibility across all configuration files.</p>
+<p>Execute the command below to add Secrets Manager as a new service:</p>
+<div class="highlight"><pre><span></span><code>forge service secrets_manager
+</code></pre></div>
+<p>Upon running this command, a new <code>secrets_manager.py</code> file will be generated within the <code>infra/services</code> directory, enriching the existing service structure.</p>
+<div class="highlight"><pre><span></span><code>infra
+├── services
+    ├── __init__.py
+    ├── api_gateway.py
+    ├── aws_lambda.py
+    └── secrets_manager.py
+</code></pre></div>
+<p>Additionally, the Services class found in <code>infra/services/__init__.py</code> will be automatically updated to include an instance of the newly created <code>SecretsManager</code> class, facilitating seamless integration and usage of Secrets Manager in your Lambda functions.</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
+<span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+
+
+<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This is what the recently introduced SecretsManager class looks like:</p>
+<div class="highlight"><span class="filename">infra/services/secrets_manager.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_secretsmanager</span> <span class="k">as</span> <span class="n">secrets_manager</span>
+
+
+<span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">Secret</span><span class="o">.</span><span class="n">from_secret_complete_arn</span><span class="p">(</span>
+            <span class="n">scope</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;SecretsManager&quot;</span><span class="p">,</span>
+            <span class="n">secret_complete_arn</span><span class="o">=</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;secrets_manager_arn&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+</code></pre></div>
+<p>To streamline access to the Behind The Name API within our application, let's update our class variable to make use of the respective secret stored on Secrets Manager.</p>
+<div class="highlight"><span class="filename">infra/services/secrets_manager.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_secretsmanager</span> <span class="k">as</span> <span class="n">secrets_manager</span>
+
+
+<span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">behind_the_name_secret</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">Secret</span><span class="o">.</span><span class="n">from_secret_complete_arn</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;BehindTheNameSecret&quot;</span><span class="p">,</span>
+</span><span class="hll">            <span class="n">secret_complete_arn</span><span class="o">=</span><span class="s2">&quot;$SECRET-ARN&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="p">)</span>
+</span></code></pre></div>
+<p>Given that our application's three stages will utilize the same Secrets Manager resource, we can directly integrate the Behind The Name API secret ARN within the SecretsManager class itself.</p>
+<h2 id="setting-up-dynamodb-tables-for-different-stages">Setting Up DynamoDB Tables for Different Stages</h2>
+<p>Initiate the creation of three distinct DynamoDB tables, each designated for a specific deployment stage:</p>
+<ul>
+<li>Dev-Names</li>
+<li>Staging-Names</li>
+<li>Prod-Names</li>
+</ul>
+<p>In this tutorial we are going to use <code>PK</code> as Partition Key on our tables.</p>
+<p>With the ARNs for each table corresponding to the different stages now in hand, it's time to incorporate them into the <code>cdk.json</code> file.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$DEV-NAMES-TABLE-ARN&quot;</span>
+</span><span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;staging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$STAGING-NAMES-TABLE-ARN&quot;</span>
+</span><span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;prod&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$PROD-NAMES-TABLE-ARN&quot;</span>
+</span><span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="integrating-dynamodb-service">Integrating DynamoDB Service</h3>
+<p>Just as we incorporated the Secrets Manager, the next step involves adding the DynamoDB service to our Service class for seamless interaction with DynamoDB tables. Execute the command below:</p>
+<p><code>forge service dynamo_db</code></p>
+<p>This action generates a new service file, <code>dynamo_db.py</code>, located in the <code>infra/services</code> directory, further expanding our suite of AWS services:</p>
+<div class="highlight"><pre><span></span><code>infra
+├── services
+    ├── __init__.py
+    ├── api_gateway.py
+    ├── aws_lambda.py
+    ├── dynamo_db.py
+    └── secrets_manager.p
+</code></pre></div>
+<p>Here's the revised edition of our Service class reflecting the latest updates:</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
+<span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
+<span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+
+
+<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamo_db</span> <span class="o">=</span> <span class="n">DynamoDB</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
+</code></pre></div>
+<p>This is the new DynamoDB class recently created.</p>
+<div class="highlight"><span class="filename">infra/services/dynamo_db.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_dynamodb</span> <span class="k">as</span> <span class="n">dynamo_db</span>
+<span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span>
+
+
+<span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamo</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+            <span class="n">scope</span><span class="p">,</span>
+            <span class="s2">&quot;Dynamo&quot;</span><span class="p">,</span>
+            <span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;dynamo_arn&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_query_permission</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">add_to_role_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dynamodb:Query&quot;</span><span class="p">],</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">table_arn</span><span class="si">}</span><span class="s2">/index/*&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div>
+<p>In DynamoDB development, querying data is a fundamental operation. Notably, the DynamoDB class is equipped with a helper method designed to simplify the process of granting query permissions. However, considering that our current project does not require querying capabilities, let's just remove this method. Furthermore, we should refine the class variables to directly reference our Names table.</p>
+<div class="highlight"><span class="filename">infra/services/dynamo_db.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_dynamodb</span> <span class="k">as</span> <span class="n">dynamo_db</span>
+
+
+<span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">names_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><span class="hll">            <span class="s2">&quot;NamesTable&quot;</span><span class="p">,</span>
+</span><span class="hll">            <span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;names_table&quot;</span><span class="p">],</span>
+</span><span class="hll">        <span class="p">)</span>
+</span></code></pre></div>
+<p>Ensure that the resource ARN precisely matches the name specified in your <code>cdk.json</code> file.</p>
+<h2 id="creating-the-requests-layer">Creating The Requests Layer</h2>
+<p>A crucial requirement for our application is to make HTTP requests to the Behind The Name API, which necessitates the use of the requests library. As this library isn't included in the standard Python environment for AWS Lambda, we need to incorporate it through a custom Lambda layer.</p>
+<p>Similarly to the other services, let's create it with Forge.</p>
+<p><code>forge service layers</code></p>
+<p>As expected, the layers are already added to the Service class.</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.layers</span> <span class="kn">import</span> <span class="n">Layers</span>
+<span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
+<span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
+<span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+
+
+<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamo_db</span> <span class="o">=</span> <span class="n">DynamoDB</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">Layers</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+</code></pre></div>
+<p>The requests library, due to its popularity, is available as a public layer for AWS Lambda, making it easier to include in your projects without creating a custom layer.</p>
+<p>We'll utilize a specific ARN for the requests library provided by Klayers for Python 3.9. You can find a list of public layers <a href="https://github.com/Jeff-Junfang/Klayers-aws-layer-">here</a>.
+.</p>
+<p><code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19</code>.</p>
+<p>Let's add the <code>requests</code> layer to our Layers class.</p>
+<div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
+
+
+<span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
+</span><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="p">)</span>
+</span></code></pre></div>
+<p>With all services in place, it's time to create our Lambda functions.</p>
+<h2 id="developing-the-create-function">Developing the Create Function</h2>
+<p>Now we'll develop the "Create" component of our CRUD application, focusing on adding names and their nicknames to our DynamoDB tables. Execute the following Forge CLI command to create a Lambda function designed for this task:</p>
+<div class="highlight"><pre><span></span><code>forge function create_name --method &quot;POST&quot; --description &quot;Create a name and its respective nicknames on Dynamo DB&quot; --belongs names --public
+</code></pre></div>
+<p>The command instructs Forge to establish a new Lambda function, <code>create_name</code>, aimed at processing POST requests. Utilizing the <code>--belongs</code> flag, Forge is directed to categorize this function within the <code>names</code> folder, highlighting its connection to a group of related functions.</p>
+<div class="highlight"><pre><span></span><code>functions
+├── names
+├── create_name
+│ ├── **init**.py
+│ ├── config.py
+│ ├── integration.py
+│ ├── main.py
+│ └── unit.py
+└── utils
+└── **init**.py
+</code></pre></div>
+<ul>
+<li><code>names/</code> This directory acts as the container for all Lambda functions related to name operations, organizing them under a common theme.</li>
+<li><code>create_name/</code> This subdirectory is dedicated to the function for creating names, equipped with all necessary files for its execution, configuration, and testing.</li>
+<li><code>utils/</code> A utility directory for shared functions or helpers that support the operations within the names functions, enhancing code reuse and maintainability.</li>
+</ul>
+<h3 id="enhanced-overview-of-create-name-endpoint">Enhanced Overview of Create Name Endpoint</h3>
+<p>The Create Name endpoint is designed to enrich the data around a given name by fetching its associated nicknames from the "Behind the Name" API. It further consolidates this information by storing the original name along with its nicknames in a DynamoDB table, each entry uniquely identified by a UUID. This process not only aggregates relevant data for future retrieval but also standardizes name-related insights within the database.</p>
+<p>Now, let's delve into the details of the function implementation.</p>
+<div class="highlight"><span class="filename">functions/names/create_name/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+    <span class="n">name_id</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
+    <span class="n">NAMES_TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NAMES_TABLE_NAME&quot;</span><span class="p">)</span>
+    <span class="n">names_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">NAMES_TABLE_NAME</span><span class="p">)</span>
+
+    <span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;secretsmanager&quot;</span><span class="p">)</span>
+    <span class="n">BEHIND_THE_NAME_SECRET_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BEHIND_THE_NAME_SECRET_NAME&quot;</span><span class="p">)</span>
+    <span class="n">BEHIND_THE_NAME_API_KEY</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="n">BEHIND_THE_NAME_SECRET_NAME</span><span class="p">)[</span><span class="s2">&quot;SecretString&quot;</span><span class="p">]</span>
+
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.behindthename.com/api/related.json?name=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&amp;key=</span><span class="si">{</span><span class="n">BEHIND_THE_NAME_API_KEY</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;error_code&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">})}</span>
+
+    <span class="n">name_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+    <span class="n">nicknames</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;names&quot;</span><span class="p">]</span>
+    <span class="n">names_table</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">name_id</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;nicknames&quot;</span><span class="p">:</span> <span class="n">nicknames</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;name_id&quot;</span><span class="p">:</span> <span class="n">name_id</span><span class="p">})}</span>
+</code></pre></div>
+<p>This function interacts both with the <code>Behind the Name</code> API and an <code>AWS DynamoDB table</code>. It begins by extracting a name from the incoming event's body, then uses this name to query the API for related nicknames. If the API call is successful, it generates a unique identifier (UUID) for this name, and stores the name along with its nicknames in a DynamoDB table.</p>
+<p>Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables and API keys are easily configurable and securely accessed within the lambda function.</p>
+<div class="highlight"><span class="filename">functions/names/create_name/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+
+<span class="k">class</span> <span class="nc">CreateNameConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CreateName&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/names&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a name and its respective nicknames on Dynamo DB&quot;</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;create_name&quot;</span><span class="p">,</span>
+<span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">],</span>
+</span><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+</span><span class="hll">                <span class="s2">&quot;NAMES_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">names_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+</span><span class="hll">                <span class="s2">&quot;BEHIND_THE_NAME_SECRET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">behind_the_name_secret</span><span class="o">.</span><span class="n">secret_name</span><span class="p">,</span>
+</span><span class="hll">            <span class="p">}</span>
+</span>        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/names&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">names_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">behind_the_name_secret</span><span class="o">.</span><span class="n">grant_read</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Overall, the <code>CreateNameConfig</code> class meticulously prepares the lambda function with the necessary tools and permissions for secure and efficient operation.</p>
+<p>This tutorial is dedicated to explain the architecture and operational intricacies of the Lambda Forge framework. In our quest for clarity and conciseness, we will <strong>purposefully</strong> sidestep the <code>unit</code> and <code>integration</code> testing examples to avert inundating readers with too much detail. However, rest assured, the comprehensive project code, inclusive the approaches for mocking AWS resources in unit tests, will be hosted on GitHub. This deliberate choice ensures that enthusiasts desiring to dive into testing techniques can do so on their terms, fostering a learning environment that is both focused and comprehensive.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
