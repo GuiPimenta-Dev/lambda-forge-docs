@@ -12,6 +12,8 @@
         <link rel="prev" href="..">
       
       
+        <link rel="next" href="../page3/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
@@ -56,12 +58,10 @@
   
     
     
-      
     
     
     
-    
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -114,19 +114,7 @@
     </div>
     
       
-        <form class="md-header__option" data-md-component="palette">
-  
     
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
-    
-    
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -542,6 +530,46 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -871,7 +899,7 @@ source venv/bin/activate
 </code></pre></div>
 <p>Make sure to replace <strong>$GITHUB-USER</strong> and <strong>$GITHUB-REPO</strong> with your actual GitHub username and the repository name you established in the previous step.</p>
 <h3 id="project-structure">Project Structure</h3>
-<p>Upon forging your project, several directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
+<p>Upon creatig your project, several directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
 <p>In the upcoming sections of this tutorial, we'll explore each of these components in detail. For now, familiarize yourself with the foundational structure that should resemble the following:</p>
 <div class="highlight"><pre><span></span><code>.
 ├── authorizers
@@ -1017,32 +1045,32 @@ source venv/bin/activate
 <p>With all the required settings now in place, we're ready to upload our code to the GitHub repository.</p>
 <p>Lambda Forge is designed to support a multi-stage deployment process, automatically creating environments for Production, Staging and Development. These environments correspond to the <code>main</code>, <code>staging</code>, and <code>dev</code> branches, respectively.</p>
 <p>Let's proceed by setting up these branches:</p>
-<div class="highlight"><pre><span></span><code># Initialize the Git repository
-git init
-git add .
+<div class="highlight"><pre><span></span><code><span class="c1"># Initialize the Git repository</span>
+git<span class="w"> </span>init
+git<span class="w"> </span>add<span class="w"> </span>.
 
-# Commit the changes
-git commit -m &quot;Initial commit&quot;
+<span class="c1"># Commit the changes</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit&quot;</span>
 
-# Set the remote repository
-git remote add origin git@github.com:$GITHUB_USER/$GITHUB_REPO.git
+<span class="c1"># Set the remote repository</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:<span class="nv">$GITHUB_USER</span>/<span class="nv">$GITHUB_REPO</span>.git
 
-# Create, checkout, and push the &#39;main&#39; branch
-git checkout -b main
-git push -u origin main
+<span class="c1"># Create, checkout, and push the &#39;main&#39; branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>main
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
 
-# Create, checkout, and push the &#39;staging&#39; branch
-git checkout -b staging
-git push -u origin staging
+<span class="c1"># Create, checkout, and push the &#39;staging&#39; branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>staging
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>staging
 
-# Create and push the &#39;dev&#39; branch
-git branch -M dev
-git push -u origin dev
+<span class="c1"># Create and push the &#39;dev&#39; branch</span>
+git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>dev
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>dev
 </code></pre></div>
 <h3 id="deploying-the-stacks">Deploying the Stacks</h3>
 <p>After pushing your code to GitHub, the next step is deploying your stacks to AWS using the AWS Cloud Development Kit (CDK). Deploy your stacks by running the following commands in your terminal:</p>
-<div class="highlight"><pre><span></span><code>cdk<span class="w"> </span>synth
-cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> </span>--require-approval<span class="w"> </span>never
+<div class="highlight"><pre><span></span><code>cdk synth
+cdk deploy --all --require-approval never
 </code></pre></div>
 <p>These commands kick off the creation of three separate stacks in AWS CloudFormation:</p>
 <ul>
@@ -1050,7 +1078,17 @@ cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> <
 <li><strong>Staging-Lambda-Forge-Demo-Stack</strong>: For the staging stage.</li>
 <li><strong>Prod-Lambda-Forge-Demo-Stack</strong>: For the production stage.</li>
 </ul>
-<p>The stacks are named following a convention that includes the stage of deployment and the project name, as configured in the cdk.json file.</p>
+<p>Every resource created on AWS by Lambda Forge adhere to a convention that incorporates the deployment stage, project name and the resource name, ensuring a clear and systematic identification across the project. The project name, a central element of this naming convention, is specified in the <code>cdk.json</code> file, which Forge automatically configured.</p>
+<div class="highlight"><span class="filename">cdk.json</span><pre><span></span><code><span class="err">...</span>
+<span class="w">    </span><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="hll"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
+</span><span class="w">    </span><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="err">...</span>
+</code></pre></div>
 <p>Following a successful deployment, three corresponding pipelines are automatically generated for each stage:</p>
 <ul>
 <li><strong>Dev-Lambda-Forge-Demo-Pipeline</strong></li>
@@ -1059,7 +1097,7 @@ cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> <
 </ul>
 <p>You can view these pipelines by navigating to the AWS CodePipeline dashboard.
 <br></p>
-<p><img alt="Pipelines" src="../three_pipelines.png" /></p>
+<p><img alt="Pipelines" src="../images/three_pipelines.png" /></p>
 <h4 id="customizing-pipeline-steps">Customizing Pipeline Steps</h4>
 <p>In Lambda Forge, pipelines are defined within their specific stack files located at <code>infra/stacks/dev_stack.py</code>, <code>infra/stacks/staging_stack.py</code>, and <code>infra/stacks/prod_stack.py</code>. Below is an outline of the default steps included in each pipeline, along with details on how they function and how you can interact with them.</p>
 <ul>
@@ -1084,8 +1122,8 @@ cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> <
 </ul>
 <p>Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, or reordering them, the framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.</p>
 <p>After the pipelines have executed, you may notice that while the Development pipeline succeeds, the Staging and Production pipelines fail.</p>
-<p><img alt="Failed Prod and Staging but Dev success" src="../failed-pipelines.png" /></p>
-<p><strong>The failure is expected</strong>, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.</p>
+<p><img alt="Failed Prod and Staging but Dev success" src="../images/failed-pipelines.png" /></p>
+<p>This failure is expected, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.</p>
 <div class="highlight"><span class="filename">functions/hello_world/integration.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">lambda_forge.constants</span> <span class="kn">import</span> <span class="n">BASE_URL</span>
@@ -1099,19 +1137,23 @@ cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> <
 </code></pre></div>
 <h3 id="accessing-your-lambda-function">Accessing Your Lambda Function</h3>
 <p>Note that the <code>Integration_Test</code> step failed <strong>after</strong> the deployment in the staging pipeline.</p>
-<p><img alt="alt text" src="../integration-tests-failed.png" /></p>
+<p><img alt="alt text" src="../images/integration-tests-failed.png" /></p>
 <p>This means that both Dev and the Staging Lambda function are successfully deployed.</p>
 <p>In this tutorial, we will use the staging URL to test our endpoints, considering it as a pre-production layer. Feel free to utilize the development URL instead if it suits your case better.</p>
 <p>Navigate to the AWS Lambda section on AWS and search for the <strong>Staging-Lambda-Forge-Demo-HelloWorld</strong> function in the list of Lambda functions.
 <br></p>
-<p><img alt="Staging Hello World Lambda Function" src="../staging-hello-world.png" /></p>
+<p><img alt="Staging Hello World Lambda Function" src="../images/staging-hello-world.png" /></p>
 <p>Once you've found your function, click on it to view its details. Proceed by selecting the Configuration tab, followed by Triggers to uncover the integration points.</p>
-<p><img alt="Api Gateway Trigger" src="../api-gateway-trigger.png" /></p>
+<p><img alt="Api Gateway Trigger" src="../images/api-gateway-trigger.png" /></p>
 <p>In this tutorial, the generated URL is:</p>
-<p><a href="https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world</a>.</p>
+<p><a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world</a>.</p>
 <p>By following the link provided, you should be greeted by a simple "Hello World" message in your web browser, indicating that your Lambda function is operational and accessible via the URL generated by API Gateway.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello World!&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="configuring-the-base-url-for-integration-tests">Configuring the BASE URL for Integration Tests</h3>
-<p>With the Lambda function's URL at hand, we identify that the segment before <code>/hello_world</code> acts as the BASE URL. For the purposes of this tutorial, the BASE URL is <code>https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging</code>. This is the URL you need to copy.</p>
+<p>With the Lambda function's URL at hand, we identify that the segment before <code>/hello_world</code> acts as the BASE URL. For the purposes of this tutorial, the BASE URL is <code>https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging</code>. This is the URL you need to copy.</p>
 <p><strong>Proceed to incorporate this URL into your project's configuration by setting it as the value for <code>base_url</code> in your <code>cdk.json</code> file</strong>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
 <span class="normal">41</span>
@@ -1134,42 +1176,42 @@ cdk<span class="w"> </span>deploy<span class="w"> </span>--all<span class="w"> <
 <span class="p">},</span>
 <span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-<span class="hll"><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging&quot;</span>
+<span class="hll"><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging&quot;</span>
 </span><span class="err">...</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="pushing-updated-code-to-github">Pushing Updated Code to GitHub</h3>
 <p>With the BASE URL configured for our integration tests, it's time to push the updated code to GitHub and aim for successful integration test outcomes across all deployment stages.</p>
 <p>Follow these steps to commit your changes and deploy them across the development, staging, and production branches:</p>
-<div class="highlight"><pre><span></span><code># Add changes to the staging area
-git add .
+<div class="highlight"><pre><span></span><code><span class="c1"># Add changes to the staging area</span>
+git<span class="w"> </span>add<span class="w"> </span>.
 
-# Commit the changes with a descriptive message
-git commit -m &quot;Configure BASE URL for integration tests&quot;
+<span class="c1"># Commit the changes with a descriptive message</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Configure BASE URL for integration tests&quot;</span>
 
-# Push changes to the &#39;dev&#39; branch.
-git push origin dev
+<span class="c1"># Push changes to the &#39;dev&#39; branch.</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
 
-# Switch to the &#39;staging&#39; branch, merge changes from &#39;dev&#39;, and push
-git checkout staging
-git merge dev
-git push origin staging
+<span class="c1"># Switch to the &#39;staging&#39; branch, merge changes from &#39;dev&#39;, and push</span>
+git<span class="w"> </span>checkout<span class="w"> </span>staging
+git<span class="w"> </span>merge<span class="w"> </span>dev
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
 
-# Switch to the &#39;main&#39; branch, merge changes from &#39;staging&#39;, and push
-git checkout main
-git merge staging
-git push origin main
+<span class="c1"># Switch to the &#39;main&#39; branch, merge changes from &#39;staging&#39;, and push</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>staging
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
 <p>After executing these commands, all associated pipelines should be triggered once again.</p>
-<p><img alt="alt text" src="../three_pipelines.png" /></p>
+<p><img alt="alt text" src="../images/three_pipelines.png" /></p>
 <p>Once the execution of all pipelines is complete, you should observe that all stages have successfully passed.</p>
-<p><img alt="alt text" src="../success-pipelines.png" /></p>
-<p><img alt="alt text" src="../functions-deployed.png" /></p>
+<p><img alt="alt text" src="../images/success-pipelines.png" /></p>
+<p><img alt="alt text" src="../images/functions-deployed.png" /></p>
 <p>Congratulations! 🎉 You've successfully deployed your very first Lambda function across three distinct stages using Lambda Forge! 🚀</p>
 <p>In this tutorial, the links are:</p>
 <ul>
-<li>Dev: <a href="https://rlb7cyuqfh.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://rlb7cyuqfh.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
-<li>Staging: <a href="https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://hxca5fw6h4.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
-<li>Prod: <a href="https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://5sk3lmuuh2.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
+<li>Dev: <a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
+<li>Staging: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
+<li>Prod: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
 </ul>
 
 
