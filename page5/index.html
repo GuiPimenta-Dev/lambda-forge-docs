@@ -712,9 +712,13 @@ Now, let's delve into the details of the function implementation.</p>
 <span class="kn">import</span> <span class="nn">boto3</span>
 <span class="kn">import</span> <span class="nn">pytest</span>
 
+<span class="c1"># Defines a pytest fixture with name users_table.</span>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">users_table</span><span class="p">():</span>
+    <span class="c1"># Set an environment variable to use a fake table name within tests.</span>
     <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;FAKE-USERS-TABLE&quot;</span>
+
+    <span class="c1"># The `moto.mock_dynamodb` context manager simulates DynamoDB for the duration of the test.</span>
     <span class="k">with</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_dynamodb</span><span class="p">():</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
@@ -729,6 +733,8 @@ Now, let's delve into the details of the function implementation.</p>
         <span class="p">)</span>
 
         <span class="n">table</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s2">&quot;FAKE-USERS-TABLE&quot;</span><span class="p">)</span>
+
+        <span class="c1"># `yield` returns the table resource to the test function, ensuring cleanup after tests.</span>
         <span class="k">yield</span> <span class="n">table</span>
 </code></pre></div>
 
