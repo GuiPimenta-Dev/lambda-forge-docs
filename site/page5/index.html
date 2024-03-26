@@ -12,13 +12,15 @@
         <link rel="prev" href="../page4/">
       
       
+        <link rel="next" href="../page6/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
       
-        <title>Building a CRUD Application - Lambda Forge</title>
+        <title>Building A Serverless CRUD Application With Dynamo DB - Lambda Forge</title>
       
     
     
@@ -68,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#building-a-crud-application" class="md-skip">
+        <a href="#building-a-serverless-crud-application-with-dynamo-db" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building a CRUD Application
+              Building A Serverless CRUD Application With Dynamo DB
             
           </span>
         </div>
@@ -290,7 +292,7 @@
           
   
   <span class="md-ellipsis">
-    Building a CRUD Application
+    Building A Serverless CRUD Application With Dynamo DB
   </span>
   
 
@@ -301,7 +303,7 @@
         
   
   <span class="md-ellipsis">
-    Building a CRUD Application
+    Building A Serverless CRUD Application With Dynamo DB
   </span>
   
 
@@ -323,19 +325,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#creating-an-api-key-on-behind-the-name-api" class="md-nav__link">
+  <a href="#configuring-dynamodb-tables-for-each-deployment-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating an API Key on Behind The Name API
+      Configuring DynamoDB Tables for Each Deployment Stage
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Creating an API Key on Behind The Name API">
+    <nav class="md-nav" aria-label="Configuring DynamoDB Tables for Each Deployment Stage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#store-the-api-key-on-aws-secrets-manager" class="md-nav__link">
+  <a href="#incorporating-dynamodb-into-our-service-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Store the API Key on AWS Secrets Manager
+      Incorporating DynamoDB Into Our Service Layer
     </span>
   </a>
   
@@ -347,28 +349,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integrating-secrets-manager-into-your-lambda-service" class="md-nav__link">
+  <a href="#building-the-create-feature" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating Secrets Manager into Your Lambda Service
+      Building the Create Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Create Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-dynamodb-tables-for-different-stages" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Setting Up DynamoDB Tables for Different Stages
+      Configuration Class
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setting Up DynamoDB Tables for Different Stages">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#integrating-dynamodb-service" class="md-nav__link">
+  <a href="#unit-tests" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating DynamoDB Service
+      Unit Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Tests
     </span>
   </a>
   
@@ -380,28 +400,103 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-the-requests-layer" class="md-nav__link">
+  <a href="#disclaimer" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating The Requests Layer
+      Disclaimer
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#developing-the-create-function" class="md-nav__link">
+  <a href="#building-the-read-feature" class="md-nav__link">
     <span class="md-ellipsis">
-      Developing the Create Function
+      Building the Read Feature
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Developing the Create Function">
+    <nav class="md-nav" aria-label="Building the Read Feature">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enhanced-overview-of-create-name-endpoint" class="md-nav__link">
+  <a href="#core-logic_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Enhanced Overview of Create Name Endpoint
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-update-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Update Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Update Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-delete-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Delete Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Delete Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
     </span>
   </a>
   
@@ -416,6 +511,26 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Page6
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -447,19 +562,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#creating-an-api-key-on-behind-the-name-api" class="md-nav__link">
+  <a href="#configuring-dynamodb-tables-for-each-deployment-stage" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating an API Key on Behind The Name API
+      Configuring DynamoDB Tables for Each Deployment Stage
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Creating an API Key on Behind The Name API">
+    <nav class="md-nav" aria-label="Configuring DynamoDB Tables for Each Deployment Stage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#store-the-api-key-on-aws-secrets-manager" class="md-nav__link">
+  <a href="#incorporating-dynamodb-into-our-service-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Store the API Key on AWS Secrets Manager
+      Incorporating DynamoDB Into Our Service Layer
     </span>
   </a>
   
@@ -471,28 +586,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integrating-secrets-manager-into-your-lambda-service" class="md-nav__link">
+  <a href="#building-the-create-feature" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating Secrets Manager into Your Lambda Service
+      Building the Create Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Create Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-dynamodb-tables-for-different-stages" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Setting Up DynamoDB Tables for Different Stages
+      Configuration Class
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setting Up DynamoDB Tables for Different Stages">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#integrating-dynamodb-service" class="md-nav__link">
+  <a href="#unit-tests" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating DynamoDB Service
+      Unit Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Tests
     </span>
   </a>
   
@@ -504,28 +637,103 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-the-requests-layer" class="md-nav__link">
+  <a href="#disclaimer" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating The Requests Layer
+      Disclaimer
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#developing-the-create-function" class="md-nav__link">
+  <a href="#building-the-read-feature" class="md-nav__link">
     <span class="md-ellipsis">
-      Developing the Create Function
+      Building the Read Feature
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Developing the Create Function">
+    <nav class="md-nav" aria-label="Building the Read Feature">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enhanced-overview-of-create-name-endpoint" class="md-nav__link">
+  <a href="#core-logic_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Enhanced Overview of Create Name Endpoint
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-update-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Update Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Update Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-delete-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Delete Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building the Delete Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-logic_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-class_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Class
     </span>
   </a>
   
@@ -551,75 +759,18 @@
                   
 
 
-<h1 id="building-a-crud-application">Building a CRUD Application</h1>
-<p>Diving deeper into AWS Resources, we're setting out to build a CRUD application that records names and their possible nicknames.</p>
-<p>After the user submit a name, the application, through the <a href="https://www.behindthename.com/api/help.php">Behind The Name API</a>, will search for potential nicknames and save them on Dynamo DB.</p>
-<h2 id="creating-an-api-key-on-behind-the-name-api">Creating an API Key on Behind The Name API</h2>
-<p>To utilize the Behind The Name API, which enables retrieval of detailed information on names, users must first generate an API key. This key is obtained by registering on the Behind The Name website and requesting access.</p>
-<p>Following registration, navigate to <a href="https://www.behindthename.com/api/gateway.php">https://www.behindthename.com/api/gateway.php</a> to create your API key.</p>
-<h3 id="store-the-api-key-on-aws-secrets-manager">Store the API Key on AWS Secrets Manager</h3>
-<p>Store the API key in <strong>AWS Secrets Manager</strong> to prevent the key from being hard-coded into your application's source code, enhancing security and maintaining the confidentiality of your API key.</p>
-<h2 id="integrating-secrets-manager-into-your-lambda-service">Integrating Secrets Manager into Your Lambda Service</h2>
-<p>To enable interaction with AWS Secrets Manager within our Lambda functions, it's essential to incorporate it into our Service class. This ensures accessibility across all configuration files.</p>
-<p>Execute the command below to add Secrets Manager as a new service:</p>
-<div class="highlight"><pre><span></span><code>forge service secrets_manager
-</code></pre></div>
-<p>Upon running this command, a new <code>secrets_manager.py</code> file will be generated within the <code>infra/services</code> directory, enriching the existing service structure.</p>
-<div class="highlight"><pre><span></span><code>infra
-├── services
-    ├── __init__.py
-    ├── api_gateway.py
-    ├── aws_lambda.py
-    └── secrets_manager.py
-</code></pre></div>
-<p>Additionally, the Services class found in <code>infra/services/__init__.py</code> will be automatically updated to include an instance of the newly created <code>SecretsManager</code> class, facilitating seamless integration and usage of Secrets Manager in your Lambda functions.</p>
-<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
-<span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
-<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
-
-
-<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
-</span></code></pre></div>
-<p>This is what the recently introduced SecretsManager class looks like:</p>
-<div class="highlight"><span class="filename">infra/services/secrets_manager.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_secretsmanager</span> <span class="k">as</span> <span class="n">secrets_manager</span>
-
-
-<span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">Secret</span><span class="o">.</span><span class="n">from_secret_complete_arn</span><span class="p">(</span>
-            <span class="n">scope</span><span class="p">,</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;SecretsManager&quot;</span><span class="p">,</span>
-            <span class="n">secret_complete_arn</span><span class="o">=</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;secrets_manager_arn&quot;</span><span class="p">],</span>
-        <span class="p">)</span>
-</code></pre></div>
-<p>To streamline access to the Behind The Name API within our application, let's update our class variable to make use of the respective secret stored on Secrets Manager.</p>
-<div class="highlight"><span class="filename">infra/services/secrets_manager.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_secretsmanager</span> <span class="k">as</span> <span class="n">secrets_manager</span>
-
-
-<span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">behind_the_name_secret</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">Secret</span><span class="o">.</span><span class="n">from_secret_complete_arn</span><span class="p">(</span>
-</span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;BehindTheNameSecret&quot;</span><span class="p">,</span>
-</span><span class="hll">            <span class="n">secret_complete_arn</span><span class="o">=</span><span class="s2">&quot;$SECRET-ARN&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="p">)</span>
-</span></code></pre></div>
-<p>Given that our application's three stages will utilize the same Secrets Manager resource, we can directly integrate the Behind The Name API secret ARN within the SecretsManager class itself.</p>
-<h2 id="setting-up-dynamodb-tables-for-different-stages">Setting Up DynamoDB Tables for Different Stages</h2>
-<p>Initiate the creation of three distinct DynamoDB tables, each designated for a specific deployment stage:</p>
+<h1 id="building-a-serverless-crud-application-with-dynamo-db">Building A Serverless CRUD Application With Dynamo DB</h1>
+<p>The primary goal of this tutorial is not to craft an elaborate application; instead, it focuses on showcasing the seamless integration of AWS resources within the Lambda Forge architecture. To highlight this, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.</p>
+<h2 id="configuring-dynamodb-tables-for-each-deployment-stage">Configuring DynamoDB Tables for Each Deployment Stage</h2>
+<p>To ensure our application can operate smoothly across different environments, we'll establish three separate DynamoDB tables, each tailored for a distinct deployment stage:</p>
 <ul>
-<li>Dev-Names</li>
-<li>Staging-Names</li>
-<li>Prod-Names</li>
+<li>Dev-Users</li>
+<li>Staging-Users</li>
+<li>Prod-Users</li>
 </ul>
-<p>In this tutorial we are going to use <code>PK</code> as Partition Key on our tables.</p>
-<p>With the ARNs for each table corresponding to the different stages now in hand, it's time to incorporate them into the <code>cdk.json</code> file.</p>
+<p>Throughout this guide, we'll utilize <code>PK</code> as the Partition Key for our tables, optimizing data organization and access.</p>
+<p>Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the <code>cdk.json</code> file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.</p>
+<p>Here's how to update your <code>cdk.json</code> file to include the DynamoDB table ARNs for development, staging, and production environments:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -636,33 +787,32 @@
 <span class="normal">64</span>
 <span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$DEV-NAMES-TABLE-ARN&quot;</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;users_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$DEV-USERS-TABLE-ARN&quot;</span>
 </span><span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;staging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$STAGING-NAMES-TABLE-ARN&quot;</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;users_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$STAGING-USERS-TABLE-ARN&quot;</span>
 </span><span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;prod&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="nt">&quot;names_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$PROD-NAMES-TABLE-ARN&quot;</span>
+<span class="hll"><span class="w">        </span><span class="nt">&quot;users_table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$PROD-USERS-TABLE-ARN&quot;</span>
 </span><span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="integrating-dynamodb-service">Integrating DynamoDB Service</h3>
-<p>Just as we incorporated the Secrets Manager, the next step involves adding the DynamoDB service to our Service class for seamless interaction with DynamoDB tables. Execute the command below:</p>
+<h3 id="incorporating-dynamodb-into-our-service-layer">Incorporating DynamoDB Into Our Service Layer</h3>
+<p>The subsequent phase in enhancing our application involves integrating the DynamoDB service within our service layer, enabling direct communication with DynamoDB tables. To accomplish this, utilize the following command:</p>
 <p><code>forge service dynamo_db</code></p>
-<p>This action generates a new service file, <code>dynamo_db.py</code>, located in the <code>infra/services</code> directory, further expanding our suite of AWS services:</p>
+<p>This command crafts a new service file named <code>dynamo_db.py</code> within the <code>infra/services</code> directory.</p>
 <div class="highlight"><pre><span></span><code>infra
 ├── services
     ├── __init__.py
     ├── api_gateway.py
     ├── aws_lambda.py
-    ├── dynamo_db.py
-    └── secrets_manager.p
+    └── dynamo_db.py
 </code></pre></div>
-<p>Here's the revised edition of our Service class reflecting the latest updates:</p>
+<p>Below is the updated structure of our Service class, now including the DynamoDB service, demonstrating the integration's completion:</p>
 <div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
 <span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
 <span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
@@ -673,10 +823,9 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dynamo_db</span> <span class="o">=</span> <span class="n">DynamoDB</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
 </code></pre></div>
-<p>This is the new DynamoDB class recently created.</p>
+<p>Here is the newly established DynamoDB class:</p>
 <div class="highlight"><span class="filename">infra/services/dynamo_db.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_dynamodb</span> <span class="k">as</span> <span class="n">dynamo_db</span>
 <span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span>
 
@@ -699,151 +848,506 @@
             <span class="p">)</span>
         <span class="p">)</span>
 </code></pre></div>
-<p>In DynamoDB development, querying data is a fundamental operation. Notably, the DynamoDB class is equipped with a helper method designed to simplify the process of granting query permissions. However, considering that our current project does not require querying capabilities, let's just remove this method. Furthermore, we should refine the class variables to directly reference our Names table.</p>
+<p>In DynamoDB development, querying data is a fundamental operation. Notably, the DynamoDB class is equipped with a helper method designed to simplify the process of granting query permissions. Furthermore, we should refine the class variables to directly reference our Users table.</p>
 <div class="highlight"><span class="filename">infra/services/dynamo_db.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_dynamodb</span> <span class="k">as</span> <span class="n">dynamo_db</span>
+<span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span>
 
 
 <span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">names_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+<span class="hll">
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
 </span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><span class="hll">            <span class="s2">&quot;NamesTable&quot;</span><span class="p">,</span>
-</span><span class="hll">            <span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;names_table&quot;</span><span class="p">],</span>
-</span><span class="hll">        <span class="p">)</span>
-</span></code></pre></div>
+</span><span class="hll">            <span class="s2">&quot;UsersTable&quot;</span><span class="p">,</span>
+</span><span class="hll">            <span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;users_table&quot;</span><span class="p">],</span>
+</span>        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_query_permission</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">add_to_role_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dynamodb:Query&quot;</span><span class="p">],</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">table_arn</span><span class="si">}</span><span class="s2">/index/*&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div>
 <p>Ensure that the resource ARN precisely matches the name specified in your <code>cdk.json</code> file.</p>
-<h2 id="creating-the-requests-layer">Creating The Requests Layer</h2>
-<p>A crucial requirement for our application is to make HTTP requests to the Behind The Name API, which necessitates the use of the requests library. As this library isn't included in the standard Python environment for AWS Lambda, we need to incorporate it through a custom Lambda layer.</p>
-<p>Similarly to the other services, let's create it with Forge.</p>
-<p><code>forge service layers</code></p>
-<p>As expected, the layers are already added to the Service class.</p>
-<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.layers</span> <span class="kn">import</span> <span class="n">Layers</span>
-<span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
-<span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
-<span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
-<span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
-
-
-<span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">SecretsManager</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dynamo_db</span> <span class="o">=</span> <span class="n">DynamoDB</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">Layers</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+<h2 id="building-the-create-feature">Building the Create Feature</h2>
+<p>Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:</p>
+<div class="highlight"><pre><span></span><code>forge function create_user --method &quot;POST&quot; --description &quot;Create a user with name and age on Dynamo DB&quot; --belongs users --public
 </code></pre></div>
-<p>The requests library, due to its popularity, is available as a public layer for AWS Lambda, making it easier to include in your projects without creating a custom layer.</p>
-<p>We'll utilize a specific ARN for the requests library provided by Klayers for Python 3.9. You can find a list of public layers <a href="https://github.com/Jeff-Junfang/Klayers-aws-layer-">here</a>.
-.</p>
-<p><code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19</code>.</p>
-<p>Let's add the <code>requests</code> layer to our Layers class.</p>
-<div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
-
-
-<span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
-</span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
-</span><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="p">)</span>
-</span></code></pre></div>
-<p>With all services in place, it's time to create our Lambda functions.</p>
-<h2 id="developing-the-create-function">Developing the Create Function</h2>
-<p>Now we'll develop the "Create" component of our CRUD application, focusing on adding names and their nicknames to our DynamoDB tables. Execute the following Forge CLI command to create a Lambda function designed for this task:</p>
-<div class="highlight"><pre><span></span><code>forge function create_name --method &quot;POST&quot; --description &quot;Create a name and its respective nicknames on Dynamo DB&quot; --belongs names --public
-</code></pre></div>
-<p>The command instructs Forge to establish a new Lambda function, <code>create_name</code>, aimed at processing POST requests. Utilizing the <code>--belongs</code> flag, Forge is directed to categorize this function within the <code>names</code> folder, highlighting its connection to a group of related functions.</p>
-<div class="highlight"><pre><span></span><code>functions
-├── names
-├── create_name
-│ ├── **init**.py
-│ ├── config.py
-│ ├── integration.py
-│ ├── main.py
-│ └── unit.py
+<p>This command signals to Forge the need to generate a new Lambda function named create_user, which will handle POST requests. By applying the <code>--belongs</code> flag, we guide Forge to organize this function within the <code>users</code> directory, emphasizing its role as part of a suite of user-related functionalities.</p>
+<div class="highlight"><pre><span></span><code>functions/users
+├── create_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
 └── utils
-└── **init**.py
+    └── __init__.py
 </code></pre></div>
 <ul>
-<li><code>names/</code> This directory acts as the container for all Lambda functions related to name operations, organizing them under a common theme.</li>
-<li><code>create_name/</code> This subdirectory is dedicated to the function for creating names, equipped with all necessary files for its execution, configuration, and testing.</li>
-<li><code>utils/</code> A utility directory for shared functions or helpers that support the operations within the names functions, enhancing code reuse and maintainability.</li>
+<li><code>users/</code> This directory acts as the container for all Lambda functions related to users operations, organizing them under a common theme.</li>
+<li><code>create_user/</code> This subdirectory is dedicated to the function for creating users, equipped with all necessary files for its execution, configuration, and testing.</li>
+<li><code>utils/</code> A utility directory for shared functions or helpers that support the operations within the users functions, enhancing code reuse and maintainability.</li>
 </ul>
-<h3 id="enhanced-overview-of-create-name-endpoint">Enhanced Overview of Create Name Endpoint</h3>
-<p>The Create Name endpoint is designed to enrich the data around a given name by fetching its associated nicknames from the "Behind the Name" API. It further consolidates this information by storing the original name along with its nicknames in a DynamoDB table, each entry uniquely identified by a UUID. This process not only aggregates relevant data for future retrieval but also standardizes name-related insights within the database.</p>
-<p>Now, let's delve into the details of the function implementation.</p>
-<div class="highlight"><span class="filename">functions/names/create_name/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<h3 id="core-logic">Core Logic</h3>
+<p>The Create User endpoint serves as the gateway for adding new users to our system. It processes incoming data from the request body, assigns a unique UUID to each user, and then stores this information in DynamoDB.
+Now, let's delve into the details of the function implementation.</p>
+<div class="highlight"><span class="filename">functions/users/create_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
 
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
-    <span class="n">name_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
 
 
 <span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="c1"># Retrieve the DynamoDB table name from environment variables.</span>
+    <span class="n">USERS_TABLE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USERS_TABLE&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize a DynamoDB resource.</span>
     <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
-    <span class="n">NAMES_TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NAMES_TABLE_NAME&quot;</span><span class="p">)</span>
-    <span class="n">names_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">NAMES_TABLE_NAME</span><span class="p">)</span>
 
-    <span class="n">secrets_manager</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;secretsmanager&quot;</span><span class="p">)</span>
-    <span class="n">BEHIND_THE_NAME_SECRET_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BEHIND_THE_NAME_SECRET_NAME&quot;</span><span class="p">)</span>
-    <span class="n">BEHIND_THE_NAME_API_KEY</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="n">BEHIND_THE_NAME_SECRET_NAME</span><span class="p">)[</span><span class="s2">&quot;SecretString&quot;</span><span class="p">]</span>
+    <span class="c1"># Reference the DynamoDB table.</span>
+    <span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">USERS_TABLE</span><span class="p">)</span>
 
+    <span class="c1"># Parse the request body to get user data.</span>
     <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
 
-    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.behindthename.com/api/related.json?name=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&amp;key=</span><span class="si">{</span><span class="n">BEHIND_THE_NAME_API_KEY</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="c1"># Generate a unique ID for the new user.</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="s2">&quot;error_code&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">})}</span>
+    <span class="c1"># Insert the new user into the DynamoDB table.</span>
+    <span class="n">users_table</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]})</span>
 
-    <span class="n">name_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-    <span class="n">nicknames</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;names&quot;</span><span class="p">]</span>
-    <span class="n">names_table</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">name_id</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;nicknames&quot;</span><span class="p">:</span> <span class="n">nicknames</span><span class="p">})</span>
-
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;name_id&quot;</span><span class="p">:</span> <span class="n">name_id</span><span class="p">})}</span>
+    <span class="c1"># Return a successful response with the newly created user ID.</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})}</span>
 </code></pre></div>
-<p>This function interacts both with the <code>Behind the Name</code> API and an <code>AWS DynamoDB table</code>. It begins by extracting a name from the incoming event's body, then uses this name to query the API for related nicknames. If the API call is successful, it generates a unique identifier (UUID) for this name, and stores the name along with its nicknames in a DynamoDB table.</p>
-<p>Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables and API keys are easily configurable and securely accessed within the lambda function.</p>
-<div class="highlight"><span class="filename">functions/names/create_name/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<h3 id="configuration-class">Configuration Class</h3>
+<p>Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables are easily configurable and securely accessed within the lambda function.</p>
+<div class="highlight"><span class="filename">functions/users/create_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 
 
-<span class="k">class</span> <span class="nc">CreateNameConfig</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">CreateUserConfig</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CreateName&quot;</span><span class="p">,</span>
-            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/names&quot;</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a name and its respective nicknames on Dynamo DB&quot;</span><span class="p">,</span>
-            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;create_name&quot;</span><span class="p">,</span>
-<span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">],</span>
-</span><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
-</span><span class="hll">                <span class="s2">&quot;NAMES_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">names_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
-</span><span class="hll">                <span class="s2">&quot;BEHIND_THE_NAME_SECRET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">behind_the_name_secret</span><span class="o">.</span><span class="n">secret_name</span><span class="p">,</span>
-</span><span class="hll">            <span class="p">}</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CreateUser&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/users&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a user with name and age on Dynamo DB&quot;</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;create_user&quot;</span><span class="p">,</span>
+<span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+</span><span class="hll">                <span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+</span><span class="hll">            <span class="p">},</span>
 </span>        <span class="p">)</span>
 
-        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/names&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">names_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-</span><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">behind_the_name_secret</span><span class="o">.</span><span class="n">grant_read</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Overall, the <code>CreateNameConfig</code> class meticulously prepares the lambda function with the necessary tools and permissions for secure and efficient operation.</p>
-<p>This tutorial is dedicated to explain the architecture and operational intricacies of the Lambda Forge framework. In our quest for clarity and conciseness, we will <strong>purposefully</strong> sidestep the <code>unit</code> and <code>integration</code> testing examples to avert inundating readers with too much detail. However, rest assured, the comprehensive project code, inclusive the approaches for mocking AWS resources in unit tests, will be hosted on GitHub. This deliberate choice ensures that enthusiasts desiring to dive into testing techniques can do so on their terms, fostering a learning environment that is both focused and comprehensive.</p>
+<h3 id="unit-tests">Unit Tests</h3>
+<p>Integrating AWS resources directly into our Lambda function introduces complexities when it comes to testing. Utilizing actual AWS services for unit testing is not optimal due to several reasons: it can incur unnecessary costs, lead to potential side effects on production data, and slow down testing due to reliance on internet connectivity and service response times. To address these challenges and ensure our tests are both efficient and isolated from real-world side effects, we'll simulate AWS resources using mock implementations. This approach allows us to control both the input and output, creating a more predictable and controlled testing environment.</p>
+<p>To facilitate this, we'll employ the moto library, which is specifically designed for mocking AWS services. This enables us to replicate AWS service responses without the need to interact with the actual services themselves.</p>
+<p>To get started with moto, install it using the following command:</p>
+<div class="highlight"><pre><span></span><code>pip install moto==4.7.1
+</code></pre></div>
+<p>Given that pytest is our chosen testing framework, it's worth highlighting how it utilizes fixtures to execute specific code segments before or after each test. Fixtures are a significant feature of pytest, enabling the setup and teardown of test environments or mock objects. This capability is particularly beneficial for our purposes, as it allows us to mock AWS resources effectively. By default, pytest automatically detects and loads fixtures defined in a file named <code>conftest.py</code>.</p>
+<p>Positioning our <code>conftest.py</code> file within the <code>functions/users</code> directory ensures that all unit tests within this scope can automatically access the defined fixtures. This strategic placement under the users folder allows every test in the directory to utilize the mocked AWS resources without additional configuration, streamlining the testing process for all tests related to the users functionality.</p>
+<p>Here's how the structure with the <code>conftest.py</code> file looks:</p>
+<div class="highlight"><pre><span></span><code>functions/users
+├── conftest.py
+├── create_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+└── utils
+    └── __init__.py
+</code></pre></div>
+<p>Below is the content of our fixture specifically designed to mock DynamoDB interactions.</p>
+<div class="highlight"><span class="filename">functions/users/conftest.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">moto</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="c1"># Defines a pytest fixture with name users_table.</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">users_table</span><span class="p">():</span>
+    <span class="c1"># Set an environment variable to use a fake table name within tests.</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;FAKE-USERS-TABLE&quot;</span>
+
+    <span class="c1"># The `moto.mock_dynamodb` context manager simulates DynamoDB for the duration of the test.</span>
+    <span class="k">with</span> <span class="n">moto</span><span class="o">.</span><span class="n">mock_dynamodb</span><span class="p">():</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+            <span class="n">AttributeDefinitions</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;AttributeName&quot;</span><span class="p">:</span> <span class="s2">&quot;PK&quot;</span><span class="p">,</span> <span class="s2">&quot;AttributeType&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">TableName</span><span class="o">=</span><span class="s2">&quot;FAKE-USERS-TABLE&quot;</span><span class="p">,</span>
+            <span class="n">KeySchema</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;AttributeName&quot;</span><span class="p">:</span> <span class="s2">&quot;PK&quot;</span><span class="p">,</span> <span class="s2">&quot;KeyType&quot;</span><span class="p">:</span> <span class="s2">&quot;HASH&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">BillingMode</span><span class="o">=</span><span class="s2">&quot;PAY_PER_REQUEST&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s2">&quot;FAKE-USERS-TABLE&quot;</span><span class="p">)</span>
+
+        <span class="c1"># `yield` returns the table resource to the test function, ensuring cleanup after tests.</span>
+        <span class="k">yield</span> <span class="n">table</span>
+</code></pre></div>
+<p>Having established this fixture, it is now readily available for use in our unit tests. Next, we will utilize this fixture to conduct tests on our create function, aiming to confirm its behavior under simulated conditions.</p>
+<div class="highlight"><span class="filename">functions/users/create_user/unit.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">lambda_handler</span>
+
+
+<span class="c1"># Test the create user function leveraging the users_table fixture from the conftest.py file automatically imported by pytest.</span>
+<span class="k">def</span> <span class="nf">test_lambda_handler</span><span class="p">(</span><span class="n">users_table</span><span class="p">):</span>
+    <span class="c1"># Simulate an event with a request body, mimicking a POST request payload containing a user&#39;s name and age.</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})}</span>
+
+    <span class="c1"># Invoke the `lambda_handler` function with the simulated event and `None` for the context.</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Parse the JSON response body to work with the data as a Python dictionary.</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Retrieve the user item from the mocked DynamoDB table using the ID returned in the response.</span>
+    <span class="c1"># This action simulates the retrieval operation that would occur in a live DynamoDB instance.</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">users_table</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]})[</span><span class="s2">&quot;Item&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Assert that the name and age in the DynamoDB item match the input values.</span>
+    <span class="c1"># These assertions confirm that the `lambda_handler` function correctly processes the input</span>
+    <span class="c1"># and stores the expected data in the DynamoDB table.</span>
+    <span class="k">assert</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;John Doe&quot;</span>
+    <span class="k">assert</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">30</span>
+</code></pre></div>
+<p>By running the command <code>pytest functions/users -k unit</code>, we initiate the execution of only the unit tests located within the <code>functions/users</code> directory.</p>
+<div class="highlight"><pre><span></span><code>============================ test session starts ==============================
+
+platform darwin -- Python 3.10.4, pytest-8.1.1, pluggy-1.4.0
+configfile: pytest.ini
+collected 2 items / 1 deselected / 1 selected
+
+functions/users/create_user/unit.py .                                    [100%]
+
+=========================== 1 passed, 1 deselected in 2.45s ===================
+</code></pre></div>
+<p>As evidenced, our unit test has successfully passed.</p>
+<h3 id="integration-tests">Integration Tests</h3>
+<p>Unlike unit tests, which are isolated and focused on individual components, integration tests play a critical role in our testing strategy by utilizing actual resources. This approach allows us to verify the effective interaction between various parts of our application, particularly the endpoints and the resources they rely on. Integration testing uncovers issues that may not be apparent during unit testing, such as:</p>
+<ul>
+<li>Incorrect or insufficient permissions that prevent functions from accessing databases</li>
+<li>Configuration errors that could lead to service disruptions</li>
+<li>Network issues affecting the communication between services</li>
+<li>Potential security vulnerabilities in the integration points</li>
+</ul>
+<p>Conducting a simple POST request and expecting a 200 response code is a basic, yet critical, integration test. It serves as a primary indicator of the endpoint's operability. In this tutorial, we'll focus solely on this basic test case to keep the content accessible and prevent information overload.</p>
+<p>However, it's worth noting that integration testing can encompass a wide array of scenarios, such as verifying the successful insertion of data into a DynamoDB table using Boto3, among others.</p>
+<div class="highlight"><span class="filename">functions/users/create_user/integration.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lambda_forge.constants</span> <span class="kn">import</span> <span class="n">BASE_URL</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">integration</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_create_user_status_code_is_200</span><span class="p">():</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/users&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre></div>
+<p>The advantage of employing a multi-stage environment is especially pronounced in the context of integration testing. Since our base url is pointing to the staging environment, we ensure that our testing activities do not adversely affect the production environment.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p><mark>To maintain our focus on illustrating the setup and interactions with AWS resources and the Lambda Forge architecture, we will <strong>intentionally</strong> skip detailed coverage of subsequent unit and integration tests</mark>.This approach is also informed by the fact that these tests will not significantly differ from those we've outlined for the <code>create user</code> endpoint. Including them would introduce redundancy and potentially overwhelm the reader with excessive detail. Our primary goal is to ensure clarity and conciseness while providing a comprehensive understanding of the key concepts.</p>
+<p>However, rest assured that all the code developed in this tutorial, along with the tests, will be made available on GitHub for future reference and deeper exploration. This way, we aim to strike a balance between thoroughness and accessibility, ensuring that the tutorial remains engaging and informative without causing reader fatigue.</p>
+<h2 id="building-the-read-feature">Building the Read Feature</h2>
+<p>We're now set to construct the read feature, enabling the retrieval of user details using their ID.</p>
+<p>To facilitate this, we'll utilize the following command:</p>
+<div class="highlight"><pre><span></span><code>forge function get_user --method &quot;GET&quot; --description &quot;Retrieve user information by ID&quot; --belongs users --endpoint &quot;/users/{user_id}&quot; --public
+</code></pre></div>
+<p>The <code>--endpoint "/users/{user_id}"</code> parameter sets up a specific URL path for accessing this function. This path includes a dynamic segment {user_id} that gets replaced by the actual ID of the user we're trying to retrieve information about when the function is called.</p>
+<p>By running this command, we add a new layer to our application that specifically handles fetching user details in an organized, accessible manner.</p>
+<div class="highlight"><pre><span></span><code>functions/users
+├── conftest.py
+├── create_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── get_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+└── utils
+    └── __init__.py
+</code></pre></div>
+<h3 id="core-logic_1">Core Logic</h3>
+<div class="highlight"><span class="filename">functions/users/get_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="c1"># Retrieve the name of the DynamoDB table from environment variables.</span>
+    <span class="n">USERS_TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize a DynamoDB resource using boto3.</span>
+    <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Reference the specific DynamoDB table by name.</span>
+    <span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">USERS_TABLE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># Extract the user ID from the pathParameters provided in the event object.</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;pathParameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Retrieve the user item from the DynamoDB table using the extracted ID.</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">users_table</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Item&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Reformat the user item into the desired output structure.</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]}</span>
+
+    <span class="c1"># Return the user data with a 200 status code, ensuring the body is properly JSON-encoded.</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)}</span>
+</code></pre></div>
+<h3 id="configuration-class_1">Configuration Class</h3>
+<div class="highlight"><span class="filename">functions/users/get_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+
+<span class="k">class</span> <span class="nc">GetUserConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GetUser&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/users&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Retrieve user information by ID&quot;</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;get_user&quot;</span><span class="p">,</span>
+            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span>
+            <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/users/</span><span class="si">{user_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_read_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="building-the-update-feature">Building the Update Feature</h2>
+<div class="highlight"><pre><span></span><code>forge function update_user --method &quot;PUT&quot; --description &quot;Update an user by ID&quot; --belongs users --endpoint &quot;/users/{user_id}&quot; --public
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>functions/users
+├── conftest.py
+├── create_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── get_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── update_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+└── utils
+    └── __init__.py
+</code></pre></div>
+<h3 id="core-logic_2">Core Logic</h3>
+<div class="highlight"><span class="filename">functions/users/update_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="c1"># Retrieve the DynamoDB table name from environment variables set in the Lambda configuration</span>
+    <span class="n">USERS_TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize a DynamoDB resource using boto3, AWS&#39;s SDK for Python</span>
+    <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Reference the DynamoDB table using the retrieved table name</span>
+    <span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">USERS_TABLE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># Extract the user ID from the pathParameters of the event object passed to the Lambda</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;pathParameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Parse the JSON body from the event object to get the user data</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Update the specified user item in the DynamoDB table with the provided name and age</span>
+    <span class="n">users_table</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]})</span>
+
+    <span class="c1"># Return a response indicating successful user update, with a 200 HTTP status code</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User updated&quot;</span><span class="p">},</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">),</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="configuration-class_2">Configuration Class</h3>
+<div class="highlight"><span class="filename">functions/users/update_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+<span class="k">class</span> <span class="nc">UpdateUserConfig</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;UpdateUser&quot;</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/users&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Update an User&quot;</span><span class="p">,</span>
+        <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;update_user&quot;</span><span class="p">,</span>
+        <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span>
+        <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;/users/</span><span class="si">{user_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="building-the-delete-feature">Building the Delete Feature</h2>
+<div class="highlight"><pre><span></span><code>forge function delete_user --method &quot;DELETE&quot; --description &quot;Delete an user by ID&quot; --belongs users --endpoint &quot;/users/{user_id}&quot; --public
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>functions/users
+├── conftest.py
+├── create_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── delete_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── get_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+├── update_user
+│   ├── __init__.py
+│   ├── config.py
+│   ├── integration.py
+│   ├── main.py
+│   └── unit.py
+└── utils
+    └── __init__.py
+</code></pre></div>
+<h3 id="core-logic_3">Core Logic</h3>
+<div class="highlight"><span class="filename">functions/users/delete_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="c1"># Fetch the name of the DynamoDB table from the environment variables.</span>
+    <span class="n">USERS_TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize a DynamoDB resource using the boto3 library.</span>
+    <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">&quot;dynamodb&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Reference the DynamoDB table by its name.</span>
+    <span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">USERS_TABLE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># Extract the user ID from the path parameters in the event object.</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;pathParameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Delete the item with the specified user ID from the DynamoDB table.</span>
+    <span class="n">users_table</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PK&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})</span>
+
+    <span class="c1"># Return a response indicating that the user has been successfully deleted, with a 200 HTTP status code.</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User deleted&quot;</span><span class="p">})}</span>
+</code></pre></div>
+<h3 id="configuration-class_3">Configuration Class</h3>
+<div class="highlight"><span class="filename">functions/users/delete_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+
+<span class="k">class</span> <span class="nc">DeleteUserConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;DeleteUser&quot;</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/users&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete an User&quot;</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;delete_user&quot;</span><span class="p">,</span>
+            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;USERS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span>
+            <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;/users/</span><span class="si">{user_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</code></pre></div>
 
 
 
