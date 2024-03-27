@@ -507,6 +507,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#deploying-our-serverless-crud-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying Our Serverless CRUD Application
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -744,6 +753,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#deploying-our-serverless-crud-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying Our Serverless CRUD Application
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -814,7 +832,6 @@
 </code></pre></div>
 <p>Below is the updated structure of our Service class, now including the DynamoDB service, demonstrating the integration's completion:</p>
 <div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
-<span class="kn">from</span> <span class="nn">infra.services.secrets_manager</span> <span class="kn">import</span> <span class="n">SecretsManager</span>
 <span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
 <span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
 
@@ -1097,6 +1114,7 @@ functions/users/create_user/unit.py .                                    [100%]
     └── __init__.py
 </code></pre></div>
 <h3 id="core-logic_1">Core Logic</h3>
+<p>This segment of our application demonstrates the retrieval of user information from a DynamoDB table through an AWS Lambda function. It highlights how to parse API gateway events, interact with DynamoDB, and structure responses for efficient data delivery.</p>
 <div class="highlight"><span class="filename">functions/users/get_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">boto3</span>
@@ -1138,6 +1156,7 @@ functions/users/create_user/unit.py .                                    [100%]
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)}</span>
 </code></pre></div>
 <h3 id="configuration-class_1">Configuration Class</h3>
+<p>The config class below outlines the configuration necessary for establishing the GetUser function within AWS, illustrating the seamless integration of AWS Lambda and API Gateway to expose a user data retrieval endpoint.</p>
 <div class="highlight"><span class="filename">functions/users/get_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 
 
@@ -1161,8 +1180,10 @@ functions/users/create_user/unit.py .                                    [100%]
         <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_read_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="building-the-update-feature">Building the Update Feature</h2>
+<p>Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.</p>
 <div class="highlight"><pre><span></span><code>forge function update_user --method &quot;PUT&quot; --description &quot;Update an user by ID&quot; --belongs users --endpoint &quot;/users/{user_id}&quot; --public
 </code></pre></div>
+<p>As expected, after using the forge command to generate the <code>update_user</code> function, a predefined directory structure is created.</p>
 <div class="highlight"><pre><span></span><code>functions/users
 ├── conftest.py
 ├── create_user
@@ -1187,6 +1208,7 @@ functions/users/create_user/unit.py .                                    [100%]
     └── __init__.py
 </code></pre></div>
 <h3 id="core-logic_2">Core Logic</h3>
+<p>Below is the implementation for updating a user, allowing changes to either the name or age.</p>
 <div class="highlight"><span class="filename">functions/users/update_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -1234,6 +1256,7 @@ functions/users/create_user/unit.py .                                    [100%]
     <span class="p">}</span>
 </code></pre></div>
 <h3 id="configuration-class_2">Configuration Class</h3>
+<p>Here's the configuration needed for the <code>update user</code> function to properly engage with the essential AWS services.</p>
 <div class="highlight"><span class="filename">functions/users/update_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 
 <span class="k">class</span> <span class="nc">UpdateUserConfig</span><span class="p">:</span>
@@ -1256,8 +1279,10 @@ functions/users/create_user/unit.py .                                    [100%]
     <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="building-the-delete-feature">Building the Delete Feature</h2>
+<p>Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.</p>
 <div class="highlight"><pre><span></span><code>forge function delete_user --method &quot;DELETE&quot; --description &quot;Delete an user by ID&quot; --belongs users --endpoint &quot;/users/{user_id}&quot; --public
 </code></pre></div>
+<p>Upon executing the Forge command, the <code>delete_user</code> folder will appear within the <code>infra/users</code> directory.</p>
 <div class="highlight"><pre><span></span><code>functions/users
 ├── conftest.py
 ├── create_user
@@ -1288,6 +1313,7 @@ functions/users/create_user/unit.py .                                    [100%]
     └── __init__.py
 </code></pre></div>
 <h3 id="core-logic_3">Core Logic</h3>
+<p>Below is the streamlined code for removing a user from DynamoDB using their user ID.</p>
 <div class="highlight"><span class="filename">functions/users/delete_user/main.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -1326,6 +1352,7 @@ functions/users/create_user/unit.py .                                    [100%]
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User deleted&quot;</span><span class="p">})}</span>
 </code></pre></div>
 <h3 id="configuration-class_3">Configuration Class</h3>
+<p>Here's how to set up the <code>delete user</code> function for interaction with the required AWS resources.</p>
 <div class="highlight"><span class="filename">functions/users/delete_user/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 
 
@@ -1348,6 +1375,150 @@ functions/users/create_user/unit.py .                                    [100%]
 
         <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="deploying-our-serverless-crud-application">Deploying Our Serverless CRUD Application</h2>
+<p>Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.</p>
+<p>As a quick refresher, deploying a Lambda Function requires initializing the config class within the LambdaStack class's constructor. Fortunately, Forge automates this process for us. Now, let's examine how our LambdaStack has evolved after our extensive interactions with Forge.</p>
+<div class="highlight"><span class="filename">infra/stacks/lambda_stack.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">Stack</span>
+<span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">release</span>
+<span class="kn">from</span> <span class="nn">functions.users.delete_user.config</span> <span class="kn">import</span> <span class="n">DeleteUserConfig</span>
+<span class="kn">from</span> <span class="nn">functions.users.update_user.config</span> <span class="kn">import</span> <span class="n">UpdateUserConfig</span>
+<span class="kn">from</span> <span class="nn">functions.users.get_user.config</span> <span class="kn">import</span> <span class="n">GetUserConfig</span>
+<span class="kn">from</span> <span class="nn">functions.users.create_user.config</span> <span class="kn">import</span> <span class="n">CreateUserConfig</span>
+<span class="kn">from</span> <span class="nn">functions.private.config</span> <span class="kn">import</span> <span class="n">PrivateConfig</span>
+<span class="kn">from</span> <span class="nn">authorizers.default.config</span> <span class="kn">import</span> <span class="n">DefaultAuthorizerConfig</span>
+<span class="kn">from</span> <span class="nn">authorizers.docs.config</span> <span class="kn">import</span> <span class="n">DocsAuthorizerConfig</span>
+<span class="kn">from</span> <span class="nn">functions.hello_world.config</span> <span class="kn">import</span> <span class="n">HelloWorldConfig</span>
+
+<span class="nd">@release</span>
+<span class="k">class</span> <span class="nc">LambdaStack</span><span class="p">(</span><span class="n">Stack</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">-Lambda-Stack&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># Authorizers</span>
+        <span class="n">DefaultAuthorizerConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+        <span class="n">DocsAuthorizerConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+
+        <span class="c1"># HelloWorld</span>
+        <span class="n">HelloWorldConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+
+        <span class="c1"># Private</span>
+        <span class="n">PrivateConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+
+        <span class="c1"># Users</span>
+        <span class="n">DeleteUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+        <span class="n">UpdateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+        <span class="n">GetUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+        <span class="n">CreateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+</code></pre></div>
+<p>Impressively, Forge has neatly arranged all related Config classes for optimal cohesion.</p>
+<p>As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.</p>
+<p>Up to this point, we've deployed all stages together for demonstration purposes. However, in a real-world scenario, it's advisable to develop on a dev branch, push changes to AWS, and test your deployed function in the dev environment. If everything checks out, you should then open a pull request to the staging branch and run it there. Once the pipeline completes successfully without any failures, proceed to open a PR to the main branch.</p>
+<p>To more closely simulate a real-world scenario, let's follow a similar process and initially deploy only to the dev environment.</p>
+<div class="highlight"><pre><span></span><code># Switch to the development branch
+git checkout dev
+
+# Stage all changes for commit
+git add .
+
+# Commit changes with a descriptive message
+git commit -m &quot;Implement initial CRUD operations for serverless application deployment&quot;
+
+# Push the changes to the remote repository
+git push
+</code></pre></div>
+<p><img alt="Dev pipeline running" src="../images/dev-pipeline-running.png" /></p>
+<p>Once the pipeline concludes its execution, we will have the opportunity to rigorously test our four core operations in the development environment.</p>
+<div class="highlight"><span class="filename">Dev - Create User</span><pre><span></span><code>curl --request POST \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 30
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Dev - Get User</span><pre><span></span><code>curl --request GET \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
+</code></pre></div>
+<div class="highlight"><span class="filename">Dev - Update User</span><pre><span></span><code>curl --request PUT \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 31
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Dev - Delete User</span><pre><span></span><code>curl --request DELETE \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
+</code></pre></div>
+<p>Great news, they all seems to be working as expected.</p>
+<p>Now, let's proceed to integrate our changes into the Staging environment and deploy them.</p>
+<div class="highlight"><pre><span></span><code># Switch to the staging branch
+git checkout staging
+
+# Merge with dev
+git merge dev
+
+# Push the changes to the remote repository
+git push
+</code></pre></div>
+<p><img alt="Staging pipeline running" src="../images/staging-pipeline-running.png" /></p>
+<div class="highlight"><span class="filename">Staging - Create User</span><pre><span></span><code>curl --request POST \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 30
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Staging - Get User</span><pre><span></span><code>curl --request GET \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
+</code></pre></div>
+<div class="highlight"><span class="filename">Staging - Update User</span><pre><span></span><code>curl --request PUT \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 31
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Staging - Delete User</span><pre><span></span><code>curl --request DELETE \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
+</code></pre></div>
+<p>And now, the moment we've all been waiting for: the grand finale, merging into the main branch!</p>
+<div class="highlight"><pre><span></span><code># Switch to the main branch
+git checkout main
+
+# Merge with staging
+git merge staging
+
+# Push the changes to the remote repository
+git push
+</code></pre></div>
+<p><img alt="Prod pipeline running" src="../images/prod-pipeline-running.png" /></p>
+<div class="highlight"><span class="filename">Prod - Create User</span><pre><span></span><code>curl --request POST \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 30
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Prod - Get User</span><pre><span></span><code>curl --request GET \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+</code></pre></div>
+<div class="highlight"><span class="filename">Prod - Update User</span><pre><span></span><code>curl --request PUT \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID \
+  --data &#39;{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 31
+}&#39;
+</code></pre></div>
+<div class="highlight"><span class="filename">Prod - Delete User</span><pre><span></span><code>curl --request DELETE \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+</code></pre></div>
+<p>Remember, all of our developments up to this point have been automatically documented using Swagger. You can access this comprehensive documentation at <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a>.</p>
+<p><img alt="Users swagger" src="../images/users-swagger.png" /></p>
+<p>Congratulations! 🎉 You've successfully deployed your very first Serverless application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻</p>
 
 
 
