@@ -191,7 +191,7 @@ def lambda_handler(event, context):
     }
 ```
 
-The `Input` and `Output` data classes define the structure for each endpoint, laying the groundwork for generating the comprehensive Swagger documentation. This documentation precisely outlines the expected input and output data for every endpoint.
+The `Input` and `Output` data classes define the structure for each endpoint, laying the groundwork for generating the Swagger documentation. This documentation precisely outlines the expected input and output data for every endpoint.
 
 Considering the project was initiated with the `--no-docs` flag, let's temporarily skip this documentation generation phase. However, we intend to revisit and implement documentation generation at a future point in this tutorial.
 
@@ -324,7 +324,7 @@ In Lambda Forge, pipelines are defined within their specific stack files located
 
 - **Integration Tests**: Performs integration testing to assess the system's overall functionality. Access the integration test report through `Details -> Reports` in CodePipeline.
 
-Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, or reordering them, the framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.
+Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing them. The framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.
 
 After the pipelines have executed, you may notice that while the Development pipeline succeeds, the Staging and Production pipelines fail.
 

@@ -55,7 +55,6 @@ Below is the updated structure of our Service class, now including the DynamoDB 
 
 ```python title="infra/services/__init__.py"
 from infra.services.dynamo_db import DynamoDB
-from infra.services.secrets_manager import SecretsManager
 from infra.services.api_gateway import APIGateway
 from infra.services.aws_lambda import AWSLambda
 
@@ -402,6 +401,8 @@ functions/users
 
 ### Core Logic
 
+This segment of our application demonstrates the retrieval of user information from a DynamoDB table through an AWS Lambda function. It highlights how to parse API gateway events, interact with DynamoDB, and structure responses for efficient data delivery.
+
 ```python title="functions/users/get_user/main.py"
 import json
 import os
@@ -446,6 +447,8 @@ def lambda_handler(event, context):
 
 ### Configuration Class
 
+The config class below outlines the configuration necessary for establishing the GetUser function within AWS, illustrating the seamless integration of AWS Lambda and API Gateway to expose a user data retrieval endpoint.
+
 ```python title="functions/users/get_user/config.py"
 from infra.services import Services
 
@@ -472,9 +475,13 @@ class GetUserConfig:
 
 ## Building the Update Feature
 
+Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.
+
 ```
 forge function update_user --method "PUT" --description "Update an user by ID" --belongs users --endpoint "/users/{user_id}" --public
 ```
+
+As expected, after using the forge command to generate the `update_user` function, a predefined directory structure is created.
 
 ```
 functions/users
@@ -502,6 +509,8 @@ functions/users
 ```
 
 ### Core Logic
+
+Below is the implementation for updating a user, allowing changes to either the name or age.
 
 ```python title="functions/users/update_user/main.py"
 import json
@@ -553,6 +562,8 @@ def lambda_handler(event, context):
 
 ### Configuration Class
 
+Here's the configuration needed for the `update user` function to properly engage with the essential AWS services.
+
 ```python title="functions/users/update_user/config.py"
 from infra.services import Services
 
@@ -578,9 +589,13 @@ class UpdateUserConfig:
 
 ## Building the Delete Feature
 
+Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.
+
 ```
 forge function delete_user --method "DELETE" --description "Delete an user by ID" --belongs users --endpoint "/users/{user_id}" --public
 ```
+
+Upon executing the Forge command, the `delete_user` folder will appear within the `infra/users` directory.
 
 ```
 functions/users
@@ -614,6 +629,8 @@ functions/users
 ```
 
 ### Core Logic
+
+Below is the streamlined code for removing a user from DynamoDB using their user ID.
 
 ```python title="functions/users/delete_user/main.py"
 import json
@@ -656,6 +673,8 @@ def lambda_handler(event, context):
 
 ### Configuration Class
 
+Here's how to set up the `delete user` function for interaction with the required AWS resources.
+
 ```python title="functions/users/delete_user/config.py"
 from infra.services import Services
 
@@ -679,3 +698,196 @@ class DeleteUserConfig:
 
         services.dynamo_db.users_table.grant_write_data(function)
 ```
+
+## Deploying Our Serverless CRUD Application
+
+Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.
+
+As a quick refresher, deploying a Lambda Function requires initializing the config class within the LambdaStack class's constructor. Fortunately, Forge automates this process for us. Now, let's examine how our LambdaStack has evolved after our extensive interactions with Forge.
+
+```python title="infra/stacks/lambda_stack.py"
+from aws_cdk import Stack
+from constructs import Construct
+from infra.services import Services
+from lambda_forge import release
+from functions.users.delete_user.config import DeleteUserConfig
+from functions.users.update_user.config import UpdateUserConfig
+from functions.users.get_user.config import GetUserConfig
+from functions.users.create_user.config import CreateUserConfig
+from functions.private.config import PrivateConfig
+from authorizers.default.config import DefaultAuthorizerConfig
+from authorizers.docs.config import DocsAuthorizerConfig
+from functions.hello_world.config import HelloWorldConfig
+
+@release
+class LambdaStack(Stack):
+    def __init__(self, scope: Construct, context, **kwargs) -> None:
+
+        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
+
+        self.services = Services(self, context)
+
+        # Authorizers
+        DefaultAuthorizerConfig(self.services)
+        DocsAuthorizerConfig(self.services)
+
+        # HelloWorld
+        HelloWorldConfig(self.services)
+
+        # Private
+        PrivateConfig(self.services)
+
+        # Users
+        DeleteUserConfig(self.services)
+        UpdateUserConfig(self.services)
+        GetUserConfig(self.services)
+        CreateUserConfig(self.services)
+```
+
+Impressively, Forge has neatly arranged all related Config classes for optimal cohesion.
+
+As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.
+
+Up to this point, we've deployed all stages together for demonstration purposes. However, in a real-world scenario, it's advisable to develop on a dev branch, push changes to AWS, and test your deployed function in the dev environment. If everything checks out, you should then open a pull request to the staging branch and run it there. Once the pipeline completes successfully without any failures, proceed to open a PR to the main branch.
+
+To more closely simulate a real-world scenario, let's follow a similar process and initially deploy only to the dev environment.
+
+```
+# Switch to the development branch
+git checkout dev
+
+# Stage all changes for commit
+git add .
+
+# Commit changes with a descriptive message
+git commit -m "Implement initial CRUD operations for serverless application deployment"
+
+# Push the changes to the remote repository
+git push
+```
+
+![Dev pipeline running](images/dev-pipeline-running.png)
+
+Once the pipeline concludes its execution, we will have the opportunity to rigorously test our four core operations in the development environment.
+
+```title="Dev - Create User"
+curl --request POST \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users \
+  --data '{
+	"name": "John Doe",
+	"age": 30
+}'
+```
+
+```title="Dev - Get User"
+curl --request GET \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
+```
+
+```title="Dev - Update User"
+curl --request PUT \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID \
+  --data '{
+	"name": "John Doe",
+	"age": 31
+}'
+```
+
+```title="Dev - Delete User"
+curl --request DELETE \
+  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
+```
+
+Great news, they all seems to be working as expected.
+
+Now, let's proceed to integrate our changes into the Staging environment and deploy them.
+
+```
+# Switch to the staging branch
+git checkout staging
+
+# Merge with dev
+git merge dev
+
+# Push the changes to the remote repository
+git push
+```
+
+![Staging pipeline running](images/staging-pipeline-running.png)
+
+```title="Staging - Create User"
+curl --request POST \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users \
+  --data '{
+	"name": "John Doe",
+	"age": 30
+}'
+```
+
+```title="Staging - Get User"
+curl --request GET \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
+```
+
+```title="Staging - Update User"
+curl --request PUT \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID \
+  --data '{
+	"name": "John Doe",
+	"age": 31
+}'
+```
+
+```title="Staging - Delete User"
+curl --request DELETE \
+  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
+```
+
+And now, the moment we've all been waiting for: the grand finale, merging into the main branch!
+
+```
+# Switch to the main branch
+git checkout main
+
+# Merge with staging
+git merge staging
+
+# Push the changes to the remote repository
+git push
+```
+
+![Prod pipeline running](images/prod-pipeline-running.png)
+
+```title="Prod - Create User"
+curl --request POST \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users \
+  --data '{
+	"name": "John Doe",
+	"age": 30
+}'
+```
+
+```title="Prod - Get User"
+curl --request GET \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+```
+
+```title="Prod - Update User"
+curl --request PUT \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID \
+  --data '{
+	"name": "John Doe",
+	"age": 31
+}'
+```
+
+```title="Prod - Delete User"
+curl --request DELETE \
+  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+```
+
+Remember, all of our developments up to this point have been automatically documented using Swagger. You can access this comprehensive documentation at [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs).
+
+![Users swagger](images/users-swagger.png)
+
+Congratulations! 🎉 You've successfully deployed your very first Serverless application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻

@@ -1047,7 +1047,7 @@ source venv/bin/activate
         <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">})</span>
     <span class="p">}</span>
 </code></pre></div>
-<p>The <code>Input</code> and <code>Output</code> data classes define the structure for each endpoint, laying the groundwork for generating the comprehensive Swagger documentation. This documentation precisely outlines the expected input and output data for every endpoint.</p>
+<p>The <code>Input</code> and <code>Output</code> data classes define the structure for each endpoint, laying the groundwork for generating the Swagger documentation. This documentation precisely outlines the expected input and output data for every endpoint.</p>
 <p>Considering the project was initiated with the <code>--no-docs</code> flag, let's temporarily skip this documentation generation phase. However, we intend to revisit and implement documentation generation at a future point in this tutorial.</p>
 <h2 id="deploying-your-lambda-function">Deploying Your Lambda Function</h2>
 <p>To deploy your Lambda function, you should integrate the Config class within the <code>infra/stacks/lambda_stack.py</code> file.</p>
@@ -1160,7 +1160,7 @@ cdk deploy --all --require-approval never
 <p><strong>Integration Tests</strong>: Performs integration testing to assess the system's overall functionality. Access the integration test report through <code>Details -&gt; Reports</code> in CodePipeline.</p>
 </li>
 </ul>
-<p>Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, or reordering them, the framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.</p>
+<p>Lambda Forge provides a suggested pipeline configuration, emphasizing flexibility in its design. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing them. The framework is designed to accommodate your project's specific requirements. This level of customization ensures that your pipelines align closely with your development, testing, and deployment strategies, providing a robust foundation for your application's continuous integration and delivery processes.</p>
 <p>After the pipelines have executed, you may notice that while the Development pipeline succeeds, the Staging and Production pipelines fail.</p>
 <p><img alt="Failed Prod and Staging but Dev success" src="../images/failed-pipelines.png" /></p>
 <p>This failure is expected, It occurs because the integration test step attempts to send a GET request to the deployed Lambda function. However, since the Stack has just been created, the Lambda function's URL is not yet available, causing the test to fail.</p>
