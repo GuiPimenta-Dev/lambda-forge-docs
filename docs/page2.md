@@ -234,7 +234,7 @@ Your token will follow this format: `ghp_********************************`
 
 ### Store the token on AWS Secrets Manager
 
-Save this token in AWS Secrets Manager as `plain text` using the precise name **github-token**. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.
+Save this token in AWS Secrets Manager as `plain text` using the exact name **github-token**. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.
 
 ### Push Your Code To Github
 

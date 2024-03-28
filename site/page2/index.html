@@ -15,7 +15,7 @@
         <link rel="next" href="../page3/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
@@ -88,8 +88,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -183,8 +182,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -1080,7 +1078,7 @@ source venv/bin/activate
 </ol>
 <p>Your token will follow this format: <code>ghp_********************************</code></p>
 <h3 id="store-the-token-on-aws-secrets-manager">Store the token on AWS Secrets Manager</h3>
-<p>Save this token in AWS Secrets Manager as <code>plain text</code> using the precise name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
+<p>Save this token in AWS Secrets Manager as <code>plain text</code> using the exact name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
 <h3 id="push-your-code-to-github">Push Your Code To Github</h3>
 <p>With all the required settings now in place, we're ready to upload our code to the GitHub repository.</p>
 <p>Lambda Forge is designed to support a multi-stage deployment process, automatically creating environments for Production, Staging and Development. These environments correspond to the <code>main</code>, <code>staging</code>, and <code>dev</code> branches, respectively.</p>

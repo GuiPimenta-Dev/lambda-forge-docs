@@ -405,7 +405,7 @@ Execution time: 167.53530287742615 seconds
 
 Fantastic, it took under **3 minutes**!
 
-This approach ensures that we never exceed the 15-minute timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.
+This approach ensures that we never exceed the 15 minutes timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.
 
 ## Configuring The Web Scraper
 
@@ -479,8 +479,8 @@ class EventBridge:
             event_bus_arn=resources["arns"]["event_bridge_arn"],
         )
 
-    def create_rule(self, name, expression, target, only_prod=False):
-        if only_prod and self.stage != "Prod":
+    def create_rule(self, name, expression, target, stages=None):
+        if stages is not None and self.stage not in stages:
             return
         events.Rule(
             self.scope,
@@ -523,7 +523,7 @@ class ScraperConfig:
             name="BooksScraperRule",
             expression="cron(0 12 ? * * *)",
             target=function,
-            only_prod=True,
+            stages=["Prod"],
         )
 ```
 
@@ -544,4 +544,4 @@ The cron expression `cron(0 12 ? * * *)` sets a schedule to trigger an action at
 
 In a multi-stage deployment setup where all stages share a single DynamoDB table, it's inefficient and unnecessary to trigger the web scraper multiple times for each stage. This redundancy could lead to excessive resource utilization and potential data duplication issues.
 
-To streamline operations and ensure efficient use of resources, we implement a strategic approach by activating the `only_prod` flag. This configuration ensures that the lambda function is scheduled to run exclusively in the Production environment. By doing so, we avoid repetitive triggers across development and staging environments, yet maintain up-to-date data in our shared DynamoDB table.
+To streamline operations and ensure efficient use of resources, we implement a strategic approach by setting the `stages` equal to Prod. This configuration ensures that the lambda function is scheduled to run exclusively in the Production environment. By doing so, we avoid repetitive triggers across development and staging environments, yet maintain up-to-date data in our shared DynamoDB table.

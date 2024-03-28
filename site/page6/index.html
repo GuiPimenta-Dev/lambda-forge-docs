@@ -13,7 +13,7 @@
       
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
@@ -86,8 +86,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -181,8 +180,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -479,9 +477,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#integrating-eventbridge-to-our-services-class" class="md-nav__link">
+  <a href="#integrating-eventbridge-to-the-services-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating EventBridge To Our Services Class
+      Integrating EventBridge To The Services Class
     </span>
   </a>
   
@@ -681,9 +679,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#integrating-eventbridge-to-our-services-class" class="md-nav__link">
+  <a href="#integrating-eventbridge-to-the-services-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Integrating EventBridge To Our Services Class
+      Integrating EventBridge To The Services Class
     </span>
   </a>
   
@@ -1083,7 +1081,7 @@
 <div class="highlight"><pre><span></span><code>Execution time: 167.53530287742615 seconds
 </code></pre></div>
 <p>Fantastic, it took under <strong>3 minutes</strong>!</p>
-<p>This approach ensures that we never exceed the 15-minute timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.</p>
+<p>This approach ensures that we never exceed the 15 minutes timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.</p>
 <h2 id="configuring-the-web-scraper">Configuring The Web Scraper</h2>
 <p>Now that we have developed our function, let's proceed to configure the necessary AWS resources for its executions on the cloud.</p>
 <div class="highlight"><span class="filename">functions/books/scraper/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
@@ -1122,7 +1120,7 @@
 <h2 id="scheduling-executions-with-event-bridge">Scheduling Executions With Event Bridge</h2>
 <p>The current configuration file equips us to execute the Lambda function as needed. However, it necessitates manual intervention for each run, which is an impractical approach for dynamic tasks like web scraping. The crux of the issue lies in the volatile nature of our target: website data, such as book prices and inventory, can change unpredictably.</p>
 <p>To mitigate this, we must ensure our web scraper operates automatically at regular intervals, thus capturing updates without manual oversight. By leveraging <strong>AWS EventBridge</strong>, we can schedule our Lambda function to run periodically, ensuring our data collection remains current with minimal effort.</p>
-<h3 id="integrating-eventbridge-to-our-services-class">Integrating EventBridge To Our Services Class</h3>
+<h3 id="integrating-eventbridge-to-the-services-class">Integrating EventBridge To The Services Class</h3>
 <p>To integrate AWS EventBridge for scheduling tasks, we begin by creating an EventBridge class using Forge. This is achieved with the following command:</p>
 <div class="highlight"><pre><span></span><code>forge service event_bridge
 </code></pre></div>
@@ -1142,8 +1140,8 @@
             <span class="n">event_bus_arn</span><span class="o">=</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;event_bridge_arn&quot;</span><span class="p">],</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">only_prod</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">only_prod</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">!=</span> <span class="s2">&quot;Prod&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">stages</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">stages</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="n">events</span><span class="o">.</span><span class="n">Rule</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span>
@@ -1182,7 +1180,7 @@
 </span><span class="hll">            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BooksScraperRule&quot;</span><span class="p">,</span>
 </span><span class="hll">            <span class="n">expression</span><span class="o">=</span><span class="s2">&quot;cron(0 12 ? * * *)&quot;</span><span class="p">,</span>
 </span><span class="hll">            <span class="n">target</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-</span><span class="hll">            <span class="n">only_prod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span class="hll">            <span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Prod&quot;</span><span class="p">],</span>
 </span><span class="hll">        <span class="p">)</span>
 </span></code></pre></div>
 <h3 id="cron-expression-explanation">Cron Expression Explanation</h3>
@@ -1198,7 +1196,7 @@
 <p>The cron expression <code>cron(0 12 ? * * *)</code> sets a schedule to trigger an action at 12 PM UTC every day.</p>
 <h3 id="preventing-redundant-triggers-in-multi-stage-environments">Preventing Redundant Triggers in Multi-Stage Environments</h3>
 <p>In a multi-stage deployment setup where all stages share a single DynamoDB table, it's inefficient and unnecessary to trigger the web scraper multiple times for each stage. This redundancy could lead to excessive resource utilization and potential data duplication issues.</p>
-<p>To streamline operations and ensure efficient use of resources, we implement a strategic approach by activating the <code>only_prod</code> flag. This configuration ensures that the lambda function is scheduled to run exclusively in the Production environment. By doing so, we avoid repetitive triggers across development and staging environments, yet maintain up-to-date data in our shared DynamoDB table.</p>
+<p>To streamline operations and ensure efficient use of resources, we implement a strategic approach by setting the <code>stages</code> equal to Prod. This configuration ensures that the lambda function is scheduled to run exclusively in the Production environment. By doing so, we avoid repetitive triggers across development and staging environments, yet maintain up-to-date data in our shared DynamoDB table.</p>
 
 
 

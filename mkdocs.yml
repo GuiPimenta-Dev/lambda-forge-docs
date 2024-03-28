@@ -2,6 +2,8 @@ site_name: Lambda Forge
 
 theme:
   name: material
+  logo: images/logo.png
+  favicon: images/logo.png
   palette:
       primary: black
 
