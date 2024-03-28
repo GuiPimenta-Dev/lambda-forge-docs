@@ -1078,7 +1078,7 @@ source venv/bin/activate
 </ol>
 <p>Your token will follow this format: <code>ghp_********************************</code></p>
 <h3 id="store-the-token-on-aws-secrets-manager">Store the token on AWS Secrets Manager</h3>
-<p>Save this token in AWS Secrets Manager as <code>plain text</code> using the precise name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
+<p>Save this token in AWS Secrets Manager as <code>plain text</code> using the exact name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
 <h3 id="push-your-code-to-github">Push Your Code To Github</h3>
 <p>With all the required settings now in place, we're ready to upload our code to the GitHub repository.</p>
 <p>Lambda Forge is designed to support a multi-stage deployment process, automatically creating environments for Production, Staging and Development. These environments correspond to the <code>main</code>, <code>staging</code>, and <code>dev</code> branches, respectively.</p>
