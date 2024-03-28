@@ -13,7 +13,7 @@
       
       
       
-      <link rel="icon" href="../images/transparent.png">
+      <link rel="icon" href="../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
@@ -86,7 +86,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/transparent.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -180,7 +180,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/transparent.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -1081,7 +1081,7 @@
 <div class="highlight"><pre><span></span><code>Execution time: 167.53530287742615 seconds
 </code></pre></div>
 <p>Fantastic, it took under <strong>3 minutes</strong>!</p>
-<p>This approach ensures that we never exceed the 15-minute timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.</p>
+<p>This approach ensures that we never exceed the 15 minutes timeout limit, as each time a new message is published to SNS, the timeout counter is refreshed, allowing continuous execution without interruption.</p>
 <h2 id="configuring-the-web-scraper">Configuring The Web Scraper</h2>
 <p>Now that we have developed our function, let's proceed to configure the necessary AWS resources for its executions on the cloud.</p>
 <div class="highlight"><span class="filename">functions/books/scraper/config.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
