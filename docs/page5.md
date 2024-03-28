@@ -53,7 +53,7 @@ infra
 
 Below is the updated structure of our Service class, now including the DynamoDB service, demonstrating the integration's completion:
 
-```python title="infra/services/__init__.py"
+```python title="infra/services/__init__.py" hl_lines="10"
 from infra.services.dynamo_db import DynamoDB
 from infra.services.api_gateway import APIGateway
 from infra.services.aws_lambda import AWSLambda

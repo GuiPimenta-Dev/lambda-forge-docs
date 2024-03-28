@@ -213,7 +213,7 @@ from functions.hello_world.config import HelloWorldConfig
 class LambdaStack(Stack):
     def __init__(self, scope: Construct, context, **kwargs) -> None:
 
-        super().__init__(scope, f"{context.name}-CDK", **kwargs)
+        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
 
         self.services = Services(self, context)
 
