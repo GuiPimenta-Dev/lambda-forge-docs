@@ -10,9 +10,9 @@ Additionally, we will cover how to configure our Lambda function to execute dail
 
 Considering the write access to our database will be exclusively reserved for the scraper, maintaining three separate databases for each deployment stage is unnecessary. Therefore, let's just create a singular DynamoDB table designed to serve all three environments uniformly.
 
-Instead of setting up each environment's details separately in the `cdk.json` file, like we did to the users table, we'll make things simpler by putting the books table ARN directly into our DynamoDB class.
+Instead of setting up each environment's details separately in the `cdk.json` file, like we did to the users table, we'll make things simpler by creating a single Books table on the AWS console and placing its ARN directly into our DynamoDB class.
 
-```python title="infra/services/dynamo_db.py" linenums="5" hl_lines="10-14"
+```python title="infra/services/dynamo_db.py" linenums="5" hl_lines="10-16"
 class DynamoDB:
   def __init__(self, scope, resources: dict) -> None:
 
@@ -27,7 +27,6 @@ class DynamoDB:
           "BooksTable",
           "$BOOKS-TABLE-ARN",
       )
-
 ```
 
 ## Lambda Layers
@@ -37,23 +36,6 @@ Another essential aspect of our project involves leveraging external libraries l
 ### What Are Lambda Layers?
 
 Lambda Layers are essentially ZIP archives containing libraries, custom runtime environments, or other dependencies. You can include these layers in your Lambda function’s execution environment without having to bundle them directly with your function's deployment package. This means you can use libraries or custom runtimes across multiple Lambda functions without needing to include them in each function’s codebase.
-
-#### Key Benefits
-
-- **Code Reusability**: Lambda Layers promote code reuse. By storing common components in layers, you can easily share them across multiple functions.
-- **Simplified Management**: Managing your function’s dependencies becomes easier. You can update a shared library in a layer without updating every function that uses it.
-- **Efficiency**: Layers can reduce the size of your deployment package, making uploads faster and reducing the time it takes to update or deploy functions.
-- **Flexibility**: You can create layers for different programming languages or purposes, offering flexibility in how you organize and manage dependencies.
-
-#### How They Work
-
-When you create a Lambda function, you specify which layers to include in its execution environment. During execution, AWS Lambda configures the function's environment to include the content of the specified layers. This content is available to your function's code just as if it were included in the deployment package directly.
-
-#### Use Cases
-
-- **Sharing libraries**: Commonly used libraries can be placed in a layer and shared among multiple functions.
-- **Custom runtimes**: You can use layers to deploy functions in languages that AWS Lambda does not natively support by including the necessary runtime in a layer.
-- **Configuration files**: Layers can be used to store configuration files that multiple functions need to access.
 
 ### Incorporating Layers Into Our Service Class
 
@@ -120,6 +102,13 @@ class Layers:
             id="BS4Layer",
             layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-beautifulsoup4:7",
         )
+```
+
+Additionally, include the libraries in the `requirements.txt` file to ensure they are installed during the pipeline execution process.
+
+```txt title="requirements.txt" linenums="16"
+requests==2.28.1
+beautifulsoup4==4.12.3
 ```
 
 ## Developing The Web Scraper
@@ -261,25 +250,26 @@ As an initial step, we have to integrate SNS into our Services class.
 forge service sns
 ```
 
-A new `sns.py` file was created on `infra/services`, so let's create a new SNS topic.
+A new `sns.py` file was created on `infra/services`, so create a new SNS topic on the AWS console and place it's ARN on the SNS class.
 
 ```python title="infra/services/sns.py" hl_lines="8-13"
-from aws_cdk.aws_sns import Topic
 from aws_cdk import aws_lambda_event_sources
+import aws_cdk.aws_sns as sns
 
 
 class SNS:
-    def __init__(self, scope, resources) -> None:
+    def __init__(self, scope, resources, stage) -> None:
+        self.stage = stage
 
-        self.books_scraper_topic = Topic(
+        self.books_scraper_topic = sns.Topic.from_topic_arn(
             scope,
             "BooksScraperTopic",
-            topic_name="BooksScraperTopic",
-            display_name="Books Scraper Topic"
+            topic_arn="$TOPIC-ARN",
         )
 
-    @staticmethod
-    def create_trigger(topic, function):
+    def create_trigger(self, topic, function, stages=None):
+        if stages and self.stage not in stages:
+            return
         sns_subscription = aws_lambda_event_sources.SnsEventSource(topic)
         function.add_event_source(sns_subscription)
 ```
@@ -442,8 +432,8 @@ This configuration file outlines the setup and permissions for a Lambda function
 - **Timeout:** Specifies a maximum duration of 5 minutes for Lambda execution.
 - **Layers:** Adds the requests and bs4 layers to the Lambda function.
 - **Environment Variables:** Establishes the required environment variables for operation.
-- **DynamoDB Access:** Provides the Lambda function with write access to the DynamoDB books table.
-- **SNS Trigger:** Utilizes the SNS class helper method to link an SNS topic with the Lambda function.
+- **DynamoDB Access:** Provides the Lambda function with write access to the DynamoDB Books table.
+- **SNS Trigger:** Utilizes the SNS class helper method to link an SNS topic with the production Lambda function.
 - **SNS Publishing Permissions:** Empowers the Lambda function to publish messages to the books topic.
 
 ## Scheduling Executions With Event Bridge
@@ -451,8 +441,6 @@ This configuration file outlines the setup and permissions for a Lambda function
 The current configuration file equips us to execute the Lambda function as needed. However, it necessitates manual intervention for each run, which is an impractical approach for dynamic tasks like web scraping. The crux of the issue lies in the volatile nature of our target: website data, such as book prices and inventory, can change unpredictably.
 
 To mitigate this, we must ensure our web scraper operates automatically at regular intervals, thus capturing updates without manual oversight. By leveraging **AWS EventBridge**, we can schedule our Lambda function to run periodically, ensuring our data collection remains current with minimal effort.
-
-### Integrating EventBridge To The Services Class
 
 To integrate AWS EventBridge for scheduling tasks, we begin by creating an EventBridge class using Forge. This is achieved with the following command:
 
@@ -473,12 +461,6 @@ class EventBridge:
         self.scope = scope
         self.stage = stage
 
-        self.event_bridge = events.EventBus.from_event_bus_arn(
-            scope,
-            id="EventBridge",
-            event_bus_arn=resources["arns"]["event_bridge_arn"],
-        )
-
     def create_rule(self, name, expression, target, stages=None):
         if stages is not None and self.stage not in stages:
             return
@@ -490,58 +472,247 @@ class EventBridge:
         )
 ```
 
-This class introduces a streamlined method for creating EventBridge rules, enabling the scheduling of Lambda function executions. Notably, it includes a condition to restrict rule creation to production environments, offering flexibility in deployment strategies.
+This class introduces a streamlined method for creating EventBridge rules, enabling the scheduling of Lambda function executions.
 
-Let's proceed to integrate our Lambda Function with the newly created EventBridge class.
+Before we proceed, it's crucial to acknowledge that we're operating within a multi-stage deployment environment. Our immediate task involves configuring the Scraper function to activate based on a scheduled rule. However, a pertinent question arises: Should we initiate the triggering of three distinct functions simultaneously? Of course not, especially when considering efficiency and resource management. More precisely, is there a need for three separate scrapers when, in reality, only one scraper is destined for activation?
 
-```python title="functions/books/scraper/config.py" hl_lines="25-30"
+Bearing this consideration in mind, it's wise to implement a few minor adjustments. Our goal is to streamline the process, thereby avoiding the unnecessary creation of unused scrapers.
+
+First, let's modify the `LambdaStack` class to send also the context to the `ScraperConfig` class.
+
+```python title="infra/stacks/lambda_stack.py" hl_lines="3" linenums="42"
+        # Books
+        ScraperConfig(self.services, context)
+```
+
+Now, let's modify our configuration class to accept the `context` as an additional argument in its constructor.
+
+By incorporating the context, we can strategically condition the creation of the function based on the deployment stage.
+
+```python title="functions/books/scraper/config.py" hl_lines="5 7 26-30"
 from infra.services import Services
 
 
 class ScraperConfig:
+    def __init__(self, services: Services, context) -> None:
+
+        if context.stage == "Prod":
+          function = services.aws_lambda.create_function(
+              name="Scraper",
+              path="./functions/books",
+              description="Web scraper to populate Dynamo with books data",
+              directory="scraper",
+              timeout=5,
+              layers=[services.layers.requests_layer, services.layers.bs4_layer],
+              environment={
+                  "BOOKS_TABLE_NAME": services.dynamo_db.books_table.table_name,
+                  "SNS_TOPIC_ARN": services.sns.books_scraper_topic.topic_arn
+              }
+          )
+
+          services.dynamo_db.books_table.grant_write_data(function)
+
+          services.sns.create_trigger(services.sns.books_scraper_topic, function)
+          services.sns.books_scraper_topic.grant_publish(function)
+
+          services.event_bridge.create_rule(
+              name="ScraperRule",
+              expression="cron(0 12 ? * * *)",
+              target=function,
+          )
+```
+
+The cron expression `cron(0 12 ? * * *)` configures a schedule to initiate an action every day at 12 PM UTC.
+
+Now, we're streamlining our deployment by creating the Lambda function and its essential resources exclusively for the staging environment that will be actively utilized.
+
+## Developing an Endpoint for Data Access
+
+Let's create an endpoint that returns all the stored data from our database or allows filtering by category, facilitating easy access and manipulation of the data.
+
+```
+forge function list_books --method "GET" --description "A function to fetch books from DynamoDB, optionally filtered by category." --belongs books --public
+```
+
+The file has been created within the `books` directory, as initially planned.
+
+```
+functions
+├── books
+    ├── list_books
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── scraper
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
+```
+
+To optimize data retrieval by category from our DynamoDB table, we need to create a Global Secondary Index (GSI) on the Books Table. This index enables efficient querying and filtering of data based on the `category` attribute, without the need for scanning the entire table.
+
+Go to the DynamoDB section within the AWS Management Console and select the Books Table. Click on the `Indexes` tab next to the table details, then press `Create index`. In the creation form, set the partition key to your `category` column. Name your index as `CategoryIndex`. After configuring these details, review your settings and confirm by clicking `Create index`.
+
+Having established our index, we can utilize it to precisely and efficiently fetch data by category when needed, significantly optimizing our query performance.
+
+```python title="functions/books/list_books/main.py"
+import json
+import os
+from dataclasses import dataclass
+from typing import List, Optional
+
+import boto3
+from boto3.dynamodb.conditions import Key
+
+@dataclass
+class Input:
+    category: Optional[str]
+
+@dataclass
+class Book:
+    id: str
+    title: str
+    price: str
+    category: str
+    stock: str
+    description: str
+    url: str
+
+@dataclass
+class Output:
+    data: List[Book]
+
+def lambda_handler(event, context):
+    # Initialize a DynamoDB client
+    dynamodb = boto3.resource("dynamodb")
+
+    # Get the name of the table from the environment variable
+    BOOKS_TABLE_NAME = os.environ["BOOKS_TABLE_NAME"]
+
+    # Create a DynamoDB table resource
+    table = dynamodb.Table(BOOKS_TABLE_NAME)
+
+    # Check if a category is specified in the query string parameters
+    category = (
+        event["queryStringParameters"].get("category")
+        if event["queryStringParameters"]
+        else None
+    )
+
+    processed_items = []
+    last_evaluated_key = None
+
+    # Handle pagination
+    while True:
+        scan_kwargs = {}
+        if category:
+            scan_kwargs.update({
+                'IndexName': "CategoryIndex",
+                'KeyConditionExpression': Key("category").eq(category.title())
+            })
+
+        if last_evaluated_key:
+            scan_kwargs['ExclusiveStartKey'] = last_evaluated_key
+
+        if category:
+            response = table.query(**scan_kwargs)
+        else:
+            response = table.scan(**scan_kwargs)
+
+        items = response.get("Items", [])
+
+        # Renaming 'PK' attribute to 'id' in each item
+        processed_items.extend(
+            [{"id": item["PK"], **{k: v for k, v in item.items() if k != "PK"}} for item in items]
+        )
+
+        last_evaluated_key = response.get('LastEvaluatedKey')
+        if not last_evaluated_key:
+            break
+
+    return {"statusCode": 200, "body": json.dumps({"data": processed_items})}
+```
+
+Now Let's configure the function
+
+```python title="functions/books/list_books/config.py" hl_lines="12 17-21"
+from infra.services import Services
+
+
+class ListBooksConfig:
     def __init__(self, services: Services) -> None:
 
         function = services.aws_lambda.create_function(
-            name="Scraper",
+            name="ListBooks",
             path="./functions/books",
-            description="Web scraper to populate Dynamo with books data",
-            directory="scraper",
-            timeout=5,
-            layers=[services.layers.requests_layer, services.layers.bs4_layer],
-            environment={
-                "BOOKS_TABLE_NAME": services.dynamo_db.books_table.table_name,
-                "SNS_TOPIC_ARN": services.sns.books_scraper_topic.topic_arn
-            }
+            description="A function to fetch books from DynamoDB, optionally filtered by category.",
+            directory="list_books",
+            environment={"BOOKS_TABLE_NAME": services.dynamo_db.books_table.table_name},
         )
 
-        services.dynamo_db.books_table.grant_write_data(function)
+        services.api_gateway.create_endpoint("GET", "/books", function, public=True)
 
-        services.sns.create_trigger(services.sns.books_scraper_topic, function)
-        services.sns.books_scraper_topic.grant_publish(function)
-
-        services.event_bridge.create_rule(
-            name="BooksScraperRule",
-            expression="cron(0 12 ? * * *)",
-            target=function,
-            stages=["Prod"],
+        services.dynamo_db.books_table.grant_read_data(function)
+        services.dynamo_db.add_query_permission(
+            function, services.dynamo_db.books_table
         )
 ```
 
-### Cron Expression Explanation
+In addition to the foundational setup facilitated by Forge, this configuration file plays a crucial role in further customizing our function. It specifically focuses on defining environment variables and granting read permissions to the function for accessing the Books table.
 
-The cron expression `cron(0 12 ? * * *)` is structured as follows:
+Moreover, we leverage a specialized helper method within our DynamoDB class to extend Query permissions to the Lambda function. This distinction is critical as querying entails more specific privileges beyond data reading, ensuring our function has the precise access needed for optimal operation.
 
-- **0**: Represents the minute part of the time schedule. The `0` means the action will trigger at the zeroth minute of the hour.
-- **12**: This is the hour part, set in 24-hour format. `12` signifies that the action will trigger at 12 PM.
-- **?**: In the day-of-month field, a `?` indicates that this field is not specified, because the day-of-week field is being used or vice versa. AWS cron expressions require one of these fields to be a question mark to avoid confusion.
-- **\***: The asterisk in the month field means "every month." The schedule does not limit the action to specific months; it will be eligible to run every month of the year.
-- **\***: In the day-of-week field, an asterisk signifies "every day of the week." This makes the action eligible to run on any day of the week.
-- **\***: The asterisk in the year field indicates "every year," ensuring the schedule is not limited to a specific year.
+## Launching Our Web Scraper and Data Visualization Endpoint
 
-The cron expression `cron(0 12 ? * * *)` sets a schedule to trigger an action at 12 PM UTC every day.
+Great, we're all set to deploy our function.
 
-### Preventing Redundant Triggers in Multi-Stage Environments
+Now, we'll commit and push our changes to the remote repository, allowing our CI/CD pipeline to handle the deployment seamlessly.
 
-In a multi-stage deployment setup where all stages share a single DynamoDB table, it's inefficient and unnecessary to trigger the web scraper multiple times for each stage. This redundancy could lead to excessive resource utilization and potential data duplication issues.
+```bash
+# Add changes to the staging area
+git add .
 
-To streamline operations and ensure efficient use of resources, we implement a strategic approach by setting the `stages` equal to Prod. This configuration ensures that the lambda function is scheduled to run exclusively in the Production environment. By doing so, we avoid repetitive triggers across development and staging environments, yet maintain up-to-date data in our shared DynamoDB table.
+# Commit the changes with a descriptive message
+git commit -m "Deploying Web Scraper and Data Visualization Endpoint"
+
+# Push changes to the 'dev' branch.
+git push origin dev
+
+# Switch to the 'staging' branch, merge changes from 'dev', and push
+git checkout staging
+git merge dev
+git push origin staging
+
+# Switch to the 'main' branch, merge changes from 'staging', and push
+git checkout main
+git merge staging
+git push origin main
+```
+
+Once the pipeline execution concludes, expect to see a single scraper function established.
+
+![alt text](images/scraper.png)
+
+Additionally, this function will be configured with two distinct triggers: an SNS trigger and an Event Bridge trigger, each serving a unique purpose in the workflow.
+
+![alt text](images/prod-scraper.png)
+
+Now we can also test new endpoints to list the scraped data.
+
+- Dev: [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books)
+- Staging: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books)
+- Prod: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books)
+
+Our documentation is also updated with the new books endpoint.
+
+![alt text](images/swagger-books.png)
+
+- Staging: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs)
+- Prod: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs)
+
+Congratulations! 🎉 You've successfully created your first web scraper using Lambda Layers, SNS, DynamoDB and Event Bridge using Lambda Forge. 🚀

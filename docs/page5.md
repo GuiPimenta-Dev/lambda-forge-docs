@@ -94,11 +94,7 @@ class DynamoDB:
 
 In DynamoDB development, querying data is a fundamental operation. Notably, the DynamoDB class is equipped with a helper method designed to simplify the process of granting query permissions. Furthermore, we should refine the class variables to directly reference our Users table.
 
-```python title="infra/services/dynamo_db.py" hl_lines="7-11"
-from aws_cdk import aws_dynamodb as dynamo_db
-from aws_cdk import aws_iam as iam
-
-
+```python title="infra/services/dynamo_db.py" hl_lines="4-8" linenums="5"
 class DynamoDB:
     def __init__(self, scope, resources: dict) -> None:
 
@@ -108,14 +104,6 @@ class DynamoDB:
             resources["arns"]["users_table"],
         )
 
-    @staticmethod
-    def add_query_permission(function, table):
-        function.add_to_role_policy(
-            iam.PolicyStatement(
-                actions=["dynamodb:Query"],
-                resources=[f"{table.table_arn}/index/*"],
-            )
-        )
 ```
 
 Ensure that the resource ARN precisely matches the name specified in your `cdk.json` file.
