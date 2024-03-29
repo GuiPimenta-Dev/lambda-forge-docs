@@ -2,7 +2,7 @@
 
 It's time to elevate our tutorial to the next level.
 
-In this section, we will develop a serverless web scraper designed to extract information about books from [https://books.toscrape.com/](https://books.toscrape.com/) utilizing the Requests library and Beautiful Soup. The retrieved data will be stored in DynamoDB, enabling us to perform queries via an endpoint.
+In this section, we will develop a serverless web scraper designed to extract informations about books from [https://books.toscrape.com/](https://books.toscrape.com/) utilizing the Requests library and Beautiful Soup. The retrieved data will be stored in DynamoDB, enabling us to perform queries via an endpoint.
 
 Additionally, we will cover how to configure our Lambda function to execute daily, ensuring our dataset remains current and accurate.
 
@@ -440,7 +440,7 @@ This configuration file outlines the setup and permissions for a Lambda function
 
 The current configuration file equips us to execute the Lambda function as needed. However, it necessitates manual intervention for each run, which is an impractical approach for dynamic tasks like web scraping. The crux of the issue lies in the volatile nature of our target: website data, such as book prices and inventory, can change unpredictably.
 
-To mitigate this, we must ensure our web scraper operates automatically at regular intervals, thus capturing updates without manual oversight. By leveraging **AWS EventBridge**, we can schedule our Lambda function to run periodically, ensuring our data collection remains current with minimal effort.
+To mitigate this, we must ensure our web scraper operates automatically at regular intervals, thus capturing updates without manual oversight. By leveraging AWS EventBridge, we can schedule our Lambda function to run periodically, ensuring our data collection remains current with minimal effort.
 
 To integrate AWS EventBridge for scheduling tasks, we begin by creating an EventBridge class using Forge. This is achieved with the following command:
 
