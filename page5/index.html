@@ -864,28 +864,22 @@
         <span class="p">)</span>
 </code></pre></div>
 <p>In DynamoDB development, querying data is a fundamental operation. Notably, the DynamoDB class is equipped with a helper method designed to simplify the process of granting query permissions. Furthermore, we should refine the class variables to directly reference our Users table.</p>
-<div class="highlight"><span class="filename">infra/services/dynamo_db.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_dynamodb</span> <span class="k">as</span> <span class="n">dynamo_db</span>
-<span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span>
-
-
-<span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/dynamo_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="hll">
-</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">users_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
 </span><span class="hll">            <span class="n">scope</span><span class="p">,</span>
 </span><span class="hll">            <span class="s2">&quot;UsersTable&quot;</span><span class="p">,</span>
 </span><span class="hll">            <span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;users_table&quot;</span><span class="p">],</span>
-</span>        <span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_query_permission</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
-        <span class="n">function</span><span class="o">.</span><span class="n">add_to_role_policy</span><span class="p">(</span>
-            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
-                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dynamodb:Query&quot;</span><span class="p">],</span>
-                <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">table_arn</span><span class="si">}</span><span class="s2">/index/*&quot;</span><span class="p">],</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-</code></pre></div>
+</span><span class="hll">        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Ensure that the resource ARN precisely matches the name specified in your <code>cdk.json</code> file.</p>
 <h2 id="building-the-create-feature">Building the Create Feature</h2>
 <p>Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:</p>
