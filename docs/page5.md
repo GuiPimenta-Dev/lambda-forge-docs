@@ -1,4 +1,4 @@
-# Multi-Stage Environments
+# CI/CD Pipelines and Multi-Stage Environments
 
 #### Customizing Pipeline Steps
 
