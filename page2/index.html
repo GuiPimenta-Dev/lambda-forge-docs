@@ -46,6 +46,8 @@
       
     
     
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@8.5.1/dist/mermaid.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -429,7 +431,7 @@
         
   
   <span class="md-ellipsis">
-    CI/CD Pipelines and Multi-Stage Environments
+    Multi-Stage Environments With AWS CodePipeline
   </span>
   
 
@@ -662,8 +664,8 @@
 <li>Click "Generate new token," ensuring the "repo" scope is selected for full control of private repositories.</li>
 <li>Complete the token generation process.</li>
 </ol>
-<p>Your token will follow this format: <code>ghp_********************************</code></p>
 <p>You can find more informations about creating a GitHub Token <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">here</a>.</p>
+<p>Your token will follow this format: <code>ghp_********************************</code></p>
 <h3 id="store-the-token-on-aws-secrets-manager">Store the Token on AWS Secrets Manager</h3>
 <p>Save this token in AWS Secrets Manager as <code>plain text</code> using the exact name <strong>github-token</strong>. This specific naming is vital as it corresponds to the default identifier that the CDK looks for within your AWS account.</p>
 <h2 id="create-a-new-directory">Create a New Directory</h2>
@@ -685,9 +687,9 @@
 </code></pre></div>
 <h2 id="create-a-new-project">Create a New Project</h2>
 <p>Start a new project named <code>lambda-forge-demo</code>, incorporating the <code>--no-docs</code> flag to bypass docs generation initially as this will be covered on a future section.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-USER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
 </code></pre></div>
-<p>Make sure to replace <strong><span class="arithmatex">\(GITHUB-USER** and **\)</span>GITHUB-REPO</strong> with your actual GitHub username and the name of an empty repository.</p>
+<p>Make sure to replace <code>$GITHUB-OWNER</code> and <code>$GITHUB-REPO</code> with the actual GitHub owner and the name of an empty repository.</p>
 <h3 id="project-structure">Project Structure</h3>
 <p>Upon creatig your project, some directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
 <p>In the upcoming sections of this tutorial, we'll explore each of these components in detail. For now, familiarize yourself with the foundational structure that should resemble the following:</p>
@@ -731,7 +733,7 @@
 <a id="__codelineno-7-42" name="__codelineno-7-42"></a><span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-43" name="__codelineno-7-43"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-44" name="__codelineno-7-44"></a><span class="w">    </span><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-45" name="__codelineno-7-45"></a><span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45"></a><span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-OWNER&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-46" name="__codelineno-7-46"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
 <a id="__codelineno-7-47" name="__codelineno-7-47"></a><span class="w">    </span><span class="p">},</span>
 <a id="__codelineno-7-48" name="__codelineno-7-48"></a><span class="w">    </span><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -767,7 +769,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      &copy; 2024 <a href="https://github.com/james-willett"  target="_blank" rel="noopener">Guilherme Pimenta</a>
+      &copy; 2024 <a href="https://github.com/GuiPimenta-Dev"  target="_blank" rel="noopener">Guilherme Pimenta</a>
     </div>
   
   
@@ -792,6 +794,8 @@
     
     
       <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
       
     
   </body>
