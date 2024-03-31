@@ -20,9 +20,9 @@ Lambda Forge uses CodePipeline to interact with your GitHub repository. To enabl
 3. Click "Generate new token," ensuring the "repo" scope is selected for full control of private repositories.
 4. Complete the token generation process.
 
-Your token will follow this format: `ghp_********************************`
-
 You can find more informations about creating a GitHub Token [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+Your token will follow this format: `ghp_********************************`
 
 ### Store the Token on AWS Secrets Manager
 
@@ -66,10 +66,10 @@ forge --help
 Start a new project named `lambda-forge-demo`, incorporating the `--no-docs` flag to bypass docs generation initially as this will be covered on a future section.
 
 ```
-forge project lambda-forge-demo --repo-owner "$GITHUB-USER" --repo-name "$GITHUB-REPO" --no-docs
+forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --no-docs
 ```
 
-Make sure to replace **$GITHUB-USER** and **$GITHUB-REPO** with your actual GitHub username and the name of an empty repository.
+Make sure to replace `$GITHUB-OWNER` and `$GITHUB-REPO` with the actual GitHub owner and the name of an empty repository.
 
 ### Project Structure
 
@@ -113,7 +113,7 @@ The `cdk.json` file, located at the root of your directory, serves as the centra
     "account": "",
     "name": "Lambda-Forge-Demo",
     "repo": {
-      "owner": "$GITHUB-USER",
+      "owner": "$GITHUB-OWNER",
       "name": "$GITHUB-REPO"
     },
     "bucket": "",

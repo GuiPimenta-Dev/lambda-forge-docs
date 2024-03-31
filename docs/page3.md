@@ -163,7 +163,7 @@ The project name is defined within the `cdk.json` file, linking each resource di
     "account": "",
     "name": "Lambda-Forge-Demo",
     "repo": {
-      "owner": "$GITHUB-USER",
+      "owner": "$GITHUB-OWNER",
       "name": "$GITHUB-REPO"
     },
 ```
