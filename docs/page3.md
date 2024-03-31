@@ -1,151 +1,198 @@
-# Generating Docs
+# Creating a Public Hello World Function With API Gateway
 
-With our Lambda Function now deployed across three distinct stages, the next step involves creating documentation for our endpoints.
+Creating a public "Hello World" function is a fantastic way to get started with Lambda Forge. This function will serve as a simple demonstration of Lambda Forge's ability to quickly deploy serverless functions accessible via an HTTP endpoint.
 
-## Setting Up a S3 Bucket for Documentation
-
-Create an Amazon S3 bucket to serve as the primary storage for your documentation files. Follow these steps to create your S3 bucket:
-
-1. **Access the AWS Management Console**: Open the Amazon S3 console at [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
-2. **Create a New Bucket**: Click on the "Create bucket" button. It's important to note that each bucket's name must be globally unique across all of Amazon S3.
-3. **Set Bucket Name**: Choose a unique and descriptive name for your bucket. This name will be crucial for accessing your documentation files. Remember, once a bucket name is set, it cannot be changed.
-4. **Choose a Region**: Select an AWS Region for your bucket. Choose the same region defined in your `cdk.json`.
-5. **Configure Options**: You may leave the default settings or configure additional options like versioning, logging, or add tags according to your needs.
-6. **Review and Create**: Before creating the bucket, review your settings. Once everything is confirmed, click "Create bucket".
-
-Once the bucket is created, update your `cdk.json` file with the bucket's name as shown below:
-
-```json title="cdk.json" hl_lines="2 9" linenums="40"
-...
-"region": "us-east-2",
-"account": "",
-"name": "Lambda-Forge-Demo",
-"repo": {
-    "owner": "$GITHUB-USER",
-    "name": "$GITHUB-REPO"
-},
-"bucket": "$S3-BUCKET-NAME",
-"coverage": 80,
-...
-```
-
-## Activating Docs
-
-To activate documentation generation, navigate to the `deploy.py` file located at `infra/stages/deploy.py`. Modify the `enabled` parameter by setting it from `False` to `True` on line 13, as demonstrated below:
-
-```python title="infra/stages/deploy.py" linenums="1" hl_lines="13"
-import aws_cdk as cdk
-from constructs import Construct
-
-from infra.stacks.lambda_stack import LambdaStack
-
-
-class DeployStage(cdk.Stage):
-    def __init__(self, scope: Construct, context, **kwargs):
-        super().__init__(scope, context.stage, **kwargs)
-
-        lambda_stack = LambdaStack(self, context)
-
-        lambda_stack.services.api_gateway.create_docs(enabled=True, authorizer=None)
-```
-
-**By default, Lambda Forge does not include documentation for the Development stage.**
-
-Since the project was initiated using the `--no-docs` flag, the generate docs step is absent from the post deployment phase in both the Staging and Production stacks.
-
-To activate the docs, update the relevant sections in your stack configurations as follows:
-
-In your Staging stack, enable generate docs by including it in the `post` array of the pipeline configuration. The updated section should look like this:
-
-```python title="infra/stacks/staging_stack.py" linenums="43", hl_lines="13"
-    # post
-    generate_docs = steps.generate_docs()
-    integration_tests = steps.run_integration_tests()
-
-    pipeline.add_stage(
-        DeployStage(self, context),
-        pre=[
-            unit_tests,
-            coverage,
-            validate_integration_tests,
-            validate_docs,
-        ],
-        post=[integration_tests, generate_docs], # Generate docs enabled
-    )
-```
-
-Similarly, for the Production stack, ensure that generate docs is enabled by adding it to the post section of your pipeline setup:
-
-```{.py3 title="infra/stacks/prod_stack.py" linenums="56", hl_lines="6"}
-    # post
-    generate_docs = steps.generate_docs()
-
-    pipeline.add_stage(
-        DeployStage(self, context),
-        post=[generate_docs], # Generate docs enabled
-    )
+Here's how you can create your first public Hello World function.
 
 ```
-
-At this point, we have all the necessary components to automatically generate our docs.
-
-To proceed, commit your changes and push them to GitHub using the following commands:
-
-```bash
-git add .
-
-git commit -m "Adding documentation support"
-
-# Push changes to the 'dev' branch
-git push origin dev
-
-# Merge 'dev' into 'staging' and push
-git checkout staging
-git merge dev
-git push origin staging
-
-# Finally, merge 'staging' into 'main' and push
-git checkout main
-git merge staging
-git push origin main
+forge function hello_world --method "GET" --description "A simple hello world" --public
 ```
 
-Upon successful completion of the pipeline, the Swagger documentation for your endpoints can be accessed via the `/docs` path. This documentation provides comprehensive details about the available endpoints, including request formats, response structures, and query parameters.
+This command prompts Lambda Forge to initiate a new Lambda function located in the `hello_world` directory. The `--method` parameter defines the HTTP method accessible for this function.. The `--description` option provides a concise summary of the function’s intent, and the `--public` flag ensures the function is openly accessible, allowing it to be invoked by anyone who has the URL.
 
-You can view the Swagger documentation at the following URLs for each environment:
+### Understanding the Function Structure
 
-- **Staging Environment**: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs)
-- **Production Environment**: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs)
+When you create a new function with Lambda Forge, it not only simplifies the creation process but also sets up a robust and organized file structure for your function. This structure is designed to support best practices in software development, including separation of concerns, configuration management, and testing. Let's break down the structure of the automatically generated hello_world function:
 
-This code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.
+```
+functions/
+└── hello_world/
+    ├── __init__.py
+    ├── config.py
+    ├── integration.py
+    ├── main.py
+    └── unit.py
+```
 
-```python
+- `functions/` This directory is the root folder for all your Lambda functions. Each function has its own subdirectory within this folder.
+- `hello_world/` The hello_world subdirectory contains all the necessary files for your function to run, be configured, and tested.
+- `__init__.py` This file marks the directory as a Python package, allowing its modules to be imported elsewhere.
+- `config.py` Holds the configuration settings for the function. These might include environment variables, resource identifiers, and other parameters critical for the function's operation.
+- `integration.py` Contains integration tests that simulate the interaction of your function with external services or resources.
+- `main.py` This is where the core logic of your Lambda function resides. The handler function, which AWS Lambda invokes when the function is executed, is defined here.
+- `unit.py` Contains unit tests for your function. Unit tests focus on testing individual parts of the function's code in isolation, ensuring that each component behaves as expected.
+
+### Implementing the Hello World Function
+
+The Lambda function's implementation should be in the `main.py` file. Below is an example showcasing our simple HelloWorld function:
+
+```python title="functions/hello_world/main.py"
+import json
 from dataclasses import dataclass
-from typing import List, Optional, Literal
-
-@dataclass
-class Path:
-    id: str # If your endpoint requires a path parameter in the URL, document it here
-
-@dataclass
-class Object:
-    a_string: str
-    an_int: int
 
 @dataclass
 class Input:
-    a_string: str
-    an_int: int
-    a_boolean: bool
-    a_list: List[str]
-    an_object: Object
-    a_list_of_object: List[Object]
-    a_literal: Literal["a", "b", "c"]
-    an_optional: Optional[str]
+    pass
 
 @dataclass
 class Output:
-    pass
+    message: str
+
+def lambda_handler(event, context):
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Hello World!"})
+    }
 ```
 
-You may have observed that our documentation endpoint is currently public. While in some scenarios, having public documentation is desirable, in others, it can pose a significant security risk. In the following section, we will explore methods to secure this and other endpoints, making them accessible only through an authorizer.
+The `Input` and `Output` data classes are the entrypoint for the documentation creation process. However, since the project was launched with the `--no-docs` flag, we will temporarily skip the docs generation details.
+
+Moving forward, we've successfully implemented a straightforward lambda function that outputs a basic JSON response: `{"message": "Hello World!"}`.
+
+### Configuring Your Lambda Function Dependencies
+
+#### The Services Class
+
+Within the `infra/services/__init__.py` file, you'll find the Services class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources directly from your `config.py` files.
+
+```python title="infra/services/__init__.py"
+from infra.services.api_gateway import APIGateway
+from infra.services.aws_lambda import AWSLambda
+
+class Services:
+
+    def __init__(self, scope, context) -> None:
+        self.api_gateway = APIGateway(scope, context)
+        self.aws_lambda = AWSLambda(scope, context)
+```
+
+#### Utilizing the Services Class in config.py
+
+In our Lambda Forge projects, the `config.py` file plays a crucial role in defining and configuring the dependencies required by a Lambda function.
+
+By passing an instance of Services to our configuration classes, we can seamlessly create and manage resources such as Lambda functions and API Gateway endpoints.
+
+```python title="functions/hello_world/config.py"
+from infra.services import Services
+
+class HelloWorldConfig:
+    def __init__(self, services: Services) -> None:
+
+        function = services.aws_lambda.create_function(
+            name="HelloWorld",
+            path="./functions/hello_world",
+            description="A simple hello world"
+        )
+
+        services.api_gateway.create_endpoint("GET", "/hello_world", function, public=True)
+```
+
+The Forge CLI has significantly simplified the setup by automatically tailoring the function to meet our specifications. Essentially, the `config.py` file configures a Lambda Function to be named as `HelloWorld` accompanied by the description `A simple hello world`.
+
+Additionally, it sets up the function to respond to GET requests at the `/hello_world` path and designates it as a public endpoint, making it accessible without authentication.
+
+## Deploying Your Lambda Function
+
+To deploy your Lambda function, you should integrate the Config class within the `infra/stacks/lambda_stack.py` file.
+
+The Forge CLI streamlines this process by automatically incorporating it for you.
+
+```python title="infra/stacks/lambda_stack.py"
+from aws_cdk import Stack
+from constructs import Construct
+from infra.services import Services
+from lambda_forge import release
+from functions.hello_world.config import HelloWorldConfig
+
+
+@release
+class LambdaStack(Stack):
+    def __init__(self, scope: Construct, context, **kwargs) -> None:
+
+        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
+
+        self.services = Services(self, context)
+
+        # HelloWorld
+        HelloWorldConfig(self.services)
+```
+
+### Push Your Code To Github
+
+With all the required settings now in place, we're ready to upload our code to the GitHub repository.
+
+Lambda Forge is designed to support a multi-stage deployment process, automatically creating environments for Production, Staging and Development. These environments correspond to the `main`, `staging`, and `dev` branches, respectively.
+
+For the sake of simplicity, we'll focus on deploying only the development branch at this moment, deferring the discussion on setting up a multi-stage environment to a future session.
+
+```bash
+# Initialize the Git repository
+git init
+git add .
+
+# Commit the changes
+git commit -m "Initial commit"
+
+# Set the remote repository
+git remote add origin git@github.com:$GITHUB_USER/$GITHUB_REPO.git
+
+# Create, checkout, and push the 'dev' branch
+git checkout -b dev
+git push -u origin dev
+```
+
+### Deploying the Stacks
+
+Lambda Forge ensures that every resource it creates on AWS follows a naming convention that integrates the deployment stage, the project name, and the resource name. This approach guarantees a consistent and clear identification methodology throughout the project.
+
+The project name is defined within the `cdk.json` file, linking each resource directly to its associated project and stage for easy management and recognition.
+
+```json hl_lines="3" title="cdk.json"
+    "region": "us-east-2",
+    "account": "",
+    "name": "Lambda-Forge-Demo",
+    "repo": {
+      "owner": "$GITHUB-USER",
+      "name": "$GITHUB-REPO"
+    },
+```
+
+Deploy the Dev Stack by running the following commands in your terminal:
+
+```
+cdk synth
+cdk deploy Dev-Lambda-Forge-Demo-Stack
+```
+
+Following a successful deployment, a new pipeline will be created with the name `Dev-Lambda-Forge-Demo-Pipeline`. Access your AWS CodePipeline console to view it.
+
+![Dev Pipeline Triggered](images/only-dev-pipeline.png)
+
+In a dedicated session, we'll delve into the specifics of the pipelines generated, including a closer examination of the development pipeline.
+
+By default, Lambda Forge does not incorporate any steps for code validation in the dev pipeline. Instead, it seamlessly integrates Github with AWS CodePipeline. This means that once code is pushed to GitHub, it triggers the pipeline, leading to automatic deployment upon the completion of the execution process.
+
+After the pipeline execution concludes, proceed to your AWS Lambda console and locate the `Dev-Lambda-Forge-Demo-HelloWorld` function.
+
+![alt text](images/dev-helloworld.png)
+
+Select the function, then navigate to `Configurations -> Triggers`. Here, you will be presented with a link to your newly deployed Lambda function, ready for use.
+
+![alt text](images/only-dev-triggers.png)
+
+For this tutorial, the Lambda function is accessible via the following URL:
+
+- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+
+Congratulations! 🎉 You've successfully deployed your very first Hello World function using Lambda Forge! 🚀

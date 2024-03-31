@@ -2,6 +2,16 @@ site_name: Lambda Forge
 
 theme:
   name: material
+  features:
+    # - navigation.tabs
+    # - navigation.sections
+    # - toc.integrate
+    # - navigation.top
+    # - search.suggest
+    # - search.highlight
+    # - content.tabs.link
+    # - content.code.annotation
+    - content.code.copy
   logo: images/logo.png
   favicon: images/logo.png
   palette:
@@ -9,11 +19,26 @@ theme:
 
 
   
+
+# plugins:
+#   - social
+#   - search
+
 markdown_extensions:
-  - pymdownx.tasklist  
-  - pymdownx.emoji  
-  - pymdownx.mark
   - pymdownx.tilde
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
   - pymdownx.superfences
-     
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji
+
+copyright: |
+  &copy; 2024 <a href="https://github.com/james-willett"  target="_blank" rel="noopener">Guilherme Pimenta</a>

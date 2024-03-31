@@ -204,6 +204,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -213,6 +224,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-to-lambda-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Welcome to Lambda Forge
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -249,7 +288,7 @@
         
   
   <span class="md-ellipsis">
-    Generating Docs
+    Creating a Public Hello World Function With API Gateway
   </span>
   
 
@@ -269,7 +308,7 @@
         
   
   <span class="md-ellipsis">
-    Private Endpoints
+    Creating a Private Function Through an Authorizer
   </span>
   
 
@@ -289,7 +328,7 @@
         
   
   <span class="md-ellipsis">
-    Building A Serverless CRUD Application With Dynamo DB
+    Multi-Stage Environments
   </span>
   
 
@@ -306,6 +345,46 @@
   
     <li class="md-nav__item">
       <a href="page6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generating Docs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="page7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building A Serverless CRUD Application With Dynamo DB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="page8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -338,6 +417,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-to-lambda-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Welcome to Lambda Forge
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -352,11 +448,9 @@
 
 
 <h1 id="introduction">Introduction</h1>
+<h2 id="welcome-to-lambda-forge">Welcome to Lambda Forge</h2>
+<p>Lambda Forge revolutionizes AWS Lambda deployment, enabling a modular and scalable architecture with an automated CI/CD pipeline for a multi-stage environment. The Forge Command Line Interface streamlines your workflow by accelerating and standardizing the development, while also generates documentation for your endpoints using Swagger and Redoc.</p>
 <p><img alt="alt text" src="images/lambda-forge.png" /></p>
-<p>Welcome to Lambda Forge, a cutting-edge framework designed to redefine the deployment and management of AWS Lambda functions. Lambda Forge stands at the intersection of innovation and functionality, offering a seamless pipeline for transitioning code from retrieval to production 🚀.</p>
-<p>Lambda Forge is not just about deployment; it's about creating a harmonious environment for your Lambda functions. With an emphasis on a consistent directory structure, it sets the stage for effortless management, deployment, and scalability. Through the synergistic use of AWS CloudFormation stack and AWS CDK, the framework orchestrates the build, test, and deployment processes, efficiently managing code from GitHub repositories across various environments.</p>
-<p>One of the hallmark features of Lambda Forge is its dedication to best practices in code organization, testing, and integration. It champions the cause of high-quality, maintainable code standards 📚. The introduction of the Forge command-line interface tool is a game-changer, simplifying the initial setup and enabling a standardized folder structure while pre-configuring essential settings for Lambda functions.</p>
-<p>Moreover, Lambda Forge fosters a modular code architecture, promoting unit and integration testing. A standout feature is the automatic generation of Swagger documentation from data classes within each Lambda function, a boon for developers. This enriches the framework, offering developers the tools to produce and access comprehensive API documentation with ease, thereby enhancing the development, management, and deployment journey of Lambda functions with Lambda Forge.</p>
 
 
 
@@ -385,6 +479,10 @@
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://github.com/james-willett"  target="_blank" rel="noopener">Guilherme Pimenta</a>
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -403,7 +501,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.bd41221c.min.js"></script>
