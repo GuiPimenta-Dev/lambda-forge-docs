@@ -423,6 +423,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -616,6 +625,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -634,7 +652,7 @@
 <h1 id="multi-stage-environments-with-aws-codepipeline">Multi-Stage Environments With AWS CodePipeline</h1>
 <p>In practical scenarios, it is highly recommended to adopt a multi-stage development approach. This strategy allows you to freely develop and test your code in isolated environments without affecting your live production environment and, consequently, the real-world users of your application.</p>
 <p>In Lambda Forge, the pipelines for development, staging, and production are meticulously organized within distinct files, found at <code>infra/stacks/dev_stack.py</code>, <code>infra/stacks/staging_stack.py</code>, and <code>infra/stacks/prod_stack.py</code>, respectively.</p>
-<p>Each stage is designed to operate with its own set of isolated resources, such as database tables, SQS queues, and more, to ensure that changes in one environment do not inadvertently affect another.</p>
+<p>Each stage is designed to operate with its own set of isolated resources, to ensure that changes in one environment do not inadvertently affect another.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 Lambda Forge provides a suggested pipeline configuration for each stage of deployment. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing some of them.
@@ -924,10 +942,11 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 
 </div>
 
-<p>The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested. This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the <code>Integration_Test</code> phase.</p>
-<p><img alt="alt text" src="../images/staging-failed.png" /></p>
+<p>The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested.</p>
+<p>This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the <code>Integration_Test</code> phase.</p>
 <p><img alt="alt text" src="../images/integration-tests-failed.png" /></p>
-<p>The failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed. To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named <code>Staging-Lambda-Forge-Demo-HelloWorld</code>.</p>
+<p>Note that the failure arises <strong>after the deployment phase</strong>, indicating that the Lambda functions have been successfully deployed.</p>
+<p>To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named <code>Staging-Lambda-Forge-Demo-HelloWorld</code>.</p>
 <p><img alt="alt text" src="../images/staging-hello-world.png" /></p>
 <p>Upon finding the function, proceed to <code>Configurations -&gt; Triggers</code>. Here, you'll discover the url that was generated for this function during the deployment.</p>
 <p><img alt="alt text" src="../images/staging-hello-world-api-gateway-trigger.png" /></p>
@@ -943,8 +962,8 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <a id="__codelineno-5-49" name="__codelineno-5-49"></a><span class="w">    </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
 <a id="__codelineno-5-50" name="__codelineno-5-50"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging&quot;</span>
 </span></code></pre></div></td></tr></table></div>
-<p>With this setup, your integration tests are now aligned with the staging environment, facilitating a smoother and more reliable testing phase.</p>
-<p>Finally, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.</p>
+<p>With this setup, your integration tests are now aligned with the staging environment, facilitating a smoother and reliable testing phase.</p>
+<p><strong>Finally, commit your changes and push the updated code to GitHub once again.</strong> Following these adjustments, the pipeline should successfully complete its run.</p>
 <h2 id="production-environment">Production Environment</h2>
 <p>The <code>Production</code> environment represents the phase where the tested and stable version of the software is deployed. This version is accessible to end-users and operates within the live environment. It is imperative that this stage remains the most safeguarded, permitting only fully vetted and secure code to be deployed. This precaution helps in minimizing the risk of exposing end-users to bugs or undesirable functionalities, ensuring a seamless and reliable user experience.</p>
 <h3 id="configuring-the-production-environment">Configuring the Production Environment</h3>
@@ -1061,6 +1080,17 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <ul>
 <li><a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
 </ul>
+<h2 id="overview">Overview</h2>
+<p>By adhering to the instructions outlined in this tutorial, you are now equipped with three distinct CI/CD pipelines. Each pipeline corresponds to a specific stage of the development lifecycle, directly linked to the <code>dev</code>, <code>staging</code>, and <code>main</code> branches in your GitHub repository.</p>
+<p>These pipelines ensure that changes made in each branch are automatically integrated and deployed to the appropriate environment, streamlining the process from development through to production.</p>
+<p><img alt="alt text" src="../images/success-pipelines.png" /></p>
+<p>Furthermore, you have deployed three unique functions, each corresponding to a different environment:</p>
+<ul>
+<li><strong>Dev</strong>: <a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
+<li><strong>Staging</strong>: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
+<li><strong>Prod</strong>: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
+</ul>
+<p>Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of development, staging, and production stages through your CI/CD workflows.</p>
 <p>Congratulations! 🎉 You've successfully deployed your Lambda function across three different environments using Lambda Forge! 🚀</p>
 
 

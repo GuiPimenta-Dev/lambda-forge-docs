@@ -820,7 +820,7 @@
 <h1 id="building-a-serverless-crud-application-with-dynamo-db">Building A Serverless CRUD Application With Dynamo DB</h1>
 <p>The primary goal of this tutorial is not to craft an elaborate application; instead, it focuses on showcasing the seamless integration of AWS resources within the Lambda Forge architecture. To highlight this, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.</p>
 <h2 id="configuring-dynamodb-tables-for-each-deployment-stage">Configuring DynamoDB Tables for Each Deployment Stage</h2>
-<p>To ensure our application can operate smoothly across different environments, we'll establish three separate DynamoDB tables, each tailored for a distinct deployment stage:</p>
+<p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage:</p>
 <ul>
 <li>Dev-Users</li>
 <li>Staging-Users</li>
@@ -1452,104 +1452,52 @@ Now, let's delve into the details of the function implementation.</p>
 </code></pre></div>
 <p>Impressively, Forge has neatly arranged all related Config classes for optimal cohesion.</p>
 <p>As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.</p>
-<p>Up to this point, we've deployed all stages together for demonstration purposes. However, in a real-world scenario, it's advisable to develop on a dev branch, push changes to AWS, and test your deployed function in the dev environment. If everything checks out, you should then open a pull request to the staging branch and run it there. Once the pipeline completes successfully without any failures, proceed to open a PR to the main branch.</p>
-<p>To more closely simulate a real-world scenario, let's follow a similar process and initially deploy only to the dev environment.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a># Switch to the development branch
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>git checkout dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Send your changes to stage</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a># Stage all changes for commit
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>git add .
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># Commit with a descriptive message</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Developing a CRUD with DynamoDB&quot;</span>
 <a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a># Commit changes with a descriptive message
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>git commit -m &quot;Implement initial CRUD operations for serverless application deployment&quot;
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c1"># Push changes to the &#39;dev&#39; branch</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
 <a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
-<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a># Push the changes to the remote repository
-<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>git push
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="c1"># Merge &#39;dev&#39; into &#39;staging&#39; and push</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>git<span class="w"> </span>merge<span class="w"> </span>dev
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="c1"># Finally, merge &#39;staging&#39; into &#39;main&#39; and push</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>git<span class="w"> </span>checkout<span class="w"> </span>main
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<p><img alt="Dev pipeline running" src="../images/dev-pipeline-running.png" /></p>
-<p>Once the pipeline concludes its execution, we will have the opportunity to rigorously test our four core operations in the development environment.</p>
-<div class="highlight"><span class="filename">Dev - Create User</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl --request POST \
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users \
+<p><img alt="Dev pipeline running" src="../images/three_pipelines.png" /></p>
+<p>In this tutorial, the generated base URLs for each environment are:</p>
+<ul>
+<li><strong>Dev</strong>: <code>https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev</code></li>
+<li><strong>Staging</strong>: <code>https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging</code></li>
+<li><strong>Prod</strong>: <code>https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod</code></li>
+</ul>
+<p>For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.</p>
+<div class="highlight"><span class="filename">Prod - Create User</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl --request POST \
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users \
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>  --data &#39;{
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    &quot;age&quot;: 30
 <a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>}&#39;
 </code></pre></div>
-<div class="highlight"><span class="filename">Dev - Get User</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>curl --request GET \
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
+<div class="highlight"><span class="filename">Prod - Get User</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>curl --request GET \
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
 </code></pre></div>
-<div class="highlight"><span class="filename">Dev - Update User</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>curl --request PUT \
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID \
+<div class="highlight"><span class="filename">Prod - Update User</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>curl --request PUT \
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID \
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>  --data &#39;{
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
 <a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>    &quot;age&quot;: 31
 <a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>}&#39;
 </code></pre></div>
-<div class="highlight"><span class="filename">Dev - Delete User</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl --request DELETE \
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
-</code></pre></div>
-<p>Great news, they all seems to be working as expected.</p>
-<p>Now, let's proceed to integrate our changes into the Staging environment and deploy them.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a># Switch to the staging branch
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>git checkout staging
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a># Merge with dev
-<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>git merge dev
-<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>
-<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a># Push the changes to the remote repository
-<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>git push
-</code></pre></div>
-<p><img alt="Staging pipeline running" src="../images/staging-pipeline-running.png" /></p>
-<div class="highlight"><span class="filename">Staging - Create User</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>curl --request POST \
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users \
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>  --data &#39;{
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
-<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>    &quot;age&quot;: 30
-<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>}&#39;
-</code></pre></div>
-<div class="highlight"><span class="filename">Staging - Get User</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>curl --request GET \
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
-</code></pre></div>
-<div class="highlight"><span class="filename">Staging - Update User</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>curl --request PUT \
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID \
-<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>  --data &#39;{
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
-<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>    &quot;age&quot;: 31
-<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>}&#39;
-</code></pre></div>
-<div class="highlight"><span class="filename">Staging - Delete User</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>curl --request DELETE \
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
-</code></pre></div>
-<p>And now, the moment we've all been waiting for: the grand finale, merging into the main branch!</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a># Switch to the main branch
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>git checkout main
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
-<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a># Merge with staging
-<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>git merge staging
-<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>
-<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a># Push the changes to the remote repository
-<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>git push
-</code></pre></div>
-<p><img alt="Prod pipeline running" src="../images/prod-pipeline-running.png" /></p>
-<div class="highlight"><span class="filename">Prod - Create User</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>curl --request POST \
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users \
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>  --data &#39;{
-<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
-<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>    &quot;age&quot;: 30
-<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>}&#39;
-</code></pre></div>
-<div class="highlight"><span class="filename">Prod - Get User</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>curl --request GET \
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
-</code></pre></div>
-<div class="highlight"><span class="filename">Prod - Update User</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>curl --request PUT \
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID \
-<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>  --data &#39;{
-<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>    &quot;name&quot;: &quot;John Doe&quot;,
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>    &quot;age&quot;: 31
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>}&#39;
-</code></pre></div>
-<div class="highlight"><span class="filename">Prod - Delete User</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>curl --request DELETE \
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+<div class="highlight"><span class="filename">Prod - Delete User</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl --request DELETE \
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
 </code></pre></div>
 <p>Remember, all of our developments up to this point have been automatically documented using Swagger. You can access this comprehensive documentation at <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a>.</p>
 <p><img alt="Users swagger" src="../images/users-swagger.png" /></p>

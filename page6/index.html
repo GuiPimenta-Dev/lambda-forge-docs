@@ -345,6 +345,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#configuring-the-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Docs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setting-up-a-s3-bucket-for-documentation" class="md-nav__link">
     <span class="md-ellipsis">
       Setting Up a S3 Bucket for Documentation
@@ -354,9 +363,51 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#activating-docs" class="md-nav__link">
+  <a href="#setting-up-documentation-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      Activating Docs
+      Setting Up Documentation Endpoints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-pipelines-for-docs-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Pipelines for Docs Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the Pipelines for Docs Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-staging-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Staging Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-production-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Production Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-the-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the Docs
     </span>
   </a>
   
@@ -437,6 +488,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#configuring-the-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Docs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setting-up-a-s3-bucket-for-documentation" class="md-nav__link">
     <span class="md-ellipsis">
       Setting Up a S3 Bucket for Documentation
@@ -446,9 +506,51 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#activating-docs" class="md-nav__link">
+  <a href="#setting-up-documentation-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      Activating Docs
+      Setting Up Documentation Endpoints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-pipelines-for-docs-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Pipelines for Docs Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring the Pipelines for Docs Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-staging-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Staging Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-production-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring the Production Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-the-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the Docs
     </span>
   </a>
   
@@ -470,7 +572,41 @@
 
 
 <h1 id="generating-docs-with-swagger-and-redoc">Generating Docs With Swagger and ReDoc</h1>
-<p>With our Lambda Function now deployed across three distinct stages, the next step involves creating documentation for our endpoints.</p>
+<p>With our Lambda Function now deployed across three distinct stages, let's set up the docs for our brand new endpoints.</p>
+<h2 id="configuring-the-docs">Configuring the Docs</h2>
+<p>Inside each <code>main.py</code> file, you should include the <code>Input</code> and <code>Output</code> dataclasses that are going to be the entrypoint for generating the docs. Case you have an endpoint that's expecting a path parameter, you can also include it in the <code>Path</code> dataclass.</p>
+<p>The code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Literal</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Define a dataclass for path parameters, useful for API endpoints requiring parameters within the URL path.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># A custom object class that represents a complex type with multiple fields.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">class</span> <span class="nc">Object</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">an_int</span><span class="p">:</span> <span class="nb">int</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># The input data class represents the expected structure of the request payload.</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># A simple string input</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">an_int</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1"># A simple integer input</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">a_boolean</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1"># A boolean value</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">a_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1"># A list of strings</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">an_object</span><span class="p">:</span> <span class="n">Object</span>  <span class="c1"># An instance of the custom &#39;Object&#39; class defined above</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">a_list_of_object</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Object</span><span class="p">]</span>  <span class="c1"># A list containing instances of &#39;Object&#39;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">a_literal</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>  <span class="c1"># A literal type, restricting values to &#39;a&#39;, &#39;b&#39;, or &#39;c&#39;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">an_optional</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1"># An optional string, which can be either a string or None</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c1"># The output data class represents the endpoint&#39;s output.</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">pass</span> <span class="c1"># No fields are defined, implying the output is empty.</span>
+</code></pre></div>
 <h2 id="setting-up-a-s3-bucket-for-documentation">Setting Up a S3 Bucket for Documentation</h2>
 <p>Create an Amazon S3 bucket to serve as the primary storage for your documentation files. Follow these steps to create your S3 bucket:</p>
 <ol>
@@ -482,157 +618,262 @@
 <li><strong>Review and Create</strong>: Before creating the bucket, review your settings. Once everything is confirmed, click "Create bucket".</li>
 </ol>
 <p>Once the bucket is created, update your <code>cdk.json</code> file with the bucket's name as shown below:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="err">...</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="hll"><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="p">},</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="hll"><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$S3-BUCKET-NAME&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="err">...</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-40">40</a></span>
+<span class="normal"><a href="#__codelineno-1-41">41</a></span>
+<span class="normal"><a href="#__codelineno-1-42">42</a></span>
+<span class="normal"><a href="#__codelineno-1-43">43</a></span>
+<span class="normal"><a href="#__codelineno-1-44">44</a></span>
+<span class="normal"><a href="#__codelineno-1-45">45</a></span>
+<span class="normal"><a href="#__codelineno-1-46">46</a></span>
+<span class="normal"><a href="#__codelineno-1-47">47</a></span>
+<span class="normal"><a href="#__codelineno-1-48">48</a></span>
+<span class="normal"><a href="#__codelineno-1-49">49</a></span>
+<span class="normal"><a href="#__codelineno-1-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="err">...</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="hll"><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="w">    </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-USER&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="p">},</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48"></a><span class="hll"><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$S3-BUCKET-NAME&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50"></a><span class="err">...</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="activating-docs">Activating Docs</h2>
-<p>To activate documentation generation, navigate to the <code>deploy.py</code> file located at <code>infra/stages/deploy.py</code>. Modify the <code>enabled</code> parameter by setting it from <code>False</code> to <code>True</code> on line 13, as demonstrated below:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stages/deploy.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kn">from</span> <span class="nn">infra.stacks.lambda_stack</span> <span class="kn">import</span> <span class="n">LambdaStack</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="k">class</span> <span class="nc">DeployStage</span><span class="p">(</span><span class="n">cdk</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">stage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a>        <span class="n">lambda_stack</span> <span class="o">=</span> <span class="n">LambdaStack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<h2 id="setting-up-documentation-endpoints">Setting Up Documentation Endpoints</h2>
+<p>To activate documentation generation, navigate to the <code>deploy.py</code> file located at <code>infra/stages/deploy.py</code>. Configure your endpoints as illustrated in the following example.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stages/deploy.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="kn">from</span> <span class="nn">infra.stacks.lambda_stack</span> <span class="kn">import</span> <span class="n">LambdaStack</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">class</span> <span class="nc">DeployStage</span><span class="p">(</span><span class="n">cdk</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">stage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>        <span class="n">lambda_stack</span> <span class="o">=</span> <span class="n">LambdaStack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>        <span class="c1"># Sets up a Swagger-based public endpoint at /docs</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">authorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><a id="__codelineno-2-15" name="__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>        <span class="c1"># Establishes a Swagger-based private endpoint at /docs/private with the &#39;secret&#39; authorizer</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/docs/private&quot;</span><span class="p">)</span>
+</span><a id="__codelineno-2-18" name="__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="c1"># Configures a Redoc-based public endpoint at /docs/redoc</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">authorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/docs/redoc&quot;</span><span class="p">,</span> <span class="n">redoc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><a id="__codelineno-2-21" name="__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>        <span class="c1"># Sets up a Redoc-based private endpoint at /docs/private/redoc with the &#39;secret&#39; authorizer</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="hll">        <span class="n">lambda_stack</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/docs/private/redoc&quot;</span><span class="p">,</span> <span class="n">redoc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
-<p><strong>By default, Lambda Forge does not include documentation for the Development stage.</strong></p>
-<p>Since the project was initiated using the <code>--no-docs</code> flag, the generate docs step is absent from the post deployment phase in both the Staging and Production stacks.</p>
-<p>To activate the docs, update the relevant sections in your stack configurations as follows:</p>
-<p>In your Staging stack, enable generate docs by including it in the <code>post</code> array of the pipeline configuration. The updated section should look like this:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/staging_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-43">43</a></span>
-<span class="normal"><a href="#__codelineno-2-44">44</a></span>
-<span class="normal"><a href="#__codelineno-2-45">45</a></span>
-<span class="normal"><a href="#__codelineno-2-46">46</a></span>
-<span class="normal"><a href="#__codelineno-2-47">47</a></span>
-<span class="normal"><a href="#__codelineno-2-48">48</a></span>
-<span class="normal"><a href="#__codelineno-2-49">49</a></span>
-<span class="normal"><a href="#__codelineno-2-50">50</a></span>
-<span class="normal"><a href="#__codelineno-2-51">51</a></span>
-<span class="normal"><a href="#__codelineno-2-52">52</a></span>
-<span class="normal"><a href="#__codelineno-2-53">53</a></span>
-<span class="normal"><a href="#__codelineno-2-54">54</a></span>
-<span class="normal"><a href="#__codelineno-2-55">55</a></span>
-<span class="normal"><a href="#__codelineno-2-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-43" name="__codelineno-2-43"></a>    <span class="c1"># post</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44"></a>    <span class="n">generate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">()</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45"></a>    <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
-<a id="__codelineno-2-46" name="__codelineno-2-46"></a>
-<a id="__codelineno-2-47" name="__codelineno-2-47"></a>    <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48"></a>        <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
-<a id="__codelineno-2-49" name="__codelineno-2-49"></a>        <span class="n">pre</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-2-50" name="__codelineno-2-50"></a>            <span class="n">unit_tests</span><span class="p">,</span>
-<a id="__codelineno-2-51" name="__codelineno-2-51"></a>            <span class="n">coverage</span><span class="p">,</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52"></a>            <span class="n">validate_integration_tests</span><span class="p">,</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53"></a>            <span class="n">validate_docs</span><span class="p">,</span>
-<a id="__codelineno-2-54" name="__codelineno-2-54"></a>        <span class="p">],</span>
-<a id="__codelineno-2-55" name="__codelineno-2-55"></a><span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">integration_tests</span><span class="p">,</span> <span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
-</span><a id="__codelineno-2-56" name="__codelineno-2-56"></a>    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<p>Similarly, for the Production stack, ensure that generate docs is enabled by adding it to the post section of your pipeline setup:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/prod_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-56">56</a></span>
+<p>This configuration enables both public and private documentation endpoints using Swagger and Redoc, making your API's documentation accessible and versatile.</p>
+<h2 id="configuring-the-pipelines-for-docs-generation">Configuring the Pipelines for Docs Generation</h2>
+<p><mark>Given that the <strong>development</strong> stage is designed for fast deployment and serves as a sandbox environment, Lambda Forge does not automatically generate documentation for the dev environment</mark>. However, if you wish to include docs generation in your development workflow, replicating the following steps for the dev environment should effectively enable this functionality.</p>
+<p>Because the project was started with the <code>--no-docs</code> flag, it currently lacks the <code>validate_docs</code> and <code>generate_docs</code> steps in both the Staging and Production pipelines.</p>
+<p>In essence, the <code>validate_docs</code> step ensures that all files intended for documentation are correctly configured with the necessary data classes. This step checks for completeness and accuracy in the documentation's underlying structure. On the other hand, the <code>generate_docs</code> step takes on the role of creating the documentation artifact itself and deploying it to the S3 bucket configured on the <code>cdk.json</code> file.</p>
+<p>To incorporate docs generation into your project, you'll need to modify your stack configurations. Specifically, you should enable the <code>validate_docs</code> and <code>generate_docs</code> steps within your CI/CD pipeline configurations for both Staging and Production environments.</p>
+<h3 id="configuring-the-staging-pipeline">Configuring the Staging Pipeline</h3>
+<p>To turn on documentation generation for the staging environment, add <code>validate_docs</code> in the pipeline's pre-execution phase and <code>generate_docs</code> post-deployment.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/staging_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-39">39</a></span>
+<span class="normal"><a href="#__codelineno-3-40">40</a></span>
+<span class="normal"><a href="#__codelineno-3-41">41</a></span>
+<span class="normal"><a href="#__codelineno-3-42">42</a></span>
+<span class="normal"><a href="#__codelineno-3-43">43</a></span>
+<span class="normal"><a href="#__codelineno-3-44">44</a></span>
+<span class="normal"><a href="#__codelineno-3-45">45</a></span>
+<span class="normal"><a href="#__codelineno-3-46">46</a></span>
+<span class="normal"><a href="#__codelineno-3-47">47</a></span>
+<span class="normal"><a href="#__codelineno-3-48">48</a></span>
+<span class="normal"><a href="#__codelineno-3-49">49</a></span>
+<span class="normal"><a href="#__codelineno-3-50">50</a></span>
+<span class="normal"><a href="#__codelineno-3-51">51</a></span>
+<span class="normal"><a href="#__codelineno-3-52">52</a></span>
+<span class="normal"><a href="#__codelineno-3-53">53</a></span>
+<span class="normal"><a href="#__codelineno-3-54">54</a></span>
+<span class="normal"><a href="#__codelineno-3-55">55</a></span>
+<span class="normal"><a href="#__codelineno-3-56">56</a></span>
 <span class="normal"><a href="#__codelineno-3-57">57</a></span>
-<span class="normal"><a href="#__codelineno-3-58">58</a></span>
-<span class="normal"><a href="#__codelineno-3-59">59</a></span>
-<span class="normal"><a href="#__codelineno-3-60">60</a></span>
-<span class="normal"><a href="#__codelineno-3-61">61</a></span>
-<span class="normal"><a href="#__codelineno-3-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-56" name="__codelineno-3-56"></a>    <span class="c1"># post</span>
-<a id="__codelineno-3-57" name="__codelineno-3-57"></a>    <span class="n">generate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">()</span>
-<a id="__codelineno-3-58" name="__codelineno-3-58"></a>
-<a id="__codelineno-3-59" name="__codelineno-3-59"></a>    <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
-<a id="__codelineno-3-60" name="__codelineno-3-60"></a>        <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
-<a id="__codelineno-3-61" name="__codelineno-3-61"></a><span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
-</span><a id="__codelineno-3-62" name="__codelineno-3-62"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-3-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-39" name="__codelineno-3-39"></a>    <span class="c1"># pre</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40"></a>    <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_unit_tests</span><span class="p">()</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41"></a>    <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_coverage</span><span class="p">()</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42"></a>    <span class="n">validate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_docs</span><span class="p">()</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43"></a>    <span class="n">validate_integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45"></a>    <span class="c1"># post</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46"></a>    <span class="n">generate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">()</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47"></a>    <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48"></a>
+<a id="__codelineno-3-49" name="__codelineno-3-49"></a>    <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50"></a>        <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
+<a id="__codelineno-3-51" name="__codelineno-3-51"></a>        <span class="n">pre</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52"></a>            <span class="n">unit_tests</span><span class="p">,</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53"></a>            <span class="n">coverage</span><span class="p">,</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54"></a>            <span class="n">validate_integration_tests</span><span class="p">,</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55"></a><span class="hll">            <span class="n">validate_docs</span><span class="p">,</span> <span class="c1"># Validate docs enabled</span>
+</span><a id="__codelineno-3-56" name="__codelineno-3-56"></a>        <span class="p">],</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57"></a><span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">integration_tests</span><span class="p">,</span> <span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
+</span><a id="__codelineno-3-58" name="__codelineno-3-58"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
+<p>The pipeline configuration will change for the staging environment. The following diagram illustrates the adjusted setup.</p>
+<div style="text-align:center;">
+
+<div class="mermaid">graph TD;
+    Source --&gt; Build;
+    Build --&gt; UpdatePipeline[Update Pipeline]
+    UpdatePipeline --&gt; Assets
+    Assets --&gt; UnitTests[Unit Tests]
+    Assets --&gt; Coverage
+    Assets --&gt; ValidateDocs[Validate Docs]
+    Assets --&gt; ValidateIntegrationTests[Validate Integration Tests]
+    UnitTests --&gt; Deploy
+    Coverage --&gt; Deploy
+    ValidateDocs --&gt; Deploy
+    ValidateIntegrationTests --&gt; Deploy
+    Deploy --&gt; IntegrationTests[Integration Tests]
+    Deploy --&gt; GenerateDocs[Generate Docs]</div>
+
+</div>
+
+<h3 id="configuring-the-production-pipeline">Configuring the Production Pipeline</h3>
+<p>Similarly for the Production stack, ensure that <code>validate_docs</code> and <code>generate_docs</code> are enabled.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/prod_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#__codelineno-4-48">48</a></span>
+<span class="normal"><a href="#__codelineno-4-49">49</a></span>
+<span class="normal"><a href="#__codelineno-4-50">50</a></span>
+<span class="normal"><a href="#__codelineno-4-51">51</a></span>
+<span class="normal"><a href="#__codelineno-4-52">52</a></span>
+<span class="normal"><a href="#__codelineno-4-53">53</a></span>
+<span class="normal"><a href="#__codelineno-4-54">54</a></span>
+<span class="normal"><a href="#__codelineno-4-55">55</a></span>
+<span class="normal"><a href="#__codelineno-4-56">56</a></span>
+<span class="normal"><a href="#__codelineno-4-57">57</a></span>
+<span class="normal"><a href="#__codelineno-4-58">58</a></span>
+<span class="normal"><a href="#__codelineno-4-59">59</a></span>
+<span class="normal"><a href="#__codelineno-4-60">60</a></span>
+<span class="normal"><a href="#__codelineno-4-61">61</a></span>
+<span class="normal"><a href="#__codelineno-4-62">62</a></span>
+<span class="normal"><a href="#__codelineno-4-63">63</a></span>
+<span class="normal"><a href="#__codelineno-4-64">64</a></span>
+<span class="normal"><a href="#__codelineno-4-65">65</a></span>
+<span class="normal"><a href="#__codelineno-4-66">66</a></span>
+<span class="normal"><a href="#__codelineno-4-67">67</a></span>
+<span class="normal"><a href="#__codelineno-4-68">68</a></span>
+<span class="normal"><a href="#__codelineno-4-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-43" name="__codelineno-4-43"></a>    <span class="c1"># pre</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44"></a>    <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_unit_tests</span><span class="p">()</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45"></a>    <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_coverage</span><span class="p">()</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46"></a>    <span class="n">validate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_docs</span><span class="p">()</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47"></a>    <span class="n">validate_integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48"></a>
+<a id="__codelineno-4-49" name="__codelineno-4-49"></a>    <span class="c1"># post</span>
+<a id="__codelineno-4-50" name="__codelineno-4-50"></a>    <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-4-51" name="__codelineno-4-51"></a>
+<a id="__codelineno-4-52" name="__codelineno-4-52"></a>    <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+<a id="__codelineno-4-53" name="__codelineno-4-53"></a>        <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">staging</span><span class="p">),</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54"></a>        <span class="n">pre</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-4-55" name="__codelineno-4-55"></a>            <span class="n">unit_tests</span><span class="p">,</span>
+<a id="__codelineno-4-56" name="__codelineno-4-56"></a>            <span class="n">coverage</span><span class="p">,</span>
+<a id="__codelineno-4-57" name="__codelineno-4-57"></a>            <span class="n">validate_integration_tests</span><span class="p">,</span>
+<a id="__codelineno-4-58" name="__codelineno-4-58"></a><span class="hll">            <span class="n">validate_docs</span><span class="p">,</span> <span class="c1"># Validate docs enabled</span>
+</span><a id="__codelineno-4-59" name="__codelineno-4-59"></a>        <span class="p">],</span>
+<a id="__codelineno-4-60" name="__codelineno-4-60"></a>        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">integration_tests</span><span class="p">],</span>
+<a id="__codelineno-4-61" name="__codelineno-4-61"></a>    <span class="p">)</span>
+<a id="__codelineno-4-62" name="__codelineno-4-62"></a>
+<a id="__codelineno-4-63" name="__codelineno-4-63"></a>    <span class="c1"># post</span>
+<a id="__codelineno-4-64" name="__codelineno-4-64"></a>    <span class="n">generate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">()</span>
+<a id="__codelineno-4-65" name="__codelineno-4-65"></a>
+<a id="__codelineno-4-66" name="__codelineno-4-66"></a>    <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+<a id="__codelineno-4-67" name="__codelineno-4-67"></a>        <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
+<a id="__codelineno-4-68" name="__codelineno-4-68"></a><span class="hll">        <span class="n">post</span><span class="o">=</span><span class="p">[</span><span class="n">generate_docs</span><span class="p">],</span> <span class="c1"># Generate docs enabled</span>
+</span><a id="__codelineno-4-69" name="__codelineno-4-69"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The pipeline configuration will also change change for the staging environment. The following diagram illustrates the adjusted setup.</p>
+<div style="text-align:center;">
+
+<div class="mermaid">graph TD;
+    Source --&gt; Build;
+    Build --&gt; UpdatePipeline[Update Pipeline]
+    UpdatePipeline --&gt; Assets
+    Assets --&gt; UnitTests[Unit Tests]
+    Assets --&gt; Coverage
+    Assets --&gt; ValidateDocs[Validate Docs]
+    Assets --&gt; ValidateIntegrationTests[Validate Integration Tests]
+    UnitTests --&gt; DeployStaging[Deploy Staging]
+    Coverage --&gt; DeployStaging
+    ValidateDocs --&gt; DeployStaging
+    ValidateIntegrationTests --&gt; DeployStaging
+    DeployStaging --&gt; IntegrationTests[Integration Tests]
+    IntegrationTests --&gt; DeployProduction[Deploy Production]
+    DeployProduction --&gt; GenerateDocs[Generate Docs]</div>
+
+</div>
+
+<h2 id="deploying-the-docs">Deploying the Docs</h2>
 <p>At this point, we have all the necessary components to automatically generate our docs.</p>
 <p>To proceed, commit your changes and push them to GitHub using the following commands:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Adding documentation support&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Push changes to the &#39;dev&#39; branch</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Merge &#39;dev&#39; into &#39;staging&#39; and push</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>git<span class="w"> </span>merge<span class="w"> </span>dev
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Finally, merge &#39;staging&#39; into &#39;main&#39; and push</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>git<span class="w"> </span>checkout<span class="w"> </span>main
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
-</code></pre></div>
-<p>Upon successful completion of the pipeline, the Swagger documentation for your endpoints can be accessed via the <code>/docs</code> path. This documentation provides comprehensive details about the available endpoints, including request formats, response structures, and query parameters.</p>
-<p>You can view the Swagger documentation at the following URLs for each environment:</p>
-<ul>
-<li><strong>Staging Environment</strong>: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
-<li><strong>Production Environment</strong>: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a></li>
-</ul>
-<p>This code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Literal</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Send your changes to stage</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="c1"># If your endpoint requires a path parameter in the URL, document it here</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">class</span> <span class="nc">Object</span><span class="p">:</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">an_int</span><span class="p">:</span> <span class="nb">int</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="n">an_int</span><span class="p">:</span> <span class="nb">int</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="n">a_boolean</span><span class="p">:</span> <span class="nb">bool</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="n">a_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="n">an_object</span><span class="p">:</span> <span class="n">Object</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="n">a_list_of_object</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Object</span><span class="p">]</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="n">a_literal</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="n">an_optional</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    <span class="k">pass</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Commit with a descriptive message</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Activating docs for Staging and Production environments&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Push changes to the &#39;dev&#39; branch</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Merge &#39;dev&#39; into &#39;staging&#39; and push</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>git<span class="w"> </span>merge<span class="w"> </span>dev
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># Finally, merge &#39;staging&#39; into &#39;main&#39; and push</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>git<span class="w"> </span>checkout<span class="w"> </span>main
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<p>You may have observed that our documentation endpoint is currently public. While in some scenarios, having public documentation is desirable, in others, it can pose a significant security risk. In the following section, we will explore methods to secure this and other endpoints, making them accessible only through an authorizer.</p>
+<p>After the pipeline completes successfully, the documentation for your API's endpoints will be available through the URLs set up in the <code>DeployStage</code> class. This documentation offers detailed insights into the endpoints, including their request formats, response structures, and available query parameters.</p>
+<p>For easy access, the documentation for public endpoints in each environment is provided at:</p>
+<ul>
+<li>
+<p><strong>Staging Environment</strong>:</p>
+</li>
+<li>
+<p><a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></p>
+</li>
+<li>
+<p><a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc</a></p>
+</li>
+<li>
+<p><strong>Production Environment</strong>:</p>
+</li>
+<li><a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a></li>
+<li><a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs/redoc">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs/redoc</a></li>
+</ul>
+<p>Accessing the private endpoints, <code>/docs/private</code> for Swagger and <code>/docs/private/redoc</code> for Redoc, necessitates the inclusion of the security token generated by the secrets authorizer, as specified in the authorizers section.</p>
 
 
 
