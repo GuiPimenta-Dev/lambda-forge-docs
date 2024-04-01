@@ -4,7 +4,7 @@ In practical scenarios, it is highly recommended to adopt a multi-stage developm
 
 In Lambda Forge, the pipelines for development, staging, and production are meticulously organized within distinct files, found at `infra/stacks/dev_stack.py`, `infra/stacks/staging_stack.py`, and `infra/stacks/prod_stack.py`, respectively.
 
-Each stage is designed to operate with its own set of isolated resources, such as database tables, SQS queues, and more, to ensure that changes in one environment do not inadvertently affect another.
+Each stage is designed to operate with its own set of isolated resources, to ensure that changes in one environment do not inadvertently affect another.
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -225,13 +225,15 @@ graph TD;
 
 </div>
 
-The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested. This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the `Integration_Test` phase.
+The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested.
 
-![alt text](images/staging-failed.png)
+This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the `Integration_Test` phase.
 
 ![alt text](images/integration-tests-failed.png)
 
-The failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed. To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named `Staging-Lambda-Forge-Demo-HelloWorld`.
+Note that the failure arises **after the deployment phase**, indicating that the Lambda functions have been successfully deployed.
+
+To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named `Staging-Lambda-Forge-Demo-HelloWorld`.
 
 ![alt text](images/staging-hello-world.png)
 
@@ -253,9 +255,9 @@ This BASE URL must then be incorporated into your `cdk.json` configuration file 
     "base_url": "https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging"
 ```
 
-With this setup, your integration tests are now aligned with the staging environment, facilitating a smoother and more reliable testing phase.
+With this setup, your integration tests are now aligned with the staging environment, facilitating a smoother and reliable testing phase.
 
-Finally, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.
+**Finally, commit your changes and push the updated code to GitHub once again.** Following these adjustments, the pipeline should successfully complete its run.
 
 ## Production Environment
 
@@ -393,5 +395,21 @@ To verify the url created, navigate to the newly deployed Lambda function in the
 For this tutorial, the endpoint URL provided is:
 
 - [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world)
+
+## Overview
+
+By adhering to the instructions outlined in this tutorial, you are now equipped with three distinct CI/CD pipelines. Each pipeline corresponds to a specific stage of the development lifecycle, directly linked to the `dev`, `staging`, and `main` branches in your GitHub repository.
+
+These pipelines ensure that changes made in each branch are automatically integrated and deployed to the appropriate environment, streamlining the process from development through to production.
+
+![alt text](images/success-pipelines.png)
+
+Furthermore, you have deployed three unique functions, each corresponding to a different environment:
+
+- **Dev**: [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+- **Staging**: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world)
+- **Prod**: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world)
+
+Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of development, staging, and production stages through your CI/CD workflows.
 
 Congratulations! 🎉 You've successfully deployed your Lambda function across three different environments using Lambda Forge! 🚀

@@ -4,18 +4,30 @@ theme:
   name: material
   features:
     # - navigation.tabs
-    # - navigation.sections
+    - navigation.sections
     # - toc.integrate
-    # - navigation.top
-    # - search.suggest
-    # - search.highlight
-    # - content.tabs.link
-    # - content.code.annotation
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
     - content.code.copy
   logo: images/logo.png
   favicon: images/logo.png
   palette:
+    # - scheme: default
+    #   primary: black
+    - scheme: default
       primary: black
+      toggle:
+        icon: material/weather-night
+        name: Modo noturno
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+    
 
 markdown_extensions:
   - pymdownx.tilde
@@ -43,4 +55,12 @@ extra_javascript:
   - https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js
 
 copyright: |
-  &copy; 2024 <a href="https://github.com/GuiPimenta-Dev"  target="_blank" rel="noopener">Guilherme Alves Pimenta</a>
+  &copy; 2024 Guilherme Alves Pimenta
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: "https://github.com/GuiPimenta-Dev"
+    - icon: fontawesome/brands/linkedin
+      link: "https://www.linkedin.com/in/guilhermealvespimenta/"

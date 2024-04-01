@@ -1,7 +1,5 @@
 # Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
 
-It's time to elevate our tutorial to the next level.
-
 In this section, we will develop a serverless web scraper designed to extract informations about books from [https://books.toscrape.com/](https://books.toscrape.com/) utilizing the Requests library and Beautiful Soup. The retrieved data will be stored in DynamoDB, enabling us to perform queries via an endpoint.
 
 Additionally, we will cover how to configure our Lambda function to execute daily, ensuring our dataset remains current and accurate.
@@ -709,8 +707,6 @@ Now we can also test new endpoints to list the scraped data.
 - Prod: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books)
 
 Our documentation is also updated with the new books endpoint.
-
-![alt text](images/swagger-books.png)
 
 - Staging: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs)
 - Prod: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs)

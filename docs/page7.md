@@ -4,7 +4,7 @@ The primary goal of this tutorial is not to craft an elaborate application; inst
 
 ## Configuring DynamoDB Tables for Each Deployment Stage
 
-To ensure our application can operate smoothly across different environments, we'll establish three separate DynamoDB tables, each tailored for a distinct deployment stage:
+To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage:
 
 - Dev-Users
 - Staging-Users
@@ -738,115 +738,36 @@ Impressively, Forge has neatly arranged all related Config classes for optimal c
 
 As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.
 
-Up to this point, we've deployed all stages together for demonstration purposes. However, in a real-world scenario, it's advisable to develop on a dev branch, push changes to AWS, and test your deployed function in the dev environment. If everything checks out, you should then open a pull request to the staging branch and run it there. Once the pipeline completes successfully without any failures, proceed to open a PR to the main branch.
-
-To more closely simulate a real-world scenario, let's follow a similar process and initially deploy only to the dev environment.
-
-```
-# Switch to the development branch
-git checkout dev
-
-# Stage all changes for commit
+```bash
+# Send your changes to stage
 git add .
 
-# Commit changes with a descriptive message
-git commit -m "Implement initial CRUD operations for serverless application deployment"
+# Commit with a descriptive message
+git commit -m "Developing a CRUD with DynamoDB"
 
-# Push the changes to the remote repository
-git push
-```
+# Push changes to the 'dev' branch
+git push origin dev
 
-![Dev pipeline running](images/dev-pipeline-running.png)
-
-Once the pipeline concludes its execution, we will have the opportunity to rigorously test our four core operations in the development environment.
-
-```title="Dev - Create User"
-curl --request POST \
-  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users \
-  --data '{
-	"name": "John Doe",
-	"age": 30
-}'
-```
-
-```title="Dev - Get User"
-curl --request GET \
-  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
-```
-
-```title="Dev - Update User"
-curl --request PUT \
-  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID \
-  --data '{
-	"name": "John Doe",
-	"age": 31
-}'
-```
-
-```title="Dev - Delete User"
-curl --request DELETE \
-  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/users/$USER-ID
-```
-
-Great news, they all seems to be working as expected.
-
-Now, let's proceed to integrate our changes into the Staging environment and deploy them.
-
-```
-# Switch to the staging branch
+# Merge 'dev' into 'staging' and push
 git checkout staging
-
-# Merge with dev
 git merge dev
+git push origin staging
 
-# Push the changes to the remote repository
-git push
-```
-
-![Staging pipeline running](images/staging-pipeline-running.png)
-
-```title="Staging - Create User"
-curl --request POST \
-  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users \
-  --data '{
-	"name": "John Doe",
-	"age": 30
-}'
-```
-
-```title="Staging - Get User"
-curl --request GET \
-  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
-```
-
-```title="Staging - Update User"
-curl --request PUT \
-  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID \
-  --data '{
-	"name": "John Doe",
-	"age": 31
-}'
-```
-
-```title="Staging - Delete User"
-curl --request DELETE \
-  --url https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/users/$USER-ID
-```
-
-And now, the moment we've all been waiting for: the grand finale, merging into the main branch!
-
-```
-# Switch to the main branch
+# Finally, merge 'staging' into 'main' and push
 git checkout main
-
-# Merge with staging
 git merge staging
-
-# Push the changes to the remote repository
-git push
+git push origin main
 ```
 
-![Prod pipeline running](images/prod-pipeline-running.png)
+![Dev pipeline running](images/three_pipelines.png)
+
+In this tutorial, the generated base URLs for each environment are:
+
+- **Dev**: `https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev`
+- **Staging**: `https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging`
+- **Prod**: `https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod`
+
+For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.
 
 ```title="Prod - Create User"
 curl --request POST \
