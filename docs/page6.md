@@ -1,4 +1,4 @@
-# Generating Docs
+# Generating Docs With Swagger and ReDoc
 
 With our Lambda Function now deployed across three distinct stages, the next step involves creating documentation for our endpoints.
 

@@ -168,10 +168,9 @@ The project name is defined within the `cdk.json` file, linking each resource di
     },
 ```
 
-Deploy the Dev Stack by running the following commands in your terminal:
+Deploy the Dev Stack by running the following command in your terminal:
 
 ```
-cdk synth
 cdk deploy Dev-Lambda-Forge-Demo-Stack
 ```
 
