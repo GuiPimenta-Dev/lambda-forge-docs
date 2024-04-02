@@ -3,9 +3,8 @@ site_name: Lambda Forge
 theme:
   name: material
   features:
-    # - navigation.tabs
-    # - navigation.sections
-    # - toc.integrate
+    - navigation.tabs
+    - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
@@ -15,8 +14,6 @@ theme:
   logo: images/logo.png
   favicon: images/logo.png
   palette:
-    # - scheme: default
-    #   primary: black
     - scheme: default
       primary: black
       toggle:
@@ -28,6 +25,20 @@ theme:
         icon: material/weather-sunny
         name: Modo claro
     
+
+nav:
+  - Home: 
+    - Introduction: index.md
+    - Getting Started: home/page2.md
+    - Creating a Hello World: home/page3.md
+    - Securing Endpoints: home/page4.md
+    - Multi-Stage Environments: home/page5.md
+    - Docs Generation: home/page6.md
+    - License: home/page7.md
+  - Example Projects:
+    - Introduction: examples/page1.md
+    - CRUD Application: examples/page2.md
+    - Web Scraper: examples/page3.md
 
 markdown_extensions:
   - pymdownx.tilde
@@ -41,6 +52,8 @@ markdown_extensions:
   - footnotes
   - pymdownx.details
   - pymdownx.mark
+  - pymdownx.tabbed
+
   - attr_list
   - pymdownx.emoji
   - pymdownx.superfences:
