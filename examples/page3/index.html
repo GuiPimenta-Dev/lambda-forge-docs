@@ -9,23 +9,23 @@
       
       
       
-        <link rel="prev" href="../page7/">
+        <link rel="prev" href="../page2/">
       
       
       
-      <link rel="icon" href="../images/logo.png">
+      <link rel="icon" href="../../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
       
-        <title>Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge - Lambda Forge</title>
+        <title>Web Scraper - Lambda Forge</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
     
       <link rel="stylesheet" href="https://unpkg.com/mermaid@8.5.1/dist/mermaid.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#building-a-serverless-web-scraper-with-layers-dynamo-db-sns-and-event-bridge" class="md-skip">
+        <a href="#building-a-serverless-web-scraper-with-dynamodb-lambda-layers-sns-and-event-bridge" class="md-skip">
           Skip to content
         </a>
       
@@ -84,13 +84,11 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -107,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
+              Web Scraper
             
           </span>
         </div>
@@ -194,6 +192,53 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../home/page1/" class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../page1/" class="md-tabs__link">
+          
+  
+  Example Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -207,12 +252,14 @@
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -226,8 +273,48 @@
   
   
   
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../home/page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -239,15 +326,16 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page2/" class="md-nav__link">
+      <a href="../../home/page2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -259,23 +347,116 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page3/" class="md-nav__link">
+      <a href="../../home/page3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Creating a Public Hello World Function With API Gateway
+    Creating a Hello World
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Securing Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-Stage Environments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -284,14 +465,59 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Example Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Example Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href="../page4/" class="md-nav__link">
+      <a href="../page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Creating a Private Function Through an Authorizer
+    Introduction
   </span>
   
 
@@ -299,19 +525,20 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page5/" class="md-nav__link">
+      <a href="../page2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Multi-Stage Environments With AWS CodePipeline
+    CRUD Application
   </span>
   
 
@@ -319,49 +546,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../page6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Generating Docs With Swagger and ReDoc
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../page7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Building A Serverless CRUD Application With Dynamo DB
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
     
@@ -380,7 +568,7 @@
           
   
   <span class="md-ellipsis">
-    Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
+    Web Scraper
   </span>
   
 
@@ -391,7 +579,7 @@
         
   
   <span class="md-ellipsis">
-    Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
+    Web Scraper
   </span>
   
 
@@ -535,6 +723,14 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -701,7 +897,7 @@
                   
 
 
-<h1 id="building-a-serverless-web-scraper-with-layers-dynamo-db-sns-and-event-bridge">Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge</h1>
+<h1 id="building-a-serverless-web-scraper-with-dynamodb-lambda-layers-sns-and-event-bridge">Building a Serverless Web Scraper with DynamoDB, Lambda Layers, SNS and Event Bridge</h1>
 <p>In this section, we will develop a serverless web scraper designed to extract informations about books from <a href="https://books.toscrape.com/">https://books.toscrape.com/</a> utilizing the Requests library and Beautiful Soup. The retrieved data will be stored in DynamoDB, enabling us to perform queries via an endpoint.</p>
 <p>Additionally, we will cover how to configure our Lambda function to execute daily, ensuring our dataset remains current and accurate.</p>
 <h2 id="dynamo-db">Dynamo DB</h2>
@@ -1102,12 +1298,13 @@
 <a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>    <span class="k">def</span> <span class="nf">create_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">stages</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>        <span class="k">if</span> <span class="n">stages</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
 <a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>            <span class="k">return</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>        <span class="n">events</span><span class="o">.</span><span class="n">Rule</span><span class="p">(</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>            <span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>            <span class="n">schedule</span><span class="o">=</span><span class="n">events</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">expression</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="n">targets</span><span class="o">.</span><span class="n">LambdaFunction</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="n">target</span><span class="p">)],</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>        <span class="p">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        <span class="n">events</span><span class="o">.</span><span class="n">Rule</span><span class="p">(</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>            <span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            <span class="n">schedule</span><span class="o">=</span><span class="n">events</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">expression</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>            <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="n">targets</span><span class="o">.</span><span class="n">LambdaFunction</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="n">target</span><span class="p">)],</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        <span class="p">)</span>
 </code></pre></div>
 <p>This class introduces a streamlined method for creating EventBridge rules, enabling the scheduling of Lambda function executions.</p>
 <p>Before we proceed, it's crucial to acknowledge that we're operating within a multi-stage deployment environment. Our immediate task involves configuring the Scraper function to activate based on a scheduled rule. However, a pertinent question arises: Should we initiate the triggering of three distinct functions simultaneously? Of course not, especially when considering efficiency and resource management. More precisely, is there a need for three separate scrapers when, in reality, only one scraper is destined for activation?</p>
@@ -1125,30 +1322,32 @@
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="k">class</span> <span class="nc">ScraperConfig</span><span class="p">:</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="hll">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="hll">        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">stage</span> <span class="o">==</span> <span class="s2">&quot;Prod&quot;</span><span class="p">:</span>
-</span><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>          <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>              <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Scraper&quot;</span><span class="p">,</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>              <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/books&quot;</span><span class="p">,</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>              <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Web scraper to populate Dynamo with books data&quot;</span><span class="p">,</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>              <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;scraper&quot;</span><span class="p">,</span>
-<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>              <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>              <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">bs4_layer</span><span class="p">],</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>              <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>                  <span class="s2">&quot;BOOKS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">books_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
-<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>                  <span class="s2">&quot;SNS_TOPIC_ARN&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="o">.</span><span class="n">topic_arn</span>
-<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>              <span class="p">}</span>
-<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>          <span class="p">)</span>
-<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>
-<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>          <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">books_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="hll">        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">stage</span> <span class="o">!=</span> <span class="s2">&quot;Prod&quot;</span><span class="p">:</span>
+</span><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="hll">            <span class="k">return</span>
+</span><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Scraper&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/books&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Web scraper to populate Dynamo with books data&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;scraper&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>            <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">bs4_layer</span><span class="p">],</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>                <span class="s2">&quot;BOOKS_TABLE_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">books_table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>                <span class="s2">&quot;SNS_TOPIC_ARN&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="o">.</span><span class="n">topic_arn</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>            <span class="p">}</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>        <span class="p">)</span>
 <a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>
-<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>          <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
-<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>          <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="o">.</span><span class="n">grant_publish</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>
-<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="hll">          <span class="n">services</span><span class="o">.</span><span class="n">event_bridge</span><span class="o">.</span><span class="n">create_rule</span><span class="p">(</span>
-</span><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="hll">              <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ScraperRule&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="hll">              <span class="n">expression</span><span class="o">=</span><span class="s2">&quot;cron(0 12 ? * * *)&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="hll">              <span class="n">target</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-</span><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="hll">          <span class="p">)</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">books_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>        <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>        <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">books_scraper_topic</span><span class="o">.</span><span class="n">grant_publish</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">event_bridge</span><span class="o">.</span><span class="n">create_rule</span><span class="p">(</span>
+</span><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="hll">            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ScraperRule&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="hll">            <span class="n">expression</span><span class="o">=</span><span class="s2">&quot;cron(0 12 ? * * *)&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="hll">            <span class="n">target</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+</span><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div>
 <p>The cron expression <code>cron(0 12 ? * * *)</code> configures a schedule to initiate an action every day at 12 PM UTC.</p>
 <p>Now, we're streamlining our deployment by creating the Lambda function and its essential resources exclusively for the staging environment that will be actively utilized.</p>
@@ -1299,19 +1498,14 @@
 <a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
 <p>Once the pipeline execution concludes, expect to see a single scraper function established.</p>
-<p><img alt="alt text" src="../images/scraper.png" /></p>
+<p><img alt="alt text" src="images/scraper.png" /></p>
 <p>Additionally, this function will be configured with two distinct triggers: an SNS trigger and an Event Bridge trigger, each serving a unique purpose in the workflow.</p>
-<p><img alt="alt text" src="../images/prod-scraper.png" /></p>
+<p><img alt="alt text" src="images/prod-scraper.png" /></p>
 <p>Now we can also test new endpoints to list the scraped data.</p>
 <ul>
 <li>Dev: <a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books</a></li>
 <li>Staging: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books</a></li>
 <li>Prod: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books</a></li>
-</ul>
-<p>Our documentation is also updated with the new books endpoint.</p>
-<ul>
-<li>Staging: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
-<li>Prod: <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a></li>
 </ul>
 <p>Congratulations! 🎉 You've successfully created your first web scraper using Lambda Layers, SNS, DynamoDB and Event Bridge using Lambda Forge. 🚀</p>
 
@@ -1394,10 +1588,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
       

@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../page6/">
+        <link rel="prev" href="../page1/">
       
       
-        <link rel="next" href="../page8/">
+        <link rel="next" href="../page3/">
       
       
-      <link rel="icon" href="../images/logo.png">
+      <link rel="icon" href="../../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
       
-        <title>Building A Serverless CRUD Application With Dynamo DB - Lambda Forge</title>
+        <title>CRUD Application - Lambda Forge</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +48,7 @@
     
       <link rel="stylesheet" href="https://unpkg.com/mermaid@8.5.1/dist/mermaid.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,13 +86,11 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building A Serverless CRUD Application With Dynamo DB
+              CRUD Application
             
           </span>
         </div>
@@ -196,6 +194,53 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../home/page1/" class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../page1/" class="md-tabs__link">
+          
+  
+  Example Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -209,12 +254,14 @@
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -228,8 +275,48 @@
   
   
   
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../home/page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -241,15 +328,16 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page2/" class="md-nav__link">
+      <a href="../../home/page2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -261,23 +349,116 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page3/" class="md-nav__link">
+      <a href="../../home/page3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Creating a Public Hello World Function With API Gateway
+    Creating a Hello World
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Securing Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-Stage Environments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/page7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -286,14 +467,59 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Example Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Example Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href="../page4/" class="md-nav__link">
+      <a href="../page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Creating a Private Function Through an Authorizer
+    Introduction
   </span>
   
 
@@ -301,49 +527,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../page5/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Multi-Stage Environments With AWS CodePipeline
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../page6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Generating Docs With Swagger and ReDoc
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
     
@@ -362,7 +549,7 @@
           
   
   <span class="md-ellipsis">
-    Building A Serverless CRUD Application With Dynamo DB
+    CRUD Application
   </span>
   
 
@@ -373,7 +560,7 @@
         
   
   <span class="md-ellipsis">
-    Building A Serverless CRUD Application With Dynamo DB
+    CRUD Application
   </span>
   
 
@@ -593,23 +780,32 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../page8/" class="md-nav__link">
+      <a href="../page3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
+    Web Scraper
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -848,7 +1044,7 @@
 
 
 <h1 id="building-a-serverless-crud-application-with-dynamo-db">Building A Serverless CRUD Application With Dynamo DB</h1>
-<p>The primary goal of this tutorial is not to craft an elaborate application; instead, it focuses on showcasing the seamless integration of AWS resources within the Lambda Forge architecture. To highlight this, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.</p>
+<p>In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.</p>
 <h2 id="configuring-dynamodb-tables-for-each-deployment-stage">Configuring DynamoDB Tables for Each Deployment Stage</h2>
 <p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage:</p>
 <ul>
@@ -1153,7 +1349,7 @@ Now, let's delve into the details of the function implementation.</p>
 <h2 id="disclaimer">Disclaimer</h2>
 <p>To maintain our focus on illustrating the setup and interactions with AWS resources and the Lambda Forge architecture, we will <strong>intentionally</strong> skip detailed coverage of subsequent unit and integration tests.</p>
 <p>This approach is also informed by the fact that these tests will not significantly differ from those we've outlined for the <code>create user</code> endpoint. Including them would introduce redundancy and potentially overwhelm the reader with excessive detail. Our primary goal is to ensure clarity and conciseness while providing a comprehensive understanding of the key concepts.</p>
-<p>However, rest assured that all the code developed in this tutorial, along with the tests, will be made available on GitHub for future reference and deeper exploration. This way, we aim to strike a balance between thoroughness and accessibility, ensuring that the tutorial remains engaging and informative without causing reader fatigue.</p>
+<p>However, rest assured that all the code developed in this tutorial, along with the tests, is available on GitHub for future reference and deeper exploration. This way, we aim to strike a balance between thoroughness and accessibility, ensuring that the tutorial remains engaging and informative without causing reader fatigue.</p>
 <h2 id="building-the-read-feature">Building the Read Feature</h2>
 <p>We're now set to construct the read feature, enabling the retrieval of user details using their ID.</p>
 <p>To facilitate this, we'll utilize the following command:</p>
@@ -1464,21 +1660,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>
 <a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 <a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>
-<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>        <span class="c1"># Authorizers</span>
-<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>        <span class="n">DefaultAuthorizerConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>        <span class="n">DocsAuthorizerConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>
-<a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a>        <span class="c1"># HelloWorld</span>
-<a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a>        <span class="n">HelloWorldConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-28" name="__codelineno-27-28" href="#__codelineno-27-28"></a>
-<a id="__codelineno-27-29" name="__codelineno-27-29" href="#__codelineno-27-29"></a>        <span class="c1"># Private</span>
-<a id="__codelineno-27-30" name="__codelineno-27-30" href="#__codelineno-27-30"></a>        <span class="n">PrivateConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-31" name="__codelineno-27-31" href="#__codelineno-27-31"></a>
-<a id="__codelineno-27-32" name="__codelineno-27-32" href="#__codelineno-27-32"></a>        <span class="c1"># Users</span>
-<a id="__codelineno-27-33" name="__codelineno-27-33" href="#__codelineno-27-33"></a>        <span class="n">DeleteUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-34" name="__codelineno-27-34" href="#__codelineno-27-34"></a>        <span class="n">UpdateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-35" name="__codelineno-27-35" href="#__codelineno-27-35"></a>        <span class="n">GetUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
-<a id="__codelineno-27-36" name="__codelineno-27-36" href="#__codelineno-27-36"></a>        <span class="n">CreateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>        <span class="c1"># Users</span>
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>        <span class="n">DeleteUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>        <span class="n">UpdateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>        <span class="n">GetUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
+<a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a>        <span class="n">CreateUserConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">)</span>
 </code></pre></div>
 <p>Impressively, Forge has neatly arranged all related Config classes for optimal cohesion.</p>
 <p>As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.</p>
@@ -1501,7 +1687,7 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
 <a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<p><img alt="Dev pipeline running" src="../images/three_pipelines.png" /></p>
+<p><img alt="Dev pipeline running" src="images/three_pipelines.png" /></p>
 <p>In this tutorial, the generated base URLs for each environment are:</p>
 <ul>
 <li><strong>Dev</strong>: <code>https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev</code></li>
@@ -1529,8 +1715,6 @@ Now, let's delve into the details of the function implementation.</p>
 <div class="highlight"><span class="filename">Prod - Delete User</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl --request DELETE \
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
 </code></pre></div>
-<p>Remember, all of our developments up to this point have been automatically documented using Swagger. You can access this comprehensive documentation at <a href="https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs">https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/docs</a>.</p>
-<p><img alt="Users swagger" src="../images/users-swagger.png" /></p>
 <p>Congratulations! 🎉 You've successfully deployed your very first Serverless application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻</p>
 
 
@@ -1612,10 +1796,10 @@ Now, let's delve into the details of the function implementation.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
       

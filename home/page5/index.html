@@ -15,19 +15,19 @@
         <link rel="next" href="../page6/">
       
       
-      <link rel="icon" href="../images/logo.png">
+      <link rel="icon" href="../../images/logo.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
     
     
       
-        <title>Multi-Stage Environments With AWS CodePipeline - Lambda Forge</title>
+        <title>Multi-Stage Environments - Lambda Forge</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +48,7 @@
     
       <link rel="stylesheet" href="https://unpkg.com/mermaid@8.5.1/dist/mermaid.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,13 +86,11 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Multi-Stage Environments With AWS CodePipeline
+              Multi-Stage Environments
             
           </span>
         </div>
@@ -196,6 +194,53 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../page1/" class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/page1/" class="md-tabs__link">
+          
+  
+  Example Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -209,12 +254,14 @@
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -226,10 +273,55 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -241,9 +333,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -261,9 +354,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -273,7 +367,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a Public Hello World Function With API Gateway
+    Creating a Hello World
   </span>
   
 
@@ -281,9 +375,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -293,7 +388,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a Private Function Through an Authorizer
+    Securing Endpoints
   </span>
   
 
@@ -301,9 +396,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
     
@@ -322,7 +418,7 @@
           
   
   <span class="md-ellipsis">
-    Multi-Stage Environments With AWS CodePipeline
+    Multi-Stage Environments
   </span>
   
 
@@ -333,7 +429,7 @@
         
   
   <span class="md-ellipsis">
-    Multi-Stage Environments With AWS CodePipeline
+    Multi-Stage Environments
   </span>
   
 
@@ -469,9 +565,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -481,7 +578,7 @@
         
   
   <span class="md-ellipsis">
-    Generating Docs With Swagger and ReDoc
+    Docs Generation
   </span>
   
 
@@ -489,9 +586,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -501,11 +599,19 @@
         
   
   <span class="md-ellipsis">
-    Building A Serverless CRUD Application With Dynamo DB
+    License
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -516,16 +622,106 @@
   
   
   
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Example Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Example Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../page8/" class="md-nav__link">
+      <a href="../../examples/page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Building A Serverless Web Scraper with Layers, Dynamo DB, SNS and Event Bridge
+    Introduction
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/page2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CRUD Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/page3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Scraper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -954,7 +1150,7 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cdk deploy Staging-Lambda-Forge-Demo-Stack
 </code></pre></div>
 <p>This command initiates the deployment process. Shortly, AWS CodePipeline will integrate a new pipeline, specifically tailored for the staging environment.</p>
-<p><img alt="alt text" src="../images/staging-running-only.png" /></p>
+<p><img alt="alt text" src="images/staging-running-only.png" /></p>
 <p>The pipeline's configuration within AWS CodePipeline is depicted below, showcasing the streamlined workflow from source code to deployment:</p>
 <div style="text-align:center;">
 
@@ -974,12 +1170,12 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 
 <p>The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested.</p>
 <p>This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the <code>Integration_Test</code> phase.</p>
-<p><img alt="alt text" src="../images/integration-tests-failed.png" /></p>
+<p><img alt="alt text" src="images/integration-tests-failed.png" /></p>
 <p>Note that the failure arises <strong>after the deployment phase</strong>, indicating that the Lambda functions have been successfully deployed.</p>
 <p>To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named <code>Staging-Lambda-Forge-Demo-HelloWorld</code>.</p>
-<p><img alt="alt text" src="../images/staging-hello-world.png" /></p>
+<p><img alt="alt text" src="images/staging-hello-world.png" /></p>
 <p>Upon finding the function, proceed to <code>Configurations -&gt; Triggers</code>. Here, you'll discover the url that was generated for this function during the deployment.</p>
-<p><img alt="alt text" src="../images/staging-hello-world-api-gateway-trigger.png" /></p>
+<p><img alt="alt text" src="images/staging-hello-world-api-gateway-trigger.png" /></p>
 <p>For this tutorial, the complete url is:</p>
 <ul>
 <li><a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
@@ -1084,7 +1280,7 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cdk deploy Prod-Lambda-Forge-Demo-Stack
 </code></pre></div>
 <p>Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate your deployment process.</p>
-<p><img alt="alt text" src="../images/prod-pipeline-running.png" /></p>
+<p><img alt="alt text" src="images/prod-pipeline-running.png" /></p>
 <p>The following diagram visually represents the configuration established in AWS CodePipeline.</p>
 <div style="text-align:center;">
 
@@ -1104,7 +1300,7 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 </div>
 
 <p>Upon the successful completion of the pipeline execution, you'll be able to observe a new Lambda function ready and deployed within your AWS Lambda console
-<img alt="alt text" src="../images/prod-hello-world.png" /></p>
+<img alt="alt text" src="images/prod-hello-world.png" /></p>
 <p>To verify the url created, navigate to the newly deployed Lambda function in the AWS Lambda console. Within the function, proceed to <code>Configurations -&gt; Triggers</code>. Here, you'll find the URL for the new endpoint that has been activated as part of the deployment process.</p>
 <p>For this tutorial, the endpoint URL provided is:</p>
 <ul>
@@ -1113,7 +1309,7 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <h2 id="overview">Overview</h2>
 <p>By adhering to the instructions outlined in this tutorial, you are now equipped with three distinct CI/CD pipelines. Each pipeline corresponds to a specific stage of the development lifecycle, directly linked to the <code>dev</code>, <code>staging</code>, and <code>main</code> branches in your GitHub repository.</p>
 <p>These pipelines ensure that changes made in each branch are automatically integrated and deployed to the appropriate environment, streamlining the process from development through to production.</p>
-<p><img alt="alt text" src="../images/success-pipelines.png" /></p>
+<p><img alt="alt text" src="images/success-pipelines.png" /></p>
 <p>Furthermore, you have deployed three unique functions, each corresponding to a different environment:</p>
 <ul>
 <li><strong>Dev</strong>: <a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
@@ -1202,10 +1398,10 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
       
