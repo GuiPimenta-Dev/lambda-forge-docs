@@ -208,7 +208,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../page1/" class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   Home
@@ -321,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../page1/" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,13 +958,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cdk deploy Dev-Lambda-Forge-Demo-Stack
 </code></pre></div>
 <p>Following a successful deployment, a new pipeline will be created with the name <code>Dev-Lambda-Forge-Demo-Pipeline</code>. Access your AWS CodePipeline console to view it.</p>
-<p><img alt="Dev Pipeline Triggered" src="images/only-dev-pipeline.png" /></p>
+<p><img alt="Dev Pipeline Triggered" src="../images/only-dev-pipeline.png" /></p>
 <p>In a dedicated session, we'll delve into the specifics of the pipelines generated, including a closer examination of the development pipeline.</p>
 <p>By default, Lambda Forge does not incorporate any steps for code validation in the dev pipeline. Instead, it seamlessly integrates Github with AWS CodePipeline. This means that once code is pushed to GitHub, it triggers the pipeline, leading to automatic deployment upon the completion of the execution process.</p>
 <p>After the pipeline execution concludes, proceed to your AWS Lambda console and locate the <code>Dev-Lambda-Forge-Demo-HelloWorld</code> function.</p>
-<p><img alt="alt text" src="images/dev-helloworld.png" /></p>
+<p><img alt="alt text" src="../images/dev-helloworld.png" /></p>
 <p>Select the function, then navigate to <code>Configurations -&gt; Triggers</code>. Here, you will be presented with a link to your newly deployed Lambda function, ready for use.</p>
-<p><img alt="alt text" src="images/only-dev-triggers.png" /></p>
+<p><img alt="alt text" src="../images/only-dev-triggers.png" /></p>
 <p>For this tutorial, the Lambda function is accessible via the following URL:</p>
 <ul>
 <li><a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
