@@ -39,6 +39,11 @@ nav:
     - Introduction: examples/page1.md
     - CRUD Application: examples/page2.md
     - Web Scraper: examples/page3.md
+    - Blog API: examples/page4.md
+    - Real Time Chat: examples/page5.md
+    - ChatBot: examples/page6.md
+
+
 
 markdown_extensions:
   - pymdownx.tilde
