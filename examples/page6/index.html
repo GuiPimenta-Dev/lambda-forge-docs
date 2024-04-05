@@ -846,7 +846,7 @@
         
   
   <span class="md-ellipsis">
-    Real Time Chat
+    Real-Time Chat
   </span>
   
 
@@ -867,7 +867,7 @@
         
   
   <span class="md-ellipsis">
-    AI ChatBot
+    Telegram AI ChatBot
   </span>
   
 
@@ -1431,13 +1431,13 @@
 <a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>        <span class="p">)</span>
 </code></pre></div>
 <p>This class introduces a streamlined method for creating EventBridge rules, enabling the scheduling of Lambda function executions.</p>
-<p>Before we proceed, it's crucial to acknowledge that we're operating within a multi-stage deployment environment. Our immediate task involves configuring the Scraper function to activate based on a scheduled rule. However, a pertinent question arises: Should we initiate the triggering of three distinct functions simultaneously? Of course not, especially when considering efficiency and resource management. More precisely, is there a need for three separate scrapers when, in reality, only one scraper is destined for activation?</p>
-<p>Bearing this consideration in mind, it's wise to implement a few minor adjustments. Our goal is to streamline the process, thereby avoiding the unnecessary creation of unused scrapers.</p>
+<p>Before we proceed, it's crucial to acknowledge that we're operating within a multi-stage deployment environment. Our immediate task involves configuring the Scraper function to activate based on a scheduled rule. However, a pertinent question arises: Should we initiate the triggering of three distinct functions simultaneously? Of course not, especially when considering efficiency and resource management. More precisely, is there a need for creating three scrapers when, in reality, only one is enough to populate the database?</p>
+<p>Bearing this consideration in mind, it's wise to implement a few minor adjustments. Our goal is to streamline the process, thereby avoiding the creation of unnecessary scrapers.</p>
 <p>First, let's modify the <code>LambdaStack</code> class to send also the context to the <code>ScraperConfig</code> class.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/lambda_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-42">42</a></span>
 <span class="normal"><a href="#__codelineno-14-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-42" name="__codelineno-14-42"></a>        <span class="c1"># Books</span>
-<a id="__codelineno-14-43" name="__codelineno-14-43"></a>        <span class="n">ScraperConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-14-43" name="__codelineno-14-43"></a><span class="hll">        <span class="n">ScraperConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Now, let's modify our configuration class to accept the <code>context</code> as an additional argument in its constructor.</p>
 <p>By incorporating the context, we can strategically condition the creation of the function based on the deployment stage.</p>
 <div class="highlight"><span class="filename">functions/books/scraper/config.py</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
