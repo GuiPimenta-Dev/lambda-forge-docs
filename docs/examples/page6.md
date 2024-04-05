@@ -31,10 +31,6 @@ class DynamoDB:
 
 Another essential aspect of our project involves leveraging external libraries like `requests` and `Beautiful Soup` for our web scraping tasks. Since these libraries are not built into Python's standard library, we'll need to incorporate them into our AWS Lambda functions as Lambda Layers.
 
-### What Are Lambda Layers?
-
-Lambda Layers are essentially ZIP archives containing libraries, custom runtime environments, or other dependencies. You can include these layers in your Lambda function’s execution environment without having to bundle them directly with your function's deployment package. This means you can use libraries or custom runtimes across multiple Lambda functions without needing to include them in each function’s codebase.
-
 ### Incorporating Layers Into Our Service Class
 
 Just as we previously set up our DynamoDB Service Class, it's now time to integrate the Lambda Layers into our Service Class using Forge. To accomplish this, simply execute the following command:

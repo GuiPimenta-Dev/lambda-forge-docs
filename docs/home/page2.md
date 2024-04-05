@@ -88,7 +88,8 @@ In the upcoming sections of this tutorial, we'll explore each of these component
 │   ├── services
 │   │   ├── __init__.py
 │   │   ├── api_gateway.py
-│   │   └── aws_lambda.py
+│   │   ├── aws_lambda.py
+│   │   └── layers.py
 │   ├── stacks
 │   │   ├── __init__.py
 │   │   ├── dev_stack.py
