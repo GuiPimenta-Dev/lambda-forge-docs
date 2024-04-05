@@ -1111,10 +1111,10 @@
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>         <span class="p">)</span>
 </code></pre></div>
 <p>Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.</p>
-<p><mark>When you create a custom layer using Forge, it seamlessly integrates the layer into your local development environment, similar to installing an external library from pip.</mark> However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.</p>
+<p><mark>When you create a custom layer using Forge, it automatically integrates the layer into your local development environment, similar to installing an external library from pip.</mark> However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-To install the custom layers in your virtual environment, use the command:
+In case you need to reinstall all custom layers into your virtual environment, use the command:
 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>forge layers --install
 </code></pre></div>
