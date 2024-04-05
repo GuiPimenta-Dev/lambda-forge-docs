@@ -40,12 +40,12 @@ nav:
   - Example Projects:
     - Introduction: examples/page1.md
     - URL Shortener: examples/page2.md
-    - Image Processing: examples/page3.md
-    - CRUD Application: examples/page4.md
+    - CRUD Application: examples/page3.md
+    - Image To QR Code: examples/page4.md
     - Authentication System: examples/page5.md
-    - Web Scraper: examples/page6.md
-    - Real Time Chat: examples/page7.md
-    - AI ChatBot: examples/page8.md
+    - Real-Time Chat: examples/page6.md
+    - Web Scraper: examples/page7.md
+    - Telegram AI ChatBot: examples/page8.md
   - License: license/page1.md
 
 

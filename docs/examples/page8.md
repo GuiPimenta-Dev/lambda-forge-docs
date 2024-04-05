@@ -1,3 +1,3 @@
-# Developing a Serverless Chatbot with ChatGPT, Amazon Lex and DynamoDB
+# Developing a Serverless Telegram Chatbot with OpenAI and DynamoDB
 
 Coming soon...
