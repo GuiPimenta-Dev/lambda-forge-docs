@@ -1078,7 +1078,7 @@
 <li><strong>Configuration files</strong>: Layers can be used to store configuration files that multiple functions need to access.</li>
 </ul>
 <h2 id="aws-lambda-development-with-custom-layers">AWS Lambda Development with Custom Layers</h2>
-<p>Forge streamlines the process of creating and sharing custom layers across AWS Lambda functions, significantly simplifying code reuse and management. This guide walks you through creating a custom layer using Forge, integrating it into your development workflow, and utilizing it within a Lambda function.</p>
+<p>Forge streamlines the process of creating and sharing custom layers across AWS Lambda functions, significantly simplifying code reuse and management. This section walks you through creating a custom layer using Forge, integrating it into your development workflow, and utilizing it within a Lambda function.</p>
 <h3 id="creating-a-custom-layer">Creating a Custom Layer</h3>
 <p>To begin, execute the following command to create a custom layer named <code>my_custom_layer</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forge<span class="w"> </span>layer<span class="w"> </span>--custom<span class="w"> </span>my_custom_layer
@@ -1110,8 +1110,8 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>         <span class="p">)</span>
 </code></pre></div>
-<p>Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.</p>
-<p><mark>When you create a custom layer using Forge, it automatically integrates the layer into your local development environment, similar to installing an external library from pip.</mark> However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.</p>
+<p>Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers usually face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.</p>
+<p><mark>When you create a custom layer using Forge, the new layer is automatically integrated into your local virtual environment, similar to installing an external library from pip.</mark> However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 In case you need to reinstall all custom layers into your virtual environment, use the command:

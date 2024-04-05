@@ -48,7 +48,8 @@ infra
     ├── __init__.py
     ├── api_gateway.py
     ├── aws_lambda.py
-    └── dynamo_db.py
+    ├── dynamo_db.py
+    └── layers.py
 ```
 
 Below is the updated structure of our Service class, now including the DynamoDB service, demonstrating the integration's completion:
@@ -57,12 +58,14 @@ Below is the updated structure of our Service class, now including the DynamoDB 
 from infra.services.dynamo_db import DynamoDB
 from infra.services.api_gateway import APIGateway
 from infra.services.aws_lambda import AWSLambda
+from infra.services.layers import Layers
 
 
 class Services:
     def __init__(self, scope, context) -> None:
         self.api_gateway = APIGateway(scope, context)
         self.aws_lambda = AWSLambda(scope, context)
+        self.layers = Layers(scope)
         self.dynamo_db = DynamoDB(scope, context.resources)
 ```
 

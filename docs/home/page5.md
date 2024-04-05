@@ -23,7 +23,7 @@ When you create a Lambda function, you specify which layers to include in its ex
 
 ## AWS Lambda Development with Custom Layers
 
-Forge streamlines the process of creating and sharing custom layers across AWS Lambda functions, significantly simplifying code reuse and management. This guide walks you through creating a custom layer using Forge, integrating it into your development workflow, and utilizing it within a Lambda function.
+Forge streamlines the process of creating and sharing custom layers across AWS Lambda functions, significantly simplifying code reuse and management. This section walks you through creating a custom layer using Forge, integrating it into your development workflow, and utilizing it within a Lambda function.
 
 ### Creating a Custom Layer
 
@@ -69,9 +69,9 @@ class Layers:
          )
 ```
 
-Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.
+Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers usually face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.
 
-==When you create a custom layer using Forge, it automatically integrates the layer into your local development environment, similar to installing an external library from pip.== However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.
+==When you create a custom layer using Forge, the new layer is automatically integrated into your local virtual environment, similar to installing an external library from pip.== However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
