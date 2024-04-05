@@ -12,7 +12,7 @@ theme:
     - content.code.annotation
     - content.code.copy
   logo: images/logo.png
-  favicon: images/logo.png
+  favicon: images/favicon.png
   palette:
     - scheme: default
       primary: black

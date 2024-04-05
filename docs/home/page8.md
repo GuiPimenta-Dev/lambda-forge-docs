@@ -98,9 +98,9 @@ class DeployStage(cdk.Stage):
 
 This configuration enables both public and private documentation endpoints using Swagger and Redoc, making your API's documentation accessible and versatile.
 
-## Configuring the Pipelines for Docs Generation
+## Configuring the Pipelines to Generate the Docs
 
-==Given that the **development** stage is designed for fast deployment and serves as a sandbox environment, Lambda Forge does not automatically generate documentation for the dev environment==. However, if you wish to include docs generation in your development workflow, replicating the following steps for the dev environment should effectively enable this functionality.
+==Given the development stage is designed for fast deployment, and serves as a sandbox environment, Lambda Forge does not generate documentation for the dev environment by default==. However, if you wish to include docs generation in your development workflow, replicating the following steps for the dev environment should effectively enable this functionality.
 
 Because the project was started with the `--no-docs` flag, it currently lacks the `validate_docs` and `generate_docs` steps in both the Staging and Production pipelines.
 
