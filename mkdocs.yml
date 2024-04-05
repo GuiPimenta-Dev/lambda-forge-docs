@@ -32,17 +32,21 @@ nav:
     - Getting Started: home/page2.md
     - Creating a Hello World: home/page3.md
     - Securing Endpoints: home/page4.md
-    - Multi-Stage Environments: home/page5.md
-    - Docs Generation: home/page6.md
-    - License: home/page7.md
+    - Lambda Layers: home/page5.md
+    - Multi-Stage Environments: home/page6.md
+    - Custom CodePipeline Steps: home/page7.md
+    - Docs Generation: home/page8.md
+    - Pre-Commit Hooks: home/page9.md
   - Example Projects:
     - Introduction: examples/page1.md
-    - CRUD Application: examples/page2.md
-    - Web Scraper: examples/page3.md
-    - Blog API: examples/page4.md
-    - Real Time Chat: examples/page5.md
-    - ChatBot: examples/page6.md
-
+    - URL Shortener: examples/page2.md
+    - Image Processing: examples/page3.md
+    - CRUD Application: examples/page4.md
+    - Authentication System: examples/page5.md
+    - Web Scraper: examples/page6.md
+    - Real Time Chat: examples/page7.md
+    - AI ChatBot: examples/page8.md
+  - License: license/page1.md
 
 
 markdown_extensions:

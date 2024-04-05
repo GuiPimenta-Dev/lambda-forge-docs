@@ -1,3 +1,3 @@
-# Serverless Real Time Chat Application With DynamoDB and WebSockets
+# Securing Authentication with AWS Cognito and Key Management Service
 
 Coming soon...

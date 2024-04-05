@@ -5,7 +5,7 @@ This incremental approach ensures that once a service is introduced in a previou
 With this understanding, let's initiate a new project and dive into coding!
 
 ```
-forge project lambda-forge-examples --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET" --public-docs
+forge project lambda-forge-examples --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET"
 ```
 
 **Docs**: [https://mdiamz20p2.execute-api.us-east-2.amazonaws.com/prod/docs](https://mdiamz20p2.execute-api.us-east-2.amazonaws.com/prod/docs).
