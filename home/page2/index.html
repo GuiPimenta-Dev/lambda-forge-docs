@@ -1113,24 +1113,25 @@
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>│   ├── services
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>│   │   ├── __init__.py
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>│   │   ├── api_gateway.py
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>│   │   └── aws_lambda.py
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>│   ├── stacks
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>│   │   ├── __init__.py
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>│   │   ├── dev_stack.py
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>│   │   ├── lambda_stack.py
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>│   │   ├── prod_stack.py
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>│   │   └── staging_stack.py
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>│   └── stages
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>│       ├── __init__.py
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>│       └── deploy.py
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>├── layers
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>│   └── __init__.py
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>├── .coveragerc
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>├── .gitignore
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>├── app.py
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>├── cdk.json
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>├── pytest.ini
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>└── requirements.txt
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>│   │   ├── aws_lambda.py
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>│   │   └── layers.py
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>│   ├── stacks
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>│   │   ├── __init__.py
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>│   │   ├── dev_stack.py
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>│   │   ├── lambda_stack.py
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>│   │   ├── prod_stack.py
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>│   │   └── staging_stack.py
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>│   └── stages
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>│       ├── __init__.py
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>│       └── deploy.py
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>├── layers
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>│   └── __init__.py
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>├── .coveragerc
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>├── .gitignore
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>├── app.py
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>├── cdk.json
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>├── pytest.ini
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>└── requirements.txt
 </code></pre></div>
 <p>The <code>cdk.json</code> file, located at the root of your directory, serves as the central configuration hub for Lambda Forge projects. When you run the <code>forge project</code> command, Forge automatically applies the informed settings into the cdk.json file.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-41">41</a></span>
