@@ -71,11 +71,11 @@ class Layers:
 
 Traditionally, working with Lambda layers introduces complexity during development. Since Lambda layers are deployed as zip files and run within the Lambda execution environment, developers face challenges in utilizing these layers locally. This often leads to a disconnect between development and production environments, complicating the development process.
 
-==When you create a custom layer using Forge, it seamlessly integrates the layer into your local development environment, similar to installing an external library from pip.== However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.
+==When you create a custom layer using Forge, it automatically integrates the layer into your local development environment, similar to installing an external library from pip.== However, to ensure that these changes are fully recognized, you may need to reload your IDE or reselect your virtual environment.
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-To install the custom layers in your virtual environment, use the command:
+In case you need to reinstall all custom layers into your virtual environment, use the command:
 
 ```
 forge layers --install
@@ -108,14 +108,17 @@ functions
 
 Now, implement the function to utilize the custom layer:
 
-```python title="functions/layers/custom/main.py" hl_lines="3 16"
+```python title="functions/layers/custom/main.py" hl_lines="4 19"
 import json
 from dataclasses import dataclass
+
 import my_custom_layer
+
 
 @dataclass
 class Input:
     pass
+
 
 @dataclass
 class Output:
@@ -126,10 +129,7 @@ def lambda_handler(event, context):
 
     message = my_custom_layer.hello_from_layer()
 
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"message": message})
-    }
+    return {"statusCode": 200, "body": json.dumps({"message": message})}
 ```
 
 Also, update the unit tests to expect the correct output message:
@@ -310,18 +310,13 @@ class Login:
 
 
 @dataclass
-class Result:
+class Output:
     gender: str
     name: Name
     location: Location
     email: str
     login: Login
     phone: str
-
-
-@dataclass
-class Output:
-    data: Result
 
 
 def lambda_handler(event, context):
