@@ -79,10 +79,10 @@ Our web scraper will extract the following details: `upc`, `title`, `price`, `ca
 Let's create it with forge.
 
 ```
-forge function scraper --description "Web scraper to populate Dynamo with books data" --no-api --belongs books
+forge function scraper --description "Web scraper to populate Dynamo with books data" --no-api --belongs-to books
 ```
 
-Remember, although users can access the scraper's results, the scraper itself won't serve as a direct endpoint. We've included the `--no-api` flag in our Forge setup to signify that this function won't be connected to the API Gateway. Its primary role is to enrich our database. Additionally, the `--belongs` flag was used to organize it within the `books` directory, aligning it with related functions planned for the future.
+Remember, although users can access the scraper's results, the scraper itself won't serve as a direct endpoint. We've included the `--no-api` flag in our Forge setup to signify that this function won't be connected to the API Gateway. Its primary role is to enrich our database. Additionally, the `--belongs-to` flag was used to organize it within the `books` directory, aligning it with related functions planned for the future.
 
 Here is the structure created for the books directory:
 
@@ -496,7 +496,7 @@ Now, we're streamlining our deployment by creating the Lambda function and its e
 Let's create an endpoint that returns all the stored data from our database or allows filtering by category, facilitating easy access and manipulation of the data.
 
 ```
-forge function list_books --method "GET" --description "A function to fetch books from DynamoDB, optionally filtered by category." --belongs books --public
+forge function list_books --method "GET" --description "A function to fetch books from DynamoDB, optionally filtered by category." --belongs-to books --public
 ```
 
 The file has been created within the `books` directory, as initially planned.

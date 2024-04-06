@@ -227,27 +227,15 @@ graph TD;
 
 The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested.
 
-This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL vital for these tests hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the `Integration_Test` phase.
+This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the `Integration_Test` phase.
 
 ![alt text](images/integration-tests-failed.png)
 
 Note that the failure arises **after the deployment phase**, indicating that the Lambda functions have been successfully deployed.
 
-To address this challenge, the solution involves a simple manual step in the AWS Lambda console. Specifically, you'll need to locate the function named `Staging-Lambda-Forge-Demo-HelloWorld`.
+To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving the Base URL](article) article to retrieve the Base URL.
 
-![alt text](images/staging-hello-world.png)
-
-Upon finding the function, proceed to `Configurations -> Triggers`. Here, you'll discover the url that was generated for this function during the deployment.
-
-![alt text](images/staging-hello-world-api-gateway-trigger.png)
-
-For this tutorial, the complete url is:
-
-- [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world)
-
-Given this, the BASE URL can be deduced as the portion of the URL preceding the `/hello_world` endpoint, which in this case is: `https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging`.
-
-This BASE URL must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
+Having the BASE URL, it must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
 
 ```json title="cdk.json" linenums="48" hl_lines="3"
     "bucket": "",
@@ -255,9 +243,7 @@ This BASE URL must then be incorporated into your `cdk.json` configuration file 
     "base_url": "https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging"
 ```
 
-With this setup, your integration tests are now aligned with the staging environment, facilitating a smoother and reliable testing phase.
-
-**Finally, commit your changes and push the updated code to GitHub once again.** Following these adjustments, the pipeline should successfully complete its run.
+Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.
 
 ## Production Environment
 

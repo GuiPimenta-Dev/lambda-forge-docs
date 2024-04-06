@@ -1,13 +1,23 @@
-In this section, we embark on crafting a series of projects, serving as practical examples to illustrate the development flow with Lambda Forge. These projects will be introduced incrementally, coexisting within a single repository.
+In this guide, we'll take you on a journey through the development process with Lambda Forge, illustrating the progression of projects through a hands-on, step-by-step approach within a unified codebase. Our methodology employs an incremental build strategy, where each new feature enhances the foundation laid by preceding projects, ensuring a cohesive and scalable architecture without duplicating efforts.
 
-This incremental approach ensures that once a service is introduced in a previous project, it won't be reinitialized in subsequent ones. Instead, we will seamlessly build upon the foundation laid by preceding projects, adding new components and functionalities as we progress.
+To keep our focus sharp on AWS resources and Lambda Forge architecture, we'll skip over the detailed discussion of unit and integration tests here. However, for those eager to dive deeper into testing methodologies, comprehensive project code and testing materials are readily available on GitHub. This tutorial also includes an insightful article called [Mocking AWS Resources for Unit Testing]() aimed at enriching your understanding.
 
-With this understanding, let's initiate a new project and dive into coding!
+Our objective is to provide a streamlined and informative learning path, striking a balance between technical detail and approachability to keep you engaged without feeling overwhelmed.
+
+To enhance usability and the overall user experience, we've implemented a custom domain, `https://api.lambda-forge.com`, making our URLs succinct and memorable across various deployment stages:
+
+- **Dev** - https://api.lambda-forge.com/dev
+- **Staging** - https://api.lambda-forge.com/staging
+- **Prod** - https://api.lambda-forge.com
+
+For those interested in customizing domain names within API Gateway, the [How to Configure a Custom Domain Name for API Gateway]() guide offers a detailed tutorial on personalizing your project's URL.
+
+Let's kick off by setting up our project:
 
 ```
 forge project lambda-forge-examples --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET"
 ```
 
-**Docs**: [https://mdiamz20p2.execute-api.us-east-2.amazonaws.com/prod/docs](https://mdiamz20p2.execute-api.us-east-2.amazonaws.com/prod/docs).
+**Docs**: [https://api.lambda-forge.com/docs](https://examples.lambda-forge.com/docs).
 
 **Source code**: [https://github.com/GuiPimenta-Dev/lambda-forge-examples](https://github.com/GuiPimenta-Dev/lambda-forge-examples)

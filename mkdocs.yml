@@ -11,20 +11,14 @@ theme:
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
-  logo: images/logo.png
-  favicon: images/logo.png
+  logo: images/favicon.png
+  favicon: images/favicon.png
   palette:
     - scheme: default
       primary: black
       toggle:
         icon: material/weather-night
         name: Modo noturno
-    - scheme: slate
-      primary: black
-      toggle:
-        icon: material/weather-sunny
-        name: Modo claro
-    
 
 nav:
   - Home: 
@@ -46,6 +40,11 @@ nav:
     - Real-Time Chat: examples/page6.md
     - Web Scraper: examples/page7.md
     - Telegram AI ChatBot: examples/page8.md
+  - Articles:
+    - Creating a S3 Bucket: articles/page1.md
+    - Custom Domain Name: articles/page2.md
+    - Mocking AWS Services: articles/page3.md
+    - Api Gateway Base URL: articles/page4.md
   - License: license/page1.md
 
 

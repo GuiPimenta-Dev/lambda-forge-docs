@@ -88,10 +88,10 @@ forge layers --install
 Create a new Lambda function that leverages your custom layer by running:
 
 ```
-forge function custom --method "GET" --description "A function that uses my_custom_layer" --belongs "layers" --endpoint "/layers/custom" --public
+forge function custom --method "GET" --description "A function that uses my_custom_layer" --belongs-to "layers" --endpoint "/layers/custom" --public
 ```
 
-The `--belongs` flag indicates to Forge that this function is part of a group of related functions, organizing them together in the same directory. It also specifies the API Gateway endpoint path with the `--endpoint` flag.
+The `--belongs-to` flag indicates to Forge that this function is part of a group of related functions, organizing them together in the same directory. It also specifies the API Gateway endpoint path with the `--endpoint` flag.
 
 ```
 functions
@@ -224,7 +224,7 @@ requests==2.28.1
 To create a Lambda function that leverages the Requests library, execute the following command:
 
 ```
-forge function external --method "GET" --description "A function that uses an external library" --belongs "layers" --endpoint "/layers/external" --public
+forge function external --method "GET" --description "A function that uses an external library" --belongs-to "layers" --endpoint "/layers/external" --public
 ```
 
 This action initiates the creation of a new function within the `layers` directory.
