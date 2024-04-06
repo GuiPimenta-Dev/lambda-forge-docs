@@ -1,3 +1,3 @@
-# Securing Authentication with AWS Cognito and Key Management Service
+# Image Resize, Watermark and Image to QR Code with AWS S3 and SES
 
 Coming soon...

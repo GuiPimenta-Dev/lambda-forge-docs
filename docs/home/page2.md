@@ -7,6 +7,7 @@ Lambda Forge is built on top of AWS Cloud Development Kit (CDK) and it's essenti
 ```
 npm install -g aws-cdk
 aws configure
+cdk bootstrap
 ```
 
 During the configuration, you will be prompted to enter your AWS Access Key ID, Secret Access Key, default region name, and output format.
@@ -46,7 +47,6 @@ source venv/bin/activate
 
 ```
 pip install lambda-forge --extra-index-url https://pypi.org/simple --extra-index-url https://test.pypi.org/simple/
-
 ```
 
 ### Forge CLI
@@ -63,7 +63,7 @@ forge --help
 
 ## Create a New Project
 
-Start a new project named `lambda-forge-demo`, incorporating the `--no-docs` flag to bypass docs generation initially as this will be covered on a future section.
+Start a new project named `lambda-forge-demo`, incorporating the `--no-docs` flag to bypass docs generation initially as this will be covered on a specific section.
 
 ```
 forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --no-docs

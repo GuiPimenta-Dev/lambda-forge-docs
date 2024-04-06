@@ -1,3 +1,3 @@
-# Transforming an Image into a QR Code: Leveraging AWS S3 and SES for Efficient Processing
+# Securing Authentication with AWS Cognito, Secrets Manager and Key Management Service
 
 Coming soon...

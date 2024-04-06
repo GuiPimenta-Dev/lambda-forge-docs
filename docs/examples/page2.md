@@ -8,7 +8,7 @@ To ensure our application can operate smoothly across different environments, we
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key name for our DynamoDB tables.
+Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.
 </div>
 
 Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.
@@ -330,7 +330,9 @@ def lambda_handler(event, context):
     return {"statusCode": 301, "headers": {"Location": original_url}}
 ```
 
-And it's configuration.
+In this Lambda function, we're essentially setting up a redirect service. When a request comes in with a short URL identifier, the function looks up this identifier in the DynamoDB table to find the corresponding original URL. If found, it redirects the user to the original URL.
+
+Next, let's move on to its configuration.
 
 ```python title="functions/urls/redirect/config.py" hl_lines="12-14 19"
 from infra.services import Services
