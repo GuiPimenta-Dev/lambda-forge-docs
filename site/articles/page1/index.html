@@ -20,7 +20,7 @@
     
     
       
-        <title>Creating a S3 Bucket - Lambda Forge</title>
+        <title>Creating S3 Buckets - Lambda Forge</title>
       
     
     
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Creating a S3 Bucket
+              Creating S3 Buckets
             
           </span>
         </div>
@@ -644,7 +644,7 @@
         
   
   <span class="md-ellipsis">
-    Image To QR Code
+    Authentication System
   </span>
   
 
@@ -665,7 +665,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -810,7 +810,7 @@
           
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -821,7 +821,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -852,16 +852,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-by-step-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step-by-Step Guide
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-Step Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
     <span class="md-ellipsis">
       Step 1: Open the Amazon S3 Console
@@ -869,8 +859,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#step-2-create-a-new-bucket" class="md-nav__link">
     <span class="md-ellipsis">
       Step 2: Create a New Bucket
@@ -878,8 +868,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#step-3-access-your-bucket" class="md-nav__link">
     <span class="md-ellipsis">
       Step 3: Access Your Bucket
@@ -887,18 +877,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -973,7 +958,7 @@
         
   
   <span class="md-ellipsis">
-    Api Gateway Base URL
+    Locating the Base URL
   </span>
   
 
@@ -1046,16 +1031,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-by-step-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step-by-Step Guide
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-Step Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
     <span class="md-ellipsis">
       Step 1: Open the Amazon S3 Console
@@ -1063,8 +1038,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#step-2-create-a-new-bucket" class="md-nav__link">
     <span class="md-ellipsis">
       Step 2: Create a New Bucket
@@ -1072,8 +1047,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#step-3-access-your-bucket" class="md-nav__link">
     <span class="md-ellipsis">
       Step 3: Access Your Bucket
@@ -1081,18 +1056,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1127,14 +1097,13 @@
 <li>You should already be logged into your AWS account.</li>
 <li>Familiarity with the basic concepts of AWS S3.</li>
 </ul>
-<h2 id="step-by-step-guide">Step-by-Step Guide</h2>
-<h3 id="step-1-open-the-amazon-s3-console">Step 1: Open the Amazon S3 Console</h3>
+<h2 id="step-1-open-the-amazon-s3-console">Step 1: Open the Amazon S3 Console</h2>
 <ol>
 <li>Once logged in to the AWS Management Console, locate the <strong>Services</strong> menu at the top of the console.</li>
 <li>Use the search bar to find <strong>S3</strong> or navigate through the categories to locate S3 under the Storage section.</li>
 <li>Click on <strong>S3</strong> to open the S3 console.</li>
 </ol>
-<h3 id="step-2-create-a-new-bucket">Step 2: Create a New Bucket</h3>
+<h2 id="step-2-create-a-new-bucket">Step 2: Create a New Bucket</h2>
 <ol>
 <li>In the S3 console, click the <strong>Create bucket</strong> button. This action opens a wizard to guide you through the bucket creation process.</li>
 <li>
@@ -1151,11 +1120,11 @@
 </li>
 <li>Review your settings, then click <strong>Create bucket</strong>.</li>
 </ol>
-<h3 id="step-3-access-your-bucket">Step 3: Access Your Bucket</h3>
+<h2 id="step-3-access-your-bucket">Step 3: Access Your Bucket</h2>
 <ul>
 <li>After creation, your new bucket will be listed in the S3 console. Click on your bucket's name to start uploading files, creating folders, or setting up permissions.</li>
 </ul>
-<h3 id="best-practices">Best Practices</h3>
+<h2 id="best-practices">Best Practices</h2>
 <ul>
 <li><strong>Naming Convention</strong>: Adhere to a consistent naming convention for easier management, especially if you plan to create multiple buckets.</li>
 <li><strong>Region Selection</strong>: Align the bucket's region with your other AWS resources to reduce latency and costs.</li>

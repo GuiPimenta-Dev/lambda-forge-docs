@@ -35,8 +35,8 @@ nav:
     - Introduction: examples/page1.md
     - URL Shortener: examples/page2.md
     - CRUD Application: examples/page3.md
-    - Authentication System: examples/page4.md
-    - Image Processing: examples/page5.md
+    - Image Processing: examples/page4.md
+    - Authentication System: examples/page5.md
     - Real-Time Chat: examples/page6.md
     - Web Scraper: examples/page7.md
     - Telegram AI ChatBot: examples/page8.md

@@ -251,7 +251,7 @@ class ShortenerConfig:
 
 In this configuration, we specify resources according to the deployment stages of the Lambda function, setting up the DynamoDB table and API Gateway base URL accordingly. It also includes permission settings, enabling the Lambda function to write to our DynamoDB table.
 
-## Implementing the Redirect Feature
+## Implementing the Redirect Function
 
 Having established the necessary components for URL shortening, we now proceed to create a new function tasked with redirecting users from the shortened URL to its original counterpart.
 
@@ -299,7 +299,7 @@ class Input:
 
 @dataclass
 class Output:
-    message: str
+    pass
 
 
 def lambda_handler(event, context):
@@ -415,4 +415,4 @@ Navigating to this URL in your browser will redirect you to the original content
 
 ![Lambda Forge Logo](images/lambda-forge-short-url.png)
 
-🎉 Success! Your URL Shortener function is now deployed and operational across all environments.
+🎉 Success! Our URL shortener function is now deployed and operational across all environments.

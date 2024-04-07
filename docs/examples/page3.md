@@ -2,7 +2,42 @@
 
 In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.
 
-## Building the Create Feature
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+The unit tests for this project are used as example by the <a href="https://docs.lambda-forge.com/articles/page3" target="_blank">Mocking AWS Resources for Unit Testing</a> article. If you're interested in learning how to effectively mock DynamoDB for testing in your own projects, it's a highly recommended read.
+</div>
+
+## Configuring DynamoDB Tables for Each Deployment Stage
+
+To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: `Dev-Users`, `Staging-Users` and `Prod-Users`.
+
+Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file.
+
+```json title="cdk.json" linenums="51" hl_lines="5 12 19"
+    "dev": {
+      "base_url": "https://api.lambda-forge.com/dev",
+      "arns": {
+        "urls_table": "$DEV-URLS-TABLE-ARN",
+        "users_table": "$DEV-USERS-TABLE-ARN"
+      }
+    },
+    "staging": {
+      "base_url": "https://api.lambda-forge.com/staging",
+      "arns": {
+        "urls_table": "$STAGING-URLS-TABLE-ARN",
+        "users_table": "$STAGING-USERS-TABLE-ARN"
+      }
+    },
+    "prod": {
+      "base_url": "https://api.lambda-forge.com",
+      "arns": {
+        "urls_table": "$PROD-URLS-TABLE-ARN",
+        "users_table": "$PROD-USERS-TABLE-ARN"
+      }
+    }
+```
+
+## Implementing the Create Functionality
 
 Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:
 
@@ -15,15 +50,16 @@ forge function create_user --method "POST" --description "Create a user with nam
 This command signals to Forge the need to generate a new Lambda function named create_user, which will handle POST requests. By applying the `--belongs-to` flag, we guide Forge to organize this function within the `users` directory, emphasizing its role as part of a suite of user-related functionalities.
 
 ```
-functions/users
-├── create_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-└── utils
-    └── __init__.py
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
 ```
 
 - `users/` This directory acts as the container for all Lambda functions related to users operations, organizing them under a common theme.
@@ -103,7 +139,7 @@ class CreateUserConfig:
         services.dynamo_db.users_table.grant_write_data(function)
 ```
 
-## Building the Read Feature
+## Implementing the Read Functionality
 
 We're now set to construct the read feature, enabling the retrieval of user details using their ID.
 
@@ -118,22 +154,22 @@ The `--endpoint "/users/{user_id}"` parameter sets up a specific URL path for ac
 By running this command, we add a new layer to our application that specifically handles fetching user details in an organized, accessible manner.
 
 ```
-functions/users
-├── conftest.py
-├── create_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── get_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-└── utils
-    └── __init__.py
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
 ```
 
 ### Core Logic
@@ -203,14 +239,12 @@ class GetUserConfig:
             },
         )
 
-        services.api_gateway.create_endpoint(
-            "GET", "/users/{user_id}", function, public=True
-        )
+        services.api_gateway.create_endpoint("GET", "/users/{user_id}", function, public=True)
 
         services.dynamo_db.users_table.grant_read_data(function)
 ```
 
-## Building the Update Feature
+## Implementing the Update Functionality
 
 Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.
 
@@ -221,28 +255,28 @@ forge function update_user --method "PUT" --description "Update an user by ID" -
 As expected, after using the forge command to generate the `update_user` function, a predefined directory structure is created.
 
 ```
-functions/users
-├── conftest.py
-├── create_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── get_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── update_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-└── utils
-    └── __init__.py
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── update_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
 ```
 
 ### Core Logic
@@ -317,14 +351,12 @@ class UpdateUserConfig:
         },
     )
 
-    services.api_gateway.create_endpoint(
-        "PUT", "/users/{user_id}", function, public=True
-    )
+    services.api_gateway.create_endpoint("PUT", "/users/{user_id}", function, public=True)
 
     services.dynamo_db.users_table.grant_write_data(function)
 ```
 
-## Building the Delete Feature
+## Implementing the Delete Functionality
 
 Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.
 
@@ -335,34 +367,34 @@ forge function delete_user --method "DELETE" --description "Delete an user by ID
 Upon executing the Forge command, the `delete_user` folder will appear within the `infra/users` directory.
 
 ```
-functions/users
-├── conftest.py
-├── create_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── delete_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── get_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-├── update_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-└── utils
-    └── __init__.py
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── delete_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── update_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
 ```
 
 ### Core Logic
@@ -429,9 +461,7 @@ class DeleteUserConfig:
             },
         )
 
-        services.api_gateway.create_endpoint(
-            "DELETE", "/users/{user_id}", function, public=True
-        )
+        services.api_gateway.create_endpoint("DELETE", "/users/{user_id}", function, public=True)
 
         services.dynamo_db.users_table.grant_write_data(function)
 ```
@@ -439,41 +469,6 @@ class DeleteUserConfig:
 ## Deploying Our Serverless CRUD Application
 
 Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.
-
-As a quick refresher, deploying a Lambda Function requires initializing the config class within the LambdaStack class's constructor. Fortunately, Forge automates this process for us. Now, let's examine how our LambdaStack has evolved after our extensive interactions with Forge.
-
-```python title="infra/stacks/lambda_stack.py"
-from aws_cdk import Stack
-from constructs import Construct
-from infra.services import Services
-from lambda_forge import release
-from functions.users.delete_user.config import DeleteUserConfig
-from functions.users.update_user.config import UpdateUserConfig
-from functions.users.get_user.config import GetUserConfig
-from functions.users.create_user.config import CreateUserConfig
-from functions.private.config import PrivateConfig
-from authorizers.default.config import DefaultAuthorizerConfig
-from authorizers.docs.config import DocsAuthorizerConfig
-from functions.hello_world.config import HelloWorldConfig
-
-@release
-class LambdaStack(Stack):
-    def __init__(self, scope: Construct, context, **kwargs) -> None:
-
-        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
-
-        self.services = Services(self, context)
-
-        # Users
-        DeleteUserConfig(self.services)
-        UpdateUserConfig(self.services)
-        GetUserConfig(self.services)
-        CreateUserConfig(self.services)
-```
-
-Impressively, Forge has neatly arranged all related Config classes for optimal cohesion.
-
-As observed, all four operations have been successfully initialized in our lambda stack, enabling us to move forward by pushing our code to GitHub and awaiting the completion of the CI/CD process. Following this, we should have a fully functional and operational CRUD application at our disposal.
 
 ```bash
 # Send your changes to stage
@@ -496,33 +491,27 @@ git merge staging
 git push origin main
 ```
 
-![Dev pipeline running](images/three_pipelines.png)
-
-In this tutorial, the generated base URLs for each environment are:
-
-- **Dev**: `https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev`
-- **Staging**: `https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging`
-- **Prod**: `https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod`
+![Dev pipeline running](images/three_example_pipelines.png)
 
 For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.
 
 ```title="Prod - Create User"
 curl --request POST \
-  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users \
+  --url https://api.lambda-forge.com/users \
   --data '{
-	"name": "John Doe",
-	"age": 30
+    "name": "John Doe",
+    "age": 30
 }'
 ```
 
 ```title="Prod - Get User"
 curl --request GET \
-  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+  --url https://api.lambda-forge.com/users/$USER-ID
 ```
 
 ```title="Prod - Update User"
 curl --request PUT \
-  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID \
+  --url https://api.lambda-forge.com/users/$USER-ID \
   --data '{
 	"name": "John Doe",
 	"age": 31
@@ -531,7 +520,7 @@ curl --request PUT \
 
 ```title="Prod - Delete User"
 curl --request DELETE \
-  --url https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/users/$USER-ID
+  --url https://api.lambda-forge.com/users/$USER-ID
 ```
 
-Congratulations! 🎉 You've successfully deployed your very first Serverless application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻
+Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻

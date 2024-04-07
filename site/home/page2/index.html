@@ -797,7 +797,7 @@
         
   
   <span class="md-ellipsis">
-    Image To QR Code
+    Authentication System
   </span>
   
 
@@ -818,7 +818,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -949,7 +949,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -1012,7 +1012,7 @@
         
   
   <span class="md-ellipsis">
-    Api Gateway Base URL
+    Locating the Base URL
   </span>
   
 
@@ -1203,6 +1203,7 @@
 <p>Lambda Forge is built on top of AWS Cloud Development Kit (CDK) and it's essential for defining cloud infrastructure in code and provisioning it through AWS CloudFormation. Execute the following commands to install the AWS CDK globally and set up your AWS credentials:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm install -g aws-cdk
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>aws configure
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cdk bootstrap
 </code></pre></div>
 <p>During the configuration, you will be prompted to enter your AWS Access Key ID, Secret Access Key, default region name, and output format.</p>
 <h2 id="create-a-github-personal-access-token">Create a GitHub Personal Access Token</h2>
@@ -1235,7 +1236,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>forge --help
 </code></pre></div>
 <h2 id="create-a-new-project">Create a New Project</h2>
-<p>Start a new project named <code>lambda-forge-demo</code>, incorporating the <code>--no-docs</code> flag to bypass docs generation initially as this will be covered on a future section.</p>
+<p>Start a new project named <code>lambda-forge-demo</code>, incorporating the <code>--no-docs</code> flag to bypass docs generation initially as this will be covered on a specific section.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
 </code></pre></div>
 <p>Make sure to replace <code>$GITHUB-OWNER</code> and <code>$GITHUB-REPO</code> with the actual GitHub owner and the name of an empty repository.</p>

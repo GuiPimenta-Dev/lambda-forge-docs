@@ -749,7 +749,7 @@
         
   
   <span class="md-ellipsis">
-    Image To QR Code
+    Authentication System
   </span>
   
 
@@ -770,7 +770,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -901,7 +901,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -964,7 +964,7 @@
         
   
   <span class="md-ellipsis">
-    Api Gateway Base URL
+    Locating the Base URL
   </span>
   
 
@@ -1108,7 +1108,7 @@
 <p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: <code>Dev-URLs</code>, <code>Staging-URLs</code> and <code>Prod-URLs</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key name for our DynamoDB tables.
+Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.
 </div>
 
 <p>Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the <code>cdk.json</code> file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.</p>
@@ -1465,7 +1465,8 @@ Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate yo
 <a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>    <span class="c1"># Redirect to the original URL with a 301 Moved Permanently response.</span>
 <a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">301</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Location&quot;</span><span class="p">:</span> <span class="n">original_url</span><span class="p">}}</span>
 </code></pre></div>
-<p>And it's configuration.</p>
+<p>In this Lambda function, we're essentially setting up a redirect service. When a request comes in with a short URL identifier, the function looks up this identifier in the DynamoDB table to find the corresponding original URL. If found, it redirects the user to the original URL.</p>
+<p>Next, let's move on to its configuration.</p>
 <div class="highlight"><span class="filename">functions/urls/redirect/config.py</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>

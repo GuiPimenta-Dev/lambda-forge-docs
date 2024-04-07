@@ -1,3 +1,3 @@
-# Image Resize, Watermark and Image to QR Code with AWS S3 and SES
+# Implementing JWT Authentication with AWS Cognito, Secrets Manager and KMS
 
 Coming soon...
