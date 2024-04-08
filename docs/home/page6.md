@@ -8,8 +8,8 @@ Each stage is designed to operate with its own set of isolated resources, to ens
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Lambda Forge provides a suggested pipeline configuration for each stage of deployment. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing some of them.
-
+<p>Lambda Forge provides a suggested pipeline configuration for each stage of deployment. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing some of them.
+</p>
 </div>
 
 ## Development Environment
@@ -233,7 +233,7 @@ This phenomenon occurs because the integration tests are set to execute immediat
 
 Note that the failure arises **after the deployment phase**, indicating that the Lambda functions have been successfully deployed.
 
-To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving the Base URL](article) article to retrieve the Base URL.
+To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving Lambda Function Base URL](https://docs.lambda-forge.com/articles/page4") article to retrieve the Base URL.
 
 Having the BASE URL, it must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
 

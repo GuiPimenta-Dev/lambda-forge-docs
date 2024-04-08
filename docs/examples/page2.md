@@ -33,7 +33,7 @@ Here's how to update your `cdk.json` file to include the DynamoDB table ARNs for
     }
 ```
 
-### Incorporating DynamoDB Into the Service Layer
+### Incorporating DynamoDB Into the Service Class
 
 The subsequent phase in enhancing our application involves integrating the DynamoDB service within our service layer, enabling direct communication with DynamoDB tables. To accomplish this, utilize the following command:
 

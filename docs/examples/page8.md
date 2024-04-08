@@ -1,3 +1,3 @@
-# Developing a Serverless Telegram Chatbot with OpenAI and DynamoDB
+# Developing a Serverless Chatbot with OpenAI and DynamoDB
 
 Coming soon...
