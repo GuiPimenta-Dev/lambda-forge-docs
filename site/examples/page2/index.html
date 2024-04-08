@@ -12,7 +12,7 @@
         <link rel="prev" href="../page1/">
       
       
-        <link rel="next" href="../page3/">
+        <link rel="next" href="../page4/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -120,11 +120,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -659,9 +655,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#incorporating-dynamodb-into-the-service-layer" class="md-nav__link">
+  <a href="#incorporating-dynamodb-into-the-service-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Incorporating DynamoDB Into the Service Layer
+      Incorporating DynamoDB Into the Service Class
     </span>
   </a>
   
@@ -682,9 +678,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementing-the-redirect-feature" class="md-nav__link">
+  <a href="#implementing-the-redirect-function" class="md-nav__link">
     <span class="md-ellipsis">
-      Implementing the Redirect Feature
+      Implementing the Redirect Function
     </span>
   </a>
   
@@ -724,32 +720,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../page3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CRUD Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../page4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -770,7 +745,7 @@
         
   
   <span class="md-ellipsis">
-    Image Processing
+    Authentication System
   </span>
   
 
@@ -833,7 +808,7 @@
         
   
   <span class="md-ellipsis">
-    Telegram AI ChatBot
+    AI ChatBot
   </span>
   
 
@@ -1038,9 +1013,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#incorporating-dynamodb-into-the-service-layer" class="md-nav__link">
+  <a href="#incorporating-dynamodb-into-the-service-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Incorporating DynamoDB Into the Service Layer
+      Incorporating DynamoDB Into the Service Class
     </span>
   </a>
   
@@ -1061,9 +1036,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementing-the-redirect-feature" class="md-nav__link">
+  <a href="#implementing-the-redirect-function" class="md-nav__link">
     <span class="md-ellipsis">
-      Implementing the Redirect Feature
+      Implementing the Redirect Function
     </span>
   </a>
   
@@ -1143,7 +1118,7 @@ Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all o
 </span><a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="w">      </span><span class="p">}</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="incorporating-dynamodb-into-the-service-layer">Incorporating DynamoDB Into the Service Layer</h3>
+<h3 id="incorporating-dynamodb-into-the-service-class">Incorporating DynamoDB Into the Service Class</h3>
 <p>The subsequent phase in enhancing our application involves integrating the DynamoDB service within our service layer, enabling direct communication with DynamoDB tables. To accomplish this, utilize the following command:</p>
 <p><code>forge service dynamo_db</code></p>
 <p>This command creates a new service file named <code>dynamo_db.py</code> within the <code>infra/services</code> directory.</p>
@@ -1397,7 +1372,7 @@ Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate yo
 <a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">urls_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </span></code></pre></div>
 <p>In this configuration, we specify resources according to the deployment stages of the Lambda function, setting up the DynamoDB table and API Gateway base URL accordingly. It also includes permission settings, enabling the Lambda function to write to our DynamoDB table.</p>
-<h2 id="implementing-the-redirect-feature">Implementing the Redirect Feature</h2>
+<h2 id="implementing-the-redirect-function">Implementing the Redirect Function</h2>
 <p>Having established the necessary components for URL shortening, we now proceed to create a new function tasked with redirecting users from the shortened URL to its original counterpart.</p>
 <p>Begin by creating a new function:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge function redirect --method &quot;GET&quot; --description &quot;Redirects from the short url to the original url&quot; --belongs-to urls --public --no-tests
@@ -1435,7 +1410,7 @@ Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate yo
 <a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
 <a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="nd">@dataclass</span>
 <a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>    <span class="k">pass</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
 <a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
 <a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
@@ -1529,7 +1504,7 @@ Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate yo
 </code></pre></div>
 <p>Navigating to this URL in your browser will redirect you to the original content, showcasing our URL Shortener in action.</p>
 <p><img alt="Lambda Forge Logo" src="../images/lambda-forge-short-url.png" /></p>
-<p>🎉 Success! Your URL Shortener function is now deployed and operational across all environments.</p>
+<p>🎉 Success! Our URL shortener function is now deployed and operational across all environments.</p>
 
 
 

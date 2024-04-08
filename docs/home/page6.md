@@ -231,9 +231,9 @@ This phenomenon occurs because the integration tests are set to execute immediat
 
 ![alt text](images/integration-tests-failed.png)
 
-Note that the failure arises **after the deployment phase**, indicating that the Lambda functions have been successfully deployed.
+==Note that the failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed.==
 
-To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving Lambda Function Base URL](https://docs.lambda-forge.com/articles/page4") article to retrieve the Base URL.
+To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving the Api Gateway Base URL](https://docs.lambda-forge.com/articles/page4") article to find your base URL.
 
 Having the BASE URL, it must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
 
@@ -322,7 +322,9 @@ class ProdStack(cdk.Stack):
         )
 ```
 
-This environment is named `Prod` and the resources used are provenient from the `prod` key in the `cdk.json` file. Additionally, the `main` branch on GitHub is being used to trigger the pipeline. Given the critical need for security and integrity in production, we replicate the staging environment, applying all tests and safeguards again before deploying the production stage. This ensures that any changes meet our high quality standards before production deployment, effectively protecting against vulnerabilities and ensuring a stable user experience.
+This environment is named `Prod` and the resources used are provenient from the `prod` key in the `cdk.json` file. Additionally, the `main` branch on GitHub is being used to trigger the pipeline.
+
+Given the critical need for security and integrity in production, we replicate the staging environment, applying all tests and safeguards again before deploying the production stage. This ensures that any changes meet our high quality standards before production deployment, effectively protecting against vulnerabilities and ensuring a stable user experience.
 
 ### Deploying the Production Environment
 

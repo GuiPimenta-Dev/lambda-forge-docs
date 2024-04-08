@@ -120,11 +120,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -772,32 +768,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/page3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CRUD Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/page4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -818,7 +793,7 @@
         
   
   <span class="md-ellipsis">
-    Image Processing
+    Authentication System
   </span>
   
 
@@ -881,7 +856,7 @@
         
   
   <span class="md-ellipsis">
-    Telegram AI ChatBot
+    AI ChatBot
   </span>
   
 
@@ -1204,8 +1179,8 @@
 <p>Each stage is designed to operate with its own set of isolated resources, to ensure that changes in one environment do not inadvertently affect another.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Lambda Forge provides a suggested pipeline configuration for each stage of deployment. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing some of them.
-
+<p>Lambda Forge provides a suggested pipeline configuration for each stage of deployment. You're encouraged to customize these pipelines to fit your project's needs. Whether adding new steps, adjusting existing ones, reordering or even removing some of them.
+</p>
 </div>
 
 <h2 id="development-environment">Development Environment</h2>
@@ -1495,7 +1470,7 @@ Lambda Forge provides a suggested pipeline configuration for each stage of deplo
 <p>This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the <code>Integration_Test</code> phase.</p>
 <p><img alt="alt text" src="../images/integration-tests-failed.png" /></p>
 <p>Note that the failure arises <strong>after the deployment phase</strong>, indicating that the Lambda functions have been successfully deployed.</p>
-<p>To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the <a href="article">Retrieving the Base URL</a> article to retrieve the Base URL.</p>
+<p>To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the <a href="https://docs.lambda-forge.com/articles/page4&quot;">Retrieving Lambda Function Base URL</a> article to retrieve the Base URL.</p>
 <p>Having the BASE URL, it must then be incorporated into your <code>cdk.json</code> configuration file under the <code>base_url</code> key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-48">48</a></span>
 <span class="normal"><a href="#__codelineno-5-49">49</a></span>

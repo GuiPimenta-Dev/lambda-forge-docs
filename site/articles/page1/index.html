@@ -120,11 +120,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -619,32 +615,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/page3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CRUD Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/page4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Authentication System
+    Image Processing
   </span>
   
 
@@ -665,7 +640,7 @@
         
   
   <span class="md-ellipsis">
-    Image Processing
+    Authentication System
   </span>
   
 
@@ -728,7 +703,7 @@
         
   
   <span class="md-ellipsis">
-    Telegram AI ChatBot
+    AI ChatBot
   </span>
   
 
@@ -882,6 +857,15 @@
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-your-bucket-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Your Bucket Public
     </span>
   </a>
   
@@ -1067,6 +1051,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#making-your-bucket-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Your Bucket Public
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       Conclusion
@@ -1130,8 +1123,30 @@
 <li><strong>Region Selection</strong>: Align the bucket's region with your other AWS resources to reduce latency and costs.</li>
 <li><strong>Security</strong>: By default, all S3 buckets are private. Only make a bucket public if it is intended to serve static web content. Always follow the principle of least privilege when configuring bucket permissions.</li>
 </ul>
+<h2 id="making-your-bucket-public">Making Your Bucket Public</h2>
+<p>To make your S3 bucket public and accessible to the internet, follow these steps:</p>
+<ol>
+<li>Navigate to the S3 console.</li>
+<li>Select the bucket you want to make public.</li>
+<li>Go to the <strong>Permissions</strong> tab.</li>
+<li>Click on <strong>Bucket Policy</strong>.</li>
+<li>Add a policy to allow public access to your bucket. Here's an example policy:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PublicReadGetObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;Principal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::YOUR_BUCKET_NAME/*&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</code></pre></div>
 <h2 id="conclusion">Conclusion</h2>
-<p>You have successfully created an Amazon S3 bucket and are ready to use it for storing and managing your data. Explore further S3 features such as lifecycle policies, object versioning, and cross-region replication to optimize your data storage strategy.</p>
+<p>You have successfully created an Amazon S3 bucket and learned how to make it public to serve static web content or other purposes. Remember to always consider security implications and follow best practices when configuring bucket permissions. Explore further S3 features such as lifecycle policies, object versioning, and cross-region replication to optimize your data storage strategy.</p>
 
 
 
