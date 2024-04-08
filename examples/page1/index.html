@@ -115,11 +115,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -627,32 +623,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../page3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CRUD Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../page4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Image To QR Code
+    Image Processing
   </span>
   
 
@@ -736,7 +711,7 @@
         
   
   <span class="md-ellipsis">
-    Telegram AI ChatBot
+    AI ChatBot
   </span>
   
 
@@ -804,7 +779,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -867,7 +842,7 @@
         
   
   <span class="md-ellipsis">
-    Api Gateway Base URL
+    Locating the Base URL
   </span>
   
 
@@ -938,15 +913,15 @@
   <h1>Introduction</h1>
 
 <p>In this guide, we'll take you on a journey through the development process with Lambda Forge, illustrating the progression of projects through a hands-on, step-by-step approach within a unified codebase. Our methodology employs an incremental build strategy, where each new feature enhances the foundation laid by preceding projects, ensuring a cohesive and scalable architecture without duplicating efforts.</p>
-<p>To keep our focus sharp on AWS resources and Lambda Forge architecture, we'll skip over the detailed discussion of unit and integration tests here. However, for those eager to dive deeper into testing methodologies, comprehensive project code and testing materials are readily available on GitHub. This tutorial also includes an insightful article called <a href="">Mocking AWS Resources for Unit Testing</a> aimed at enriching your understanding.</p>
+<p>To keep our focus sharp on AWS resources and Lambda Forge architecture, we'll skip over the detailed discussion of unit and integration tests here. However, for those eager to dive deeper into testing methodologies, there is an insightful article called <a href="https://docs.lambda-forge.com/articles/page3">Mocking AWS Resources for Unit Testing</a> aimed at enriching your understanding about the subject.</p>
 <p>Our objective is to provide a streamlined and informative learning path, striking a balance between technical detail and approachability to keep you engaged without feeling overwhelmed.</p>
 <p>To enhance usability and the overall user experience, we've implemented a custom domain, <code>https://api.lambda-forge.com</code>, making our URLs succinct and memorable across various deployment stages:</p>
 <ul>
-<li><strong>Dev</strong> - https://api.lambda-forge.com/dev</li>
-<li><strong>Staging</strong> - https://api.lambda-forge.com/staging</li>
-<li><strong>Prod</strong> - https://api.lambda-forge.com</li>
+<li><strong>Dev</strong> - <code>https://api.lambda-forge.com/dev</code></li>
+<li><strong>Staging</strong> - <code>https://api.lambda-forge.com/staging</code></li>
+<li><strong>Prod</strong> - <code>https://api.lambda-forge.com</code></li>
 </ul>
-<p>For those interested in customizing domain names within API Gateway, the <a href="">How to Configure a Custom Domain Name for API Gateway</a> guide offers a detailed tutorial on personalizing your project's URL.</p>
+<p>For those interested in customizing domain names within API Gateway, the <a href="https://docs.lambda-forge.com/articles/page2">How to Configure a Custom Domain Name for API Gateway</a> guide offers a detailed tutorial on personalizing your project's URL.</p>
 <p>Let's kick off by setting up our project:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forge project lambda-forge-examples --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --bucket &quot;$S3-BUCKET&quot;
 </code></pre></div>

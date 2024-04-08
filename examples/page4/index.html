@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../page3/">
+        <link rel="prev" href="../page2/">
       
       
         <link rel="next" href="../page5/">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Image To QR Code - Lambda Forge</title>
+        <title>Image Processing - Lambda Forge</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#transforming-an-image-into-a-qr-code-leveraging-aws-s3-and-ses-for-efficient-processing" class="md-skip">
+        <a href="#image-processing-with-aws-s3-secrets-manager-and-smtp-email-delivery" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Image To QR Code
+              Image Processing
             
           </span>
         </div>
@@ -120,11 +120,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Modo noturno"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Modo noturno" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
-      </label>
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -621,27 +617,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../page3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CRUD Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -654,15 +629,96 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Image Processing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Image To QR Code
+    Image Processing
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-s3-buckets-for-each-deployment-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring S3 Buckets for Each Deployment Stage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring S3 Buckets for Each Deployment Stage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incorporating-s3-into-the-service-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incorporating S3 Into the Service Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-external-libraries-as-lambda-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using External Libraries as Lambda Layers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resize
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watermark
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -743,7 +799,7 @@
         
   
   <span class="md-ellipsis">
-    Telegram AI ChatBot
+    AI ChatBot
   </span>
   
 
@@ -811,7 +867,7 @@
         
   
   <span class="md-ellipsis">
-    Creating a S3 Bucket
+    Creating S3 Buckets
   </span>
   
 
@@ -874,7 +930,7 @@
         
   
   <span class="md-ellipsis">
-    Api Gateway Base URL
+    Locating the Base URL
   </span>
   
 
@@ -931,6 +987,65 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-s3-buckets-for-each-deployment-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring S3 Buckets for Each Deployment Stage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring S3 Buckets for Each Deployment Stage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incorporating-s3-into-the-service-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incorporating S3 Into the Service Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-external-libraries-as-lambda-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using External Libraries as Lambda Layers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resize
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watermark
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -944,8 +1059,323 @@
                   
 
 
-<h1 id="transforming-an-image-into-a-qr-code-leveraging-aws-s3-and-ses-for-efficient-processing">Transforming an Image into a QR Code: Leveraging AWS S3 and SES for Efficient Processing</h1>
+<h1 id="image-processing-with-aws-s3-secrets-manager-and-smtp-email-delivery">Image Processing with AWS S3, Secrets Manager and SMTP Email Delivery</h1>
+<p>In this section, we'll delve into the creation of four distinct projects centered around image processing. These projects include: <code>Image Resizing</code>, <code>Watermarking</code>, <code>Color Filters</code>, and <code>Converting an Image into a QR Code</code>. Upon user submission of a request, the image undergoes processing. Once processed, the file is saved on Amazon S3 and promptly dispatched via email, allowing users to conveniently access the results.</p>
+<h2 id="configuring-s3-buckets-for-each-deployment-stage">Configuring S3 Buckets for Each Deployment Stage</h2>
+<p>Let's establish three distinct buckets, each dedicated to a specific stage: <code>Dev-Lambda-Forge-Images</code>, <code>Staging-Lambda-Forge-Images</code> and <code>Prod-Lambda-Forge-Images</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Keep in mind that your bucket name must be unique across all AWS regions. Therefore, you'll need to select distinct names for your project.</p>
+</div>
+
+<p>Now place the arns on your <code>cdk.json</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-51" name="__codelineno-0-51"></a>   <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com/dev&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-57" name="__codelineno-0-57"></a>      <span class="p">}</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="p">},</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="s2">&quot;staging&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com/staging&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-65" name="__codelineno-0-65"></a>      <span class="p">}</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>    <span class="p">},</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="s2">&quot;prod&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-73" name="__codelineno-0-73"></a>      <span class="p">}</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="incorporating-s3-into-the-service-class">Incorporating S3 Into the Service Class</h3>
+<p>The next step in improving our application involves integrating the S3 service into our service layer, facilitating direct communication with S3 buckets. To achieve this, execute the following command:</p>
+<p><code>forge service s3</code></p>
+<p>This command generates a new service file named s3.py within the infra/services directory, as illustrated below:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>infra
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── services
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    ├── __init__.py
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    ├── api_gateway.py
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    ├── aws_lambda.py
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── dynamo_db.py
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── layers.py
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    └── s3.py
+</code></pre></div>
+<p>Below showcases the updated structure of our Service class, now incorporating the S3 service, indicating the successful integration:</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">infra.services.s3</span> <span class="kn">import</span> <span class="n">S3</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">infra.services.dynamo_db</span> <span class="kn">import</span> <span class="n">DynamoDB</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">from</span> <span class="nn">infra.services.layers</span> <span class="kn">import</span> <span class="n">Layers</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">Layers</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dynamo_db</span> <span class="o">=</span> <span class="n">DynamoDB</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">s3</span> <span class="o">=</span> <span class="n">S3</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Here is the newly established S3 class:</p>
+<div class="highlight"><span class="filename">infra/services/s3</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_s3</span> <span class="k">as</span> <span class="n">s3</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_s3_notifications</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">class</span> <span class="nc">S3</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="c1"># self.s3 = s3.Bucket.from_bucket_arn(</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="c1">#     scope,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="c1">#     &quot;S3&quot;,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="c1">#     bucket_arn=context.resources[&quot;arns&quot;][&quot;s3_arn&quot;],</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="c1"># )</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="o">...</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="k">def</span> <span class="nf">create_trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">stages</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="k">if</span> <span class="n">stages</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">stage</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="k">return</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">notifications</span> <span class="o">=</span> <span class="n">aws_s3_notifications</span><span class="o">.</span><span class="n">LambdaDestination</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="n">bucket</span><span class="o">.</span><span class="n">add_event_notification</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">EventType</span><span class="o">.</span><span class="n">OBJECT_CREATED</span><span class="p">,</span> <span class="n">notifications</span><span class="p">)</span>
+</code></pre></div>
+<p>As seen, Forge has created the class with a helper method to streamline the creation of a trigger between a bucket and a lambda function.</p>
+<p>Let's update the class variables to directly reference our recently created bucket.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/s3.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="k">class</span> <span class="nc">S3</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">images_bucket</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="o">.</span><span class="n">from_bucket_arn</span><span class="p">(</span>
+</span><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="hll">            <span class="s2">&quot;ImagesBucket&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="hll">            <span class="n">bucket_arn</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;images_bucket&quot;</span><span class="p">],</span>
+</span><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="hll">        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Excellent! This approach configures our framework to utilize each ARN on its designated stage effectively.</p>
+<h2 id="using-external-libraries-as-lambda-layers">Using External Libraries as Lambda Layers</h2>
+<p>For image processing, we'll utilize the Pillow library, widely used for working with images, and the requests library to download content from user-provided URLs. Public ARNs for both libraries are available <a href="https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json">here</a>.</p>
+<p>The ARN we require is listed below:</p>
+<ul>
+<li>Pillow: <code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1</code></li>
+<li>Requests: <code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19</code></li>
+</ul>
+<p>Now, let's update the Layers class to include the Pillow layer as one of its variables.</p>
+<div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">pillow_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+</span><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;PillowLayer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="hll">        <span class="p">)</span>
+</span><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+</span><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="hll">        <span class="p">)</span>
+</span></code></pre></div>
+<p>It's essential to include the both libraries in our <code>requirements.txt</code> file to ensure it's installed when deploying our application.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">requirements.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-15" name="__codelineno-6-15"></a>pillow==10.3.0
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>requests==2.28.1
+</code></pre></div></td></tr></table></div>
+<h2 id="resize">Resize</h2>
+<p>This function will be designed to accept three parameters from the user: <code>url</code>, denoting a URL leading to an image; <code>email</code>, specifying the recipient email to which we'll be sending the file as a response; and <code>dimensions</code>, indicating the desired size to which the user wishes to resize the image.</p>
+<p>Let's dive into building this functionality.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>forge function resize --method &quot;POST&quot; --description &quot;Resizes an image and stores it on S3&quot; --belongs-to &quot;images&quot; --public --no-tests --endpoint &quot;images/resize&quot;
+</code></pre></div>
+<p>Upon executing this command, the following structure is generated.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>functions
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>└── images
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ├── resize
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    │   ├── __init__.py
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    │   ├── config.py
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    │   └── main.py
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    └── utils
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        └── __init__.py
+</code></pre></div>
+<p>Let's them create the resize funcionality.</p>
+<div class="highlight"><span class="filename">functions/images/resize/main.py</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">hashlib</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">import</span> <span class="nn">uuid</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kn">import</span> <span class="nn">requests</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    <span class="n">dimensions</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>    <span class="c1"># Parse the input event to get the URL and the email body</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>    <span class="n">email</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>    <span class="n">dimensions</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dimensions&quot;</span><span class="p">,</span> <span class="s2">&quot;100x100&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>    <span class="c1"># if dimension dont follow the correct format, return an error</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>    <span class="k">if</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid dimensions format&quot;</span><span class="p">}</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>    <span class="c1"># Download the image</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>
+<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>
+<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>    <span class="c1"># Resize the image as needed</span>
+<a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>    <span class="n">img_resized</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="p">)))</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>
+<a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>    <span class="c1"># Convert the resized image to bytes</span>
+<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>    <span class="n">img_resized</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">img_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+<a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">img_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>
+<a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>    <span class="c1"># create the file name with a uuid</span>
+<a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>
+<a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>    <span class="c1"># Upload the resized image to S3</span>
+<a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
+<a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
+<a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
+<a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">img_byte_arr</span><span class="p">,</span>
+<a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">},</span>
+<a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>    <span class="p">)</span>
+<a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a>
+<a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Image resized and uploaded successfully&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>This Lambda function retrieves an image from a given URL, resizes it based on specified dimensions, and uploads the resized image to an S3 bucket while attaching metadata including the original URL and recipient email.</p>
+<p>Now, let's proceed with the configuration.</p>
+<div class="highlight"><span class="filename">functions/images/resize/config.py</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span> <span class="nc">ResizeConfig</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Resize&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/image&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Resizes an image and stores it on S3&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;resize&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>            <span class="p">},</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        <span class="p">)</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/images/resize&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="watermark">Watermark</h2>
 <p>Coming soon...</p>
+<!--
+Create a bucket per stage
+
+Use the public Pillow layer
+
+self.pillow_layer = \_lambda.LayerVersion.from_layer_version_arn(
+scope,
+id="PillowLayer",
+layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1",
+)
+
+Add pillow pillow==10.3.0 to requirements.txt
+
+## Resize
+
+forge function resize --method "POST" --description "Resizes an image and stores it on S3" --belongs-to "images" --public --no-tests --endpoint "images/resize"
+
+## Watermark
+
+forge function watermark --method "POST" --description "Create watermark to the image" --belongs-to "image" --no-tests --public --endpoint "images/resize"
+
+## colorize
+
+forge function colorize --method "POST" --description "Change the colors of the image" --belongs-to "image" --no-tests --public --endpoint "images/resize"
+
+## image to qrcode
+
+We will need to upload the qrcode library ourselves as it doesnt have a public one. link to article on how to do that!
+
+forge function img_to_qrcode --method "POST" --description "Turns image into qr code" --belongs-to "image" --no-tests --public --endpoint "images/resize"
+
+## secrets manager
+
+Configure secrets manager, with a secret with email, password. secrets-manager name: mailer
+
+Create an app password. (Point to article teaching how create an app password)
+
+## mailer
+
+forge function mailer --description "Sends an email when an image enters the bucket" --belongs-to "images" --no-api --no-tests
+
+Mention the approach where we send the env variables as plain texts froms ecrets manager.
+
+Exaplin this is unsafe because exposes the credentiais on the the aws lambda console. a safer way would be to retrieve the values it self inside the function when its running.
+
+But also explain this is a piece of code commonly used. To several lambda functions, why not create a layer to make that smoother ?
+
+Create a simple layer called sm_utils to retrieve the code based on the secret name. -->
 
 
 
