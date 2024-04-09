@@ -20,7 +20,7 @@
     
     
       
-        <title>Image Processing - Lambda Forge</title>
+        <title>Image to QR Code - Lambda Forge</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#image-processing-with-aws-s3-secrets-manager-and-smtp-email-delivery" class="md-skip">
+        <a href="#converting-image-to-qr-code-with-aws-s3-secrets-manager-and-smtp-email-delivery" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Image Processing
+              Image to QR Code
             
           </span>
         </div>
@@ -633,7 +633,7 @@
           
   
   <span class="md-ellipsis">
-    Image Processing
+    Image to QR Code
   </span>
   
 
@@ -644,7 +644,7 @@
         
   
   <span class="md-ellipsis">
-    Image Processing
+    Image to QR Code
   </span>
   
 
@@ -693,24 +693,6 @@
   <a href="#using-external-libraries-as-lambda-layers" class="md-nav__link">
     <span class="md-ellipsis">
       Using External Libraries as Lambda Layers
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#watermark" class="md-nav__link">
-    <span class="md-ellipsis">
-      Watermark
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-filter" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Filter
     </span>
   </a>
   
@@ -1066,24 +1048,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#watermark" class="md-nav__link">
-    <span class="md-ellipsis">
-      Watermark
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-filter" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Filter
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#image-to-qr-code" class="md-nav__link">
     <span class="md-ellipsis">
       Image to QR Code
@@ -1116,8 +1080,8 @@
                   
 
 
-<h1 id="image-processing-with-aws-s3-secrets-manager-and-smtp-email-delivery">Image Processing with AWS S3, Secrets Manager and SMTP Email Delivery</h1>
-<p>In this section, we'll delve into the creation of three distinct projects centered around image processing. These projects include: <code>Watermarking</code>, <code>Color Filters</code>, and <code>Converting an Image into a QR Code</code>. Upon user submission of a request, the image undergoes processing. Once processed, the file is saved on Amazon S3 and promptly dispatched via email, allowing users to conveniently access the results.</p>
+<h1 id="converting-image-to-qr-code-with-aws-s3-secrets-manager-and-smtp-email-delivery">Converting Image to QR Code with AWS S3, Secrets Manager and SMTP Email Delivery</h1>
+<p>In this part, we're going to cover how to make a function that turns images uploaded by users into QR codes. When a user sends a request, the image gets processed, saved on Amazon S3, and then sent to them via email so they can easily check out the results.</p>
 <h2 id="configuring-s3-buckets-for-each-deployment-stage">Configuring S3 Buckets for Each Deployment Stage</h2>
 <p>Let's establish three distinct buckets, each dedicated to a specific stage: <code>Dev-Lambda-Forge-Images</code>, <code>Staging-Lambda-Forge-Images</code> and <code>Prod-Lambda-Forge-Images</code>.</p>
 <div class="admonition note">
@@ -1245,13 +1209,13 @@
 </span></code></pre></div></td></tr></table></div>
 <p>Excellent! This approach configures our framework to utilize each ARN on its designated stage effectively.</p>
 <h2 id="using-external-libraries-as-lambda-layers">Using External Libraries as Lambda Layers</h2>
-<p>For image processing, we'll utilize the Pillow library, widely used for working with images, and the requests library to download content from user-provided URLs. Public ARNs for both libraries are available <a href="https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json">here</a>.</p>
+<p>We are going to use the requests library to download content from user-provided URLs. Public ARNs for layers are available <a href="https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json">here</a>.</p>
 <p>The ARN we require is listed below:</p>
 <ul>
-<li>Pillow: <code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1</code></li>
 <li>Requests: <code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19</code></li>
 </ul>
-<p>Now, let's update the Layers class to include the Pillow layer as one of its variables.</p>
+<p>To convert the image into a qr code, we are also going to use an external library called <code>qrcode</code>. Unlike the readily available AWS layer for Requests, we're dealing with a library for which AWS doesn't provide a public layer.</p>
+<p>To seamlessly incorporate this library, refer to the article <a href="">Deploying an External Library to AWS Lambda as a Layer</a> for guidance on deploying the qrcode library. Once you obtain the ARN of your deployed Lambda layer, simply add it to the Layers class.</p>
 <div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">Path</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
@@ -1259,39 +1223,39 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">pillow_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
 </span><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;PillowLayer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
 </span><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="hll">        <span class="p">)</span>
 </span><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">qrcode_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
 </span><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;QrCodeLayer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;$QR-CODE-LAYER&quot;</span><span class="p">,</span>
 </span><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div>
-<p>It's essential to include the both libraries in our <code>requirements.txt</code> file to ensure it's installed when deploying our application.</p>
+<p>It's essential to include both libraries in our <code>requirements.txt</code> file to ensure they are installed when deploying our application.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">requirements.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-15" name="__codelineno-6-15"></a>pillow==10.3.0
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a>requests==2.28.1
+<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-15" name="__codelineno-6-15"></a>requests==2.28.1
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>qrcode==7.4.2
 </code></pre></div></td></tr></table></div>
-<h2 id="watermark">Watermark</h2>
-<p>This function will be designed to accept three parameters from the user: <code>url</code>, denoting a URL leading to an image; <code>email</code>, specifying the recipient email to which we'll be sending the file as a response; and <code>text</code>, indicating the desired text to which the user wishes to add as a watermark.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>forge function watermark --method &quot;POST&quot; --description &quot;Create watermarks in the image&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/watermark&quot;
+<h2 id="image-to-qr-code">Image to QR Code</h2>
+<p>With our layers now set up, it's time to create our new function.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>forge function qrcode --method &quot;POST&quot; --description &quot;Converts an image into a qr code&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/qrcode&quot;
 </code></pre></div>
-<p>Below is the revised directory structure:</p>
+<p>We now have the following directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>functions
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>└── images
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ├── utils
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    │   └── __init__.py
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    └── watermark
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        ├── __init__.py
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        ├── config.py
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        └── main.py
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ├── qrcode
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    │   ├── __init__.py
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    │   ├── config.py
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    │   └── main.py
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    └── utils
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        └── __init__.py
 </code></pre></div>
-<p>To create the watermark feature, we've developed:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/images/watermark/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<p>This function will receive from the user a <code>url</code> to convert the image parameter and a <code>email</code> parameter to send the email notification. Let's proceed with its implementation.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/images/img_to_qrcode/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
@@ -1342,396 +1306,89 @@
 <span class="normal"><a href="#__codelineno-9-49">49</a></span>
 <span class="normal"><a href="#__codelineno-9-50">50</a></span>
 <span class="normal"><a href="#__codelineno-9-51">51</a></span>
-<span class="normal"><a href="#__codelineno-9-52">52</a></span>
-<span class="normal"><a href="#__codelineno-9-53">53</a></span>
-<span class="normal"><a href="#__codelineno-9-54">54</a></span>
-<span class="normal"><a href="#__codelineno-9-55">55</a></span>
-<span class="normal"><a href="#__codelineno-9-56">56</a></span>
-<span class="normal"><a href="#__codelineno-9-57">57</a></span>
-<span class="normal"><a href="#__codelineno-9-58">58</a></span>
-<span class="normal"><a href="#__codelineno-9-59">59</a></span>
-<span class="normal"><a href="#__codelineno-9-60">60</a></span>
-<span class="normal"><a href="#__codelineno-9-61">61</a></span>
-<span class="normal"><a href="#__codelineno-9-62">62</a></span>
-<span class="normal"><a href="#__codelineno-9-63">63</a></span>
-<span class="normal"><a href="#__codelineno-9-64">64</a></span>
-<span class="normal"><a href="#__codelineno-9-65">65</a></span>
-<span class="normal"><a href="#__codelineno-9-66">66</a></span>
-<span class="normal"><a href="#__codelineno-9-67">67</a></span>
-<span class="normal"><a href="#__codelineno-9-68">68</a></span>
-<span class="normal"><a href="#__codelineno-9-69">69</a></span>
-<span class="normal"><a href="#__codelineno-9-70">70</a></span>
-<span class="normal"><a href="#__codelineno-9-71">71</a></span>
-<span class="normal"><a href="#__codelineno-9-72">72</a></span>
-<span class="normal"><a href="#__codelineno-9-73">73</a></span>
-<span class="normal"><a href="#__codelineno-9-74">74</a></span>
-<span class="normal"><a href="#__codelineno-9-75">75</a></span>
-<span class="normal"><a href="#__codelineno-9-76">76</a></span>
-<span class="normal"><a href="#__codelineno-9-77">77</a></span>
-<span class="normal"><a href="#__codelineno-9-78">78</a></span>
-<span class="normal"><a href="#__codelineno-9-79">79</a></span>
-<span class="normal"><a href="#__codelineno-9-80">80</a></span>
-<span class="normal"><a href="#__codelineno-9-81">81</a></span>
-<span class="normal"><a href="#__codelineno-9-82">82</a></span>
-<span class="normal"><a href="#__codelineno-9-83">83</a></span>
-<span class="normal"><a href="#__codelineno-9-84">84</a></span>
-<span class="normal"><a href="#__codelineno-9-85">85</a></span>
-<span class="normal"><a href="#__codelineno-9-86">86</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<span class="normal"><a href="#__codelineno-9-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">json</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">os</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kn">import</span> <span class="nn">uuid</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="kn">import</span> <span class="nn">qrcode</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>
 <a id="__codelineno-9-10" name="__codelineno-9-10"></a>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a>    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a>    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17"></a>
-<a id="__codelineno-9-18" name="__codelineno-9-18"></a>
-<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22"></a>
-<a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="c1"># Calculate the textsize based on the font dimensions</span>
-<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="k">def</span> <span class="nf">textsize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="p">):</span>
-<a id="__codelineno-9-25" name="__codelineno-9-25"></a>    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
-<a id="__codelineno-9-27" name="__codelineno-9-27"></a>    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">textbbox</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
-<a id="__codelineno-9-28" name="__codelineno-9-28"></a>    <span class="k">return</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>
-<a id="__codelineno-9-29" name="__codelineno-9-29"></a>
-<a id="__codelineno-9-30" name="__codelineno-9-30"></a>
-<a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<a id="__codelineno-9-32" name="__codelineno-9-32"></a>
-<a id="__codelineno-9-33" name="__codelineno-9-33"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
-<a id="__codelineno-9-34" name="__codelineno-9-34"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-35" name="__codelineno-9-35"></a>
-<a id="__codelineno-9-36" name="__codelineno-9-36"></a>    <span class="c1"># Parse the input event to get the URL, email body, and watermark text</span>
-<a id="__codelineno-9-37" name="__codelineno-9-37"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
-<a id="__codelineno-9-38" name="__codelineno-9-38"></a>
-<a id="__codelineno-9-39" name="__codelineno-9-39"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-40" name="__codelineno-9-40"></a>    <span class="n">email</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-41" name="__codelineno-9-41"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;Lambda Forge&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="c1"># Parse the input event to get the URL of the image and the S3 bucket name</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>    <span class="c1"># Download the image</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a>    <span class="n">image_bytes</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a>    <span class="c1"># Generate QR code from the image</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a>    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">()</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a>    <span class="c1"># Create an image from the QR code</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a>    <span class="n">qr_image</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a>
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a>    <span class="c1"># Convert the QR code image to bytes</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a>    <span class="n">qr_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">qr_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">qr_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a>
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a>    <span class="c1"># Create the file name with a uuid</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39"></a>
+<a id="__codelineno-9-40" name="__codelineno-9-40"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
 <a id="__codelineno-9-42" name="__codelineno-9-42"></a>
-<a id="__codelineno-9-43" name="__codelineno-9-43"></a>    <span class="c1"># Download the image</span>
-<a id="__codelineno-9-44" name="__codelineno-9-44"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-9-45" name="__codelineno-9-45"></a>    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
-<a id="__codelineno-9-46" name="__codelineno-9-46"></a>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a>    <span class="c1"># Add watermark to the image</span>
-<a id="__codelineno-9-48" name="__codelineno-9-48"></a>    <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
-<a id="__codelineno-9-49" name="__codelineno-9-49"></a>        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<a id="__codelineno-9-50" name="__codelineno-9-50"></a>        <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">load_default</span><span class="p">()</span>  <span class="c1"># Use default font</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a>        <span class="n">text_width</span><span class="p">,</span> <span class="n">text_height</span> <span class="o">=</span> <span class="n">textsize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="p">)</span>
-<a id="__codelineno-9-52" name="__codelineno-9-52"></a>
-<a id="__codelineno-9-53" name="__codelineno-9-53"></a>        <span class="c1"># Define color for the watermark text</span>
-<a id="__codelineno-9-54" name="__codelineno-9-54"></a>        <span class="n">watermark_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Adjust RGB values for a greyish color</span>
-<a id="__codelineno-9-55" name="__codelineno-9-55"></a>
-<a id="__codelineno-9-56" name="__codelineno-9-56"></a>        <span class="c1"># Calculate the number of rows and columns needed to cover the entire image</span>
-<a id="__codelineno-9-57" name="__codelineno-9-57"></a>        <span class="n">num_cols</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="p">(</span><span class="n">text_width</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Adjust 10 for spacing between watermarks</span>
-<a id="__codelineno-9-58" name="__codelineno-9-58"></a>        <span class="n">num_rows</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="p">(</span><span class="n">text_height</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Adjust 10 for spacing between watermarks</span>
-<a id="__codelineno-9-59" name="__codelineno-9-59"></a>
-<a id="__codelineno-9-60" name="__codelineno-9-60"></a>        <span class="c1"># Iterate to add watermark text multiple times</span>
-<a id="__codelineno-9-61" name="__codelineno-9-61"></a>        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rows</span><span class="p">):</span>
-<a id="__codelineno-9-62" name="__codelineno-9-62"></a>            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
-<a id="__codelineno-9-63" name="__codelineno-9-63"></a>                <span class="n">x</span> <span class="o">=</span> <span class="n">col</span> <span class="o">*</span> <span class="p">(</span><span class="n">text_width</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Adjust 10 for spacing between watermarks</span>
-<a id="__codelineno-9-64" name="__codelineno-9-64"></a>                <span class="n">y</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="p">(</span><span class="n">text_height</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Adjust 10 for spacing between watermarks</span>
-<a id="__codelineno-9-65" name="__codelineno-9-65"></a>                <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">watermark_color</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
-<a id="__codelineno-9-66" name="__codelineno-9-66"></a>
-<a id="__codelineno-9-67" name="__codelineno-9-67"></a>    <span class="c1"># Convert the image to bytes</span>
-<a id="__codelineno-9-68" name="__codelineno-9-68"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-<a id="__codelineno-9-69" name="__codelineno-9-69"></a>    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">img_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-<a id="__codelineno-9-70" name="__codelineno-9-70"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">img_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-<a id="__codelineno-9-71" name="__codelineno-9-71"></a>
-<a id="__codelineno-9-72" name="__codelineno-9-72"></a>    <span class="c1"># Initialize the S3 client</span>
-<a id="__codelineno-9-73" name="__codelineno-9-73"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-74" name="__codelineno-9-74"></a>
-<a id="__codelineno-9-75" name="__codelineno-9-75"></a>    <span class="c1"># Create the file name with a uuid</span>
-<a id="__codelineno-9-76" name="__codelineno-9-76"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-<a id="__codelineno-9-77" name="__codelineno-9-77"></a>
-<a id="__codelineno-9-78" name="__codelineno-9-78"></a>    <span class="c1"># Upload the image with watermark to S3</span>
-<a id="__codelineno-9-79" name="__codelineno-9-79"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
-<a id="__codelineno-9-80" name="__codelineno-9-80"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-<a id="__codelineno-9-81" name="__codelineno-9-81"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
-<a id="__codelineno-9-82" name="__codelineno-9-82"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">img_byte_arr</span><span class="p">,</span>
-<a id="__codelineno-9-83" name="__codelineno-9-83"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">},</span>
-<a id="__codelineno-9-84" name="__codelineno-9-84"></a>    <span class="p">)</span>
-<a id="__codelineno-9-85" name="__codelineno-9-85"></a>
-<a id="__codelineno-9-86" name="__codelineno-9-86"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Image uploaded successfully with watermark&quot;</span><span class="p">}</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43"></a>    <span class="c1"># Upload the QR code image to S3</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">qr_byte_arr</span><span class="p">,</span>
+<a id="__codelineno-9-48" name="__codelineno-9-48"></a>        <span class="n">ContentType</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)},</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50"></a>    <span class="p">)</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a>
+<a id="__codelineno-9-52" name="__codelineno-9-52"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;QR code generated and uploaded successfully&quot;</span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
     <p class="admonition-title">Note</p>
-<p>Note that for this and the following functions, we're storing the file with both the URL and the email as metadata on the S3 bucket, specifically on line 83. This detail will be pivotal for retrieving the emails later to send them to the recipients.</p>
+<p>It's important to note that we're storing the file with both the URL and the email as metadata on the S3 bucket, specifically on line 49. This detail will be crucial for retrieving the emails later to send them to the recipients.
+</p>
 </div>
-<p>Now, Let's configure it.</p>
-<div class="highlight"><span class="filename">functions/images/watermark/config.py</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+
+<p>Now, it's configuration.</p>
+<div class="highlight"><span class="filename">functions/images/qrcode/config.py</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span> <span class="nc">WatermarkConfig</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span> <span class="nc">QrcodeConfig</span><span class="p">:</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Watermark&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Qrcode&quot;</span><span class="p">,</span>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/image&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create watermarks in the image&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;watermark&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">pillow_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">],</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Turns image into qr code&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">qrcode_layer</span><span class="p">],</span>
 </span><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
 </span><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="hll">                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
 </span><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="hll">            <span class="p">},</span>
 </span><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="p">)</span>
 <a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/images/watermark&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/image/qrcode&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
 <a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="color-filter">Color Filter</h2>
-<p>Similar to the watermark, this function will take an <code>email</code> and <code>url</code> as parameters. Additionally, it will receive a parameter named <code>color_filter</code>, indicating the filter to apply to the image.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge function color_filter --method &quot;POST&quot; --description &quot;Apply color filters to the image&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/color-filter&quot;
-</code></pre></div>
-<p>Here is the revised folder structure for the images folder.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>functions
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>└── images
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    ├── color_filter
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    │   ├── __init__.py
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    │   ├── config.py
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    │   └── main.py
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    ├── utils
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    │   └── __init__.py
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    └── watermark
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        ├── __init__.py
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        ├── config.py
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        └── main.py
-</code></pre></div>
-<p>Let's now proceed with the implementation of the color filters functionality.</p>
-<div class="highlight"><span class="filename">functions/images/color_filter/main.py</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kn">import</span> <span class="nn">uuid</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="kn">import</span> <span class="nn">boto3</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span><span class="p">,</span> <span class="n">ImageOps</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="n">color_filter</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;grayscale&quot;</span><span class="p">,</span> <span class="s2">&quot;invert&quot;</span><span class="p">,</span> <span class="s2">&quot;solarize&quot;</span><span class="p">,</span> <span class="s2">&quot;equalize&quot;</span><span class="p">,</span> <span class="s2">&quot;contour&quot;</span><span class="p">,</span> <span class="s2">&quot;emboss&quot;</span><span class="p">]</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
-<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
-<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="nd">@dataclass</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
-<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
-<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
-<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>    <span class="c1"># Parse the input event to get the URL, email body, and color filter</span>
-<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
-<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>
-<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>    <span class="n">email</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>    <span class="n">color_filter</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;color_filter&quot;</span><span class="p">,</span> <span class="s2">&quot;grayscale&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>
-<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>    <span class="c1"># Download the image</span>
-<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
-<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>
-<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>    <span class="c1"># Apply color transformation</span>
-<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>    <span class="k">if</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;grayscale&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">grayscale</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>    <span class="k">elif</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;invert&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">))</span>
-<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>    <span class="k">elif</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;solarize&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">solarize</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>    <span class="k">elif</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;equalize&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">equalize</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">))</span>
-<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>    <span class="k">elif</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;contour&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">CONTOUR</span><span class="p">)</span>
-<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>    <span class="k">elif</span> <span class="n">color_filter</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;emboss&quot;</span><span class="p">:</span>
-<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>        <span class="n">new_img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">EMBOSS</span><span class="p">)</span>
-<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>        <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>            <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-<a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Unsupported color filter: </span><span class="si">{</span><span class="n">color_filter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>        <span class="p">}</span>
-<a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a>
-<a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a>    <span class="c1"># Convert the image to bytes</span>
-<a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-<a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>    <span class="n">new_img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">img_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-<a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a>    <span class="n">img_byte_arr</span> <span class="o">=</span> <span class="n">img_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-<a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a>
-<a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
-<a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a>
-<a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a>    <span class="c1"># Create the file name with a uuid</span>
-<a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-<a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a>
-<a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a>    <span class="c1"># Initialize the S3 client</span>
-<a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a>
-<a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a>    <span class="c1"># Upload the transformed image to S3</span>
-<a id="__codelineno-13-71" name="__codelineno-13-71" href="#__codelineno-13-71"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
-<a id="__codelineno-13-72" name="__codelineno-13-72" href="#__codelineno-13-72"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-<a id="__codelineno-13-73" name="__codelineno-13-73" href="#__codelineno-13-73"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
-<a id="__codelineno-13-74" name="__codelineno-13-74" href="#__codelineno-13-74"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">img_byte_arr</span><span class="p">,</span>
-<a id="__codelineno-13-75" name="__codelineno-13-75" href="#__codelineno-13-75"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">},</span>
-<a id="__codelineno-13-76" name="__codelineno-13-76" href="#__codelineno-13-76"></a>    <span class="p">)</span>
-<a id="__codelineno-13-77" name="__codelineno-13-77" href="#__codelineno-13-77"></a>
-<a id="__codelineno-13-78" name="__codelineno-13-78" href="#__codelineno-13-78"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Image transformed and uploaded successfully&quot;</span><span class="p">}</span>
-</code></pre></div>
-<p>And now, let's configure it...</p>
-<div class="highlight"><span class="filename">functions/images/color_filter/config.py</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">class</span> <span class="nc">ColorFilterConfig</span><span class="p">:</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ColorFilter&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/images&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Apply color filters to the image&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;color_filter&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">pillow_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">],</span>
-</span><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
-</span><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="hll">                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
-</span><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="hll">            <span class="p">},</span>
-</span><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>        <span class="p">)</span>
-<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
-<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/images/color-filter&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>
-<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-</span></code></pre></div>
-<h2 id="image-to-qr-code">Image to QR Code</h2>
-<p>To convert the image to a qr code, we are going to make use of an external library called <code>qrcode</code>. Unlike the readily available AWS layers for Pillow and Requests, we're dealing with a library for which AWS doesn't provide a public layer.</p>
-<p>To seamlessly incorporate this library, refer to the article <a href="">Deploying an External Library to AWS Lambda as a Layer</a> for guidance on deploying the qrcode library. Once you obtain the ARN of your deployed Lambda layer, simply add it to the Layers class.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/layers.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-14">14</a></span>
-<span class="normal"><a href="#__codelineno-15-15">15</a></span>
-<span class="normal"><a href="#__codelineno-15-16">16</a></span>
-<span class="normal"><a href="#__codelineno-15-17">17</a></span>
-<span class="normal"><a href="#__codelineno-15-18">18</a></span>
-<span class="normal"><a href="#__codelineno-15-19">19</a></span>
-<span class="normal"><a href="#__codelineno-15-20">20</a></span>
-<span class="normal"><a href="#__codelineno-15-21">21</a></span>
-<span class="normal"><a href="#__codelineno-15-22">22</a></span>
-<span class="normal"><a href="#__codelineno-15-23">23</a></span>
-<span class="normal"><a href="#__codelineno-15-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-14" name="__codelineno-15-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15"></a>            <span class="n">scope</span><span class="p">,</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a>            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17"></a>            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a>        <span class="p">)</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19"></a>
-<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">qr_code_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
-</span><a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;QrCodeLayer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;$QR-CODE-LAYER&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="hll">        <span class="p">)</span>
-</span></code></pre></div></td></tr></table></div>
-<p>With our layer now set up, it's time to create our new function.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>forge function qrcode --method &quot;POST&quot; --description &quot;Converts an image into a qr code&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/qrcode&quot;
-</code></pre></div>
-<p>We now have the following directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>functions
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>└── images
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    ├── color_filter
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    │   ├── __init__.py
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    │   ├── config.py
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    │   └── main.py
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    ├── qrcode
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    │   ├── __init__.py
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    │   ├── config.py
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    │   └── main.py
-<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    ├── utils
-<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>    │   └── __init__.py
-<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    └── watermark
-<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>        ├── __init__.py
-<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>        ├── config.py
-<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>        └── main.py
-</code></pre></div>
-<p>Unlike the preceding functions, this particular one doesn't necessitate an additional parameter beyond the <code>url</code> and the recipient <code>email</code>. Let's proceed with its implementation.</p>
-<div class="highlight"><span class="filename">functions/images/img_to_qrcode/main.py</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kn">import</span> <span class="nn">uuid</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="kn">import</span> <span class="nn">boto3</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="kn">import</span> <span class="nn">qrcode</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
-<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>    <span class="c1"># Parse the input event to get the URL of the image and the S3 bucket name</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>
-<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
-<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
-<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>
-<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    <span class="c1"># Download the image</span>
-<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    <span class="n">image_bytes</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>
-<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>    <span class="c1"># Generate QR code from the image</span>
-<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">()</span>
-<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
-<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>
-<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>    <span class="c1"># Create an image from the QR code</span>
-<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>    <span class="n">qr_image</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
-<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>
-<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>    <span class="c1"># Convert the QR code image to bytes</span>
-<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>    <span class="n">qr_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">qr_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
-<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">qr_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>
-<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a>    <span class="c1"># Create the file name with a uuid</span>
-<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>
-<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>    <span class="c1"># Initialize the S3 client</span>
-<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
-<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>
-<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>    <span class="c1"># Upload the QR code image to S3</span>
-<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
-<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
-<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">qr_byte_arr</span><span class="p">,</span>
-<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a>        <span class="n">ContentType</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
-<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)},</span>
-<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>    <span class="p">)</span>
-<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a>
-<a id="__codelineno-18-52" name="__codelineno-18-52" href="#__codelineno-18-52"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;QR code generated and uploaded successfully&quot;</span><span class="p">}</span>
-</code></pre></div>
-<p>Now, it's configuration.</p>
-<div class="highlight"><span class="filename">functions/images/qrcode/config.py</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">class</span> <span class="nc">QrcodeConfig</span><span class="p">:</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Qrcode&quot;</span><span class="p">,</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/image&quot;</span><span class="p">,</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Turns image into qr code&quot;</span><span class="p">,</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">,</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">pillow_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">qr_code_layer</span><span class="p">],</span>
-</span><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
-</span><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="hll">                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
-</span><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="hll">            <span class="p">},</span>
-</span><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>        <span class="p">)</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>
-<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/image/qrcode&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
-<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-</span></code></pre></div>
 <h2 id="mailer">Mailer</h2>
-<p>It's worth noting that in our previous implementations, we deliberately omitted email notifications. This exemplifies one of the advantages of serverless architecture: the ability to completely decouple functions from each other and initiate notifications through events.</p>
+<p>It's worth noting that in our previous implementation, we deliberately omitted email notifications. This exemplifies one of the advantages of serverless architecture: the ability to completely decouple functions from each other and initiate notifications through events.</p>
 <p>This is precisely the approach we're taking with the mailer function. Whenever a file is uploaded to the S3 bucket, an event will be triggered to run this Lambda function. With the assistance of metadata, the mailer Lambda function will be equipped with the necessary information to determine the appropriate email recipients for notifications.</p>
 <p>Coming soon...</p>
 <!--
@@ -1783,9 +1440,9 @@ But also explain this is a piece of code commonly used. To several lambda functi
 
 Create a simple layer called sm_utils to retrieve the code based on the secret name. -->
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>
 </code></pre></div>
 
 
