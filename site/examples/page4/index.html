@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#converting-image-to-qr-code-with-aws-s3-secrets-manager-and-smtp-email-delivery" class="md-skip">
+        <a href="#converting-image-to-qr-code-with-aws-s3-secrets-manager-and-email-notifications" class="md-skip">
           Skip to content
         </a>
       
@@ -666,19 +666,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuring-s3-buckets-for-each-deployment-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuring S3 Buckets for Each Deployment Stage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuring S3 Buckets for Each Deployment Stage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#incorporating-s3-into-the-service-class" class="md-nav__link">
     <span class="md-ellipsis">
       Incorporating S3 Into the Service Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incorporating-secrets-manager-into-the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incorporating Secrets Manager into the Services Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-a-non-public-library-as-lambda-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using a Non-Public Library as Lambda Layer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-the-function-to-convert-image-to-qr-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Function to Convert Image to QR Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-the-mailer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Mailer Function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mitigating-security-risks-in-mailer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mitigating Security Risks in Mailer Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mitigating Security Risks in Mailer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-custom-layer-to-avoid-code-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a Custom Layer to Avoid Code Duplication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refactoring-the-mailer-function-to-use-custom-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refactoring The Mailer Function to Use Custom Layers
     </span>
   </a>
   
@@ -690,27 +744,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-external-libraries-as-lambda-layers" class="md-nav__link">
+  <a href="#deploying-the-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Using External Libraries as Lambda Layers
+      Deploying The Functions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#image-to-qr-code" class="md-nav__link">
+  <a href="#testing-the-image-to-qr-code-conversion" class="md-nav__link">
     <span class="md-ellipsis">
-      Image to QR Code
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mailer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mailer
+      Testing the Image to QR Code Conversion
     </span>
   </a>
   
@@ -1015,19 +1060,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuring-s3-buckets-for-each-deployment-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuring S3 Buckets for Each Deployment Stage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuring S3 Buckets for Each Deployment Stage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#incorporating-s3-into-the-service-class" class="md-nav__link">
     <span class="md-ellipsis">
       Incorporating S3 Into the Service Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incorporating-secrets-manager-into-the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incorporating Secrets Manager into the Services Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-a-non-public-library-as-lambda-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using a Non-Public Library as Lambda Layer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-the-function-to-convert-image-to-qr-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Function to Convert Image to QR Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-the-mailer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing the Mailer Function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mitigating-security-risks-in-mailer-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mitigating Security Risks in Mailer Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mitigating Security Risks in Mailer Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-custom-layer-to-avoid-code-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a Custom Layer to Avoid Code Duplication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refactoring-the-mailer-function-to-use-custom-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refactoring The Mailer Function to Use Custom Layers
     </span>
   </a>
   
@@ -1039,27 +1138,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-external-libraries-as-lambda-layers" class="md-nav__link">
+  <a href="#deploying-the-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Using External Libraries as Lambda Layers
+      Deploying The Functions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#image-to-qr-code" class="md-nav__link">
+  <a href="#testing-the-image-to-qr-code-conversion" class="md-nav__link">
     <span class="md-ellipsis">
-      Image to QR Code
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mailer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mailer
+      Testing the Image to QR Code Conversion
     </span>
   </a>
   
@@ -1080,10 +1170,10 @@
                   
 
 
-<h1 id="converting-image-to-qr-code-with-aws-s3-secrets-manager-and-smtp-email-delivery">Converting Image to QR Code with AWS S3, Secrets Manager and SMTP Email Delivery</h1>
+<h1 id="converting-image-to-qr-code-with-aws-s3-secrets-manager-and-email-notifications">Converting Image to QR Code with AWS S3, Secrets Manager and Email Notifications</h1>
 <p>In this part, we're going to cover how to make a function that turns images uploaded by users into QR codes. When a user sends a request, the image gets processed, saved on Amazon S3, and then sent to them via email so they can easily check out the results.</p>
-<h2 id="configuring-s3-buckets-for-each-deployment-stage">Configuring S3 Buckets for Each Deployment Stage</h2>
-<p>Let's establish three distinct buckets, each dedicated to a specific stage: <code>Dev-Lambda-Forge-Images</code>, <code>Staging-Lambda-Forge-Images</code> and <code>Prod-Lambda-Forge-Images</code>.</p>
+<h2 id="incorporating-s3-into-the-service-class">Incorporating S3 Into the Service Class</h2>
+<p>Let's start creating three distinct buckets, each dedicated to a specific stage: <code>Dev-Lambda-Forge-Images</code>, <code>Staging-Lambda-Forge-Images</code> and <code>Prod-Lambda-Forge-Images</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Keep in mind that your bucket name must be unique across all AWS regions. Therefore, you'll need to select distinct names for your project.</p>
@@ -1110,38 +1200,31 @@
 <span class="normal"><a href="#__codelineno-0-68">68</a></span>
 <span class="normal"><a href="#__codelineno-0-69">69</a></span>
 <span class="normal"><a href="#__codelineno-0-70">70</a></span>
-<span class="normal"><a href="#__codelineno-0-71">71</a></span>
-<span class="normal"><a href="#__codelineno-0-72">72</a></span>
-<span class="normal"><a href="#__codelineno-0-73">73</a></span>
-<span class="normal"><a href="#__codelineno-0-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-51" name="__codelineno-0-51"></a>   <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-51" name="__codelineno-0-51"></a>   <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="p">{</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com/dev&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-IMAGES-BUCKET-ARN&quot;</span>
-</span><a id="__codelineno-0-57" name="__codelineno-0-57"></a>      <span class="p">}</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="p">},</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="s2">&quot;staging&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com/staging&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-IMAGES-BUCKET-ARN&quot;</span>
-</span><a id="__codelineno-0-65" name="__codelineno-0-65"></a>      <span class="p">}</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a>    <span class="p">},</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="s2">&quot;prod&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-71" name="__codelineno-0-71"></a>        <span class="s2">&quot;users_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-USERS-TABLE-ARN&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-IMAGES-BUCKET-ARN&quot;</span>
-</span><a id="__codelineno-0-73" name="__codelineno-0-73"></a>      <span class="p">}</span>
-<a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="p">}</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$DEV-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-56" name="__codelineno-0-56"></a>      <span class="p">}</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="p">},</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="s2">&quot;staging&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com/staging&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$STAGING-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-63" name="__codelineno-0-63"></a>      <span class="p">}</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="p">},</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="s2">&quot;prod&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>      <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.lambda-forge.com&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>      <span class="s2">&quot;arns&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>        <span class="s2">&quot;urls_table&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-URLS-TABLE-ARN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="hll">        <span class="s2">&quot;images_bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;$PROD-IMAGES-BUCKET-ARN&quot;</span>
+</span><a id="__codelineno-0-70" name="__codelineno-0-70"></a>      <span class="p">}</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="incorporating-s3-into-the-service-class">Incorporating S3 Into the Service Class</h3>
-<p>The next step in improving our application involves integrating the S3 service into our service layer, facilitating direct communication with S3 buckets. To achieve this, execute the following command:</p>
+<p>The next step involves integrating the S3 service into our service layer, facilitating direct communication with S3 buckets. To achieve this, execute the following command:</p>
 <p><code>forge service s3</code></p>
-<p>This command generates a new service file named s3.py within the infra/services directory, as illustrated below:</p>
+<p>This command generates a new service file named <code>s3.py</code> within the infra/services directory, as illustrated below:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>infra
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── services
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    ├── __init__.py
@@ -1208,242 +1291,638 @@
 </span><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Excellent! This approach configures our framework to utilize each ARN on its designated stage effectively.</p>
-<h2 id="using-external-libraries-as-lambda-layers">Using External Libraries as Lambda Layers</h2>
-<p>We are going to use the requests library to download content from user-provided URLs. Public ARNs for layers are available <a href="https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json">here</a>.</p>
-<p>The ARN we require is listed below:</p>
-<ul>
-<li>Requests: <code>arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19</code></li>
-</ul>
-<p>To convert the image into a qr code, we are also going to use an external library called <code>qrcode</code>. Unlike the readily available AWS layer for Requests, we're dealing with a library for which AWS doesn't provide a public layer.</p>
-<p>To seamlessly incorporate this library, refer to the article <a href="">Deploying an External Library to AWS Lambda as a Layer</a> for guidance on deploying the qrcode library. Once you obtain the ARN of your deployed Lambda layer, simply add it to the Layers class.</p>
-<div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">Path</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">requests_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
-</span><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;RequestsLayer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="hll">        <span class="p">)</span>
-</span><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">qrcode_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
-</span><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;QrCodeLayer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;$QR-CODE-LAYER&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="hll">        <span class="p">)</span>
-</span></code></pre></div>
-<p>It's essential to include both libraries in our <code>requirements.txt</code> file to ensure they are installed when deploying our application.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">requirements.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-15" name="__codelineno-6-15"></a>requests==2.28.1
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a>qrcode==7.4.2
-</code></pre></div></td></tr></table></div>
-<h2 id="image-to-qr-code">Image to QR Code</h2>
-<p>With our layers now set up, it's time to create our new function.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>forge function qrcode --method &quot;POST&quot; --description &quot;Converts an image into a qr code&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/qrcode&quot;
+<h2 id="incorporating-secrets-manager-into-the-services-class">Incorporating Secrets Manager into the Services Class</h2>
+<p>Since we are dealing with emails, we must use usernames and passowrd. Hardcoding email credentials directly into the code exposes them to potential breaches. To mitigate this risk, we'll implement a more secure approach using AWS Secrets Manager, a service designed to safeguard sensitive information such as secret keys.</p>
+<p>To create a new secrets manager service, simply type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge service secrets_manager
 </code></pre></div>
-<p>We now have the following directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>functions
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>└── images
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ├── qrcode
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    │   ├── __init__.py
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    │   ├── config.py
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    │   └── main.py
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    └── utils
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        └── __init__.py
+<p>Similar to the S3 class, Forge will generate the new service file within the <code>infra/services</code> directory and seamlessly integrate it into the Services class.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>infra
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>├── services
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    ├── __init__.py
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    ├── api_gateway.py
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    ├── aws_lambda.py
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    ├── dynamo_db.py
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    ├── layers.py
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    ├── s3.py
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    └── secrets_manager.py
 </code></pre></div>
-<p>This function will receive from the user a <code>url</code> to convert the image parameter and a <code>email</code> parameter to send the email notification. Let's proceed with its implementation.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/images/img_to_qrcode/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span>
-<span class="normal"><a href="#__codelineno-9-12">12</a></span>
-<span class="normal"><a href="#__codelineno-9-13">13</a></span>
-<span class="normal"><a href="#__codelineno-9-14">14</a></span>
-<span class="normal"><a href="#__codelineno-9-15">15</a></span>
-<span class="normal"><a href="#__codelineno-9-16">16</a></span>
-<span class="normal"><a href="#__codelineno-9-17">17</a></span>
-<span class="normal"><a href="#__codelineno-9-18">18</a></span>
-<span class="normal"><a href="#__codelineno-9-19">19</a></span>
-<span class="normal"><a href="#__codelineno-9-20">20</a></span>
-<span class="normal"><a href="#__codelineno-9-21">21</a></span>
-<span class="normal"><a href="#__codelineno-9-22">22</a></span>
-<span class="normal"><a href="#__codelineno-9-23">23</a></span>
-<span class="normal"><a href="#__codelineno-9-24">24</a></span>
-<span class="normal"><a href="#__codelineno-9-25">25</a></span>
-<span class="normal"><a href="#__codelineno-9-26">26</a></span>
-<span class="normal"><a href="#__codelineno-9-27">27</a></span>
-<span class="normal"><a href="#__codelineno-9-28">28</a></span>
-<span class="normal"><a href="#__codelineno-9-29">29</a></span>
-<span class="normal"><a href="#__codelineno-9-30">30</a></span>
-<span class="normal"><a href="#__codelineno-9-31">31</a></span>
-<span class="normal"><a href="#__codelineno-9-32">32</a></span>
-<span class="normal"><a href="#__codelineno-9-33">33</a></span>
-<span class="normal"><a href="#__codelineno-9-34">34</a></span>
-<span class="normal"><a href="#__codelineno-9-35">35</a></span>
-<span class="normal"><a href="#__codelineno-9-36">36</a></span>
-<span class="normal"><a href="#__codelineno-9-37">37</a></span>
-<span class="normal"><a href="#__codelineno-9-38">38</a></span>
-<span class="normal"><a href="#__codelineno-9-39">39</a></span>
-<span class="normal"><a href="#__codelineno-9-40">40</a></span>
-<span class="normal"><a href="#__codelineno-9-41">41</a></span>
-<span class="normal"><a href="#__codelineno-9-42">42</a></span>
-<span class="normal"><a href="#__codelineno-9-43">43</a></span>
-<span class="normal"><a href="#__codelineno-9-44">44</a></span>
-<span class="normal"><a href="#__codelineno-9-45">45</a></span>
-<span class="normal"><a href="#__codelineno-9-46">46</a></span>
-<span class="normal"><a href="#__codelineno-9-47">47</a></span>
-<span class="normal"><a href="#__codelineno-9-48">48</a></span>
-<span class="normal"><a href="#__codelineno-9-49">49</a></span>
-<span class="normal"><a href="#__codelineno-9-50">50</a></span>
-<span class="normal"><a href="#__codelineno-9-51">51</a></span>
-<span class="normal"><a href="#__codelineno-9-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kn">import</span> <span class="nn">uuid</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="kn">import</span> <span class="nn">boto3</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="kn">import</span> <span class="nn">qrcode</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="c1"># Parse the input event to get the URL of the image and the S3 bucket name</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a>
-<a id="__codelineno-9-17" name="__codelineno-9-17"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
-<a id="__codelineno-9-18" name="__codelineno-9-18"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-19" name="__codelineno-9-19"></a>
-<a id="__codelineno-9-20" name="__codelineno-9-20"></a>    <span class="c1"># Download the image</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22"></a>    <span class="n">image_bytes</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-<a id="__codelineno-9-23" name="__codelineno-9-23"></a>
-<a id="__codelineno-9-24" name="__codelineno-9-24"></a>    <span class="c1"># Generate QR code from the image</span>
-<a id="__codelineno-9-25" name="__codelineno-9-25"></a>    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">()</span>
-<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-9-27" name="__codelineno-9-27"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
-<a id="__codelineno-9-28" name="__codelineno-9-28"></a>
-<a id="__codelineno-9-29" name="__codelineno-9-29"></a>    <span class="c1"># Create an image from the QR code</span>
-<a id="__codelineno-9-30" name="__codelineno-9-30"></a>    <span class="n">qr_image</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
-<a id="__codelineno-9-31" name="__codelineno-9-31"></a>
-<a id="__codelineno-9-32" name="__codelineno-9-32"></a>    <span class="c1"># Convert the QR code image to bytes</span>
-<a id="__codelineno-9-33" name="__codelineno-9-33"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-<a id="__codelineno-9-34" name="__codelineno-9-34"></a>    <span class="n">qr_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">qr_byte_arr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-35" name="__codelineno-9-35"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">qr_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-<a id="__codelineno-9-36" name="__codelineno-9-36"></a>
-<a id="__codelineno-9-37" name="__codelineno-9-37"></a>    <span class="c1"># Create the file name with a uuid</span>
-<a id="__codelineno-9-38" name="__codelineno-9-38"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-<a id="__codelineno-9-39" name="__codelineno-9-39"></a>
-<a id="__codelineno-9-40" name="__codelineno-9-40"></a>    <span class="c1"># Initialize the S3 client</span>
-<a id="__codelineno-9-41" name="__codelineno-9-41"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-42" name="__codelineno-9-42"></a>
-<a id="__codelineno-9-43" name="__codelineno-9-43"></a>    <span class="c1"># Upload the QR code image to S3</span>
-<a id="__codelineno-9-44" name="__codelineno-9-44"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
-<a id="__codelineno-9-45" name="__codelineno-9-45"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-<a id="__codelineno-9-46" name="__codelineno-9-46"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">qr_byte_arr</span><span class="p">,</span>
-<a id="__codelineno-9-48" name="__codelineno-9-48"></a>        <span class="n">ContentType</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-49" name="__codelineno-9-49"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)},</span>
-<a id="__codelineno-9-50" name="__codelineno-9-50"></a>    <span class="p">)</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a>
-<a id="__codelineno-9-52" name="__codelineno-9-52"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;QR code generated and uploaded successfully&quot;</span><span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-<div class="admonition note">
-    <p class="admonition-title">Note</p>
-<p>It's important to note that we're storing the file with both the URL and the email as metadata on the S3 bucket, specifically on line 49. This detail will be crucial for retrieving the emails later to send them to the recipients.
-</p>
+<p>Here's the newly established class:</p>
+<div class="highlight"><span class="filename">infra/services/secrets_manager.py</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_secretsmanager</span> <span class="k">as</span> <span class="n">secrets_manager</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="c1"># self.secrets_manager = secrets_manager.Secret.from_secret_complete_arn(</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="c1">#     scope,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="c1">#     id=&quot;SecretsManager&quot;,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="c1">#     secret_complete_arn=resources[&quot;arns&quot;][&quot;secrets_manager_arn&quot;],</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="c1"># )</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="k">pass</span>
+</code></pre></div>
+<p>Now, head over to the AWS Secrets Manager panel in the AWS console and create a new secret. Within this secret, store both the email address and an app password.</p>
+<div class="admonition warning">
+  <p class="admonition-title">Warning</p>
+<p>Note that you shouldn't save your regular GMAIL password; instead, use an app password. Refer to <a href="https://support.google.com/accounts/answer/185833?hl=en" target="_blank">Sign in with app passwords</a> to generate your app password.</p>
 </div>
 
-<p>Now, it's configuration.</p>
-<div class="highlight"><span class="filename">functions/images/qrcode/config.py</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span> <span class="nc">QrcodeConfig</span><span class="p">:</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Qrcode&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/image&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Turns image into qr code&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">requests_layer</span><span class="p">,</span> <span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">qrcode_layer</span><span class="p">],</span>
-</span><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
-</span><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="hll">                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
-</span><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="hll">            <span class="p">},</span>
-</span><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="p">)</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/image/qrcode&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<p>Now that we have the secret ARN in hand, let's proceed to update the Secrets Manager class accordingly.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/secrets_manager.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="k">class</span> <span class="nc">SecretsManager</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">gmail_secret</span> <span class="o">=</span> <span class="n">secrets_manager</span><span class="o">.</span><span class="n">Secret</span><span class="o">.</span><span class="n">from_secret_complete_arn</span><span class="p">(</span>
+</span><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;GmailSecret&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="hll">            <span class="n">secret_complete_arn</span><span class="o">=</span><span class="s2">&quot;$GMAIL-SECRET-ARN&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="hll">        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="using-a-non-public-library-as-lambda-layer">Using a Non-Public Library as Lambda Layer</h2>
+<p>To convert the image into a qr code, we are going to use an external library called <code>qrcode</code>. Unlike more popular layers, we're dealing with a library for which AWS doesn't provide a public layer.</p>
+<p>To seamlessly incorporate this library, refer to the article <a href="">Deploying External Layers to AWS</a> for guidance on deploying the qrcode library. Once you obtain the ARN of your deployed Lambda layer, simply add it to the Layers class.</p>
+<div class="highlight"><span class="filename">infra/services/layers.py</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda</span> <span class="k">as</span> <span class="n">_lambda</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span> <span class="nn">lambda_forge</span> <span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">class</span> <span class="nc">Layers</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">qrcode_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+</span><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;QrCodeLayer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="hll">            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;$QR-CODE-LAYER-ARN&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div>
-<h2 id="mailer">Mailer</h2>
+<p>It's essential to include both libraries in our <code>requirements.txt</code> file to ensure they are installed when deploying our application.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">requirements.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-15" name="__codelineno-10-15"></a>qrcode==7.4.2
+</code></pre></div></td></tr></table></div>
+<h2 id="implementing-the-function-to-convert-image-to-qr-code">Implementing the Function to Convert Image to QR Code</h2>
+<p>With our layers now set up, it's time to create our new function.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge function qrcode --method &quot;POST&quot; --description &quot;Converts an image into a qr code&quot; --belongs-to &quot;images&quot; --no-tests --public --endpoint &quot;images/qrcode&quot;
+</code></pre></div>
+<p>We now have the following directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>functions
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>└── images
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    ├── qrcode
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    │   ├── __init__.py
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    │   ├── config.py
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    │   └── main.py
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    └── utils
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        └── __init__.py
+</code></pre></div>
+<p>Let's dive into implementing this function, which will handle user input consisting of a <code>url</code> to convert the image parameter and an <code>email</code> parameter for sending notification.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/images/img_to_qrcode/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span>
+<span class="normal"><a href="#__codelineno-13-26">26</a></span>
+<span class="normal"><a href="#__codelineno-13-27">27</a></span>
+<span class="normal"><a href="#__codelineno-13-28">28</a></span>
+<span class="normal"><a href="#__codelineno-13-29">29</a></span>
+<span class="normal"><a href="#__codelineno-13-30">30</a></span>
+<span class="normal"><a href="#__codelineno-13-31">31</a></span>
+<span class="normal"><a href="#__codelineno-13-32">32</a></span>
+<span class="normal"><a href="#__codelineno-13-33">33</a></span>
+<span class="normal"><a href="#__codelineno-13-34">34</a></span>
+<span class="normal"><a href="#__codelineno-13-35">35</a></span>
+<span class="normal"><a href="#__codelineno-13-36">36</a></span>
+<span class="normal"><a href="#__codelineno-13-37">37</a></span>
+<span class="normal"><a href="#__codelineno-13-38">38</a></span>
+<span class="normal"><a href="#__codelineno-13-39">39</a></span>
+<span class="normal"><a href="#__codelineno-13-40">40</a></span>
+<span class="normal"><a href="#__codelineno-13-41">41</a></span>
+<span class="normal"><a href="#__codelineno-13-42">42</a></span>
+<span class="normal"><a href="#__codelineno-13-43">43</a></span>
+<span class="normal"><a href="#__codelineno-13-44">44</a></span>
+<span class="normal"><a href="#__codelineno-13-45">45</a></span>
+<span class="normal"><a href="#__codelineno-13-46">46</a></span>
+<span class="normal"><a href="#__codelineno-13-47">47</a></span>
+<span class="normal"><a href="#__codelineno-13-48">48</a></span>
+<span class="normal"><a href="#__codelineno-13-49">49</a></span>
+<span class="normal"><a href="#__codelineno-13-50">50</a></span>
+<span class="normal"><a href="#__codelineno-13-51">51</a></span>
+<span class="normal"><a href="#__codelineno-13-52">52</a></span>
+<span class="normal"><a href="#__codelineno-13-53">53</a></span>
+<span class="normal"><a href="#__codelineno-13-54">54</a></span>
+<span class="normal"><a href="#__codelineno-13-55">55</a></span>
+<span class="normal"><a href="#__codelineno-13-56">56</a></span>
+<span class="normal"><a href="#__codelineno-13-57">57</a></span>
+<span class="normal"><a href="#__codelineno-13-58">58</a></span>
+<span class="normal"><a href="#__codelineno-13-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kn">import</span> <span class="nn">hashlib</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="kn">import</span> <span class="nn">qrcode</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">:</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a>    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a>    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a>    <span class="c1"># Parse the input event to get the URL of the image and the S3 bucket name</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a>    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">])</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27"></a>
+<a id="__codelineno-13-28" name="__codelineno-13-28"></a>    <span class="c1"># Retrieve the S3 bucket name from environment variables</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30"></a>
+<a id="__codelineno-13-31" name="__codelineno-13-31"></a>    <span class="c1"># Generate QR code from the image</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32"></a>    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">()</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34"></a>    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35"></a>
+<a id="__codelineno-13-36" name="__codelineno-13-36"></a>    <span class="c1"># Create an image from the QR code</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37"></a>    <span class="n">qr_image</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38"></a>
+<a id="__codelineno-13-39" name="__codelineno-13-39"></a>    <span class="c1"># Convert the QR code image to bytes</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<a id="__codelineno-13-41" name="__codelineno-13-41"></a>    <span class="n">qr_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">qr_byte_arr</span><span class="p">)</span>
+<a id="__codelineno-13-42" name="__codelineno-13-42"></a>    <span class="n">qr_byte_arr</span> <span class="o">=</span> <span class="n">qr_byte_arr</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<a id="__codelineno-13-43" name="__codelineno-13-43"></a>
+<a id="__codelineno-13-44" name="__codelineno-13-44"></a>    <span class="c1"># Create the file name with a hash based on the input URL</span>
+<a id="__codelineno-13-45" name="__codelineno-13-45"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<a id="__codelineno-13-46" name="__codelineno-13-46"></a>
+<a id="__codelineno-13-47" name="__codelineno-13-47"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-13-48" name="__codelineno-13-48"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-49" name="__codelineno-13-49"></a>
+<a id="__codelineno-13-50" name="__codelineno-13-50"></a>    <span class="c1"># Upload the QR code image to S3</span>
+<a id="__codelineno-13-51" name="__codelineno-13-51"></a>    <span class="n">s3_client</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span>
+<a id="__codelineno-13-52" name="__codelineno-13-52"></a>        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
+<a id="__codelineno-13-53" name="__codelineno-13-53"></a>        <span class="n">Key</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
+<a id="__codelineno-13-54" name="__codelineno-13-54"></a>        <span class="n">Body</span><span class="o">=</span><span class="n">qr_byte_arr</span><span class="p">,</span>
+<a id="__codelineno-13-55" name="__codelineno-13-55"></a>        <span class="n">ContentType</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-56" name="__codelineno-13-56"></a>        <span class="n">Metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)},</span>
+<a id="__codelineno-13-57" name="__codelineno-13-57"></a>    <span class="p">)</span>
+<a id="__codelineno-13-58" name="__codelineno-13-58"></a>
+<a id="__codelineno-13-59" name="__codelineno-13-59"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Essentially, our function retrieves the URL from the parameters provided by the user. It then utilizes the qrcode library to convert the URL into a QR code before storing it in the S3 bucket. Additionally, the function saves the original url along with the associated email as metadata for future reference.</p>
+<p>Now, it's configuration.</p>
+<div class="highlight"><span class="filename">functions/images/qrcode/config.py</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">class</span> <span class="nc">QrcodeConfig</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Qrcode&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/images&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Converts an image into a qr code&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">qrcode_layer</span><span class="p">],</span>
+</span><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+</span><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="hll">                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
+</span><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="hll">            <span class="p">},</span>
+</span><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>        <span class="p">)</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/images/qrcode&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_write</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="implementing-the-mailer-function">Implementing the Mailer Function</h2>
 <p>It's worth noting that in our previous implementation, we deliberately omitted email notifications. This exemplifies one of the advantages of serverless architecture: the ability to completely decouple functions from each other and initiate notifications through events.</p>
 <p>This is precisely the approach we're taking with the mailer function. Whenever a file is uploaded to the S3 bucket, an event will be triggered to run this Lambda function. With the assistance of metadata, the mailer Lambda function will be equipped with the necessary information to determine the appropriate email recipients for notifications.</p>
-<p>Coming soon...</p>
-<!--
-Create a bucket per stage
-
-Use the public Pillow layer
-
-self.pillow_layer = \_lambda.LayerVersion.from_layer_version_arn(
-scope,
-id="PillowLayer",
-layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1",
-)
-
-Add pillow pillow==10.3.0 to requirements.txt
-
-## Resize
-
-forge function resize --method "POST" --description "Resizes an image and stores it on S3" --belongs-to "images" --public --no-tests --endpoint "images/resize"
-
-## Watermark
-
-forge function watermark --method "POST" --description "Create watermark to the image" --belongs-to "image" --no-tests --public --endpoint "images/resize"
-
-## colorize
-
-forge function colorize --method "POST" --description "Change the colors of the image" --belongs-to "image" --no-tests --public --endpoint "images/resize"
-
-## image to qrcode
-
-We will need to upload the qrcode library ourselves as it doesnt have a public one. link to article on how to do that!
-
-forge function img_to_qrcode --method "POST" --description "Turns image into qr code" --belongs-to "image" --no-tests --public --endpoint "images/resize"
-
-## secrets manager
-
-Configure secrets manager, with a secret with email, password. secrets-manager name: mailer
-
-Create an app password. (Point to article teaching how create an app password)
-
-## mailer
-
-forge function mailer --description "Sends an email when an image enters the bucket" --belongs-to "images" --no-api --no-tests
-
-Mention the approach where we send the env variables as plain texts froms ecrets manager.
-
-Exaplin this is unsafe because exposes the credentiais on the the aws lambda console. a safer way would be to retrieve the values it self inside the function when its running.
-
-But also explain this is a piece of code commonly used. To several lambda functions, why not create a layer to make that smoother ?
-
-Create a simple layer called sm_utils to retrieve the code based on the secret name. -->
-
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>forge function mailer --description &quot;Sends an email based on metadata when image enters the bucket&quot; --belongs-to &quot;images&quot; --no-api --no-tests
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>
+<p>Here's how our updated directory looks now.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>functions
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>├── images
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    ├── mailer
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    │   ├── __init__.py
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    │   ├── config.py
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    │   └── main.py
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    ├── qrcode
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    │   ├── __init__.py
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    │   ├── config.py
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    │   └── main.py
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    └── utils
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>        └── __init__.py
 </code></pre></div>
+<p>Let's whip up an eye-catching HTML layout to give our email a touch of elegance.</p>
+<div class="highlight"><span class="filename">functions/images/mailer/template.html</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">      </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="n">Arial</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">        </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">        </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">        </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#f4f4f4</span><span class="p">;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">      </span><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">        </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">        </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">        </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">        </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="w">        </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">        </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="w">      </span><span class="nt">p</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="w">        </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="w">        </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#555555</span><span class="p">;</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="w">      </span><span class="p">.</span><span class="nc">logo</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="w">        </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="w">        </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">        </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="w">        </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="w">    </span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>      <span class="p">&lt;</span><span class="nt">img</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>        <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://public-lambda-forge-logo.s3.us-east-2.amazonaws.com/wNSN2U7n9NiAKEItWlsrcdJ0RWFyZOmbNvsc6Kht84WsWVxuBz5O.png&quot;</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>        <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Lambda Forge Logo&quot;</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>        <span class="na">class</span><span class="o">=</span><span class="s">&quot;logo&quot;</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>      <span class="p">/&gt;</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Your Image Is Ready!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello,<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>        We&#39;re excited to let you know that your image has been processed and is
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>        now attached to this email.
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Please check the attachment to view it.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>        Made with ❤️ by
+<a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>        <span class="p">&lt;</span><span class="nt">b</span>
+<a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>          <span class="p">&gt;&lt;</span><span class="nt">a</span>
+<a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>            <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://docs.lambda-forge.com&quot;</span>
+<a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>            <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: inherit; text-decoration: none;&quot;</span>
+<a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>            <span class="p">&gt;</span>Lambda Forge<span class="p">&lt;/</span><span class="nt">a</span>
+<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>          <span class="p">&gt;&lt;/</span><span class="nt">b</span>
+<a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>        <span class="p">&gt;</span>
+<a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a>  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Time to implement the mailer functionality!</p>
+<div class="highlight"><span class="filename">functions/images/mailer/main.py</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">import</span> <span class="nn">smtplib</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kn">from</span> <span class="nn">email.mime.application</span> <span class="kn">import</span> <span class="n">MIMEApplication</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="c1"># Fetch the SMTP details from the environment variables</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>    <span class="n">SMTP_HOST</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_HOST&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="n">SMTP_PORT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_PORT&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>    <span class="n">SMTP_USER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_USER&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>    <span class="n">SMTP_PASS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_PASS&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    <span class="c1"># Extract the bucket name and the object key from the event</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    <span class="n">record</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;Records&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;s3&quot;</span><span class="p">][</span><span class="s2">&quot;bucket&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>    <span class="n">object_key</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;s3&quot;</span><span class="p">][</span><span class="s2">&quot;object&quot;</span><span class="p">][</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>    <span class="c1"># Fetch the image from S3</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">Key</span><span class="o">=</span><span class="n">object_key</span><span class="p">)</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>    <span class="c1"># Extract the receiver email from the metadata</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>    <span class="n">receiver</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;Metadata&quot;</span><span class="p">][</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>    <span class="c1"># Create the multipart email</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>    <span class="n">sender_name</span> <span class="o">=</span> <span class="s2">&quot;Lambda Forge&quot;</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>    <span class="c1"># Set the &#39;From&#39; field, including both the name and the email:</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sender_name</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="n">SMTP_USER</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">receiver</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Image Processed Successfully!&quot;</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>    <span class="c1"># Join the current directory with the filename to get the full path of the HTML file</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a>    <span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>    <span class="n">html_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_directory</span><span class="p">,</span> <span class="s2">&quot;template.html&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>    <span class="c1"># Read the HTML content</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>    <span class="n">html</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">html_path</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">))</span>
+<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a>
+<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a>    <span class="c1"># Attach the image</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a>    <span class="n">image_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;Body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="n">object_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a>    <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEApplication</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">Name</span><span class="o">=</span><span class="n">file_name</span><span class="p">)</span>
+<a id="__codelineno-18-52" name="__codelineno-18-52" href="#__codelineno-18-52"></a>    <span class="n">part</span><span class="p">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;attachment; filename=&quot;</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<a id="__codelineno-18-53" name="__codelineno-18-53" href="#__codelineno-18-53"></a>    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<a id="__codelineno-18-54" name="__codelineno-18-54" href="#__codelineno-18-54"></a>
+<a id="__codelineno-18-55" name="__codelineno-18-55" href="#__codelineno-18-55"></a>    <span class="c1"># Send the email via Gmail&#39;s SMTP server, or use another server if not using Gmail</span>
+<a id="__codelineno-18-56" name="__codelineno-18-56" href="#__codelineno-18-56"></a>    <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="n">SMTP_HOST</span><span class="p">,</span> <span class="n">SMTP_PORT</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+<a id="__codelineno-18-57" name="__codelineno-18-57" href="#__codelineno-18-57"></a>        <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">SMTP_USER</span><span class="p">,</span> <span class="n">SMTP_PASS</span><span class="p">)</span>
+<a id="__codelineno-18-58" name="__codelineno-18-58" href="#__codelineno-18-58"></a>        <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">SMTP_USER</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+</code></pre></div>
+<p>This function fetches essential email-sending details from environment variables such as <code>SMTP_HOST</code>, <code>SMTP_PORT</code>, <code>SMTP_USER</code>, and <code>SMTP_PASS</code>. It then retrieves the recipient's email address from the bucket's metadata and sends an email with the QR code attached.</p>
+<p>The elegance of this approach lies in its flexibility. We can incorporate multiple image processors, including tasks like image resizing, applying color filters, facial recognition, and more. None of these processors need to handle email sending directly. By simply saving the processed image inside the bucket, the corresponding functionality is seamlessly applied.</p>
+<p>Now, let's configure our Mailer function.</p>
+<div class="highlight"><span class="filename">functions/images/mailer/config.py</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">class</span> <span class="nc">MailerConfig</span><span class="p">:</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mailer&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/images&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Sends an email when an image enters the bucket&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;mailer&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="hll">            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+</span><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="hll">                <span class="s2">&quot;SMTP_HOST&quot;</span><span class="p">:</span> <span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="hll">                <span class="s2">&quot;SMTP_PORT&quot;</span><span class="p">:</span> <span class="s2">&quot;465&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="hll">                <span class="s2">&quot;SMTP_USER&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">gmail_secret</span><span class="o">.</span><span class="n">secret_value_from_json</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unsafe_unwrap</span><span class="p">(),</span>
+</span><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="hll">                <span class="s2">&quot;SMTP_PASS&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">gmail_secret</span><span class="o">.</span><span class="n">secret_value_from_json</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unsafe_unwrap</span><span class="p">(),</span>
+</span><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="hll">            <span class="p">},</span>
+</span><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>        <span class="p">)</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_read</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+</span></code></pre></div>
+<p>With our existing setup, we configure the environment variables and grant read permissions to the function for accessing the bucket. Additionally, we utilize Forge's helper method to establish a trigger that activates when an object is created in the bucket, invoking the function.</p>
+<h2 id="mitigating-security-risks-in-mailer-configuration">Mitigating Security Risks in Mailer Configuration</h2>
+<p>Although the <code>/mailer/config.py</code> file may seem functional, its implementation poses a significant security risk. Hardcoding credentials directly into environment variables exposes them to potential breaches, as the secret will be visible on the Lambda Function panel.</p>
+<p><img alt="alt text" src="../images/pass-exposed.png" /></p>
+<p>To mitigate this risk, let's modify our <code>main.py</code> file slightly. Instead of retrieving the Gmail credentials from environment variables, we'll directly retrieve them from AWS Secrets Manager.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/images/mailer/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span>
+<span class="normal"><a href="#__codelineno-20-18">18</a></span>
+<span class="normal"><a href="#__codelineno-20-19">19</a></span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span>
+<span class="normal"><a href="#__codelineno-20-21">21</a></span>
+<span class="normal"><a href="#__codelineno-20-22">22</a></span>
+<span class="normal"><a href="#__codelineno-20-23">23</a></span>
+<span class="normal"><a href="#__codelineno-20-24">24</a></span>
+<span class="normal"><a href="#__codelineno-20-25">25</a></span>
+<span class="normal"><a href="#__codelineno-20-26">26</a></span>
+<span class="normal"><a href="#__codelineno-20-27">27</a></span>
+<span class="normal"><a href="#__codelineno-20-28">28</a></span>
+<span class="normal"><a href="#__codelineno-20-29">29</a></span>
+<span class="normal"><a href="#__codelineno-20-30">30</a></span>
+<span class="normal"><a href="#__codelineno-20-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a>    <span class="c1"># Fetch the SMTP details from the environment variables</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16"></a>    <span class="n">SMTP_HOST</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_HOST&quot;</span><span class="p">]</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17"></a>    <span class="n">SMTP_PORT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_PORT&quot;</span><span class="p">]</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18"></a>
+<a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="hll">    <span class="kn">import</span> <span class="nn">json</span>
+</span><a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="hll">
+</span><a id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="hll">    <span class="c1"># Initialize the Secrets Manager client</span>
+</span><a id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="hll">    <span class="n">sm_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;secretsmanager&#39;</span><span class="p">)</span>
+</span><a id="__codelineno-20-23" name="__codelineno-20-23"></a><span class="hll">    <span class="n">secret_name</span> <span class="o">=</span> <span class="s1">&#39;$SECRET-NAME&#39;</span>
+</span><a id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="hll">
+</span><a id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="hll">    <span class="c1"># Retrieve the secret value from Secrets Manager</span>
+</span><a id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="hll">    <span class="n">response</span> <span class="o">=</span> <span class="n">sm_client</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="n">secret_name</span><span class="p">)</span>
+</span><a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="hll">    <span class="n">secret</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;SecretString&#39;</span><span class="p">])</span>
+</span><a id="__codelineno-20-28" name="__codelineno-20-28"></a><span class="hll">
+</span><a id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="hll">    <span class="c1"># Extract SMTP credentials from the secret data</span>
+</span><a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="hll">    <span class="n">SMTP_USER</span> <span class="o">=</span> <span class="n">secret</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-20-31" name="__codelineno-20-31"></a><span class="hll">    <span class="n">SMTP_PASS</span> <span class="o">=</span> <span class="n">secret</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>That's quite a bit of boilerplate code for such a straightforward task! 😰 Considering the critical importance of security, we'll probably employ this code snippet in numerous functions.</p>
+<h3 id="creating-a-custom-layer-to-avoid-code-duplication">Creating a Custom Layer to Avoid Code Duplication</h3>
+<p>To avoid duplicating the previous code throughout our project, let's establish a new <code>sm_utils</code> custom layer. This approach will streamline the process, allowing all lambda functions that need to retrieve a secret from Secrets Manager to do so with just a single line of code.</p>
+<p>Check out <a href="https://docs.lambda-forge.com/home/page5/#aws-lambda-development-with-custom-layers">AWS Lambda Development with Custom Layers</a> to delve deeper into custom layers in Lambda development.</p>
+<p>To create the new custom layer, simply type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>forge layer --custom sm_utils
+</code></pre></div>
+<p>This command creates the following directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>layers
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>├── __init__.py
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>└── sm_utils
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    ├── __init__.py
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    └── sm_utils.py
+</code></pre></div>
+<p>Additionally, a new layer has been incorporated into the Layers class.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/layers</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-5" name="__codelineno-23-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">qrcode_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="o">.</span><span class="n">from_layer_version_arn</span><span class="p">(</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a>            <span class="n">scope</span><span class="p">,</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;QrCodeLayer&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a>            <span class="n">layer_version_arn</span><span class="o">=</span><span class="s2">&quot;arn:aws:lambda:us-east-2:211125768252:layer:QRCode:1&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a>        <span class="p">)</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">sm_utils_layer</span> <span class="o">=</span> <span class="n">_lambda</span><span class="o">.</span><span class="n">LayerVersion</span><span class="p">(</span>
+</span><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;SmUtilsLayer&#39;</span><span class="p">,</span>
+</span><a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="hll">            <span class="n">code</span><span class="o">=</span><span class="n">_lambda</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">from_asset</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="s1">&#39;layers/sm_utils&#39;</span><span class="p">)),</span>
+</span><a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="hll">            <span class="n">compatible_runtimes</span><span class="o">=</span><span class="p">[</span><span class="n">_lambda</span><span class="o">.</span><span class="n">Runtime</span><span class="o">.</span><span class="n">PYTHON_3_9</span><span class="p">],</span>
+</span><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="hll">            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="hll">         <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Now, it's time to level up the sm_utils layer by introducing a <code>get_secret</code> function. This handy feature will be shared across all our Lambda functions, simplifying our codebase.</p>
+<div class="highlight"><span class="filename">layers/sm_utils/sm_utils.py</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="k">def</span> <span class="nf">get_secret</span><span class="p">(</span><span class="n">secret_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="c1"># Initialize the Secrets Manager client</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">sm_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;secretsmanager&#39;</span><span class="p">)</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>    <span class="c1"># Retrieve the secret value from Secrets Manager</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">sm_client</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="n">secret_name</span><span class="p">)</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="n">secret</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;SecretString&#39;</span><span class="p">])</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>    <span class="k">return</span> <span class="n">secret</span>
+</code></pre></div>
+<h3 id="refactoring-the-mailer-function-to-use-custom-layers">Refactoring The Mailer Function to Use Custom Layers</h3>
+<p>Below is the updated <code>main.py</code> file, now leveraging the newly integrated layer.</p>
+<div class="highlight"><span class="filename">functions/images/mailer/main.py</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kn">import</span> <span class="nn">smtplib</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="kn">from</span> <span class="nn">email.mime.application</span> <span class="kn">import</span> <span class="n">MIMEApplication</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="kn">import</span> <span class="nn">boto3</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="hll"><span class="kn">import</span> <span class="nn">sm_utils</span>
+</span><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>    <span class="c1"># Initialize the S3 client</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>    <span class="c1"># Fetch the SMTP details from the environment variables</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>    <span class="n">SMTP_HOST</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_HOST&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>    <span class="n">SMTP_PORT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SMTP_PORT&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>    <span class="c1"># Get the secret name from env variable</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>    <span class="n">SECRET_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SECRET_NAME&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>    <span class="c1"># Get the secret from sm_utils layer</span>
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a><span class="hll">    <span class="n">secret</span> <span class="o">=</span> <span class="n">sm_utils</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="n">SECRET_NAME</span><span class="p">)</span>
+</span><a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>    <span class="n">SMTP_USER</span> <span class="o">=</span> <span class="n">secret</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>    <span class="n">SMTP_PASS</span> <span class="o">=</span> <span class="n">secret</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>    <span class="c1"># Extract the bucket name and the object key from the event</span>
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>    <span class="n">record</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;Records&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>    <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;s3&quot;</span><span class="p">][</span><span class="s2">&quot;bucket&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>    <span class="n">object_key</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;s3&quot;</span><span class="p">][</span><span class="s2">&quot;object&quot;</span><span class="p">][</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>
+<a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>    <span class="c1"># Fetch the image from S3</span>
+<a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">Key</span><span class="o">=</span><span class="n">object_key</span><span class="p">)</span>
+<a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>
+<a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>    <span class="c1"># Extract the receiver email from the metadata</span>
+<a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a>    <span class="n">receiver</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;Metadata&quot;</span><span class="p">][</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a>
+<a id="__codelineno-25-39" name="__codelineno-25-39" href="#__codelineno-25-39"></a>    <span class="c1"># Create the multipart email</span>
+<a id="__codelineno-25-40" name="__codelineno-25-40" href="#__codelineno-25-40"></a>    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<a id="__codelineno-25-41" name="__codelineno-25-41" href="#__codelineno-25-41"></a>    <span class="n">sender_name</span> <span class="o">=</span> <span class="s2">&quot;Lambda Forge&quot;</span>
+<a id="__codelineno-25-42" name="__codelineno-25-42" href="#__codelineno-25-42"></a>
+<a id="__codelineno-25-43" name="__codelineno-25-43" href="#__codelineno-25-43"></a>    <span class="c1"># Set the &#39;From&#39; field, including both the name and the email:</span>
+<a id="__codelineno-25-44" name="__codelineno-25-44" href="#__codelineno-25-44"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sender_name</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">{</span><span class="n">SMTP_USER</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+<a id="__codelineno-25-45" name="__codelineno-25-45" href="#__codelineno-25-45"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">receiver</span>
+<a id="__codelineno-25-46" name="__codelineno-25-46" href="#__codelineno-25-46"></a>    <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Image Processed Successfully!&quot;</span>
+<a id="__codelineno-25-47" name="__codelineno-25-47" href="#__codelineno-25-47"></a>
+<a id="__codelineno-25-48" name="__codelineno-25-48" href="#__codelineno-25-48"></a>    <span class="c1"># Join the current directory with the filename to get the full path of the HTML file</span>
+<a id="__codelineno-25-49" name="__codelineno-25-49" href="#__codelineno-25-49"></a>    <span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<a id="__codelineno-25-50" name="__codelineno-25-50" href="#__codelineno-25-50"></a>    <span class="n">html_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_directory</span><span class="p">,</span> <span class="s2">&quot;template.html&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-51" name="__codelineno-25-51" href="#__codelineno-25-51"></a>
+<a id="__codelineno-25-52" name="__codelineno-25-52" href="#__codelineno-25-52"></a>    <span class="c1"># Read the HTML content</span>
+<a id="__codelineno-25-53" name="__codelineno-25-53" href="#__codelineno-25-53"></a>    <span class="n">html</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">html_path</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-25-54" name="__codelineno-25-54" href="#__codelineno-25-54"></a>    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">))</span>
+<a id="__codelineno-25-55" name="__codelineno-25-55" href="#__codelineno-25-55"></a>
+<a id="__codelineno-25-56" name="__codelineno-25-56" href="#__codelineno-25-56"></a>    <span class="c1"># Attach the image</span>
+<a id="__codelineno-25-57" name="__codelineno-25-57" href="#__codelineno-25-57"></a>    <span class="n">image_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;Body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-25-58" name="__codelineno-25-58" href="#__codelineno-25-58"></a>    <span class="n">file_name</span> <span class="o">=</span> <span class="n">object_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-25-59" name="__codelineno-25-59" href="#__codelineno-25-59"></a>    <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEApplication</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">Name</span><span class="o">=</span><span class="n">file_name</span><span class="p">)</span>
+<a id="__codelineno-25-60" name="__codelineno-25-60" href="#__codelineno-25-60"></a>    <span class="n">part</span><span class="p">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;attachment; filename=&quot;</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<a id="__codelineno-25-61" name="__codelineno-25-61" href="#__codelineno-25-61"></a>    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<a id="__codelineno-25-62" name="__codelineno-25-62" href="#__codelineno-25-62"></a>
+<a id="__codelineno-25-63" name="__codelineno-25-63" href="#__codelineno-25-63"></a>    <span class="c1"># Send the email via Gmail&#39;s SMTP server, or use another server if not using Gmail</span>
+<a id="__codelineno-25-64" name="__codelineno-25-64" href="#__codelineno-25-64"></a>    <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="n">SMTP_HOST</span><span class="p">,</span> <span class="n">SMTP_PORT</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+<a id="__codelineno-25-65" name="__codelineno-25-65" href="#__codelineno-25-65"></a>        <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">SMTP_USER</span><span class="p">,</span> <span class="n">SMTP_PASS</span><span class="p">)</span>
+<a id="__codelineno-25-66" name="__codelineno-25-66" href="#__codelineno-25-66"></a>        <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">SMTP_USER</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+</code></pre></div>
+<p>Now, let's adjust the configuration to accommodate the changes necessary for the function.</p>
+<div class="highlight"><span class="filename">functions/images/mailer/config.py</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="k">class</span> <span class="nc">MailerConfig</span><span class="p">:</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mailer&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/images&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Sends an email when an image enters the bucket&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;mailer&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="hll">            <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">sm_utils_layer</span><span class="p">],</span>
+</span><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>            <span class="n">environment</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>                <span class="s2">&quot;SMTP_HOST&quot;</span><span class="p">:</span> <span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a>                <span class="s2">&quot;SMTP_PORT&quot;</span><span class="p">:</span> <span class="s2">&quot;465&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="hll">                <span class="s2">&quot;SECRET_NAME&quot;</span><span class="p">:</span> <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">gmail_secret</span><span class="o">.</span><span class="n">secret_name</span><span class="p">,</span>
+</span><a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a>            <span class="p">},</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a>        <span class="p">)</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a>
+<a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a>        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="o">.</span><span class="n">grant_read</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a>        <span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">services</span><span class="o">.</span><span class="n">s3</span><span class="o">.</span><span class="n">images_bucket</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a>
+<a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">secrets_manager</span><span class="o">.</span><span class="n">gmail_secret</span><span class="o">.</span><span class="n">grant_read</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="deploying-the-functions">Deploying The Functions</h2>
+<p>Next, we'll commit our code and push it to GitHub, following these steps:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Send your changes to stage</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># Commit with a descriptive message</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Image to QR code converter with result being sent by email&quot;</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="c1"># Push changes to the &#39;dev&#39; branch</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="c1"># Merge &#39;dev&#39; into &#39;staging&#39; and push</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>git<span class="w"> </span>merge<span class="w"> </span>dev
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>staging
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="c1"># Finally, merge &#39;staging&#39; into &#39;main&#39; and push</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>git<span class="w"> </span>checkout<span class="w"> </span>main
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>This process guarantees that our code transitions systematically through the development, staging, and production environments. It activates our three specialized deployment pipelines, as illustrated by the pipelines running in the accompanying image.</p>
+<p><img alt="Pipelines running" src="../images/three_example_pipelines.png" /></p>
+<p>Following the successful execution of these pipelines, the Image to QR code feature becomes accessible across the development, staging, and production stages, ensuring a seamless deployment.</p>
+<h2 id="testing-the-image-to-qr-code-conversion">Testing the Image to QR Code Conversion</h2>
+<p>We'll walk through testing our Image to QR Code Converter, focusing on the production environment for this demonstration. The procedure remains consistent across development and staging environments, with the only difference being the specific endpoints used.</p>
+<p>To convert an image URL into a QR code, we execute the following POST request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>curl<span class="w"> </span>--request<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span>--url<span class="w"> </span>https://api.lambda-forge.com/images/qrcode<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span>--header<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">  </span>--data<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="s1">    &quot;url&quot;: &quot;https://public-lambda-forge-logo.s3.us-east-2.amazonaws.com/wNSN2U7n9NiAKEItWlsrcdJ0RWFyZOmbNvsc6Kht84WsWVxuBz5O.png&quot;,</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="s1">    &quot;email&quot;: &quot;$EMAIL&quot;</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<p>Shortly after the request is made, an email is dispatched to the provided address.
+<img alt="alt text" src="../images/email.png" /></p>
+<p>The email contains a QR code attachment, as seen in the illustration below:</p>
+<p><img alt="alt text" src="../images/qrcode.png" /></p>
+<p>Upon scanning the QR code, the original image is displayed:</p>
+<p><img alt="Lambda Forge Logo" src="../images/lambda-forge-short-url.png" /></p>
+<p>🎉 Success! The Image to QR Code Converter function is now fully deployed and operational in all environments. 🚀✨</p>
 
 
 

@@ -110,6 +110,8 @@ class DynamoDB:
         )
 ```
 
+The `context.resources` object on line 11 contains only the resources that are pertinent to the current stage. By tapping into this, we can dynamically tweak our AWS resources according to the specific stage we're operating in.
+
 ## Implementing the Shortener Function
 
 To initiate, let's develop the shortener function, which serves as the primary interface for user interaction. This function is tasked with accepting a lengthy URL from the user and providing them with its shortened counterpart in response:
@@ -383,7 +385,7 @@ git push origin main
 
 This sequence ensures our code passes through development, staging, and finally, production environments, activating our three distinct deployment pipelines.
 
-![Dev pipeline running](images/three_example_pipelines.png)
+![Pipelines running](images/three_example_pipelines.png)
 
 After the pipelines complete, the URL Shortener feature is available across development, staging, and production stages.
 

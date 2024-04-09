@@ -1207,6 +1207,7 @@
 </span><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="hll">            <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;urls_table&quot;</span><span class="p">],</span>
 </span><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
+<p>The <code>context.resources</code> object on line 11 contains only the resources that are pertinent to the current stage. By tapping into this, we can dynamically tweak our AWS resources according to the specific stage we're operating in.</p>
 <h2 id="implementing-the-shortener-function">Implementing the Shortener Function</h2>
 <p>To initiate, let's develop the shortener function, which serves as the primary interface for user interaction. This function is tasked with accepting a lengthy URL from the user and providing them with its shortened counterpart in response:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge function shortener --method &quot;POST&quot; --description &quot;Creates a new short URL entry in DynamoDB mapped to the original one&quot; --belongs-to urls --public --no-tests
@@ -1505,7 +1506,7 @@ Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate yo
 <a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
 <p>This sequence ensures our code passes through development, staging, and finally, production environments, activating our three distinct deployment pipelines.</p>
-<p><img alt="Dev pipeline running" src="../images/three_example_pipelines.png" /></p>
+<p><img alt="Pipelines running" src="../images/three_example_pipelines.png" /></p>
 <p>After the pipelines complete, the URL Shortener feature is available across development, staging, and production stages.</p>
 <h2 id="testing-the-deployment">Testing The Deployment</h2>
 <p>Let's test our URL Shortener by shortening a lengthy URL. For demonstration purposes, we'll use the production environment, but the process remains identical for development and staging, using their respective endpoints.</p>
