@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../examples/page8/">
+        <link rel="prev" href="../page4/">
       
       
-        <link rel="next" href="../page2/">
+        <link rel="next" href="../../license/page1/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Creating S3 Buckets - Lambda Forge</title>
+        <title>Deploying External Library as Layers - Lambda Forge</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-create-an-amazon-s3-bucket" class="md-skip">
+        <a href="#deploying-an-external-library-to-aws-lambda-as-a-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Creating S3 Buckets
+              Deploying External Library as Layers
             
           </span>
         </div>
@@ -230,7 +230,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../page1/" class="md-tabs__link">
           
   
   Articles
@@ -769,30 +769,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Creating S3 Buckets
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -801,89 +781,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 1: Open the Amazon S3 Console
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-create-a-new-bucket" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 2: Create a New Bucket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3-access-your-bucket" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 3: Access Your Bucket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Best Practices
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#making-your-bucket-public" class="md-nav__link">
-    <span class="md-ellipsis">
-      Making Your Bucket Public
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conclusion
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -956,10 +853,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../page5/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Deploying External Library as Layers
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -968,6 +885,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up The Environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-layer-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparing the Layer Package
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-and-using-the-lambda-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and Using the Lambda Layer
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1027,63 +991,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#setting-up-the-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      Prerequisites
+      Setting Up The Environment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
+  <a href="#preparing-the-layer-package" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1: Open the Amazon S3 Console
+      Preparing the Layer Package
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-create-a-new-bucket" class="md-nav__link">
+  <a href="#creating-and-using-the-lambda-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2: Create a New Bucket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3-access-your-bucket" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 3: Access Your Bucket
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Best Practices
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#making-your-bucket-public" class="md-nav__link">
-    <span class="md-ellipsis">
-      Making Your Bucket Public
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conclusion
+      Creating and Using the Lambda Layer
     </span>
   </a>
   
@@ -1104,70 +1032,47 @@
                   
 
 
-<h1 id="how-to-create-an-amazon-s3-bucket">How to Create an Amazon S3 Bucket</h1>
-<p>Amazon Simple Storage Service (Amazon S3) offers industry-leading scalability, data availability, security, and performance. This tutorial will guide you through the process of creating an S3 bucket, which can be used for a wide range of applications, including website hosting, data storage, and backups.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li>You should already be logged into your AWS account.</li>
-<li>Familiarity with the basic concepts of AWS S3.</li>
-</ul>
-<h2 id="step-1-open-the-amazon-s3-console">Step 1: Open the Amazon S3 Console</h2>
-<ol>
-<li>Once logged in to the AWS Management Console, locate the <strong>Services</strong> menu at the top of the console.</li>
-<li>Use the search bar to find <strong>S3</strong> or navigate through the categories to locate S3 under the Storage section.</li>
-<li>Click on <strong>S3</strong> to open the S3 console.</li>
-</ol>
-<h2 id="step-2-create-a-new-bucket">Step 2: Create a New Bucket</h2>
-<ol>
-<li>In the S3 console, click the <strong>Create bucket</strong> button. This action opens a wizard to guide you through the bucket creation process.</li>
-<li>
-<p>Enter the following details:</p>
-</li>
-<li>
-<p><strong>Bucket name</strong>: Choose a unique name for your bucket. This name must be globally unique across all existing bucket names in Amazon S3 and cannot be changed after the bucket is created.</p>
-</li>
-<li>
-<p><strong>AWS Region</strong>: Choose the same region specified in your <code>cdk.json</code> file.</p>
-</li>
-<li>
-<p>(Optional) Configure additional options such as Versioning, Server Access Logging, Tags, and Default Encryption according to your requirements. If you're unsure or new to S3, you may proceed with the default settings.</p>
-</li>
-<li>Review your settings, then click <strong>Create bucket</strong>.</li>
-</ol>
-<h2 id="step-3-access-your-bucket">Step 3: Access Your Bucket</h2>
-<ul>
-<li>After creation, your new bucket will be listed in the S3 console. Click on your bucket's name to start uploading files, creating folders, or setting up permissions.</li>
-</ul>
-<h2 id="best-practices">Best Practices</h2>
-<ul>
-<li><strong>Naming Convention</strong>: Adhere to a consistent naming convention for easier management, especially if you plan to create multiple buckets.</li>
-<li><strong>Region Selection</strong>: Align the bucket's region with your other AWS resources to reduce latency and costs.</li>
-<li><strong>Security</strong>: By default, all S3 buckets are private. Only make a bucket public if it is intended to serve static web content. Always follow the principle of least privilege when configuring bucket permissions.</li>
-</ul>
-<h2 id="making-your-bucket-public">Making Your Bucket Public</h2>
-<p>To make your S3 bucket public and accessible to the internet, follow these steps:</p>
-<ol>
-<li>Navigate to the S3 console.</li>
-<li>Select the bucket you want to make public.</li>
-<li>Go to the <strong>Permissions</strong> tab.</li>
-<li>Click on <strong>Bucket Policy</strong>.</li>
-<li>Add a policy to allow public access to your bucket. Here's an example policy:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PublicReadGetObject&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;Principal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::YOUR_BUCKET_NAME/*&quot;</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="p">]</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+<h1 id="deploying-an-external-library-to-aws-lambda-as-a-layer">Deploying an External Library to AWS Lambda as a Layer</h1>
+<p>This guide outlines the steps to deploy an external library, such as the qrcode library, to AWS Lambda as a Layer. AWS Lambda Layers serve as a repository for managing common code or data shared across multiple functions. By deploying the <code>qrcode</code> library as a Layer, the library can be utilized in various Lambda functions without needing to be included in each function's deployment package.</p>
+<p>Although the <code>qrcode</code> library is used as an example, this method applies universally to any library you wish to deploy in this manner.</p>
+<h2 id="setting-up-the-environment">Setting Up The Environment</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir packages
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cd packages
 </code></pre></div>
-<h2 id="conclusion">Conclusion</h2>
-<p>You have successfully created an Amazon S3 bucket and learned how to make it public to serve static web content or other purposes. Remember to always consider security implications and follow best practices when configuring bucket permissions. Explore further S3 features such as lifecycle policies, object versioning, and cross-region replication to optimize your data storage strategy.</p>
+<p>Initialize a virtual environment within this directory and activate it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3 -m venv venv
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>source venv/bin/activate
+</code></pre></div>
+<p>Create a directory named <code>python</code> within the current directory and navigate into it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir python
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cd python
+</code></pre></div>
+<p>It is crucial to name this directory as <strong>python</strong> as it aligns with Lambda Layers' requirements.</p>
+<p>Install the qrcode library directly into this directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip install qrcode -t .
+</code></pre></div>
+<p>This command uses pip to install the library into the current <code>python</code> directory.</p>
+<p>After installation, you can attempt to list the directory contents. You should see the installed packages.</p>
+<h2 id="preparing-the-layer-package">Preparing the Layer Package</h2>
+<p>Remove unnecessary files, specifically those with the .dist-info extension, to conserve space. These files are not needed for the Lambda Layer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rm -rf *dist-info
+</code></pre></div>
+<p>Return to the parent directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cd ..
+</code></pre></div>
+<p>Zip the python directory, naming the zip file <code>qr-code-lambda-package.zip</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>zip -r qr-code-lambda-package.zip python
+</code></pre></div>
+<p>You should now have the zip file in your current directory.</p>
+<p>Create a s3 bucket and upload your zip file to it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aws s3 cp qr-code-lambda-package.zip s3://your-s3-bucket-name/
+</code></pre></div>
+<p>Verify the upload by checking the S3 bucket and ensuring the zip file is present. Note the object URL for later use.</p>
+<h2 id="creating-and-using-the-lambda-layer">Creating and Using the Lambda Layer</h2>
+<p>Navigate to the AWS Lambda console and select the Layers option.</p>
+<p>Click on <code>Create layer</code> and input the necessary configuration details. Choose the <code>Upload a file from Amazon S3</code> option and paste the URL of the bucket containing the zip file you created earlier.</p>
+<p>Finalize by clicking "Add".</p>
+<p>That's it! You've successfully deployed the <code>qrcode</code> library to AWS Lambda as a Layer.</p>
 
 
 
