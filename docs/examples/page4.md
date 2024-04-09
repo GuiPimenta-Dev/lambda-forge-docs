@@ -1,6 +1,6 @@
-# Image Processing with AWS S3, Secrets Manager and SMTP Email Delivery
+# Converting Image to QR Code with AWS S3, Secrets Manager and SMTP Email Delivery
 
-In this section, we'll delve into the creation of four distinct projects centered around image processing. These projects include: `Image Resizing`, `Watermarking`, `Color Filters`, and `Converting an Image into a QR Code`. Upon user submission of a request, the image undergoes processing. Once processed, the file is saved on Amazon S3 and promptly dispatched via email, allowing users to conveniently access the results.
+In this part, we're going to cover how to make a function that turns images uploaded by users into QR codes. When a user sends a request, the image gets processed, saved on Amazon S3, and then sent to them via email so they can easily check out the results.
 
 ## Configuring S3 Buckets for Each Deployment Stage
 
@@ -122,14 +122,15 @@ Excellent! This approach configures our framework to utilize each ARN on its des
 
 ## Using External Libraries as Lambda Layers
 
-For image processing, we'll utilize the Pillow library, widely used for working with images, and the requests library to download content from user-provided URLs. Public ARNs for both libraries are available [here](https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json).
+We are going to use the requests library to download content from user-provided URLs. Public ARNs for layers are available [here](https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json).
 
 The ARN we require is listed below:
 
-- Pillow: `arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1`
 - Requests: `arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19`
 
-Now, let's update the Layers class to include the Pillow layer as one of its variables.
+To convert the image into a qr code, we are also going to use an external library called `qrcode`. Unlike the readily available AWS layer for Requests, we're dealing with a library for which AWS doesn't provide a public layer.
+
+To seamlessly incorporate this library, refer to the article [Deploying an External Library to AWS Lambda as a Layer]() for guidance on deploying the qrcode library. Once you obtain the ARN of your deployed Lambda layer, simply add it to the Layers class.
 
 ```python title="infra/services/layers.py" hl_lines="8-12 14-18"
 from aws_cdk import aws_lambda as _lambda
@@ -139,42 +140,40 @@ from lambda_forge import Path
 class Layers:
     def __init__(self, scope) -> None:
 
-        self.pillow_layer = _lambda.LayerVersion.from_layer_version_arn(
-            scope,
-            id="PillowLayer",
-            layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-pillow:1",
-        )
-
         self.requests_layer = _lambda.LayerVersion.from_layer_version_arn(
             scope,
             id="RequestsLayer",
             layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19",
         )
+
+        self.qrcode_layer = _lambda.LayerVersion.from_layer_version_arn(
+            scope,
+            id="QrCodeLayer",
+            layer_version_arn="$QR-CODE-LAYER",
+        )
 ```
 
-It's essential to include the both libraries in our `requirements.txt` file to ensure it's installed when deploying our application.
+It's essential to include both libraries in our `requirements.txt` file to ensure they are installed when deploying our application.
 
 ```title="requirements.txt" linenums="15"
-pillow==10.3.0
 requests==2.28.1
+qrcode==7.4.2
 ```
 
-## Resize
+## Image to QR Code
 
-This function will be designed to accept three parameters from the user: `url`, denoting a URL leading to an image; `email`, specifying the recipient email to which we'll be sending the file as a response; and `dimensions`, indicating the desired size to which the user wishes to resize the image.
-
-Let's dive into building this functionality.
+With our layers now set up, it's time to create our new function.
 
 ```
-forge function resize --method "POST" --description "Resizes an image and stores it on S3" --belongs-to "images" --public --no-tests --endpoint "images/resize"
+forge function qrcode --method "POST" --description "Converts an image into a qr code" --belongs-to "images" --no-tests --public --endpoint "images/qrcode"
 ```
 
-Upon executing this command, the following structure is generated.
+We now have the following directory:
 
 ```
 functions
 └── images
-    ├── resize
+    ├── qrcode
     │   ├── __init__.py
     │   ├── config.py
     │   └── main.py
@@ -182,106 +181,100 @@ functions
         └── __init__.py
 ```
 
-Let's them create the resize funcionality.
+This function will receive from the user a `url` to convert the image parameter and a `email` parameter to send the email notification. Let's proceed with its implementation.
 
-```python title="functions/images/resize/main.py"
-import hashlib
+```python title="functions/images/img_to_qrcode/main.py" linenums="1"
 import json
 import os
 import uuid
-from dataclasses import dataclass
 from io import BytesIO
 
 import boto3
+import qrcode
 import requests
-from PIL import Image
-
-
-@dataclass
-class Input:
-    url: str
-    email: str
-    dimensions: str
-
-
-@dataclass
-class Output:
-    message: str
 
 
 def lambda_handler(event, context):
 
+    # Parse the input event to get the URL of the image and the S3 bucket name
+    body = json.loads(event["body"])
+    url = body.get("url")
+
     # Retrieve the S3 bucket name from environment variables
     bucket_name = os.environ.get("BUCKET_NAME")
 
-    # Parse the input event to get the URL and the email body
-    body = json.loads(event["body"])
-
-    url = body.get("url")
-    email = body.get("email")
-    dimensions = body.get("dimensions", "100x100")
-
-    # if dimension dont follow the correct format, return an error
-    if dimensions.count("x") != 1:
-        return {"statusCode": 400, "message": "Invalid dimensions format"}
-
     # Download the image
     response = requests.get(url)
-    img = Image.open(BytesIO(response.content))
+    image_bytes = BytesIO(response.content)
+
+    # Generate QR code from the image
+    qr = qrcode.QRCode()
+    qr.add_data(url)
+    qr.make()
+
+    # Create an image from the QR code
+    qr_image = qr.make_image()
+
+    # Convert the QR code image to bytes
+    qr_byte_arr = BytesIO()
+    qr_image.save(qr_byte_arr, format="PNG")
+    qr_byte_arr = qr_byte_arr.getvalue()
+
+    # Create the file name with a uuid
+    file_name = f"{uuid.uuid4()}.jpg"
 
     # Initialize the S3 client
     s3_client = boto3.client("s3")
 
-    # Resize the image as needed
-    width, height = dimensions.split("x")
-    img_resized = img.resize((int(width), int(height)))
-
-    # Convert the resized image to bytes
-    img_byte_arr = BytesIO()
-    img_resized.save(img_byte_arr, format=img.format)
-    img_byte_arr = img_byte_arr.getvalue()
-
-    # create the file name with a uuid
-    file_name = f"{uuid.uuid4()}.jpg"
-
-    # Upload the resized image to S3
+    # Upload the QR code image to S3
     s3_client.put_object(
         Bucket=bucket_name,
         Key=file_name,
-        Body=img_byte_arr,
-        Metadata={"url": url, "email": email},
+        Body=qr_byte_arr,
+        ContentType="image/png",
+        Metadata={"url": url, "email": body.get("email")},
     )
 
-    return {"statusCode": 200, "message": "Image resized and uploaded successfully"}
+    return {"statusCode": 200, "message": "QR code generated and uploaded successfully"}
 ```
 
-This Lambda function retrieves an image from a given URL, resizes it based on specified dimensions, and uploads the resized image to an S3 bucket while attaching metadata including the original URL and recipient email.
+<div class="admonition note">
+    <p class="admonition-title">Note</p>
+<p>It's important to note that we're storing the file with both the URL and the email as metadata on the S3 bucket, specifically on line 49. This detail will be crucial for retrieving the emails later to send them to the recipients.
+</p>
+</div>
 
-Now, let's proceed with the configuration.
+Now, it's configuration.
 
-```python title="functions/images/resize/config.py"
+```python title="functions/images/qrcode/config.py" hl_lines="12-15 20"
 from infra.services import Services
 
 
-class ResizeConfig:
+class QrcodeConfig:
     def __init__(self, services: Services) -> None:
 
         function = services.aws_lambda.create_function(
-            name="Resize",
+            name="Qrcode",
             path="./functions/image",
-            description="Resizes an image and stores it on S3",
-            directory="resize",
+            description="Turns image into qr code",
+            directory="qrcode",
+            layers=[services.layers.requests_layer, services.layers.qrcode_layer],
             environment={
                 "BUCKET_NAME": services.s3.images_bucket.bucket_name,
             },
         )
 
-        services.api_gateway.create_endpoint("POST", "/images/resize", function, public=True)
+        services.api_gateway.create_endpoint("POST", "/image/qrcode", function, public=True)
 
         services.s3.images_bucket.grant_write(function)
+
 ```
 
-## Watermark
+## Mailer
+
+It's worth noting that in our previous implementation, we deliberately omitted email notifications. This exemplifies one of the advantages of serverless architecture: the ability to completely decouple functions from each other and initiate notifications through events.
+
+This is precisely the approach we're taking with the mailer function. Whenever a file is uploaded to the S3 bucket, an event will be triggered to run this Lambda function. With the assistance of metadata, the mailer Lambda function will be equipped with the necessary information to determine the appropriate email recipients for notifications.
 
 Coming soon...
 
@@ -333,3 +326,11 @@ Exaplin this is unsafe because exposes the credentiais on the the aws lambda con
 But also explain this is a piece of code commonly used. To several lambda functions, why not create a layer to make that smoother ?
 
 Create a simple layer called sm_utils to retrieve the code based on the secret name. -->
+
+```
+
+```
+
+```
+
+```

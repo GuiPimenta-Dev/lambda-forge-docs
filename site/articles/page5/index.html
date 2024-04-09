@@ -9,8 +9,10 @@
       
       
       
-        <link rel="prev" href="../../articles/page5/">
+        <link rel="prev" href="../page4/">
       
+      
+        <link rel="next" href="../../license/page1/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -18,7 +20,7 @@
     
     
       
-        <title>License - Lambda Forge</title>
+        <title>Deploying External Library as Layers - Lambda Forge</title>
       
     
     
@@ -71,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#deploying-an-external-library-to-aws-lambda-as-a-layer" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -100,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              License
+              Deploying External Library as Layers
             
           </span>
         </div>
@@ -217,11 +224,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../articles/page1/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../page1/" class="md-tabs__link">
           
   
   Articles
@@ -235,11 +244,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../license/page1/" class="md-tabs__link">
         
   
     
@@ -717,25 +724,30 @@
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -746,7 +758,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Articles
@@ -760,7 +772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page1/" class="md-nav__link">
+      <a href="../page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -781,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page2/" class="md-nav__link">
+      <a href="../page2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -802,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page3/" class="md-nav__link">
+      <a href="../page3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page4/" class="md-nav__link">
+      <a href="../page4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -841,10 +853,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../articles/page5/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Deploying External Library as Layers
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -853,6 +885,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up The Environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-layer-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparing the Layer Package
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-and-using-the-lambda-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and Using the Lambda Layer
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -869,17 +948,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../license/page1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -888,7 +960,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -910,6 +981,43 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up The Environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-layer-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparing the Layer Package
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-and-using-the-lambda-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and Using the Lambda Layer
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -924,25 +1032,47 @@
                   
 
 
-  <h1>License</h1>
-
-<p>MIT License</p>
-<p>Copyright (c) 2024 Guilherme Alves Pimenta</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+<h1 id="deploying-an-external-library-to-aws-lambda-as-a-layer">Deploying an External Library to AWS Lambda as a Layer</h1>
+<p>This guide outlines the steps to deploy an external library, such as the qrcode library, to AWS Lambda as a Layer. AWS Lambda Layers serve as a repository for managing common code or data shared across multiple functions. By deploying the <code>qrcode</code> library as a Layer, the library can be utilized in various Lambda functions without needing to be included in each function's deployment package.</p>
+<p>Although the <code>qrcode</code> library is used as an example, this method applies universally to any library you wish to deploy in this manner.</p>
+<h2 id="setting-up-the-environment">Setting Up The Environment</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir packages
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cd packages
+</code></pre></div>
+<p>Initialize a virtual environment within this directory and activate it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3 -m venv venv
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>source venv/bin/activate
+</code></pre></div>
+<p>Create a directory named <code>python</code> within the current directory and navigate into it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir python
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cd python
+</code></pre></div>
+<p>It is crucial to name this directory as <strong>python</strong> as it aligns with Lambda Layers' requirements.</p>
+<p>Install the qrcode library directly into this directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip install qrcode -t .
+</code></pre></div>
+<p>This command uses pip to install the library into the current <code>python</code> directory.</p>
+<p>After installation, you can attempt to list the directory contents. You should see the installed packages.</p>
+<h2 id="preparing-the-layer-package">Preparing the Layer Package</h2>
+<p>Remove unnecessary files, specifically those with the .dist-info extension, to conserve space. These files are not needed for the Lambda Layer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rm -rf *dist-info
+</code></pre></div>
+<p>Return to the parent directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cd ..
+</code></pre></div>
+<p>Zip the python directory, naming the zip file <code>qr-code-lambda-package.zip</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>zip -r qr-code-lambda-package.zip python
+</code></pre></div>
+<p>You should now have the zip file in your current directory.</p>
+<p>Create a s3 bucket and upload your zip file to it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aws s3 cp qr-code-lambda-package.zip s3://your-s3-bucket-name/
+</code></pre></div>
+<p>Verify the upload by checking the S3 bucket and ensuring the zip file is present. Note the object URL for later use.</p>
+<h2 id="creating-and-using-the-lambda-layer">Creating and Using the Lambda Layer</h2>
+<p>Navigate to the AWS Lambda console and select the Layers option.</p>
+<p>Click on <code>Create layer</code> and input the necessary configuration details. Choose the <code>Upload a file from Amazon S3</code> option and paste the URL of the bucket containing the zip file you created earlier.</p>
+<p>Finalize by clicking "Add".</p>
+<p>That's it! You've successfully deployed the <code>qrcode</code> library to AWS Lambda as a Layer.</p>
 
 
 

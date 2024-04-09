@@ -724,7 +724,7 @@
         
   
   <span class="md-ellipsis">
-    Image Processing
+    Image to QR Code
   </span>
   
 
@@ -949,6 +949,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/page5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploying External Library as Layers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1083,7 +1104,7 @@
 <p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: <code>Dev-URLs</code>, <code>Staging-URLs</code> and <code>Prod-URLs</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.
+<p>Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.</p>
 </div>
 
 <p>Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the <code>cdk.json</code> file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.</p>

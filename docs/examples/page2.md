@@ -8,7 +8,7 @@ To ensure our application can operate smoothly across different environments, we
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.
+<p>Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.</p>
 </div>
 
 Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.
