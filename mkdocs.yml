@@ -33,7 +33,7 @@ nav:
     - URL Shortener: examples/page2.md
     # - CRUD Application: examples/page3.md
     - Image to QR Code: examples/page4.md
-    - Authentication System: examples/page5.md
+    - JWT Authentication: examples/page5.md
     - Real-Time Chat: examples/page6.md
     - Web Scraper: examples/page7.md
     - AI ChatBot: examples/page8.md

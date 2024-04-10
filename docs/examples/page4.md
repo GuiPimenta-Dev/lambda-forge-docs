@@ -579,19 +579,29 @@ Now, it's time to level up the sm_utils layer by introducing a `get_secret` func
 
 ```python title="layers/sm_utils/sm_utils.py"
 import json
+
 import boto3
+
 
 def get_secret(secret_name: str):
 
     # Initialize the Secrets Manager client
-    sm_client = boto3.client('secretsmanager')
+    sm_client = boto3.client("secretsmanager")
 
     # Retrieve the secret value from Secrets Manager
     response = sm_client.get_secret_value(SecretId=secret_name)
-    secret = json.loads(response['SecretString'])
+    try:
+        secret = json.loads(response["SecretString"])
+    except json.JSONDecodeError:
+        secret = response["SecretString"]
 
     return secret
 ```
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Given the intention to utilize this function across multiple functions, a few improvements were made to accommodate a broader range of functions. Notably, it now accommodates scenarios where the secret is stored in plain text instead of JSON format.</p>
+</div>
 
 ### Refactoring The Mailer Function to Use Custom Layers
 

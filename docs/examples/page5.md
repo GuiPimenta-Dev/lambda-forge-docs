@@ -1,3 +1,3 @@
-# Implementing JWT Authentication with AWS Cognito, Secrets Manager and KMS
+# Implementing JWT Authentication with Dynamo DB, Secrets Manager and KMS
 
 Coming soon...
