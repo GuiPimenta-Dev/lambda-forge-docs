@@ -856,7 +856,28 @@
         
   
   <span class="md-ellipsis">
-    ETL Pipeline
+    Twitter Data Pipeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/page9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stock Price Tracker
   </span>
   
 
@@ -1252,64 +1273,74 @@
 <p>Having successfully installed Lambda Forge, you are now ready to explore the capabilities of the Forge CLI. Begin by entering the following command to access the comprehensive list of available options and commands:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>forge --help
 </code></pre></div>
+<p>Here's a concise list of the commands supported by Forge:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Commands:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  authorizer  Create a new authorizer
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  function    Create a new function
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  layer       Create a new layer
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  project     Create a new project
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  service     Create a new AWS service
+</code></pre></div>
+<p>For a comprehensive list of configurations that each Forge command supports, you can refer to the command line help by running:</p>
+<p><code>forge $COMMAND --help</code>.</p>
+<p>Later in this tutorial, we'll delve into the specifics of each command. But for now, let's kickstart by establishing the foundation of our project.</p>
 <h2 id="create-a-new-project">Create a New Project</h2>
-<p>Start a new project named <code>lambda-forge-demo</code>, incorporating the <code>--no-docs</code> flag to bypass docs generation initially as this will be covered on a specific section.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
+<p>Start a new project named <code>lambda-forge-demo</code>, incorporating the <code>--no-docs</code> flag to bypass docs generation initially as this will be covered on a dedicated section.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --no-docs
 </code></pre></div>
 <p>Make sure to replace <code>$GITHUB-OWNER</code> and <code>$GITHUB-REPO</code> with the actual GitHub owner and the name of an empty repository.</p>
 <h3 id="project-structure">Project Structure</h3>
 <p>Upon creatig your project, some directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
 <p>In the upcoming sections of this tutorial, we'll explore each of these components in detail. For now, familiarize yourself with the foundational structure that should resemble the following:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>├── authorizers
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>│   └── __init__.py
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>├── functions
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>│   └── __init__.py
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>├── infra
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>│   ├── __init__.py
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>│   ├── services
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>│   │   ├── __init__.py
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>│   │   ├── api_gateway.py
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>│   │   ├── aws_lambda.py
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>│   │   └── layers.py
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>│   ├── stacks
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>│   │   ├── __init__.py
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>│   │   ├── dev_stack.py
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>│   │   ├── lambda_stack.py
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>│   │   ├── prod_stack.py
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>│   │   └── staging_stack.py
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>│   └── stages
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>│       ├── __init__.py
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>│       └── deploy.py
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>├── layers
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>│   └── __init__.py
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>├── .coveragerc
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>├── .gitignore
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>├── app.py
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>├── cdk.json
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>├── pytest.ini
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>└── requirements.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>├── authorizers
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>│   └── __init__.py
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>├── functions
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│   └── __init__.py
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>├── infra
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│   ├── __init__.py
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>│   ├── services
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>│   │   ├── __init__.py
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>│   │   ├── api_gateway.py
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>│   │   ├── aws_lambda.py
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>│   │   └── layers.py
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>│   ├── stacks
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>│   │   ├── __init__.py
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>│   │   ├── dev_stack.py
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>│   │   ├── lambda_stack.py
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>│   │   ├── prod_stack.py
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>│   │   └── staging_stack.py
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>│   └── stages
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>│       ├── __init__.py
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>│       └── deploy.py
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>├── layers
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>│   └── __init__.py
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>├── .coveragerc
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>├── .gitignore
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>├── app.py
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>├── cdk.json
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>├── pytest.ini
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>└── requirements.txt
 </code></pre></div>
 <p>The <code>cdk.json</code> file, located at the root of your directory, serves as the central configuration hub for Lambda Forge projects. When you run the <code>forge project</code> command, Forge automatically applies the informed settings into the cdk.json file.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-41">41</a></span>
-<span class="normal"><a href="#__codelineno-7-42">42</a></span>
-<span class="normal"><a href="#__codelineno-7-43">43</a></span>
-<span class="normal"><a href="#__codelineno-7-44">44</a></span>
-<span class="normal"><a href="#__codelineno-7-45">45</a></span>
-<span class="normal"><a href="#__codelineno-7-46">46</a></span>
-<span class="normal"><a href="#__codelineno-7-47">47</a></span>
-<span class="normal"><a href="#__codelineno-7-48">48</a></span>
-<span class="normal"><a href="#__codelineno-7-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-41" name="__codelineno-7-41"></a><span class="w">    </span><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-42" name="__codelineno-7-42"></a><span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-43" name="__codelineno-7-43"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-44" name="__codelineno-7-44"></a><span class="w">    </span><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-45" name="__codelineno-7-45"></a><span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-OWNER&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-46" name="__codelineno-7-46"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
-<a id="__codelineno-7-47" name="__codelineno-7-47"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-7-48" name="__codelineno-7-48"></a><span class="w">    </span><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-49" name="__codelineno-7-49"></a><span class="w">    </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span>
+<span class="normal"><a href="#__codelineno-8-45">45</a></span>
+<span class="normal"><a href="#__codelineno-8-46">46</a></span>
+<span class="normal"><a href="#__codelineno-8-47">47</a></span>
+<span class="normal"><a href="#__codelineno-8-48">48</a></span>
+<span class="normal"><a href="#__codelineno-8-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">    </span><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">    </span><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-OWNER&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-REPO&quot;</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="w">    </span><span class="nt">&quot;bucket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="w">    </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
 </code></pre></div></td></tr></table></div>
-<p>For a comprehensive list of configurations that Forge supports, you can refer to the command line help by running <code>forge project --help</code>.</p>
 
 
 

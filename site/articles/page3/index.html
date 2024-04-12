@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#developing-a-serverless-crud-app-using-dynamodb" class="md-skip">
+        <a href="#effective-testing-practices-with-lambda-forge" class="md-skip">
           Skip to content
         </a>
       
@@ -703,7 +703,28 @@
         
   
   <span class="md-ellipsis">
-    ETL Pipeline
+    Twitter Data Pipeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/page9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stock Price Tracker
   </span>
   
 
@@ -802,17 +823,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Mocking AWS Services
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -822,175 +832,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#configuring-dynamodb-tables-for-each-deployment-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuring DynamoDB Tables for Each Deployment Stage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-create-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Create Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Create Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-read-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Read Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Read Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-update-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Update Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Update Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-delete-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Delete Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Delete Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deploying-our-serverless-crud-application" class="md-nav__link">
-    <span class="md-ellipsis">
-      Deploying Our Serverless CRUD Application
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1128,164 +969,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#configuring-dynamodb-tables-for-each-deployment-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuring DynamoDB Tables for Each Deployment Stage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-create-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Create Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Create Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-read-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Read Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Read Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-update-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Update Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Update Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-the-delete-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementing the Delete Functionality
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementing the Delete Functionality">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-logic_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Logic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-class_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deploying-our-serverless-crud-application" class="md-nav__link">
-    <span class="md-ellipsis">
-      Deploying Our Serverless CRUD Application
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1299,16 +982,23 @@
                   
 
 
-<h1 id="developing-a-serverless-crud-app-using-dynamodb">Developing a Serverless CRUD App Using DynamoDB</h1>
-<p>In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.</p>
+<h1 id="effective-testing-practices-with-lambda-forge">Effective Testing Practices with Lambda Forge</h1>
+<p>Comming soon...</p>
+<!-- # Developing a Serverless CRUD App Using DynamoDB
+
+In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 The unit tests for this project are used as example by the <a href="https://docs.lambda-forge.com/articles/page3" target="_blank">Mocking AWS Resources for Unit Testing</a> article. If you're interested in learning how to effectively mock DynamoDB for testing in your own projects, it's a highly recommended read.
 </div>
 
-<h2 id="configuring-dynamodb-tables-for-each-deployment-stage">Configuring DynamoDB Tables for Each Deployment Stage</h2>
-<p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: <code>Dev-Users</code>, <code>Staging-Users</code> and <code>Prod-Users</code>.</p>
-<p>Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the <code>cdk.json</code> file.</p>
+## Configuring DynamoDB Tables for Each Deployment Stage
+
+To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: `Dev-Users`, `Staging-Users` and `Prod-Users`.
+
+Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file.
+
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-51">51</a></span>
 <span class="normal"><a href="#__codelineno-0-52">52</a></span>
 <span class="normal"><a href="#__codelineno-0-53">53</a></span>
@@ -1351,11 +1041,16 @@ The unit tests for this project are used as example by the <a href="https://docs
 </span><a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="w">      </span><span class="p">}</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="implementing-the-create-functionality">Implementing the Create Functionality</h2>
-<p>Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:</p>
+
+## Implementing the Create Functionality
+
+Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>forge function create_user --method &quot;POST&quot; --description &quot;Create a user with name and age on Dynamo DB&quot; --belongs-to users --public
 </code></pre></div>
-<p>This command signals to Forge the need to generate a new Lambda function named create_user, which will handle POST requests. By applying the <code>--belongs-to</code> flag, we guide Forge to organize this function within the <code>users</code> directory, emphasizing its role as part of a suite of user-related functionalities.</p>
+
+This command signals to Forge the need to generate a new Lambda function named create_user, which will handle POST requests. By applying the `--belongs-to` flag, we guide Forge to organize this function within the `users` directory, emphasizing its role as part of a suite of user-related functionalities.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>functions
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>└── users
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    ├── create_user
@@ -1367,14 +1062,16 @@ The unit tests for this project are used as example by the <a href="https://docs
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    └── utils
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        └── __init__.py
 </code></pre></div>
-<ul>
-<li><code>users/</code> This directory acts as the container for all Lambda functions related to users operations, organizing them under a common theme.</li>
-<li><code>create_user/</code> This subdirectory is dedicated to the function for creating users, equipped with all necessary files for its execution, configuration, and testing.</li>
-<li><code>utils/</code> A utility directory for shared functions or helpers that support the operations within the users functions, enhancing code reuse and maintainability.</li>
-</ul>
-<h3 id="core-logic">Core Logic</h3>
-<p>The Create User endpoint serves as the gateway for adding new users to our system. It processes incoming data from the request body, assigns a unique UUID to each user, and then stores this information in DynamoDB.
-Now, let's delve into the details of the function implementation.</p>
+
+- `users/` This directory acts as the container for all Lambda functions related to users operations, organizing them under a common theme.
+- `create_user/` This subdirectory is dedicated to the function for creating users, equipped with all necessary files for its execution, configuration, and testing.
+- `utils/` A utility directory for shared functions or helpers that support the operations within the users functions, enhancing code reuse and maintainability.
+
+### Core Logic
+
+The Create User endpoint serves as the gateway for adding new users to our system. It processes incoming data from the request body, assigns a unique UUID to each user, and then stores this information in DynamoDB.
+Now, let's delve into the details of the function implementation.
+
 <div class="highlight"><span class="filename">functions/users/create_user/main.py</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">json</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span> <span class="nn">uuid</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -1415,8 +1112,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>    <span class="c1"># Return a successful response with the newly created user ID.</span>
 <a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})}</span>
 </code></pre></div>
-<h3 id="configuration-class">Configuration Class</h3>
-<p>Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables are easily configurable and securely accessed within the lambda function.</p>
+
+### Configuration Class
+
+Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables are easily configurable and securely accessed within the lambda function.
+
 <div class="highlight"><span class="filename">functions/users/create_user/config.py</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -1437,13 +1137,20 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="implementing-the-read-functionality">Implementing the Read Functionality</h2>
-<p>We're now set to construct the read feature, enabling the retrieval of user details using their ID.</p>
-<p>To facilitate this, we'll utilize the following command:</p>
+
+## Implementing the Read Functionality
+
+We're now set to construct the read feature, enabling the retrieval of user details using their ID.
+
+To facilitate this, we'll utilize the following command:
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge function get_user --method &quot;GET&quot; --description &quot;Retrieve user information by ID&quot; --belongs-to users --endpoint &quot;/users/{user_id}&quot; --public
 </code></pre></div>
-<p>The <code>--endpoint "/users/{user_id}"</code> parameter sets up a specific URL path for accessing this function. This path includes a dynamic segment {user_id} that gets replaced by the actual ID of the user we're trying to retrieve information about when the function is called.</p>
-<p>By running this command, we add a new layer to our application that specifically handles fetching user details in an organized, accessible manner.</p>
+
+The `--endpoint "/users/{user_id}"` parameter sets up a specific URL path for accessing this function. This path includes a dynamic segment {user_id} that gets replaced by the actual ID of the user we're trying to retrieve information about when the function is called.
+
+By running this command, we add a new layer to our application that specifically handles fetching user details in an organized, accessible manner.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>functions
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>└── users
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    ├── create_user
@@ -1461,8 +1168,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    └── utils
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        └── __init__.py
 </code></pre></div>
-<h3 id="core-logic_1">Core Logic</h3>
-<p>This segment of our application demonstrates the retrieval of user information from a DynamoDB table through an AWS Lambda function. It highlights how to parse API gateway events, interact with DynamoDB, and structure responses for efficient data delivery.</p>
+
+### Core Logic
+
+This segment of our application demonstrates the retrieval of user information from a DynamoDB table through an AWS Lambda function. It highlights how to parse API gateway events, interact with DynamoDB, and structure responses for efficient data delivery.
+
 <div class="highlight"><span class="filename">functions/users/get_user/main.py</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">json</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span> <span class="nn">os</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span> <span class="nn">boto3</span>
@@ -1503,8 +1213,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>    <span class="c1"># Return the user data with a 200 status code, ensuring the body is properly JSON-encoded.</span>
 <a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)}</span>
 </code></pre></div>
-<h3 id="configuration-class_1">Configuration Class</h3>
-<p>The config class below outlines the configuration necessary for establishing the GetUser function within AWS, illustrating the seamless integration of AWS Lambda and API Gateway to expose a user data retrieval endpoint.</p>
+
+### Configuration Class
+
+The config class below outlines the configuration necessary for establishing the GetUser function within AWS, illustrating the seamless integration of AWS Lambda and API Gateway to expose a user data retrieval endpoint.
+
 <div class="highlight"><span class="filename">functions/users/get_user/config.py</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
@@ -1525,11 +1238,16 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
 <a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_read_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="implementing-the-update-functionality">Implementing the Update Functionality</h2>
-<p>Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.</p>
+
+## Implementing the Update Functionality
+
+Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>forge function update_user --method &quot;PUT&quot; --description &quot;Update an user by ID&quot; --belongs-to users --endpoint &quot;/users/{user_id}&quot; --public
 </code></pre></div>
-<p>As expected, after using the forge command to generate the <code>update_user</code> function, a predefined directory structure is created.</p>
+
+As expected, after using the forge command to generate the `update_user` function, a predefined directory structure is created.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>functions
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>└── users
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    ├── create_user
@@ -1553,8 +1271,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    └── utils
 <a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        └── __init__.py
 </code></pre></div>
-<h3 id="core-logic_2">Core Logic</h3>
-<p>Below is the implementation for updating a user, allowing changes to either the name or age.</p>
+
+### Core Logic
+
+Below is the implementation for updating a user, allowing changes to either the name or age.
+
 <div class="highlight"><span class="filename">functions/users/update_user/main.py</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span> <span class="nn">json</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span> <span class="nn">os</span>
@@ -1601,8 +1322,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User updated&quot;</span><span class="p">},</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">),</span>
 <a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>    <span class="p">}</span>
 </code></pre></div>
-<h3 id="configuration-class_2">Configuration Class</h3>
-<p>Here's the configuration needed for the <code>update user</code> function to properly engage with the essential AWS services.</p>
+
+### Configuration Class
+
+Here's the configuration needed for the `update user` function to properly engage with the essential AWS services.
+
 <div class="highlight"><span class="filename">functions/users/update_user/config.py</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">class</span> <span class="nc">UpdateUserConfig</span><span class="p">:</span>
@@ -1622,11 +1346,16 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
 <a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="implementing-the-delete-functionality">Implementing the Delete Functionality</h2>
-<p>Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.</p>
+
+## Implementing the Delete Functionality
+
+Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>forge function delete_user --method &quot;DELETE&quot; --description &quot;Delete an user by ID&quot; --belongs-to users --endpoint &quot;/users/{user_id}&quot; --public
 </code></pre></div>
-<p>Upon executing the Forge command, the <code>delete_user</code> folder will appear within the <code>infra/users</code> directory.</p>
+
+Upon executing the Forge command, the `delete_user` folder will appear within the `infra/users` directory.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>functions
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>└── users
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    ├── create_user
@@ -1656,8 +1385,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>    └── utils
 <a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>        └── __init__.py
 </code></pre></div>
-<h3 id="core-logic_3">Core Logic</h3>
-<p>Below is the streamlined code for removing a user from DynamoDB using their user ID.</p>
+
+### Core Logic
+
+Below is the streamlined code for removing a user from DynamoDB using their user ID.
+
 <div class="highlight"><span class="filename">functions/users/delete_user/main.py</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">import</span> <span class="nn">json</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kn">import</span> <span class="nn">os</span>
@@ -1695,8 +1427,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>    <span class="c1"># Return a response indicating that the user has been successfully deleted, with a 200 HTTP status code.</span>
 <a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User deleted&quot;</span><span class="p">})}</span>
 </code></pre></div>
-<h3 id="configuration-class_3">Configuration Class</h3>
-<p>Here's how to set up the <code>delete user</code> function for interaction with the required AWS resources.</p>
+
+### Configuration Class
+
+Here's how to set up the `delete user` function for interaction with the required AWS resources.
+
 <div class="highlight"><span class="filename">functions/users/delete_user/config.py</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
@@ -1717,8 +1452,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
 <a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>        <span class="n">services</span><span class="o">.</span><span class="n">dynamo_db</span><span class="o">.</span><span class="n">users_table</span><span class="o">.</span><span class="n">grant_write_data</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="deploying-our-serverless-crud-application">Deploying Our Serverless CRUD Application</h2>
-<p>Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.</p>
+
+## Deploying Our Serverless CRUD Application
+
+Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Send your changes to stage</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
@@ -1738,8 +1476,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>git<span class="w"> </span>merge<span class="w"> </span>staging
 <a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<p><img alt="Dev pipeline running" src="images/three_example_pipelines.png" /></p>
-<p>For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.</p>
+
+![Dev pipeline running](images/three_example_pipelines.png)
+
+For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.
+
 <div class="highlight"><span class="filename">Prod - Create User</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl --request POST \
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  --url https://api.lambda-forge.com/users \
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  --data &#39;{
@@ -1747,9 +1488,11 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    &quot;age&quot;: 30
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>}&#39;
 </code></pre></div>
+
 <div class="highlight"><span class="filename">Prod - Get User</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl --request GET \
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>  --url https://api.lambda-forge.com/users/$USER-ID
 </code></pre></div>
+
 <div class="highlight"><span class="filename">Prod - Update User</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl --request PUT \
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  --url https://api.lambda-forge.com/users/$USER-ID \
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  --data &#39;{
@@ -1757,10 +1500,12 @@ Now, let's delve into the details of the function implementation.</p>
 <a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    &quot;age&quot;: 31
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>}&#39;
 </code></pre></div>
+
 <div class="highlight"><span class="filename">Prod - Delete User</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl --request DELETE \
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  --url https://api.lambda-forge.com/users/$USER-ID
 </code></pre></div>
-<p>Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻</p>
+
+Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻 -->
 
 
 

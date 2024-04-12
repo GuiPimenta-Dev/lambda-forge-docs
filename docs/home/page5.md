@@ -75,7 +75,7 @@ Traditionally, working with Lambda layers introduces complexity during developme
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-In case you need to reinstall all custom layers into your virtual environment, use the command:
+In case you need to reinstall the custom layers into your virtual environment, use the command:
 
 ```
 forge layers --install
@@ -88,22 +88,19 @@ forge layers --install
 Create a new Lambda function that leverages your custom layer by running:
 
 ```
-forge function custom --method "GET" --description "A function that uses my_custom_layer" --belongs-to "layers" --endpoint "/layers/custom" --public
+forge function custom --method "GET" --description "A function that uses my_custom_layer" --public
 ```
 
-The `--belongs-to` flag indicates to Forge that this function is part of a group of related functions, organizing them together in the same directory. It also specifies the API Gateway endpoint path with the `--endpoint` flag.
+This command simply creates a public function named `custom` inside the `functions` directory.
 
 ```
 functions
-└── layers
-    ├── custom
-    │   ├── __init__.py
-    │   ├── config.py
-    │   ├── integration.py
-    │   ├── main.py
-    │   └── unit.py
-    └── utils
-        └── __init__.py
+├── custom
+    ├── __init__.py
+    ├── config.py
+    ├── integration.py
+    ├── main.py
+    └── unit.py
 ```
 
 Now, implement the function to utilize the custom layer:
@@ -148,7 +145,7 @@ def test_lambda_handler():
 
 Finally, configure the function to make use of the `my_custom_layer` layer:
 
-```python title="functions/layers/custom/config.py" hl_lines="12"
+```python title="functions/layers/custom/config.py" hl_lines="11"
 from infra.services import Services
 
 
@@ -157,13 +154,12 @@ class CustomConfig:
 
         function = services.aws_lambda.create_function(
             name="Custom",
-            path="./functions/layers",
+            path="./functions/custom",
             description="A function to make use of the custom layer",
-            directory="custom",
             layers=[services.layers.my_custom_layer],
         )
 
-        services.api_gateway.create_endpoint("GET", "/layers/custom", function, public=True)
+        services.api_gateway.create_endpoint("GET", "/custom", function, public=True)
 ```
 
 Once you've committed and pushed your code to GitHub and the pipeline has successfully executed, making a GET request to the generated URL should return the following response:
@@ -176,7 +172,7 @@ Once you've committed and pushed your code to GitHub and the pipeline has succes
 
 The URL for this tutorial is:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/layers/custom](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/layers/custom)
+- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/custom](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/custom)
 
 ## AWS Lambda Development with External Libraries
 
@@ -224,28 +220,19 @@ requests==2.28.1
 To create a Lambda function that leverages the Requests library, execute the following command:
 
 ```
-forge function external --method "GET" --description "A function that uses an external library" --belongs-to "layers" --endpoint "/layers/external" --public
+forge function external --method "GET" --description "A function that uses an external library" --public
 ```
 
-This action initiates the creation of a new function within the `layers` directory.
+This action initiates the creation of a new function named the `external` directory.
 
 ```
 functions
-└── layers
-    ├── custom
-    │   ├── __init__.py
-    │   ├── config.py
-    │   ├── integration.py
-    │   ├── main.py
-    │   └── unit.py
-    ├── external
-    │   ├── __init__.py
-    │   ├── config.py
-    │   ├── integration.py
-    │   ├── main.py
-    │   └── unit.py
-    └── utils
-        └── __init__.py
+├── external
+    ├── __init__.py
+    ├── config.py
+    ├── integration.py
+    ├── main.py
+    └── unit.py
 ```
 
 Now, implement the function to utilize the custom layer:
@@ -270,53 +257,10 @@ class Name:
 
 
 @dataclass
-class Street:
-    number: int
-    name: str
-
-
-@dataclass
-class Coordinates:
-    latitude: str
-    longitude: str
-
-
-@dataclass
-class Timezone:
-    offset: str
-    description: str
-
-
-@dataclass
-class Location:
-    street: Street
-    city: str
-    state: str
-    country: str
-    postcode: int
-    coordinates: Coordinates
-    timezone: Timezone
-
-
-@dataclass
-class Login:
-    uuid: str
-    username: str
-    password: str
-    salt: str
-    md5: str
-    sha1: str
-    sha256: str
-
-
-@dataclass
 class Output:
     gender: str
     name: Name
-    location: Location
     email: str
-    login: Login
-    phone: str
 
 
 def lambda_handler(event, context):
@@ -324,12 +268,9 @@ def lambda_handler(event, context):
     result = requests.get("https://randomuser.me/api").json()["results"][0]
 
     data = {
-        "gender": result["gender"],
         "name": result["name"],
-        "location": result["location"],
+        "gender": result["gender"],
         "email": result["email"],
-        "login": result["login"],
-        "phone": result["phone"],
     }
 
     return {"statusCode": 200, "body": json.dumps({"data": data})}
@@ -347,7 +288,7 @@ def test_lambda_handler():
     response = lambda_handler(None, None)
     body = json.loads(response["body"])
 
-    assert ["gender", "name", "location", "email", "login", "phone"] == list(body.keys())
+    assert ["name", "gender", "email"] == list(body.keys())
 ```
 
 Finally, configure the function to make use of the requests layer:
@@ -361,57 +302,28 @@ class ExternalConfig:
 
         function = services.aws_lambda.create_function(
             name="External",
-            path="./functions/layers",
+            path="./functions/external",
             description="A function that uses an external library",
-            directory="external",
             layers=[services.layers.requests_layer],
         )
 
-        services.api_gateway.create_endpoint("GET", "/layers/external", function, public=True)
+        services.api_gateway.create_endpoint("GET", "/external", function, public=True)
 ```
 
 Once you've committed and pushed your code to GitHub and the pipeline has successfully executed, making a GET request to the generated URL should return the following response:
 
 ```json
 {
-  "gender": "str",
   "name": {
     "title": "str",
     "first": "str",
     "last": "str"
   },
-  "location": {
-    "street": {
-      "number": "int",
-      "name": "str"
-    },
-    "city": "str",
-    "state": "str",
-    "country": "str",
-    "postcode": "int",
-    "coordinates": {
-      "latitude": "str",
-      "longitude": "str"
-    },
-    "timezone": {
-      "offset": "str",
-      "description": "str"
-    }
-  },
-  "email": "str",
-  "login": {
-    "uuid": "str",
-    "username": "str",
-    "password": "str",
-    "salt": "str",
-    "md5": "str",
-    "sha1": "str",
-    "sha256": "str"
-  },
-  "phone": "str"
+  "gender": "str",
+  "email": "str"
 }
 ```
 
 For this tutorial, the generated URL is:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/layers/external](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/layers/external)
+- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/external](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/external)

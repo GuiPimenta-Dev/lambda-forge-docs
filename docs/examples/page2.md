@@ -210,7 +210,9 @@ To make this possible, we must incorporate the base URL into the `cdk.json` file
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>
 Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate your own base URL in each environment.
+</p>
 </div>
 
 Initially, the `LambdaStack` class sends only the `self.services` as argument to the `ShortenerConfig` class. We must update it to also send the `context` parameter. This change allows the config class to access base URLs and dynamically set the correct environment variables during the function definition, enhancing its adaptability.

@@ -6,7 +6,7 @@ JWT authentication is a secure method for transmitting information between parti
 
 ## Setting Up the DynamoDB Tables
 
-To get started, we must create tables to store user credentials securely. For maximum decoupling of environments, proceed to your AWS console and create three separate tables, each designated for a specific stage: `Dev-JWT-Auth`, `Staging-JWT-Auth`, and `Prod-JWT-Auth`.
+To get started, we must create tables to store user credentials securely. For maximum decoupling of environments, proceed to your AWS console and create three separate tables, each designated for a specific stage: `Dev-Auth`, `Staging-Auth`, and `Prod-Auth`.
 
 Once you have obtained the ARNs for these tables, let's integrate them into the `cdk.json` file within the corresponding environment.
 
@@ -16,7 +16,7 @@ Once you have obtained the ARNs for these tables, let's integrate them into the 
       "arns": {
         "urls_table": "$DEV-URLS-TABLE-ARN",
         "images_bucket": "$DEV-IMAGES-BUCKET-ARN",
-        "jwt_auth_table": "$DEV-JWT-AUTH-TABLE-ARN"
+        "auth_table": "$DEV-AUTH-TABLE-ARN"
       }
     },
     "staging": {
@@ -24,7 +24,7 @@ Once you have obtained the ARNs for these tables, let's integrate them into the 
       "arns": {
         "urls_table": "$STAGING-URLS-TABLE-ARN",
         "images_bucket": "$STAGING-IMAGES-BUCKET-ARN",
-        "jwt_auth_table": "$STAGING-JWT-AUTH-TABLE-ARN"
+        "auth_table": "$STAGING-AUTH-TABLE-ARN"
 
       }
     },
@@ -33,7 +33,7 @@ Once you have obtained the ARNs for these tables, let's integrate them into the 
       "arns": {
         "urls_table": "$PROD-URLS-TABLE-ARN",
         "images_bucket": "$PROD-IMAGES-BUCKET-ARN",
-        "jwt_auth_table": "$PROD-JWT-AUTH-TABLE-ARN"
+        "auth_table": "$PROD-AUTH-TABLE-ARN"
       }
     }
 ```
@@ -50,10 +50,10 @@ class DynamoDB:
             context.resources["arns"]["urls_table"],
         )
 
-        self.jwt_auth_table = dynamo_db.Table.from_table_arn(
+        self.auth_table = dynamo_db.Table.from_table_arn(
             scope,
-            "JWTAuthTable",
-            context.resources["arns"]["jwt_auth_table"],
+            "AuthTable",
+            context.resources["arns"]["auth_table"],
         )
 ```
 
@@ -91,10 +91,10 @@ from aws_cdk import aws_kms as kms
 class KMS:
     def __init__(self, scope, context) -> None:
 
-        self.jwt_auth_key = kms.Key.from_key_arn(
+        self.auth_key = kms.Key.from_key_arn(
             scope,
-            "JWTAuthKey",
-            key_arn="$JWT-AUTH-KEY-ARN",
+            "AuthKey",
+            key_arn="$AUTH-KEY-ARN",
         )
 ```
 
@@ -127,7 +127,7 @@ class SecretsManager:
 
 To hash our JWT tokens, we'll leverage the widely-used Python library called `pyjwt`. Due to its popularity, AWS conveniently offers it as a public layer, streamlining our authentication implementation.
 
-- JWT: `arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-PyJWT:3`
+- PYJWT: `arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-PyJWT:3`
 
 Let's now create a new class variable refencing the pyjwt layer.
 
@@ -197,20 +197,20 @@ def encrypt_with_kms(plaintext: str, kms_key_id: str) -> str:
 
 def lambda_handler(event, context):
     # Retrieve the DynamoDB table name and KMS key ID from environment variables.
-    USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
+    AUTH_TABLE_NAME = os.environ.get("AUTH_TABLE_NAME")
     KMS_KEY_ID = os.environ.get("KMS_KEY_ID")
 
     # Initialize a DynamoDB resource.
     dynamodb = boto3.resource("dynamodb")
 
     # Reference the DynamoDB table.
-    users_table = dynamodb.Table(USERS_TABLE_NAME)
+    auth_table = dynamodb.Table(AUTH_TABLE_NAME)
 
     # Parse the request body to get user data.
     body = json.loads(event["body"])
 
     # Verify if the user already exists.
-    user = users_table.get_item(Key={"PK": body["email"]})
+    user = auth_table.get_item(Key={"PK": body["email"]})
     if user.get("Item"):
         return {
             "statusCode": 400,
@@ -221,7 +221,7 @@ def lambda_handler(event, context):
     encrypted_password = encrypt_with_kms(body["password"], KMS_KEY_ID)
 
     # Insert the new user into the DynamoDB table.
-    users_table.put_item(Item={"PK": body["email"], "password": encrypted_password})
+    auth_table.put_item(Item={"PK": body["email"], "password": encrypted_password})
 
     # Return a successful response with the newly created user ID.
     return {"statusCode": 201}
@@ -244,16 +244,16 @@ class SignUpConfig:
             description="Create a user with name and age on Dynamo DB",
             directory="signup",
             environment={
-                "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
-                "KMS_KEY_ID": services.kms.signup_key.key_id,
+                "AUTH_TABLE_NAME": services.dynamo_db.auth_table.table_name,
+                "KMS_KEY_ID": services.kms.auth_key.key_id,
             },
         )
 
         services.api_gateway.create_endpoint("POST", "/signup", function, public=True)
 
-        services.dynamo_db.users_table.grant_read_write_data(function)
+        services.dynamo_db.auth_table.grant_read_write_data(function)
 
-        services.kms.signup_key.grant_encrypt(function)
+        services.kms.auth_key.grant_encrypt(function)
 ```
 
 ## Implementing the SignIn Functionality
@@ -314,7 +314,7 @@ def decrypt_with_kms(ciphertext_blob: bytes, kms_key_id: str) -> str:
 
 def lambda_handler(event, context):
     # Retrieve the DynamoDB table name and KMS key ID from environment variables.
-    USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
+    AUTH_TABLE_NAME = os.environ.get("AUTH_TABLE_NAME")
     KMS_KEY_ID = os.environ.get("KMS_KEY_ID")
     JWT_SECRET_NAME = os.environ.get("JWT_SECRET_NAME")
 
@@ -327,10 +327,10 @@ def lambda_handler(event, context):
 
     # Initialize a DynamoDB resource.
     dynamodb = boto3.resource("dynamodb")
-    users_table = dynamodb.Table(USERS_TABLE_NAME)
+    auth_table = dynamodb.Table(AUTH_TABLE_NAME)
 
     # Retrieve user data from DynamoDB.
-    response = users_table.get_item(Key={"PK": email})
+    response = auth_table.get_item(Key={"PK": email})
     user = response.get("Item")
 
     # Check if user exists.
@@ -373,17 +373,17 @@ class SigninConfig:
             directory="signin",
             layers=[services.layers.sm_utils_layer, services.layers.pyjwt_layer],
             environment={
-                "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
-                "KMS_KEY_ID": services.kms.signup_key.key_id,
+                "AUTH_TABLE_NAME": services.dynamo_db.auth_table.table_name,
+                "KMS_KEY_ID": services.kms.auth_key.key_id,
                 "JWT_SECRET_NAME": services.secrets_manager.jwt_secret.secret_name,
             },
         )
 
         services.api_gateway.create_endpoint("POST", "/signin", function, public=True)
 
-        services.dynamo_db.users_table.grant_read_data(function)
+        services.dynamo_db.auth_table.grant_read_data(function)
 
-        services.kms.signup_key.grant_decrypt(function)
+        services.kms.auth_key.grant_decrypt(function)
 
         services.secrets_manager.jwt_secret.grant_read(function)
 ```
@@ -423,21 +423,7 @@ def lambda_handler(event, context):
     # Extract the JWT token from the event
     token = event["headers"].get("authorization")
 
-    # If token is missing, deny access
-    if not token:
-        return {
-            "policyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                    {
-                        "Action": "execute-api:Invoke",
-                        "Effect": "deny",
-                        "Resource": event["methodArn"],
-                    }
-                ],
-            }
-        }
-
+    # Retrieve the JWT secret from Secrets Manager
     JWT_SECRET_NAME = os.environ.get("JWT_SECRET_NAME")
     JWT_SECRET = sm_utils.get_secret(JWT_SECRET_NAME)
 
@@ -499,7 +485,7 @@ class JwtAuthorizerConfig:
 Now it's time to create a simple private function that can only be acessible through requests that passes the validations made through the authorizer.
 
 ```
-forge function hello --method "GET" --description "A protected function" --no-tests
+forge function hello --method "GET" --description "A private function" --no-tests
 ```
 
 This command creates a standalone function in the root of the `functions` folder.
@@ -548,7 +534,7 @@ class HelloConfig:
         function = services.aws_lambda.create_function(
             name="Hello",
             path="./functions/hello",
-            description="A protected function",
+            description="A private function",
         )
 
         services.api_gateway.create_endpoint("GET", "/hello", function, authorizer="jwt")
@@ -587,9 +573,12 @@ This sequence ensures our code passes through development, staging, and finally,
 
 After the pipelines complete, the Authentication system should be available across development, staging, and production stages.
 
-## Testing the Deployed Functions
+## Testing the Functions
 
-Let's start by creating a new user using the signup function:
+Let's start by testing the signup function with the credentials below:
+
+- Email: `tutorial@lambda-forge.com`
+- Password: `12345678`
 
 ```
 curl --request POST \
@@ -601,7 +590,15 @@ curl --request POST \
 }'
 ```
 
-The endpoint returns a status code of 201. Now, let's use the same credentials to sign in:
+The endpoint exclusively returns a status code of 201.
+
+However, if we navigate to the `Prod-Auth` Table on the Dynamo DB console, we'll notice that the password stored isn't simply `12345678`, but rather a significantly lengthy hash string:
+
+`AQICAHinYrMBzzQKgEowcHc4llDo3C5gg+cRawehAsWTMZ24iwEvX3NrQs9oYi0hD2YnB28hAAAAZjBkBgkqhkiG9w0BBwagVzBVAgEAMFAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEeMCuyCVk4C+Nr4OAgEQgCOEKlx01+tGfqKTNXSktApuxUI31EnwzLt7GdW0wdXrT+Yu+A==`
+
+This showcases the robustness of the security measures in place to safeguard passwords.
+
+Now, let's utilize the same credentials to log in:
 
 ```
 curl --request POST \
@@ -613,7 +610,7 @@ curl --request POST \
 }'
 ```
 
-The endpoint now returns a token:
+The signin endpoint returns a token:
 
 ```json
 {

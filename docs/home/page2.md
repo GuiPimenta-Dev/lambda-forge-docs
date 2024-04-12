@@ -61,9 +61,26 @@ Having successfully installed Lambda Forge, you are now ready to explore the cap
 forge --help
 ```
 
+Here's a concise list of the commands supported by Forge:
+
+```
+Commands:
+  authorizer  Create a new authorizer
+  function    Create a new function
+  layer       Create a new layer
+  project     Create a new project
+  service     Create a new AWS service
+```
+
+For a comprehensive list of configurations that each Forge command supports, you can refer to the command line help by running:
+
+`forge $COMMAND --help`.
+
+Later in this tutorial, we'll delve into the specifics of each command. But for now, let's kickstart by establishing the foundation of our project.
+
 ## Create a New Project
 
-Start a new project named `lambda-forge-demo`, incorporating the `--no-docs` flag to bypass docs generation initially as this will be covered on a specific section.
+Start a new project named `lambda-forge-demo`, incorporating the `--no-docs` flag to bypass docs generation initially as this will be covered on a dedicated section.
 
 ```
 forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --no-docs
@@ -122,5 +139,3 @@ The `cdk.json` file, located at the root of your directory, serves as the centra
     "bucket": "",
     "coverage": 80,
 ```
-
-For a comprehensive list of configurations that Forge supports, you can refer to the command line help by running `forge project --help`.
