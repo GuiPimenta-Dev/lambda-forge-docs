@@ -44,9 +44,13 @@ authorizers
 
 ### Implementing The Authorizer
 
-Forge automatically generates a basic implementation of an AWS Lambda authorizer. This example is intended solely for demonstration and learning purposes, and it is critical to devise a comprehensive and secure authentication mechanism suitable for your application's specific security needs. For demonstration, the authorizer checks a custom header for a specific secret value to decide on granting or denying access.
+Forge automatically generates a basic implementation of an AWS Lambda authorizer that checks for a secret value present on the headers to decide on granting or denying access.
 
-==**Important Note**: The example below employs a simple secret key for authorization and should not be used in production environments. It is crucial to replace this logic with a robust, secure authorization strategy before deploying your application.==
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p> The example below is intended solely for demonstration and learning purposes and should not be used in production environemnts. It is crucial to develop a comprehensive and secure authentication mechanism suitable for your application's security needs.</p>
+
+</div>
 
 ```python title="authorizers/secret/main.py"
 def lambda_handler(event, context):
@@ -73,7 +77,7 @@ def lambda_handler(event, context):
                 {
                     "Action": "execute-api:Invoke",
                     "Effect": effect,
-                    "Resource": "*"
+                    "Resource": event["methodArn"]
                 }
             ],
         },
@@ -81,7 +85,7 @@ def lambda_handler(event, context):
     return policy
 ```
 
-The code snippet above demonstrates that the authorizer is configured to verify the presence of a specific header in the request, as shown below:
+The code snippet above demonstrates that the authorizer is configured to verify the presence of a header named `secret` in the request, as shown below:
 
 `secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8`
 

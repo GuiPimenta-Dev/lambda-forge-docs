@@ -1,3 +1,3 @@
-# Developing a Serverless Chatbot with OpenAI and DynamoDB
+# ETL Pipelines in a Serverless Architecture with AWS Glue, S3 and Amazon Redshift
 
 Coming soon...

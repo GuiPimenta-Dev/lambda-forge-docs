@@ -1,114 +1,526 @@
-# Mocking AWS Resources for Unit Testing
+# Developing a Serverless CRUD App Using DynamoDB
 
-Coming soon...
+In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.
 
-<!-- ### Unit Tests
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+The unit tests for this project are used as example by the <a href="https://docs.lambda-forge.com/articles/page3" target="_blank">Mocking AWS Resources for Unit Testing</a> article. If you're interested in learning how to effectively mock DynamoDB for testing in your own projects, it's a highly recommended read.
+</div>
 
-Integrating AWS resources directly into our Lambda function introduces complexities when it comes to testing. Utilizing actual AWS services for unit testing is not optimal due to several reasons: it can incur unnecessary costs, lead to potential side effects on production data, and slow down testing due to reliance on internet connectivity and service response times. To address these challenges and ensure our tests are both efficient and isolated from real-world side effects, we'll simulate AWS resources using mock implementations. This approach allows us to control both the input and output, creating a more predictable and controlled testing environment.
+## Configuring DynamoDB Tables for Each Deployment Stage
 
-To facilitate this, we'll employ the moto library, which is specifically designed for mocking AWS services. This enables us to replicate AWS service responses without the need to interact with the actual services themselves.
+To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: `Dev-Users`, `Staging-Users` and `Prod-Users`.
 
-To get started with moto, install it using the following command:
+Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file.
+
+```json title="cdk.json" linenums="51" hl_lines="5 12 19"
+    "dev": {
+      "base_url": "https://api.lambda-forge.com/dev",
+      "arns": {
+        "urls_table": "$DEV-URLS-TABLE-ARN",
+        "users_table": "$DEV-USERS-TABLE-ARN"
+      }
+    },
+    "staging": {
+      "base_url": "https://api.lambda-forge.com/staging",
+      "arns": {
+        "urls_table": "$STAGING-URLS-TABLE-ARN",
+        "users_table": "$STAGING-USERS-TABLE-ARN"
+      }
+    },
+    "prod": {
+      "base_url": "https://api.lambda-forge.com",
+      "arns": {
+        "urls_table": "$PROD-URLS-TABLE-ARN",
+        "users_table": "$PROD-USERS-TABLE-ARN"
+      }
+    }
+```
+
+## Implementing the Create Functionality
+
+Next, we'll focus on constructing the "Create" functionality of our CRUD application. This feature is dedicated to inputting names and their corresponding ages into our DynamoDB tables. To initiate the creation of a Lambda function tailored for this operation, run the following command in the Forge CLI:
 
 ```
-pip install moto==4.7.1
-```
 
-Given that pytest is our chosen testing framework, it's worth highlighting how it utilizes fixtures to execute specific code segments before or after each test. Fixtures are a significant feature of pytest, enabling the setup and teardown of test environments or mock objects. This capability is particularly beneficial for our purposes, as it allows us to mock AWS resources effectively. By default, pytest automatically detects and loads fixtures defined in a file named `conftest.py`.
-
-Positioning our `conftest.py` file within the `functions/users` directory ensures that all unit tests within this scope can automatically access the defined fixtures. This strategic placement under the users folder allows every test in the directory to utilize the mocked AWS resources without additional configuration, streamlining the testing process for all tests related to the users functionality.
-
-Here's how the structure with the `conftest.py` file looks:
+forge function create_user --method "POST" --description "Create a user with name and age on Dynamo DB" --belongs-to users --public
 
 ```
-functions/users
-├── conftest.py
-├── create_user
-│   ├── __init__.py
-│   ├── config.py
-│   ├── integration.py
-│   ├── main.py
-│   └── unit.py
-└── utils
-    └── __init__.py
+
+This command signals to Forge the need to generate a new Lambda function named create_user, which will handle POST requests. By applying the `--belongs-to` flag, we guide Forge to organize this function within the `users` directory, emphasizing its role as part of a suite of user-related functionalities.
+
+```
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
 ```
 
-Below is the content of our fixture specifically designed to mock DynamoDB interactions.
+- `users/` This directory acts as the container for all Lambda functions related to users operations, organizing them under a common theme.
+- `create_user/` This subdirectory is dedicated to the function for creating users, equipped with all necessary files for its execution, configuration, and testing.
+- `utils/` A utility directory for shared functions or helpers that support the operations within the users functions, enhancing code reuse and maintainability.
 
-```python title="functions/users/conftest.py"
+### Core Logic
+
+The Create User endpoint serves as the gateway for adding new users to our system. It processes incoming data from the request body, assigns a unique UUID to each user, and then stores this information in DynamoDB.
+Now, let's delve into the details of the function implementation.
+
+```python title="functions/users/create_user/main.py"
 import json
+import uuid
+from dataclasses import dataclass
 import os
-import moto
 import boto3
-import pytest
 
-# Defines a pytest fixture with name users_table.
-@pytest.fixture
-def users_table():
-    # Set an environment variable to use a fake table name within tests.
-    os.environ["USERS_TABLE_NAME"] = "FAKE-USERS-TABLE"
 
-    # The `moto.mock_dynamodb` context manager simulates DynamoDB for the duration of the test.
-    with moto.mock_dynamodb():
-        db = boto3.client("dynamodb")
-        db.create_table(
-            AttributeDefinitions=[
-                {"AttributeName": "PK", "AttributeType": "S"},
-            ],
-            TableName="FAKE-USERS-TABLE",
-            KeySchema=[
-                {"AttributeName": "PK", "KeyType": "HASH"},
-            ],
-            BillingMode="PAY_PER_REQUEST",
+@dataclass
+class Input:
+    name: str
+    age: int
+
+
+@dataclass
+class Output:
+    id: str
+
+
+def lambda_handler(event, context):
+    # Retrieve the DynamoDB table name from environment variables.
+    USERS_TABLE = os.environ.get("USERS_TABLE")
+
+    # Initialize a DynamoDB resource.
+    dynamodb = boto3.resource("dynamodb")
+
+    # Reference the DynamoDB table.
+    users_table = dynamodb.Table(USERS_TABLE)
+
+    # Parse the request body to get user data.
+    body = json.loads(event["body"])
+
+    # Generate a unique ID for the new user.
+    user_id = str(uuid.uuid4())
+
+    # Insert the new user into the DynamoDB table.
+    users_table.put_item(Item={"PK": user_id, "name": body["name"], "age": body["age"]})
+
+    # Return a successful response with the newly created user ID.
+    return {"statusCode": 200, "body": json.dumps({"user_id": user_id})}
+```
+
+### Configuration Class
+
+Let's develop a configuration class to streamline the lambda function's access to necessary resources. This class will centralize the management of environment variables and resource configurations, thereby enhancing code maintainability and readability. It ensures that all external resources such as DynamoDB tables are easily configurable and securely accessed within the lambda function.
+
+```python title="functions/users/create_user/config.py" hl_lines="12-14 19"
+from infra.services import Services
+
+
+class CreateUserConfig:
+    def __init__(self, services: Services) -> None:
+
+        function = services.aws_lambda.create_function(
+            name="CreateUser",
+            path="./functions/users",
+            description="Create a user with name and age on Dynamo DB",
+            directory="create_user",
+            environment={
+                "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
+            },
         )
 
-        table = boto3.resource("dynamodb").Table("FAKE-USERS-TABLE")
+        services.api_gateway.create_endpoint("POST", "/users", function, public=True)
 
-        # `yield` returns the table resource to the test function, ensuring cleanup after tests.
-        yield table
+        services.dynamo_db.users_table.grant_write_data(function)
 ```
 
-Having established this fixture, it is now readily available for use in our unit tests. Next, we will utilize this fixture to conduct tests on our create function, aiming to confirm its behavior under simulated conditions.
+## Implementing the Read Functionality
 
-```python title="functions/users/create_user/unit.py"
+We're now set to construct the read feature, enabling the retrieval of user details using their ID.
+
+To facilitate this, we'll utilize the following command:
+
+```
+forge function get_user --method "GET" --description "Retrieve user information by ID" --belongs-to users --endpoint "/users/{user_id}" --public
+```
+
+The `--endpoint "/users/{user_id}"` parameter sets up a specific URL path for accessing this function. This path includes a dynamic segment {user_id} that gets replaced by the actual ID of the user we're trying to retrieve information about when the function is called.
+
+By running this command, we add a new layer to our application that specifically handles fetching user details in an organized, accessible manner.
+
+```
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
+```
+
+### Core Logic
+
+This segment of our application demonstrates the retrieval of user information from a DynamoDB table through an AWS Lambda function. It highlights how to parse API gateway events, interact with DynamoDB, and structure responses for efficient data delivery.
+
+```python title="functions/users/get_user/main.py"
 import json
-from .main import lambda_handler
+import os
+import boto3
+from dataclasses import dataclass
 
+@dataclass
+class Path:
+    user_id: str
 
-# Test the create user function leveraging the users_table fixture from the conftest.py file automatically imported by pytest.
-def test_lambda_handler(users_table):
-    # Simulate an event with a request body, mimicking a POST request payload containing a user's name and age.
-    event = {"body": json.dumps({"name": "John Doe", "age": 30})}
+@dataclass
+class Input:
+    pass
 
-    # Invoke the `lambda_handler` function with the simulated event and `None` for the context.
-    response = lambda_handler(event, None)
+@dataclass
+class Output:
+    name: str
+    age: int
 
-    # Parse the JSON response body to work with the data as a Python dictionary.
-    response = json.loads(response["body"])
+def lambda_handler(event, context):
+    # Retrieve the name of the DynamoDB table from environment variables.
+    USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
 
-    # Retrieve the user item from the mocked DynamoDB table using the ID returned in the response.
-    # This action simulates the retrieval operation that would occur in a live DynamoDB instance.
-    user = users_table.get_item(Key={"PK": response["user_id"]})["Item"]
+    # Initialize a DynamoDB resource using boto3.
+    dynamodb = boto3.resource("dynamodb")
 
-    # Assert that the name and age in the DynamoDB item match the input values.
-    # These assertions confirm that the `lambda_handler` function correctly processes the input
-    # and stores the expected data in the DynamoDB table.
-    assert user["name"] == "John Doe"
-    assert user["age"] == 30
+    # Reference the specific DynamoDB table by name.
+    users_table = dynamodb.Table(USERS_TABLE_NAME)
+
+    # Extract the user ID from the pathParameters provided in the event object.
+    user_id = event["pathParameters"].get("user_id")
+
+    # Retrieve the user item from the DynamoDB table using the extracted ID.
+    user = users_table.get_item(Key={"PK": user_id}).get("Item")
+
+    # Reformat the user item into the desired output structure.
+    user = {"name": user["name"], "age": user["age"]}
+
+    # Return the user data with a 200 status code, ensuring the body is properly JSON-encoded.
+    return {"statusCode": 200, "body": json.dumps(user, default=str)}
 ```
 
-By running the command `pytest functions/users -k unit`, we initiate the execution of only the unit tests located within the `functions/users` directory.
+### Configuration Class
+
+The config class below outlines the configuration necessary for establishing the GetUser function within AWS, illustrating the seamless integration of AWS Lambda and API Gateway to expose a user data retrieval endpoint.
+
+```python title="functions/users/get_user/config.py"
+from infra.services import Services
+
+
+class GetUserConfig:
+    def __init__(self, services: Services) -> None:
+
+        function = services.aws_lambda.create_function(
+            name="GetUser",
+            path="./functions/users",
+            description="Retrieve user information by ID",
+            directory="get_user",
+            environment={
+                "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
+            },
+        )
+
+        services.api_gateway.create_endpoint("GET", "/users/{user_id}", function, public=True)
+
+        services.dynamo_db.users_table.grant_read_data(function)
+```
+
+## Implementing the Update Functionality
+
+Let's utilize Forge once again to swiftly establish a tailored structure, setting the stage for our Update User functionality.
 
 ```
-============================ test session starts ==============================
-
-platform darwin -- Python 3.10.4, pytest-8.1.1, pluggy-1.4.0
-configfile: pytest.ini
-collected 2 items / 1 deselected / 1 selected
-
-functions/users/create_user/unit.py .                                    [100%]
-
-=========================== 1 passed, 1 deselected in 2.45s ===================
+forge function update_user --method "PUT" --description "Update an user by ID" --belongs-to users --endpoint "/users/{user_id}" --public
 ```
 
-As evidenced, our unit test has successfully passed. -->
+As expected, after using the forge command to generate the `update_user` function, a predefined directory structure is created.
+
+```
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── update_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
+```
+
+### Core Logic
+
+Below is the implementation for updating a user, allowing changes to either the name or age.
+
+```python title="functions/users/update_user/main.py"
+import json
+from dataclasses import dataclass
+import os
+import boto3
+
+
+@dataclass
+class Path:
+    user_id: str
+
+
+@dataclass
+class Input:
+    name: str
+    age: int
+
+
+@dataclass
+class Output:
+    message: str
+
+def lambda_handler(event, context):
+    # Retrieve the DynamoDB table name from environment variables set in the Lambda configuration
+    USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
+
+    # Initialize a DynamoDB resource using boto3, AWS's SDK for Python
+    dynamodb = boto3.resource("dynamodb")
+
+    # Reference the DynamoDB table using the retrieved table name
+    users_table = dynamodb.Table(USERS_TABLE_NAME)
+
+    # Extract the user ID from the pathParameters of the event object passed to the Lambda
+    user_id = event["pathParameters"].get("user_id")
+
+    # Parse the JSON body from the event object to get the user data
+    body = json.loads(event["body"])
+
+    # Update the specified user item in the DynamoDB table with the provided name and age
+    users_table.put_item(Item={"PK": user_id, "name": body["name"], "age": body["age"]})
+
+    # Return a response indicating successful user update, with a 200 HTTP status code
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "User updated"}, default=str),
+    }
+```
+
+### Configuration Class
+
+Here's the configuration needed for the `update user` function to properly engage with the essential AWS services.
+
+```python title="functions/users/update_user/config.py"
+from infra.services import Services
+
+class UpdateUserConfig:
+  def __init__(self, services: Services) -> None:
+
+    function = services.aws_lambda.create_function(
+        name="UpdateUser",
+        path="./functions/users",
+        description="Update an User",
+        directory="update_user",
+        environment={
+            "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
+        },
+    )
+
+    services.api_gateway.create_endpoint("PUT", "/users/{user_id}", function, public=True)
+
+    services.dynamo_db.users_table.grant_write_data(function)
+```
+
+## Implementing the Delete Functionality
+
+Now, to complete our CRUD application, let's proceed with constructing the Delete User endpoint.
+
+```
+forge function delete_user --method "DELETE" --description "Delete an user by ID" --belongs-to users --endpoint "/users/{user_id}" --public
+```
+
+Upon executing the Forge command, the `delete_user` folder will appear within the `infra/users` directory.
+
+```
+functions
+└── users
+    ├── create_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── delete_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── get_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    ├── update_user
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── integration.py
+    │   ├── main.py
+    │   └── unit.py
+    └── utils
+        └── __init__.py
+```
+
+### Core Logic
+
+Below is the streamlined code for removing a user from DynamoDB using their user ID.
+
+```python title="functions/users/delete_user/main.py"
+import json
+from dataclasses import dataclass
+import os
+import boto3
+
+@dataclass
+class Path:
+    user_id: str
+
+@dataclass
+class Input:
+    pass
+
+@dataclass
+class Output:
+    message: str
+
+
+def lambda_handler(event, context):
+    # Fetch the name of the DynamoDB table from the environment variables.
+    USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
+
+    # Initialize a DynamoDB resource using the boto3 library.
+    dynamodb = boto3.resource("dynamodb")
+
+    # Reference the DynamoDB table by its name.
+    users_table = dynamodb.Table(USERS_TABLE_NAME)
+
+    # Extract the user ID from the path parameters in the event object.
+    user_id = event["pathParameters"].get("user_id")
+
+    # Delete the item with the specified user ID from the DynamoDB table.
+    users_table.delete_item(Key={"PK": user_id})
+
+    # Return a response indicating that the user has been successfully deleted, with a 200 HTTP status code.
+    return {"statusCode": 200, "body": json.dumps({"message": "User deleted"})}
+```
+
+### Configuration Class
+
+Here's how to set up the `delete user` function for interaction with the required AWS resources.
+
+```python title="functions/users/delete_user/config.py"
+from infra.services import Services
+
+
+class DeleteUserConfig:
+    def __init__(self, services: Services) -> None:
+
+        function = services.aws_lambda.create_function(
+            name="DeleteUser",
+            path="./functions/users",
+            description="Delete an User",
+            directory="delete_user",
+            environment={
+                "USERS_TABLE_NAME": services.dynamo_db.users_table.table_name,
+            },
+        )
+
+        services.api_gateway.create_endpoint("DELETE", "/users/{user_id}", function, public=True)
+
+        services.dynamo_db.users_table.grant_write_data(function)
+```
+
+## Deploying Our Serverless CRUD Application
+
+Fantastic, with our four fundamental operations in place, we're ready for deployment to AWS.
+
+```bash
+# Send your changes to stage
+git add .
+
+# Commit with a descriptive message
+git commit -m "Developing a CRUD with DynamoDB"
+
+# Push changes to the 'dev' branch
+git push origin dev
+
+# Merge 'dev' into 'staging' and push
+git checkout staging
+git merge dev
+git push origin staging
+
+# Finally, merge 'staging' into 'main' and push
+git checkout main
+git merge staging
+git push origin main
+```
+
+![Dev pipeline running](images/three_example_pipelines.png)
+
+For simplicity, we'll focus on demonstrating the processes in the production stage. However, these operations can be similarly conducted using the base URLs for other environments.
+
+```title="Prod - Create User"
+curl --request POST \
+  --url https://api.lambda-forge.com/users \
+  --data '{
+    "name": "John Doe",
+    "age": 30
+}'
+```
+
+```title="Prod - Get User"
+curl --request GET \
+  --url https://api.lambda-forge.com/users/$USER-ID
+```
+
+```title="Prod - Update User"
+curl --request PUT \
+  --url https://api.lambda-forge.com/users/$USER-ID \
+  --data '{
+	"name": "John Doe",
+	"age": 31
+}'
+```
+
+```title="Prod - Delete User"
+curl --request DELETE \
+  --url https://api.lambda-forge.com/users/$USER-ID
+```
+
+Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻

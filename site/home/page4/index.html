@@ -230,7 +230,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../articles/page1/" class="md-tabs__link">
+        <a href="../../articles/page2/" class="md-tabs__link">
           
   
   Articles
@@ -787,7 +787,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication System
+    JWT Authentication
   </span>
   
 
@@ -850,7 +850,7 @@
         
   
   <span class="md-ellipsis">
-    AI ChatBot
+    ETL Pipeline
   </span>
   
 
@@ -914,27 +914,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page1/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Creating S3 Buckets
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../articles/page2/" class="md-nav__link">
         
   
@@ -977,6 +956,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../../articles/page5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploying External Library as Layers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/page1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating S3 Buckets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../articles/page4/" class="md-nav__link">
         
   
@@ -998,11 +1019,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../articles/page5/" class="md-nav__link">
+      <a href="../../articles/page6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Deploying External Library as Layers
+    JSON Web Tokens
   </span>
   
 
@@ -1214,8 +1235,13 @@
 <li><code>utils/</code> Provides utility functions that are used by the authorizers, offering common functionalities or resources that can be leveraged across various authorizers.</li>
 </ul>
 <h3 id="implementing-the-authorizer">Implementing The Authorizer</h3>
-<p>Forge automatically generates a basic implementation of an AWS Lambda authorizer. This example is intended solely for demonstration and learning purposes, and it is critical to devise a comprehensive and secure authentication mechanism suitable for your application's specific security needs. For demonstration, the authorizer checks a custom header for a specific secret value to decide on granting or denying access.</p>
-<p><mark><strong>Important Note</strong>: The example below employs a simple secret key for authorization and should not be used in production environments. It is crucial to replace this logic with a robust, secure authorization strategy before deploying your application.</mark></p>
+<p>Forge automatically generates a basic implementation of an AWS Lambda authorizer that checks for a secret value present on the headers to decide on granting or denying access.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p> The example below is intended solely for demonstration and learning purposes and should not be used in production environemnts. It is crucial to develop a comprehensive and secure authentication mechanism suitable for your application's security needs.</p>
+
+</div>
+
 <div class="highlight"><span class="filename">authorizers/secret/main.py</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="c1"># ATTENTION: The example provided below is strictly for demonstration purposes and should NOT be deployed in a production environment.</span>
@@ -1240,14 +1266,14 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>                <span class="p">{</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                    <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;execute-api:Invoke&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                    <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="n">effect</span><span class="p">,</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                    <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                    <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;methodArn&quot;</span><span class="p">]</span>
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                <span class="p">}</span>
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>            <span class="p">],</span>
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        <span class="p">},</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="p">}</span>
 <a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>    <span class="k">return</span> <span class="n">policy</span>
 </code></pre></div>
-<p>The code snippet above demonstrates that the authorizer is configured to verify the presence of a specific header in the request, as shown below:</p>
+<p>The code snippet above demonstrates that the authorizer is configured to verify the presence of a header named <code>secret</code> in the request, as shown below:</p>
 <p><code>secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8</code></p>
 <p>This key serves as a simple form of authentication, granting or denying access based on its presence and accuracy in the request headers.</p>
 <p>The secret mentioned is automatically generated by Forge, meaning the specific secret you encounter during your implementation will differ from the example provided. Please be mindful of this distinction as you proceed.</p>

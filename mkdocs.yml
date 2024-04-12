@@ -36,15 +36,16 @@ nav:
     - JWT Authentication: examples/page5.md
     - Real-Time Chat: examples/page6.md
     - Web Scraper: examples/page7.md
-    - AI ChatBot: examples/page8.md
+    - ETL Pipeline: examples/page8.md
   - Articles:
-    - Creating S3 Buckets: articles/page1.md
     - Custom Domain Name: articles/page2.md
     - Mocking AWS Services: articles/page3.md
-    - Locating the Base URL: articles/page4.md
     - Deploying External Library as Layers: articles/page5.md
-  - License: license/page1.md
+    - Creating S3 Buckets: articles/page1.md
+    - Locating the Base URL: articles/page4.md
+    - JSON Web Tokens: articles/page6.md
 
+  - License: license/page1.md
 
 markdown_extensions:
   - pymdownx.tilde

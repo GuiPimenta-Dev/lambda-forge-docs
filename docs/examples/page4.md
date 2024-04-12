@@ -43,7 +43,7 @@ The next step involves integrating the S3 service into our service layer, facili
 
 This command generates a new service file named `s3.py` within the infra/services directory, as illustrated below:
 
-```
+```hl_lines="8"
 infra
 ├── services
     ├── __init__.py
@@ -127,7 +127,7 @@ forge service secrets_manager
 
 Similar to the S3 class, Forge will generate the new service file within the `infra/services` directory and seamlessly integrate it into the Services class.
 
-```
+```hl_lines="9"
 infra
 ├── services
     ├── __init__.py
@@ -590,6 +590,8 @@ def get_secret(secret_name: str):
 
     # Retrieve the secret value from Secrets Manager
     response = sm_client.get_secret_value(SecretId=secret_name)
+
+    # Handle scenarios where the secret is stored as plain text instead of JSON.
     try:
         secret = json.loads(response["SecretString"])
     except json.JSONDecodeError:
@@ -598,14 +600,9 @@ def get_secret(secret_name: str):
     return secret
 ```
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Given the intention to utilize this function across multiple functions, a few improvements were made to accommodate a broader range of functions. Notably, it now accommodates scenarios where the secret is stored in plain text instead of JSON format.</p>
-</div>
-
 ### Refactoring The Mailer Function to Use Custom Layers
 
-Below is the updated `main.py` file, now leveraging the newly integrated layer.
+Below is the updated `main.py` file, now leveraging the new `sm_utils` layer.
 
 ```python title="functions/images/mailer/main.py" hl_lines="8 23"
 import os

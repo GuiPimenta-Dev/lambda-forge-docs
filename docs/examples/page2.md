@@ -41,7 +41,7 @@ The subsequent phase in enhancing our application involves integrating the Dynam
 
 This command creates a new service file named `dynamo_db.py` within the `infra/services` directory.
 
-```
+```hl_lines="6"
 infra
 ├── services
     ├── __init__.py
