@@ -1803,7 +1803,11 @@
 <p><img alt="Pipelines running" src="../images/three_example_pipelines.png" /></p>
 <p>After the pipelines complete, the Authentication system should be available across development, staging, and production stages.</p>
 <h2 id="testing-the-deployed-functions">Testing the Deployed Functions</h2>
-<p>Let's start by creating a new user using the signup function:</p>
+<p>Let's start by testing the signup function with the credentials below:</p>
+<ul>
+<li>Email: <code>tutorial@lambda-forge.com</code></li>
+<li>Password: <code>12345678</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>curl --request POST \
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  --url https://api.lambda-forge.com/signup \
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>  --header &#39;Content-Type: application/json&#39; \
