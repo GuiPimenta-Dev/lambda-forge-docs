@@ -1816,7 +1816,8 @@
 <a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    &quot;password&quot;: &quot;12345678&quot;
 <a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>}&#39;
 </code></pre></div>
-<p>The endpoint returns a status code of 201. Now, let's use the same credentials to sign in:</p>
+<p>The endpoint returns with only the status code 201.</p>
+<p>Now, let's use the same credentials to sign in:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl --request POST \
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>  --url https://api.lambda-forge.com/signin \
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>  --header &#39;Content-Type: application/json&#39; \
@@ -1825,7 +1826,7 @@
 <a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>    &quot;password&quot;: &quot;12345678&quot;
 <a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>}&#39;
 </code></pre></div>
-<p>The endpoint now returns a token:</p>
+<p>The signin endpoint returns a token:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">{</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR1dG9yaWFsQGxhbWJkYWZvcmdlLmNvbSJ9.ppQLiYZ-6AtHdwaCb-H-vJnjTCle9ppULqq5-TqVPjk&quot;</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">}</span>
