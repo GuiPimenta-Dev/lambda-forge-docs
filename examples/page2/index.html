@@ -1371,7 +1371,9 @@
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>
 Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate your own base URL in each environment.
+</p>
 </div>
 
 <p>Initially, the <code>LambdaStack</code> class sends only the <code>self.services</code> as argument to the <code>ShortenerConfig</code> class. We must update it to also send the <code>context</code> parameter. This change allows the config class to access base URLs and dynamically set the correct environment variables during the function definition, enhancing its adaptability.</p>
