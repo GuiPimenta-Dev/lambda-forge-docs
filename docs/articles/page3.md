@@ -1,6 +1,6 @@
-# Effective Testing Practices with Lambda Forge
+# Effective Software Testing with Lambda Forge
 
-Comming soon...
+Coming soon...
 
 <!-- # Developing a Serverless CRUD App Using DynamoDB
 

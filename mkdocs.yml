@@ -40,7 +40,7 @@ nav:
     - Stock Price Tracker: examples/page9.md
   - Articles:
     - Custom Domain Name: articles/page2.md
-    - Mocking AWS Services: articles/page3.md
+    - Tests with Lambda Forge: articles/page3.md
     - Deploying External Library as Layers: articles/page5.md
     - Creating S3 Buckets: articles/page1.md
     - Locating the Base URL: articles/page4.md
