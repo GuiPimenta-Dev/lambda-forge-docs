@@ -1,4 +1,4 @@
-# Stock Price Tracker with Cloudwatch Event, SQS, Dynamo DB and SES
+# Stock Price Tracker with Event Bridge, SQS, Dynamo DB and SES
 
 Coming soon...
 

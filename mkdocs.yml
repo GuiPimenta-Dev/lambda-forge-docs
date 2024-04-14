@@ -2,6 +2,7 @@ site_name: Lambda Forge
 
 theme:
   name: material
+  custom_dir: docs/theme_override_home/
   features:
     - navigation.tabs
     - navigation.sections
@@ -18,8 +19,9 @@ theme:
       primary: black
 
 nav:
-  - Home: 
-    - Introduction: index.md
+  - Home: index.md
+  - Docs: 
+    - Introduction: home/page1.md
     - Getting Started: home/page2.md
     - Creating a Hello World: home/page3.md
     - Securing Endpoints: home/page4.md
@@ -36,7 +38,7 @@ nav:
     - JWT Authentication: examples/page5.md
     - Real-Time Chat: examples/page6.md
     - Web Scraper: examples/page7.md
-    - Twitter Data Pipeline: examples/page8.md
+    - Data Processing Pipeline: examples/page8.md
     - Stock Price Tracker: examples/page9.md
   - Articles:
     - Custom Domain Name: articles/page2.md

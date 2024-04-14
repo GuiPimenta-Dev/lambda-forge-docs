@@ -6,7 +6,7 @@ JWT authentication is a secure method for transmitting information between parti
 
 ## Setting Up the DynamoDB Tables
 
-To get started, we must create tables to store user credentials securely. For maximum decoupling of environments, proceed to your AWS console and create three separate tables, each designated for a specific stage: `Dev-Auth`, `Staging-Auth`, and `Prod-Auth`.
+To get started, we must create tables to store user credentials securely. For maximum decoupling of environments, proceed to your AWS console and create three separate tables, each designated for a specific stage: `Dev-Auth`, `Staging-Auth` and `Prod-Auth`.
 
 Once you have obtained the ARNs for these tables, let's integrate them into the `cdk.json` file within the corresponding environment.
 
@@ -25,7 +25,6 @@ Once you have obtained the ARNs for these tables, let's integrate them into the 
         "urls_table": "$STAGING-URLS-TABLE-ARN",
         "images_bucket": "$STAGING-IMAGES-BUCKET-ARN",
         "auth_table": "$STAGING-AUTH-TABLE-ARN"
-
       }
     },
     "prod": {
@@ -71,7 +70,7 @@ This command creates a new file within the `infra/services` directory specifical
 
 ```hl_lines="7"
 infra
-├── services
+└── services
     ├── __init__.py
     ├── api_gateway.py
     ├── aws_lambda.py
@@ -145,6 +144,12 @@ Let's now create a new class variable refencing the pyjwt layer.
             id="JWTLayer",
             layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-PyJWT:3",
         )
+```
+
+Don't forget to add the pyjwt layer in the `requirements.txt`
+
+```title="requirements.txt" linenums="15"
+jwt==1.3.1
 ```
 
 ## Implementing the SignUp Function
@@ -239,9 +244,9 @@ class SignUpConfig:
     def __init__(self, services: Services) -> None:
 
         function = services.aws_lambda.create_function(
-            name="CreateUser",
+            name="SignUp",
             path="./functions/auth",
-            description="Create a user with name and age on Dynamo DB",
+            description="Securely handle user registration with unique credentials.",
             directory="signup",
             environment={
                 "AUTH_TABLE_NAME": services.dynamo_db.auth_table.table_name,
@@ -369,7 +374,7 @@ class SigninConfig:
         function = services.aws_lambda.create_function(
             name="Signin",
             path="./functions/auth",
-            description="Signin function",
+            description="Authenticate user login by verifying email and password against stored credentials",
             directory="signin",
             layers=[services.layers.sm_utils_layer, services.layers.pyjwt_layer],
             environment={
@@ -395,7 +400,7 @@ Now that we have the signin function, it returns a token to the client, typicall
 With that being said, let's proceed with its implementation.
 
 ```
-forge authorizer jwt --description "A jwt authorizer for private lambda functions"
+forge authorizer jwt --description "A jwt authorizer for private lambda functions" --no-tests
 ```
 
 This command creates a new `jwt` authorizer under the `authorizers` folder.
@@ -405,8 +410,7 @@ authorizers
   ├── jwt
   │   ├── __init__.py
   │   ├── config.py
-  │   ├── main.py
-  │   └── unit.py
+  │   └── main.py
   └── utils
       └── __init__.py
 ```
@@ -436,10 +440,12 @@ def lambda_handler(event, context):
         effect = "deny"
         email = None
 
+    # Set the decoded email as context
     context = {"email": email}
 
     # Allow access with the user's email
     return {
+        "context": context,
         "policyDocument": {
             "Version": "2012-10-17",
             "Statement": [
@@ -450,7 +456,6 @@ def lambda_handler(event, context):
                 }
             ],
         },
-        "context": context,
     }
 ```
 
@@ -590,11 +595,13 @@ curl --request POST \
 }'
 ```
 
-The endpoint exclusively returns a status code of 201.
+The endpoint returns a status code `201`.
 
 However, if we navigate to the `Prod-Auth` Table on the Dynamo DB console, we'll notice that the password stored isn't simply `12345678`, but rather a significantly lengthy hash string:
 
-`AQICAHinYrMBzzQKgEowcHc4llDo3C5gg+cRawehAsWTMZ24iwEvX3NrQs9oYi0hD2YnB28hAAAAZjBkBgkqhkiG9w0BBwagVzBVAgEAMFAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEeMCuyCVk4C+Nr4OAgEQgCOEKlx01+tGfqKTNXSktApuxUI31EnwzLt7GdW0wdXrT+Yu+A==`
+```
+AQICAHinYrMBzzQKgEowcHc4llDo3C5gg+cRawehAsWTMZ24iwEvX3NrQs9oYi0hD2YnB28hAAAAZjBkBgkqhkiG9w0BBwagVzBVAgEAMFAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEeMCuyCVk4C+Nr4OAgEQgCOEKlx01+tGfqKTNXSktApuxUI31EnwzLt7GdW0wdXrT+Yu+A==
+```
 
 This showcases the robustness of the security measures in place to safeguard passwords.
 

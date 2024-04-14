@@ -4,20 +4,13 @@
 
 Lambda Layers are essentially ZIP archives containing libraries, custom runtime environments, or other dependencies. You can include these layers in your Lambda function’s execution environment without having to bundle them directly with your function's deployment package. This means you can use libraries or custom runtimes across multiple Lambda functions without needing to include them in each function’s codebase.
 
-### Key Benefits
-
-- **Code Reusability**: Lambda Layers promote code reuse. By storing common components in layers, you can easily share them across multiple functions.
-- **Simplified Management**: Managing your function’s dependencies becomes easier. You can update a shared library in a layer without updating every function that uses it.
-- **Efficiency**: Layers can reduce the size of your deployment package, making uploads faster and reducing the time it takes to update or deploy functions.
-- **Flexibility**: You can create layers for different programming languages or purposes, offering flexibility in how you organize and manage dependencies.
-
 ### How They Work
 
 When you create a Lambda function, you specify which layers to include in its execution environment. During execution, AWS Lambda configures the function's environment to include the content of the specified layers. This content is available to your function's code just as if it were included in the deployment package directly.
 
 ### Use Cases
 
-- **Sharing libraries**: Commonly used libraries can be placed in a layer and shared among multiple functions.
+- **Sharing code**: Commonly used code can be placed in a layer and shared among multiple functions.
 - **Custom runtimes**: You can use layers to deploy functions in languages that AWS Lambda does not natively support by including the necessary runtime in a layer.
 - **Configuration files**: Layers can be used to store configuration files that multiple functions need to access.
 
@@ -52,7 +45,7 @@ def hello_from_layer():
 
 Additionally, Forge sets the new custom layer in the Layers class.
 
-```python title="infra/services/layers.py"
+```python title="infra/services/layers.py" hl_lines="8-14"
 from aws_cdk import aws_lambda as _lambda
 from lambda_forge import Path
 
@@ -95,7 +88,7 @@ This command simply creates a public function named `custom` inside the `functio
 
 ```
 functions
-├── custom
+└── custom
     ├── __init__.py
     ├── config.py
     ├── integration.py
@@ -223,11 +216,11 @@ To create a Lambda function that leverages the Requests library, execute the fol
 forge function external --method "GET" --description "A function that uses an external library" --public
 ```
 
-This action initiates the creation of a new function named the `external` directory.
+This command creates a new function named `external` inside the functions directory.
 
 ```
 functions
-├── external
+└── external
     ├── __init__.py
     ├── config.py
     ├── integration.py
@@ -258,8 +251,8 @@ class Name:
 
 @dataclass
 class Output:
-    gender: str
     name: Name
+    gender: str
     email: str
 
 
@@ -293,7 +286,7 @@ def test_lambda_handler():
 
 Finally, configure the function to make use of the requests layer:
 
-```python title="functions/layers/custom/config.py" hl_lines="12"
+```python title="functions/layers/custom/config.py" hl_lines="11"
 from infra.services import Services
 
 
