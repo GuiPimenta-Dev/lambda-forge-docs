@@ -12,7 +12,7 @@ To enhance usability and the overall user experience, we've implemented a custom
 
 For those interested in customizing domain names within API Gateway, the [How to Configure a Custom Domain Name for API Gateway](https://docs.lambda-forge.com/articles/page2) guide offers a detailed tutorial on personalizing your project's URL.
 
-With that being said, let's forge some lambdas!
+With that being said, let's forge some Lambdas!
 
 ```
 forge project lambda-forge-examples --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET"
