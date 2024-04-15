@@ -10,21 +10,25 @@
       
       
       
+        <link rel="prev" href="../deploying-external-library-as-layers/">
       
       
-      <link rel="icon" href="/images/favicon.png">
+        <link rel="next" href="../locating-the-base-url/">
+      
+      
+      <link rel="icon" href="../../images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
-        <title>Lambda Forge</title>
+        <title>Creating S3 Buckets - Lambda Forge</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.bcfcd587.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -56,7 +60,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
       <link rel="stylesheet" href="https://unpkg.com/mermaid@8.5.1/dist/mermaid.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -81,6 +85,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#how-to-create-an-amazon-s3-bucket" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,9 +100,9 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-header__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="/images/favicon.png" alt="logo">
+  <img src="../../images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -110,7 +119,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Creating S3 Buckets
             
           </span>
         </div>
@@ -193,7 +202,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-tabs__item">
-      <a href="/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -212,7 +221,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
     
       <li class="md-tabs__item">
-        <a href="/home/introduction/" class="md-tabs__link">
+        <a href="../../home/introduction/" class="md-tabs__link">
           
   
   Docs
@@ -230,7 +239,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
     
       <li class="md-tabs__item">
-        <a href="/examples/introduction/" class="md-tabs__link">
+        <a href="../../examples/introduction/" class="md-tabs__link">
           
   
   Example Projects
@@ -244,11 +253,13 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/articles/custom-domain-name/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../custom-domain-name/" class="md-tabs__link">
           
   
   Articles
@@ -264,7 +275,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-tabs__item">
-      <a href="/license/license/" class="md-tabs__link">
+      <a href="../../license/license/" class="md-tabs__link">
         
   
     
@@ -298,9 +309,9 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
+    <a href="../.." title="Lambda Forge" class="md-nav__button md-logo" aria-label="Lambda Forge" data-md-component="logo">
       
-  <img src="/images/favicon.png" alt="logo">
+  <img src="../../images/favicon.png" alt="logo">
 
     </a>
     Lambda Forge
@@ -315,7 +326,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -375,7 +386,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/introduction/" class="md-nav__link">
+      <a href="../../home/introduction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -396,7 +407,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/getting-started/" class="md-nav__link">
+      <a href="../../home/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -417,7 +428,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/creating-a-hello-world/" class="md-nav__link">
+      <a href="../../home/creating-a-hello-world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -438,7 +449,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/securing-endpoints/" class="md-nav__link">
+      <a href="../../home/securing-endpoints/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -459,7 +470,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/lambda-layers/" class="md-nav__link">
+      <a href="../../home/lambda-layers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -480,7 +491,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/multi-stage-environments/" class="md-nav__link">
+      <a href="../../home/multi-stage-environments/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -501,7 +512,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/custom-codepipeline-steps/" class="md-nav__link">
+      <a href="../../home/custom-codepipeline-steps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -522,7 +533,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/docs-generation/" class="md-nav__link">
+      <a href="../../home/docs-generation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -543,7 +554,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/home/pre-commit-hooks/" class="md-nav__link">
+      <a href="../../home/pre-commit-hooks/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -611,7 +622,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/introduction/" class="md-nav__link">
+      <a href="../../examples/introduction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -672,7 +683,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/guess-the-number/" class="md-nav__link">
+      <a href="../../examples/guess-the-number/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -693,7 +704,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/url-shortener/" class="md-nav__link">
+      <a href="../../examples/url-shortener/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -714,7 +725,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/image-to-qr-code-converter/" class="md-nav__link">
+      <a href="../../examples/image-to-qr-code-converter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -783,7 +794,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/jwt-authentication/" class="md-nav__link">
+      <a href="../../examples/jwt-authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -804,7 +815,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/oauth2-authentication/" class="md-nav__link">
+      <a href="../../examples/oauth2-authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -825,7 +836,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/real-time-chat/" class="md-nav__link">
+      <a href="../../examples/real-time-chat/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -846,7 +857,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/web-scraper/" class="md-nav__link">
+      <a href="../../examples/web-scraper/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -915,7 +926,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/data-processing-pipeline/" class="md-nav__link">
+      <a href="../../examples/data-processing-pipeline/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -936,7 +947,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/examples/stock-price-tracker/" class="md-nav__link">
+      <a href="../../examples/stock-price-tracker/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -969,25 +980,30 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -998,7 +1014,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Articles
@@ -1012,7 +1028,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/articles/custom-domain-name/" class="md-nav__link">
+      <a href="../custom-domain-name/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1033,7 +1049,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/articles/tests-with-lambda-forge/" class="md-nav__link">
+      <a href="../tests-with-lambda-forge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1070,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/articles/deploying-external-library-as-layers/" class="md-nav__link">
+      <a href="../deploying-external-library-as-layers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1072,10 +1088,30 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/articles/creating-s3-buckets/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Creating S3 Buckets
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1084,6 +1120,89 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Open the Amazon S3 Console
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-create-a-new-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Create a New Bucket
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-access-your-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Access Your Bucket
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-your-bucket-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Your Bucket Public
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1096,7 +1215,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/articles/locating-the-base-url/" class="md-nav__link">
+      <a href="../locating-the-base-url/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1117,7 +1236,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/articles/json-web-tokens/" class="md-nav__link">
+      <a href="../json-web-tokens/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1145,7 +1264,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="/license/license/" class="md-nav__link">
+      <a href="../../license/license/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1175,6 +1294,79 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-open-the-amazon-s3-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Open the Amazon S3 Console
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-create-a-new-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Create a New Bucket
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-access-your-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Access Your Bucket
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-your-bucket-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Your Bucket Public
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1186,8 +1378,86 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="how-to-create-an-amazon-s3-bucket">How to Create an Amazon S3 Bucket</h1>
+<p>Amazon Simple Storage Service (Amazon S3) offers industry-leading scalability, data availability, security, and performance. This tutorial will guide you through the process of creating an S3 bucket, which can be used for a wide range of applications, including website hosting, data storage, and backups.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>You should already be logged into your AWS account.</li>
+<li>Familiarity with the basic concepts of AWS S3.</li>
+</ul>
+<h2 id="step-1-open-the-amazon-s3-console">Step 1: Open the Amazon S3 Console</h2>
+<ol>
+<li>Once logged in to the AWS Management Console, locate the <strong>Services</strong> menu at the top of the console.</li>
+<li>Use the search bar to find <strong>S3</strong> or navigate through the categories to locate S3 under the Storage section.</li>
+<li>Click on <strong>S3</strong> to open the S3 console.</li>
+</ol>
+<h2 id="step-2-create-a-new-bucket">Step 2: Create a New Bucket</h2>
+<ol>
+<li>In the S3 console, click the <strong>Create bucket</strong> button. This action opens a wizard to guide you through the bucket creation process.</li>
+<li>
+<p>Enter the following details:</p>
+</li>
+<li>
+<p><strong>Bucket name</strong>: Choose a unique name for your bucket. This name must be globally unique across all existing bucket names in Amazon S3 and cannot be changed after the bucket is created.</p>
+</li>
+<li>
+<p><strong>AWS Region</strong>: Choose the same region specified in your <code>cdk.json</code> file.</p>
+</li>
+<li>
+<p>(Optional) Configure additional options such as Versioning, Server Access Logging, Tags, and Default Encryption according to your requirements. If you're unsure or new to S3, you may proceed with the default settings.</p>
+</li>
+<li>Review your settings, then click <strong>Create bucket</strong>.</li>
+</ol>
+<h2 id="step-3-access-your-bucket">Step 3: Access Your Bucket</h2>
+<ul>
+<li>After creation, your new bucket will be listed in the S3 console. Click on your bucket's name to start uploading files, creating folders, or setting up permissions.</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li><strong>Naming Convention</strong>: Adhere to a consistent naming convention for easier management, especially if you plan to create multiple buckets.</li>
+<li><strong>Region Selection</strong>: Align the bucket's region with your other AWS resources to reduce latency and costs.</li>
+<li><strong>Security</strong>: By default, all S3 buckets are private. Only make a bucket public if it is intended to serve static web content. Always follow the principle of least privilege when configuring bucket permissions.</li>
+</ul>
+<h2 id="making-your-bucket-public">Making Your Bucket Public</h2>
+<p>To make your S3 bucket public and accessible to the internet, follow these steps:</p>
+<ol>
+<li>Navigate to the S3 console.</li>
+<li>Select the bucket you want to make public.</li>
+<li>Go to the <strong>Permissions</strong> tab.</li>
+<li>Click on <strong>Bucket Policy</strong>.</li>
+<li>Add a policy to allow public access to your bucket. Here's an example policy:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PublicReadGetObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;Principal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::YOUR_BUCKET_NAME/*&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+<p>You have successfully created an Amazon S3 bucket and learned how to make it public to serve static web content or other purposes. Remember to always consider security implications and follow best practices when configuring bucket permissions. Explore further S3 features such as lifecycle policies, object versioning, and cross-region replication to optimize your data storage strategy.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1255,10 +1525,10 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "/assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.1e8ae164.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
       
