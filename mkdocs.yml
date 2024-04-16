@@ -37,7 +37,7 @@ nav:
       - Image to QR Code Converter: examples/image-to-qr-code-converter.md
     - Intermediate:
       - JWT Authentication: examples/jwt-authentication.md
-      - OAuth2 Authentication: examples/oauth2-authentication.md
+      # - OAuth2 Authentication: examples/oauth2-authentication.md
       - Real-Time Chat: examples/real-time-chat.md
       - Web Scraper: examples/web-scraper.md
     - Advanced:
