@@ -211,7 +211,7 @@ To make this possible, we must incorporate the base URL into the `cdk.json` file
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>
-Follow the article <a href="#">Finding the Api Gateway Base URL</a> to locate your own base URL in each environment.
+Follow the article <a href="https://docs.lambda-forge.com/articles/locating-the-base-url/">Locating The Api Gateway Base URL on CloudFormation</a> to locate your own base URL in each environment.
 </p>
 </div>
 

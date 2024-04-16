@@ -947,27 +947,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../examples/oauth2-authentication/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    OAuth2 Authentication
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/real-time-chat/" class="md-nav__link">
         
   
@@ -1180,7 +1159,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Tests with Lambda Forge
+    Mocks for Unit Testing
   </span>
   
 
@@ -1201,28 +1180,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Deploying External Library as Layers
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../articles/creating-s3-buckets/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Creating S3 Buckets
+    External Library as Layers
   </span>
   
 
@@ -1243,7 +1201,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Locating the Base URL
+    Api Gateway Base URL
   </span>
   
 
@@ -1265,6 +1223,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     JSON Web Tokens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../articles/understanding-websockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebSockets
   </span>
   
 
@@ -1747,7 +1726,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p>This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the <code>Integration_Test</code> phase.</p>
 <p><img alt="alt text" src="../images/integration-tests-failed.png" /></p>
 <p><mark>Note that the failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed.</mark></p>
-<p>To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the <a href="https://docs.lambda-forge.com/articles/page4&quot;">Retrieving the Api Gateway Base URL</a> article to find your base URL.</p>
+<p>To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the <a href="https://docs.lambda-forge.com/articles/locating-the-base-url/&quot;">Locating The Api Gateway Base URL on CloudFormation</a> article to find your base URL.</p>
 <p>Having the BASE URL, it must then be incorporated into your <code>cdk.json</code> configuration file under the <code>base_url</code> key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-48">48</a></span>
 <span class="normal"><a href="#__codelineno-5-49">49</a></span>

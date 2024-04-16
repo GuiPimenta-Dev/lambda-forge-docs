@@ -594,6 +594,7 @@ def get_secret(secret_name: str):
     # Handle scenarios where the secret is stored as plain text instead of JSON.
     try:
         secret = json.loads(response["SecretString"])
+
     except json.JSONDecodeError:
         secret = response["SecretString"]
 

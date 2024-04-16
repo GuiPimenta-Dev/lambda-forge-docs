@@ -233,7 +233,7 @@ This phenomenon occurs because the integration tests are set to execute immediat
 
 ==Note that the failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed.==
 
-To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Retrieving the Api Gateway Base URL](https://docs.lambda-forge.com/articles/page4") article to find your base URL.
+To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Locating The Api Gateway Base URL on CloudFormation](https://docs.lambda-forge.com/articles/locating-the-base-url/") article to find your base URL.
 
 Having the BASE URL, it must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
 

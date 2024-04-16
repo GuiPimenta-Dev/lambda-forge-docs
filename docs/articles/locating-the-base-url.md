@@ -1,19 +1,21 @@
-# Finding the API Gateway Base URL
+# Locating The Api Gateway Base URL on CloudFormation
 
-This guide will walk you through the steps to locate the base URL for the API Gateway, essential for interacting with your deployed functions. Our focus will be on the function named `Staging-Lambda-Forge-Demo-HelloWorld`.
+When deploying APIs using CloudFormation in AWS, it's essential to locate the base URL of your API Gateway. This base URL serves as the entry point for accessing the various resources and endpoints defined within your API.
 
-![alt text](images/staging-hello-world.png)
+## Steps to Find the Base URL:
 
-First, navigate to the function in question. Then, access `Configurations -> Triggers` to uncover the URL generated upon deployment.
+1. **Navigate to the AWS CloudFormation Console:** Begin by logging into the AWS Management Console and navigating to the CloudFormation service.
 
-![alt text](images/staging-hello-world-api-gateway-trigger.png)
+2. **Select the Stack:** In the CloudFormation dashboard, select the stack corresponding to the deployment of your API Gateway.
 
-For the purposes of our tutorial, the relevant URL is as follows:
+3. **View Stack Outputs:** Once the stack is selected, navigate to the "Outputs" tab. Here, you will find a list of key-value pairs representing various outputs generated during the stack creation process.
 
-- [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world)
+4. **Locate the Base URL Output:** Look for an output key that provides the base URL of your API Gateway. This key-value pair typically has a description indicating its purpose, such as "APIGatewayBaseUrl" or "ApiGatewayEndpoint."
 
-The BASE URL, vital for API interactions, is identified as the URL segment **before** the `/hello_world` endpoint. For our example, it's:
+5. **Note the Base URL:** Take note of the value associated with the base URL output key. This value represents the URL endpoint through which your API can be accessed.
 
-`https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging`
+6. **Test the Base URL:** To verify the correctness of the base URL, you can copy it and paste it into a web browser or API testing tool. Attempt to access one of the endpoints defined within your API to ensure proper connectivity.
 
-With the base URL now in your possession, you're well-equipped to begin integrating your services, paving the way for seamless communication and functionality between your applications and the AWS infrastructure.
+## Conclusion:
+
+Locating the base URL of your API Gateway on CloudFormation is a straightforward process that involves navigating to the CloudFormation console, selecting the appropriate stack, and viewing the stack outputs. By following these steps, you can easily find and verify the base URL needed to interact with your API endpoints deployed via CloudFormation.

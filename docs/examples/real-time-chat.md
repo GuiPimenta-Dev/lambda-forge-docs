@@ -2,7 +2,7 @@
 
 In this section, we will develop a real-time chat application utilizing WebSockets, facilitating instant communication. This solution is versatile and can be adapted to various scenarios requiring rapid, real-time interactions.
 
-For a deeper dive into WebSockets and to understand how they differ from HTTP, check out the article [Understanding WebSockets: The Real-Time Communication Protocol]().
+For a deeper dive into WebSockets and to understand how they differ from HTTP, check out the article [Understanding WebSockets: The Real-Time Communication Protocol](https://docs.lambda-forge.com/articles/understanding-websockets/).
 
 ## Incorporating the Websockets Class into the Services Class
 
@@ -534,17 +534,17 @@ The URL we will use to test our application corresponds to the development stage
 
 Navigate to the PieSocket tester and enter the URL of your WebSocket connection. This URL is typically generated after deploying your WebSocket service.
 
-![WebSocket Connection](image.png)
+![WebSocket Connection](images/pre-connect.png)
 
 Upon successfully connecting, the WebSocket service will respond with the connection ID.
 
-![WebSocket Connection ID Response](image-1.png)
+![WebSocket Connection ID Response](images/sender-connect.png)
 
 ### Step 2: Create a Second Connection
 
 Open a new tab or window and repeat the connection steps to establish a second WebSocket client.
 
-![Second WebSocket Connection](image-2.png)
+![Second WebSocket Connection](images/receiver-connect.png)
 
 You'll notice each connection has a unique ID. These IDs are crucial for directing messages to the correct recipient.
 
@@ -569,7 +569,7 @@ Choose one tab as the sender and use the other's connection ID as the recipient.
 
 If everything is configured correctly, you should observe the message appearing in real-time on both channels!
 
-![alt text](image-4.png)
-![alt text](image-3.png)
+![alt text](images/sender.png)
+![alt text](images/receiver.png)
 
 🎉 Congratulations! You've now successfully developed a Serverless Real-Time Chat application using WebSockets and Lambda Forge. 💬 🌐

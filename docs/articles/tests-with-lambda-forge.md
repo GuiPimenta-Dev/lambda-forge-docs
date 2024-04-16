@@ -1,4 +1,4 @@
-# Effective Software Testing with Lambda Forge
+# Mocking AWS Resources for Unit Testing
 
 Coming soon...
 
