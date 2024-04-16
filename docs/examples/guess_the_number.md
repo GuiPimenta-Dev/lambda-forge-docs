@@ -1,3 +1,0 @@
-# Creating a Guess the Number Game with DynamoDB
-
-Coming soon...

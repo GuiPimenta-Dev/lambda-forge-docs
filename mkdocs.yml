@@ -21,38 +21,38 @@ theme:
 nav:
   - Home: index.md
   - Docs: 
-    - Introduction: home/page1.md
-    - Getting Started: home/page2.md
-    - Creating a Hello World: home/page3.md
-    - Securing Endpoints: home/page4.md
-    - Lambda Layers: home/page5.md
-    - Multi-Stage Environments: home/page6.md
-    - Custom CodePipeline Steps: home/page7.md
-    - Docs Generation: home/page8.md
-    - Pre-Commit Hooks: home/page9.md
+    - Getting Started: home/getting-started.md
+    - Creating a Hello World: home/creating-a-hello-world.md
+    - Securing Endpoints: home/securing-endpoints.md
+    - Lambda Layers: home/lambda-layers.md
+    - Multi-Stage Environments: home/multi-stage-environments.md
+    - Custom CodePipeline Steps: home/custom-codepipeline-steps.md
+    - Docs Generation: home/docs-generation.md
+    - Pre-Commit Hooks: home/pre-commit-hooks.md
   - Example Projects:
-    - Introduction: examples/page1.md
+    - Introduction: examples/introduction.md
     - Begginer:
-      - Guess The Number: examples/guess_the_number.md
-      - URL Shortener: examples/page2.md
-      - Image to QR Code Converter: examples/page4.md
+      - Guess The Number: examples/guess-the-number.md
+      - URL Shortener: examples/url-shortener.md
+      - Image to QR Code Converter: examples/image-to-qr-code-converter.md
     - Intermediate:
-      - JWT Authentication: examples/page5.md
-      - Real-Time Chat: examples/page6.md
-      - Web Scraper: examples/page7.md
+      - JWT Authentication: examples/jwt-authentication.md
+      - OAuth2 Authentication: examples/oauth2-authentication.md
+      - Real-Time Chat: examples/real-time-chat.md
+      - Web Scraper: examples/web-scraper.md
     - Advanced:
-      - AI Telegram Bot: examples/ai_telegram_bot.md
-      - Data Processing Pipeline: examples/page8.md
-      - Stock Price Tracker: examples/page9.md
+      # - AI Telegram Bot: examples/ai-telegram-bot.md
+      - Data Processing Pipeline: examples/data-processing-pipeline.md
+      - Stock Price Tracker: examples/stock-price-tracker.md
   - Articles:
-    - Custom Domain Name: articles/page2.md
-    - Tests with Lambda Forge: articles/page3.md
-    - Deploying External Library as Layers: articles/page5.md
-    - Creating S3 Buckets: articles/page1.md
-    - Locating the Base URL: articles/page4.md
-    - JSON Web Tokens: articles/page6.md
-
-  - License: license/page1.md
+    - Custom Domain Name: articles/custom-domain-name.md
+    - Tests with Lambda Forge: articles/tests-with-lambda-forge.md
+    - Deploying External Library as Layers: articles/deploying-external-library-as-layers.md
+    - Creating S3 Buckets: articles/creating-s3-buckets.md
+    - Locating the Base URL: articles/locating-the-base-url.md
+    - JSON Web Tokens: articles/json-web-tokens.md
+    # - Telegram Bot: articles/telegram-bot-webhook.md
+  - License: license/license.md
 
 markdown_extensions:
   - pymdownx.tilde
@@ -67,7 +67,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.mark
   - pymdownx.tabbed
-
   - attr_list
   - pymdownx.emoji
   - pymdownx.superfences:
