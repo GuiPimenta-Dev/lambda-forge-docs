@@ -10,7 +10,7 @@
       
       
       
-        <link rel="prev" href="../creating-s3-buckets/">
+        <link rel="prev" href="../deploying-external-library-as-layers/">
       
       
         <link rel="next" href="../json-web-tokens/">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Locating the Base URL - Lambda Forge</title>
+        <title>Api Gateway Base URL - Lambda Forge</title>
       
     
     
@@ -86,7 +86,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <div data-md-component="skip">
       
         
-        <a href="#finding-the-api-gateway-base-url" class="md-skip">
+        <a href="#locating-the-api-gateway-base-url-on-cloudformation" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Locating the Base URL
+              Api Gateway Base URL
             
           </span>
         </div>
@@ -794,27 +794,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../examples/oauth2-authentication/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    OAuth2 Authentication
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/real-time-chat/" class="md-nav__link">
         
   
@@ -1032,7 +1011,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Tests with Lambda Forge
+    Mocks for Unit Testing
   </span>
   
 
@@ -1053,28 +1032,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Deploying External Library as Layers
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../creating-s3-buckets/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Creating S3 Buckets
+    External Library as Layers
   </span>
   
 
@@ -1100,15 +1058,63 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Api Gateway Base URL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Locating the Base URL
+    Api Gateway Base URL
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-find-the-base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Find the Base URL:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1127,6 +1133,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     JSON Web Tokens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../understanding-websockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebSockets
   </span>
   
 
@@ -1183,6 +1210,32 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-find-the-base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Find the Base URL:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1196,18 +1249,31 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                   
 
 
-<h1 id="finding-the-api-gateway-base-url">Finding the API Gateway Base URL</h1>
-<p>This guide will walk you through the steps to locate the base URL for the API Gateway, essential for interacting with your deployed functions. Our focus will be on the function named <code>Staging-Lambda-Forge-Demo-HelloWorld</code>.</p>
-<p><img alt="alt text" src="../images/staging-hello-world.png" /></p>
-<p>First, navigate to the function in question. Then, access <code>Configurations -&gt; Triggers</code> to uncover the URL generated upon deployment.</p>
-<p><img alt="alt text" src="../images/staging-hello-world-api-gateway-trigger.png" /></p>
-<p>For the purposes of our tutorial, the relevant URL is as follows:</p>
-<ul>
-<li><a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
-</ul>
-<p>The BASE URL, vital for API interactions, is identified as the URL segment <strong>before</strong> the <code>/hello_world</code> endpoint. For our example, it's:</p>
-<p><code>https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging</code></p>
-<p>With the base URL now in your possession, you're well-equipped to begin integrating your services, paving the way for seamless communication and functionality between your applications and the AWS infrastructure.</p>
+<h1 id="locating-the-api-gateway-base-url-on-cloudformation">Locating The Api Gateway Base URL on CloudFormation</h1>
+<p>When deploying APIs using CloudFormation in AWS, it's essential to locate the base URL of your API Gateway. This base URL serves as the entry point for accessing the various resources and endpoints defined within your API.</p>
+<h2 id="steps-to-find-the-base-url">Steps to Find the Base URL:</h2>
+<ol>
+<li>
+<p><strong>Navigate to the AWS CloudFormation Console:</strong> Begin by logging into the AWS Management Console and navigating to the CloudFormation service.</p>
+</li>
+<li>
+<p><strong>Select the Stack:</strong> In the CloudFormation dashboard, select the stack corresponding to the deployment of your API Gateway.</p>
+</li>
+<li>
+<p><strong>View Stack Outputs:</strong> Once the stack is selected, navigate to the "Outputs" tab. Here, you will find a list of key-value pairs representing various outputs generated during the stack creation process.</p>
+</li>
+<li>
+<p><strong>Locate the Base URL Output:</strong> Look for an output key that provides the base URL of your API Gateway. This key-value pair typically has a description indicating its purpose, such as "APIGatewayBaseUrl" or "ApiGatewayEndpoint."</p>
+</li>
+<li>
+<p><strong>Note the Base URL:</strong> Take note of the value associated with the base URL output key. This value represents the URL endpoint through which your API can be accessed.</p>
+</li>
+<li>
+<p><strong>Test the Base URL:</strong> To verify the correctness of the base URL, you can copy it and paste it into a web browser or API testing tool. Attempt to access one of the endpoints defined within your API to ensure proper connectivity.</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion:</h2>
+<p>Locating the base URL of your API Gateway on CloudFormation is a straightforward process that involves navigating to the CloudFormation console, selecting the appropriate stack, and viewing the stack outputs. By following these steps, you can easily find and verify the base URL needed to interact with your API endpoints deployed via CloudFormation.</p>
 
 
 
