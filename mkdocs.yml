@@ -48,10 +48,9 @@ nav:
     - Custom Domain Name: articles/custom-domain-name.md
     - Tests with Lambda Forge: articles/tests-with-lambda-forge.md
     - Deploying External Library as Layers: articles/deploying-external-library-as-layers.md
-    - Creating S3 Buckets: articles/creating-s3-buckets.md
     - Locating the Base URL: articles/locating-the-base-url.md
     - JSON Web Tokens: articles/json-web-tokens.md
-    # - Telegram Bot: articles/telegram-bot-webhook.md
+    - WebSockets: articles/understanding-websockets.md
   - License: license/license.md
 
 markdown_extensions:
