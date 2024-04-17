@@ -2,6 +2,7 @@ site_name: Lambda Forge
 
 theme:
   name: material
+  custom_dir: docs/theme_override_home/
   features:
     - navigation.tabs
     - navigation.sections
@@ -18,35 +19,39 @@ theme:
       primary: black
 
 nav:
-  - Home: 
-    - Introduction: index.md
-    - Getting Started: home/page2.md
-    - Creating a Hello World: home/page3.md
-    - Securing Endpoints: home/page4.md
-    - Lambda Layers: home/page5.md
-    - Multi-Stage Environments: home/page6.md
-    - Custom CodePipeline Steps: home/page7.md
-    - Docs Generation: home/page8.md
-    - Pre-Commit Hooks: home/page9.md
+  - Home: index.md
+  - Docs: 
+    - Getting Started: home/getting-started.md
+    - Creating a Hello World: home/creating-a-hello-world.md
+    - Securing Endpoints: home/securing-endpoints.md
+    - Lambda Layers: home/lambda-layers.md
+    - Multi-Stage Environments: home/multi-stage-environments.md
+    - Custom CodePipeline Steps: home/custom-codepipeline-steps.md
+    - Docs Generation: home/docs-generation.md
+    - Pre-Commit Hooks: home/pre-commit-hooks.md
   - Example Projects:
-    - Introduction: examples/page1.md
-    - URL Shortener: examples/page2.md
-    # - CRUD Application: examples/page3.md
-    - Image to QR Code: examples/page4.md
-    - JWT Authentication: examples/page5.md
-    - Real-Time Chat: examples/page6.md
-    - Web Scraper: examples/page7.md
-    - Twitter Data Pipeline: examples/page8.md
-    - Stock Price Tracker: examples/page9.md
+    - Introduction: examples/introduction.md
+    - Begginer:
+      - Guess The Number: examples/guess-the-number.md
+      - URL Shortener: examples/url-shortener.md
+      - Image to QR Code: examples/image-to-qr-code-converter.md
+    - Intermediate:
+      - JWT Authentication: examples/jwt-authentication.md
+      # - OAuth2 Authentication: examples/oauth2-authentication.md
+      - Real-Time Chat: examples/real-time-chat.md
+      - Web Scraper: examples/web-scraper.md
+    - Advanced:
+      # - AI Telegram Bot: examples/ai-telegram-bot.md
+      - Data Processing Pipeline: examples/data-processing-pipeline.md
+      - Stock Price Tracker: examples/stock-price-tracker.md
   - Articles:
-    - Custom Domain Name: articles/page2.md
-    - Tests with Lambda Forge: articles/page3.md
-    - Deploying External Library as Layers: articles/page5.md
-    - Creating S3 Buckets: articles/page1.md
-    - Locating the Base URL: articles/page4.md
-    - JSON Web Tokens: articles/page6.md
-
-  - License: license/page1.md
+    - Custom Domain Name: articles/custom-domain-name.md
+    - Mocks for Unit Testing: articles/tests-with-lambda-forge.md
+    - External Library as Layers: articles/deploying-external-library-as-layers.md
+    - Api Gateway Base URL: articles/locating-the-base-url.md
+    - JSON Web Tokens: articles/json-web-tokens.md
+    - WebSockets: articles/understanding-websockets.md
+  - License: license/license.md
 
 markdown_extensions:
   - pymdownx.tilde
@@ -61,7 +66,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.mark
   - pymdownx.tabbed
-
   - attr_list
   - pymdownx.emoji
   - pymdownx.superfences:
@@ -85,3 +89,4 @@ extra:
       link: "https://github.com/GuiPimenta-Dev"
     - icon: fontawesome/brands/linkedin
       link: "https://www.linkedin.com/in/guilhermealvespimenta/"
+

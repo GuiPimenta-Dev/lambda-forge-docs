@@ -1,3 +1,0 @@
-# Tailoring AWS CodePipeline with Custom Steps
-
-Coming soon...

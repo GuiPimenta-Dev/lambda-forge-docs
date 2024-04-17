@@ -1,3 +1,0 @@
-# Building a Real-Time Chat Application with WebSockets and DynamoDB in a Serverless Architecture
-
-Coming soon...
