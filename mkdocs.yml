@@ -34,7 +34,7 @@ nav:
     - Begginer:
       - Guess The Number: examples/guess-the-number.md
       - URL Shortener: examples/url-shortener.md
-      - Image to QR Code Converter: examples/image-to-qr-code-converter.md
+      - Image to QR Code: examples/image-to-qr-code-converter.md
     - Intermediate:
       - JWT Authentication: examples/jwt-authentication.md
       # - OAuth2 Authentication: examples/oauth2-authentication.md

@@ -167,7 +167,7 @@ Let's first create the function that will actually send the connection id.
 forge function send_connection_id --description "Sends the connection id to the client when a connection is made" --belongs-to "chat" --no-tests
 ```
 
-This command is designed to establish a new function within the `chat` directory.
+This command creates a new `send_connection_id` function within the `chat` directory.
 
 ```
 functions
