@@ -254,7 +254,7 @@
 
 </html>
 
-# Developing a Serverless CRUD App Using DynamoDB
+<!-- # Developing a Serverless CRUD App Using DynamoDB
 
 In this section, we will develop a straightforward CRUD application designed to capture and manage user-defined names and ages, each uniquely identified by a UUID. This approach not only simplifies the demonstration of the architecture's capabilities but also emphasizes the practical application of these technologies in a user-centric scenario.
 
@@ -779,4 +779,4 @@ curl --request DELETE \
   --url https://api.lambda-forge.com/users/$USER-ID
 ```
 
-Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻 --> -->
+Congratulations! 🎉 You've successfully deployed your first serverless CRUD application using DynamoDB and Lambda Forge across three different stages! 🚀👩‍💻 --> --> -->
