@@ -1307,7 +1307,8 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 
 <h1 id="generating-docs">Generating Docs</h1>
-<p>Lambda Forge goes beyond just organizing Lambda functions for scalability. It assists in automatically documenting important project aspects and enables straightforward cloud document deployment, accessible through API Gateway. This ensures critical information is easily available, optimizing project management and collaboration.</p>
+<p>Lambda Forge excels not only in structuring Lambda functions for scalability but also in facilitating the automatic documentation of key project components. It simplifies the deployment of documents to the cloud, making them readily accessible via API Gateway.</p>
+<p>Documentation is seamlessly generated through the <code>generate_docs</code> step in CodePipeline and is then deployed to the S3 Bucket defined within your <code>cdk.json</code> file. This automated process ensures your project's documentation is always up-to-date and easily accessible.</p>
 <h2 id="api-documentation-with-swagger-and-redoc">API Documentation with Swagger and ReDoc</h2>
 <p>An API document is a technical resource that provides instructions on how to effectively use and integrate with an API. It includes information about the API's functions, classes, return types, arguments, and more, as well as examples of requests and responses. Good API documentation is critical for developers to understand how to make calls to the API and what results they can expect.</p>
 <p>To automatically document your api endpoints with Swagger and Redoc, you should include the <code>Input</code> and <code>Output</code> dataclasses inside your <code>main.py</code> files. Case you have an endpoint that's expecting a path parameter, you can also include it in the <code>Path</code> dataclass.</p>
