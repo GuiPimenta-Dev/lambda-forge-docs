@@ -563,6 +563,15 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#available-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Docs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-documentation-with-swagger-and-redoc" class="md-nav__link">
     <span class="md-ellipsis">
       API Documentation with Swagger and ReDoc
@@ -584,15 +593,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   <a href="#setting-up-the-docs-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       Setting Up the Docs Endpoints
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      Endpoints
     </span>
   </a>
   
@@ -1083,27 +1083,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../articles/another.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WSS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../articles/tests-with-lambda-forge/" class="md-nav__link">
         
   
@@ -1256,6 +1235,15 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#available-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Docs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-documentation-with-swagger-and-redoc" class="md-nav__link">
     <span class="md-ellipsis">
       API Documentation with Swagger and ReDoc
@@ -1282,15 +1270,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      Endpoints
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1309,6 +1288,15 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <h1 id="generating-docs">Generating Docs</h1>
 <p>Lambda Forge excels not only in structuring Lambda functions for scalability but also in facilitating the automatic documentation of key project components. It simplifies the deployment of documents to the cloud, making them readily accessible via API Gateway.</p>
 <p>Documentation is seamlessly generated through the <code>generate_docs</code> step in CodePipeline and is then deployed to the S3 Bucket defined within your <code>cdk.json</code> file. This automated process ensures your project's documentation is always up-to-date and easily accessible.</p>
+<h2 id="available-docs">Available Docs</h2>
+<ul>
+<li>Swagger: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
+<li>Redoc: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc</a></li>
+<li>Diagram: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram</a></li>
+<li>Tests: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests</a></li>
+<li>Coverage: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage</a></li>
+<li>Wiki: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki</a></li>
+</ul>
 <h2 id="api-documentation-with-swagger-and-redoc">API Documentation with Swagger and ReDoc</h2>
 <p>An API document is a technical resource that provides instructions on how to effectively use and integrate with an API. It includes information about the API's functions, classes, return types, arguments, and more, as well as examples of requests and responses. Good API documentation is critical for developers to understand how to make calls to the API and what results they can expect.</p>
 <p>To automatically document your api endpoints with Swagger and Redoc, you should include the <code>Input</code> and <code>Output</code> dataclasses inside your <code>main.py</code> files. Case you have an endpoint that's expecting a path parameter, you can also include it in the <code>Path</code> dataclass.</p>
@@ -1405,15 +1393,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="c1"># Page2 Wiki at /page2</span>
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/page2&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;Page2&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use the Wiki&#39;s title as mode</span>
 </code></pre></div>
-<h2 id="endpoints">Endpoints</h2>
-<ul>
-<li>Swagger: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
-<li>Redoc: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc</a></li>
-<li>Diagram: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram</a></li>
-<li>Tests: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests</a></li>
-<li>Coverage: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage</a></li>
-<li>Wiki: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki</a></li>
-</ul>
 
 
 
