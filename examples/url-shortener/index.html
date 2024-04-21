@@ -474,7 +474,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    CodePipeline Steps
+    CodeBuild Steps
   </span>
   
 
@@ -495,7 +495,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   <span class="md-ellipsis">
-    Multi-Stage Environments
+    CodePipeline
   </span>
   
 
@@ -1346,6 +1346,31 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h1 id="creating-a-url-shortener-service-using-dynamodb">Creating a URL Shortener Service Using DynamoDB</h1>
 <p>In this section, we will explore the development of a URL shortener. This utility enables users to input a lengthy URL, which the system then compresses into a more concise version.</p>
+<p><input type="text" id="myInput" name="myInput" placeholder="Enter a long url" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc;"></p>
+<p><button onclick="handleInput()" style="background-color: #4CAF50; color: white; padding: 10px 24px; border: none; border-radius: 5px; cursor: pointer; margin-top: 5px;">Submit</button></p>
+<script>
+function handleInput() {
+    var inputValue = document.getElementById("myInput").value;
+    fetch('https://api.lambda-forge.com/dev/urls', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+            'Access-Control-Allow-Origin': "*"
+        },
+        body: JSON.stringify({url: inputValue})
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Shortened URL: " + data.short_url);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert("An error occurred while trying to shorten the URL.");
+    });
+}
+</script>
+
 <h2 id="configuring-dynamodb-tables-for-each-deployment-stage">Configuring DynamoDB Tables for Each Deployment Stage</h2>
 <p>To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: <code>Dev-URLs</code>, <code>Staging-URLs</code> and <code>Prod-URLs</code>.</p>
 <div class="admonition note">
