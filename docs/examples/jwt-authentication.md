@@ -10,7 +10,7 @@ To get started, we must create tables to store user credentials securely. For ma
 
 Once you have obtained the ARNs for these tables, let's integrate them into the `cdk.json` file within the corresponding environment.
 
-```python title="cdk.json" linenums="51" hl_lines="6 14 23"
+```python title="cdk.json" linenums="51" hl_lines="6 14 22"
    "dev": {
       "base_url": "https://api.lambda-forge.com/dev",
       "arns": {

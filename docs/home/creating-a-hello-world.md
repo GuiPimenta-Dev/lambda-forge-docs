@@ -56,7 +56,7 @@ def lambda_handler(event, context):
     }
 ```
 
-The `Input` and `Output` data classes are the entrypoint for the documentation creation process. However, since the project was launched with the `--no-docs` flag, we will temporarily skip the docs generation details.
+The `Input` and `Output` data classes are the entrypoint for the documentation creation process. However, we will temporarily skip the docs generation details as this will be covered on a dedicated session.
 
 Moving forward, we've successfully implemented a straightforward lambda function that outputs a basic JSON response: `{"message": "Hello World!"}`.
 
@@ -194,6 +194,6 @@ Select the function, then navigate to `Configurations -> Triggers`. Here, you wi
 
 For this tutorial, the Lambda function is accessible via the following URL:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+- [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world)
 
 Congratulations! 🎉 You've successfully deployed your very first Hello World function using Lambda Forge! 🚀

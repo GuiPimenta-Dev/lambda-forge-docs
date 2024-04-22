@@ -617,11 +617,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../multi-stage-environments/" class="md-nav__link">
+      <a href="../custom-codepipeline-steps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Multi-Stage Environments
+    CodeBuild Steps
   </span>
   
 
@@ -638,11 +638,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../custom-codepipeline-steps/" class="md-nav__link">
+      <a href="../multi-stage-environments/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Custom CodePipeline Steps
+    CodePipeline
   </span>
   
 
@@ -1149,27 +1149,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../articles/another.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WSS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../articles/tests-with-lambda-forge/" class="md-nav__link">
         
   
@@ -1640,7 +1619,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p><img alt="Dev Pipeline Triggered" src="../images/only-dev-pipeline.png" /></p>
 <p>After the pipeline completes successfully, the private Lambda function becomes operational:</p>
 <ul>
-<li>Dev: <a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private</a></li>
+<li>Dev: <a href="https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private">https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private</a></li>
 </ul>
 <p>Direct access to these URLs through a web browser will display an unauthorized access message:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
@@ -1649,7 +1628,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </code></pre></div>
 <p>However, access is granted when including the necessary secret in the request header. Below is how to use <code>curl</code> to access the Lambda function:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl --request GET \
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private \
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  --url https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private \
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  --header &#39;secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&#39;
 </code></pre></div>
 <p>Upon running the curl command, you will receive the following response:</p>

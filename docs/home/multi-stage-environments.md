@@ -18,7 +18,7 @@ The `Development` environment is where the initial coding and feature implementa
 
 This environment is strategically structured to facilitate rapid deployments, allowing new features to be rolled out directly without undergoing any preliminary validation steps. It functions essentially as a sandbox environment, providing developers with a space to both develop and test new features in a fast-paced and flexible setting. This approach enables immediate feedback and iterative improvements, streamlining the development process.
 
-### Configuring the Development Environment
+### Development Environment Configuration
 
 This section details the setup process for the development environment.
 
@@ -58,37 +58,85 @@ class DevStack(cdk.Stack):
             pipeline_name=f"{context.stage}-{context.name}-Pipeline",
         )
 
-        pipeline.add_stage(DeployStage(self, context))
+        # post
+        redoc = steps.redoc()
+        swagger = steps.swagger()
+
+        pipeline.add_stage(
+            DeployStage(self, context),
+            post=[
+                redoc,
+                swagger,
+            ]
+        )
 ```
 
 On line 10, the `context` decorator assigns the stage name as `Dev` and configures the use of resources tagged as `dev` in the `cdk.json` file. Moreover, it imports some additional configuration variables from the `cdk.json` file, assigning them to the argument named `context`.
 
-```json title="cdk.json" linenums="41"
-    "region": "us-east-2",
-    "account": "",
-    "name": "Lambda-Forge-Demo",
-    "repo": {
-      "owner": "$GITHUB-OWNER",
-      "name": "$GITHUB-REPO"
-    },
-    "bucket": "",
-    "coverage": 80,
-    "dev": {
-        "arns": {}
-    },
-    "staging": {
-        "arns": {}
-    },
-    "prod": {
-        "arns": {}
-    }
+Additionally, we incorporate the source code from the `dev` branch hosted on GitHub into the pipeline. Subsequently, we finalize the deployment of the Lambda functions by activating the `DeployStage` and generating `Swagger` and `Redoc` after the deployment.
+
+### Dev Pipeline Workflow
+
+The diagram below succinctly illustrates the default pipeline configuration for the `Dev` stage and established within the AWS CodePipeline.
+
+<div style="text-align:center;">
+
+```mermaid
+graph TD;
+    Source --> Build;
+    Build --> UpdatePipeline
+    UpdatePipeline --> Assets
+    Assets --> Deployment
+    Deployment --> Redoc
+    Deployment --> Swagger
 ```
 
-Additionally, we incorporate the source code from the `dev` branch hosted on GitHub into the pipeline. Subsequently, we finalize the deployment of the Lambda functions by activating the `DeployStage`.
+</div>
 
-### Development Pipeline Workflow
+### Adding Wikis
 
-As the deployment of the Development Environment has been covered in previous sections, we'll not revisit those steps here. However, the diagram below succinctly illustrates the pipeline configuration established within the AWS CodePipeline.
+For project success through teamwork, prioritizing knowledge sharing is key. Leveraging wikis facilitates seamless information dissemination, ensuring everyone is on the same page.
+
+First, let's create some markdown files that we'll use for our documents.
+
+```
+docs/
+└── wikis/
+    ├── page1.md
+    └── page2.md
+```
+
+Let's proceed by updating the pipeline to generate the S3 artifact containing our wikis.
+
+```python title="infra/stacks/dev_stack.py" linenums="38" hl_lines="4-16 23"
+        # post
+        redoc = steps.redoc()
+        swagger = steps.swagger()
+        wikis = [
+            {
+                "title": "Page1",
+                "file_path": "docs/wikis/page1.md",
+                "favicon": "https://docs.lambda-forge.com/images/favicon.png",
+            },
+            {
+                "title": "Page2",
+                "file_path": "docs/wikis/page2.md",
+                "favicon": "https://docs.lambda-forge.com/images/favicon.png",
+            }
+        ]
+        wikis = steps.wikis(wikis)
+
+        pipeline.add_stage(
+            DeployStage(self, context),
+            post=[
+                redoc,
+                swagger,
+                wikis,
+            ]
+        )
+```
+
+Below is the diagram illustrating the updated pipeline configuration:
 
 <div style="text-align:center;">
 
@@ -98,15 +146,24 @@ graph TD;
     Build --> UpdatePipeline[Update Pipeline]
     UpdatePipeline --> Assets
     Assets --> Deployment
+    Deployment --> Redoc
+    Deployment --> Swagger
+    Deployment --> Wikis
 ```
 
 </div>
+
+### Deploying the Dev Environment
+
+After committing and pushing the code to Github, our pipeline should be triggered and updated with the latest configurations.
+
+![alt text](images/updated-dev.png)
 
 ## Staging Environment
 
 The `Staging` environment serves as a near-replica of the production environment, enabling thorough testing and quality assurance processes to catch any bugs or issues before they reach the end-users.
 
-### Configuring the Staging Environment
+### Staging Environment Configuration
 
 Let's take a deeper look in the staging configuration file.
 
@@ -155,8 +212,11 @@ class StagingStack(cdk.Stack):
         validate_integration_tests = steps.validate_integration_tests()
 
         # post
-        generate_docs = steps.generate_docs()
+        redoc = steps.redoc()
+        swagger = steps.swagger()
         integration_tests = steps.run_integration_tests()
+        tests_report = steps.tests_report()
+        coverage_report = steps.coverage_report()
 
         pipeline.add_stage(
             DeployStage(self, context),
@@ -164,36 +224,115 @@ class StagingStack(cdk.Stack):
                 unit_tests,
                 coverage,
                 validate_integration_tests,
+                validate_docs,
             ],
-            post=[integration_tests],
+            post=[
+                redoc,
+                swagger,
+                integration_tests,
+                tests_report,
+                coverage_report,
+            ],
         )
 ```
 
 Similar to the `Dev` environment, this environment is named `Staging`, with resources designated as `staging` in the `cdk.json` file. We also integrate the source code from the `staging` branch on GitHub into the pipeline. However, in contrast to Dev, the Staging environment incorporates stringent quality assurance protocols prior to deployment.
 
-Before deploying the functions, we execute all unit tests specified in the `unit.py` files. Additionally, we ensure that the code coverage percentage exceeds the threshold set in the `cdk.json` file. We also verify that every function connected to the API Gateway is subjected to at least one integration test, identified by the custom `pytest.mark.integration` decorator.
+### Staging Pipeline Workflow
 
-Once all functions have been successfully deployed, we proceed to conduct integration tests as detailed in the `integration.py` files. Essentially, this procedure entails dispatching an HTTP request to each of the newly deployed functions and ensuring they respond with a 200 status code.
+The diagram below succinctly illustrates the default pipeline configuration for the `Staging` stage and established within the AWS CodePipeline.
 
-Initially, the project was initiated with the `--no-docs` flag, resulting in the `validate_docs` and `generate_docs` steps being created but not integrated into the pipeline. We will delve into these steps in greater depth, exploring their functionality and potential benefits in the next section.
+<div style="text-align:center;">
+
+```mermaid
+graph TD;
+    Source --> Build;
+    Build --> UpdatePipeline
+    UpdatePipeline --> Assets
+    Assets --> UnitTests
+    Assets --> Coverage
+    Assets --> ValidateDocs
+    Assets --> ValidateIntegrationTests
+    UnitTests --> Deploy
+    Coverage --> Deploy
+    ValidateDocs --> Deploy
+    ValidateIntegrationTests --> Deploy
+    Deploy --> Redoc
+    Deploy --> Swagger
+    Deploy --> IntegrationTests
+    Deploy --> TestsReport
+    Deploy --> CoverageReport
+```
+
+</div>
+
+### Adding the ValidateTodo Step
+
+Let's fine-tune our pipeline by incorporating the `ValidateTodo` step, which we devised during the previous session. This step will scan files for any TODO comments, promptly raising an error if one is detected.
+
+```python title="infra/stacks/staging_stack.py" linenums="38" hl_lines="6 22"
+        # pre
+        unit_tests = steps.run_unit_tests()
+        coverage = steps.run_coverage()
+        validate_docs = steps.validate_docs()
+        validate_integration_tests = steps.validate_integration_tests()
+        validate_todo = steps.validate_todo()
+
+        # post
+        redoc = steps.redoc()
+        swagger = steps.swagger()
+        integration_tests = steps.run_integration_tests()
+        tests_report = steps.tests_report()
+        coverage_report = steps.coverage_report()
+
+        pipeline.add_stage(
+            DeployStage(self, context),
+            pre=[
+                unit_tests,
+                coverage,
+                validate_integration_tests,
+                validate_docs,
+                validate_todo,
+            ],
+            post=[
+                redoc,
+                swagger,
+                integration_tests,
+                tests_report,
+                coverage_report,
+            ],
+        )
+```
+
+We've introduced the validate todo step prior to deployment. Below, you'll find the updated pipeline configuration.
+
+<div style="text-align:center;">
+
+```mermaid
+graph TD;
+    Source --> Build;
+    Build --> UpdatePipeline
+    UpdatePipeline --> Assets
+    Assets --> UnitTests
+    Assets --> Coverage
+    Assets --> ValidateDocs
+    Assets --> ValidateIntegrationTests
+    Assets --> ValidateTodo
+    UnitTests --> Deploy
+    Coverage --> Deploy
+    ValidateDocs --> Deploy
+    ValidateTodo --> Deploy
+    ValidateIntegrationTests --> Deploy
+    Deploy --> CoverageReport
+    Deploy --> IntegrationTests
+    Deploy --> Redoc
+    Deploy --> Swagger
+    Deploy --> TestsReport
+```
+
+</div>
 
 ### Deploying the Staging Environment
-
-First let's create and push the current code to a new branch called `staging`.
-
-```
-# Stage your changes
-git add .
-
-# Commit with a descriptive message
-git commit -m "Deploying the Staging Environment"
-
-# Create/switch to 'staging' branch.
-git checkout -b staging
-
-# Push 'staging' to remote.
-git push origin staging
-```
 
 Next, let's deploy the staging environment with CDK, adhering to the naming conventions established by Forge:
 
@@ -201,55 +340,53 @@ Next, let's deploy the staging environment with CDK, adhering to the naming conv
 cdk deploy Staging-Lambda-Forge-Demo-Stack
 ```
 
-This command initiates the deployment process. Shortly, AWS CodePipeline will integrate a new pipeline, specifically tailored for the staging environment.
+After some minutes, a new pipeline named `Staging-Lambda-Forge-Demo-Stack` is created on AWS CodePipeline.
 
 ![alt text](images/staging-running-only.png)
 
-The pipeline's configuration within AWS CodePipeline is depicted below, showcasing the streamlined workflow from source code to deployment:
+In the staging environment, we conduct rigorous testing to ensure the robustness of our applications. Integration tests are particularly vital as they simulate real-world scenarios in an environment closely mirroring production.
 
-<div style="text-align:center;">
+Let's take the `HelloWorld` integration test as example.
 
-```mermaid
-graph TD;
-    Source --> Build;
-    Build --> UpdatePipeline[Update Pipeline]
-    UpdatePipeline --> Assets
-    Assets --> UnitTests[Unit Tests]
-    Assets --> Coverage
-    Assets --> ValidateIntegrationTests[Validate Integration Tests]
-    UnitTests --> Deploy
-    Coverage --> Deploy
-    ValidateIntegrationTests --> Deploy
-    Deploy --> IntegrationTests[Integration Tests]
+```python title="functions/hello_world/integration.py" hl_lines="9 11"
+import pytest
+import requests
+from lambda_forge.constants import BASE_URL
+
+
+@pytest.mark.integration(method="GET", endpoint="/hello_world")
+def test_hello_world_status_code_is_200():
+
+    response = requests.get(url=f"{BASE_URL}/hello_world")
+
+    assert response.status_code == 200
 ```
 
-</div>
+Note that, this integration test is actually sending a `GET` request to the deployed staging `/hello_world` endpoint and expecting `200` as the status code.
 
-The first deployment of the Staging Pipeline often results in failure, a situation that might seem alarming but is actually expected due to the sequence in which components are deployed and tested.
+==**However, given this is our initial deployment, the BASE URL has not been established yet, leading the IntegrationTests step to fail.**==
 
-This phenomenon occurs because the integration tests are set to execute immediately after the deployment phase. However, during the first deployment, the BASE URL hasn't been established since it's the inaugural setup of the Staging environment. Consequently, this leads to the failure of the `Integration_Test` phase.
+![alt text](images/integrations-failed.png)
 
-![alt text](images/integration-tests-failed.png)
+### Resolving the Initial Staging Deployment Error
 
-==Note that the failure arises after the deployment phase, indicating that the Lambda functions have been successfully deployed.==
+To address this issue, we need to set up the BASE URL specifically for the integration tests. Follow the guidelines provided in the [Locating The Api Gateway Base URL on CloudFormation](https://docs.lambda-forge.com/articles/locating-the-base-url/") article to find your base URL.
 
-To address this issue, we need to set up the base URL specifically for the integration tests. Follow the guidelines provided in the [Locating The Api Gateway Base URL on CloudFormation](https://docs.lambda-forge.com/articles/locating-the-base-url/") article to find your base URL.
+Having the BASE URL, it must then be incorporated into your `cdk.json` file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
 
-Having the BASE URL, it must then be incorporated into your `cdk.json` configuration file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
-
-```json title="cdk.json" linenums="48" hl_lines="3"
-    "bucket": "",
-    "coverage": 80,
-    "base_url": "https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging"
+```json title="cdk.json" linenums="50"
+    "base_url": "https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging"
 ```
 
 Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.
+
+![alt text](images/staging-success.png)
 
 ## Production Environment
 
 The `Production` environment represents the phase where the tested and stable version of the software is deployed. This version is accessible to end-users and operates within the live environment. It is imperative that this stage remains the most safeguarded, permitting only fully vetted and secure code to be deployed. This precaution helps in minimizing the risk of exposing end-users to bugs or undesirable functionalities, ensuring a seamless and reliable user experience.
 
-### Configuring the Production Environment
+### Production Environment Configuration
 
 ```python
 
@@ -262,11 +399,7 @@ from lambda_forge import Steps, context, create_context
 from infra.stages.deploy import DeployStage
 
 
-@context(
-    stage="Prod",
-    resources="prod",
-    staging=create_context(stage="Staging", resources="staging"),
-)
+@context(stage="Prod", resources="prod")
 class ProdStack(cdk.Stack):
     def __init__(self, scope: Construct, context, **kwargs) -> None:
         super().__init__(scope, f"{context.stage}-{context.name}-Stack", **kwargs)
@@ -296,63 +429,32 @@ class ProdStack(cdk.Stack):
 
         # pre
         unit_tests = steps.run_unit_tests()
-        coverage = steps.run_coverage()
-        validate_docs = steps.validate_docs()
-        validate_integration_tests = steps.validate_integration_tests()
-
-        # post
         integration_tests = steps.run_integration_tests()
 
-        pipeline.add_stage(
-            DeployStage(self, context.staging),
-            pre=[
-                unit_tests,
-                coverage,
-                validate_integration_tests,
-            ],
-            post=[integration_tests],
-        )
-
         # post
-        generate_docs = steps.generate_docs()
+        diagram = steps.diagram()
+        redoc = steps.redoc()
+        swagger = steps.swagger()
 
         pipeline.add_stage(
             DeployStage(self, context),
-            post=[],
+            pre=[
+                unit_tests,
+                integration_tests,
+            ],
+            post=[
+                diagram,
+                redoc,
+                swagger,
+            ],
         )
 ```
 
 This environment is named `Prod` and the resources used are provenient from the `prod` key in the `cdk.json` file. Additionally, the `main` branch on GitHub is being used to trigger the pipeline.
 
-Given the critical need for security and integrity in production, we replicate the staging environment, applying all tests and safeguards again before deploying the production stage. This ensures that any changes meet our high quality standards before production deployment, effectively protecting against vulnerabilities and ensuring a stable user experience.
+Considering the paramount importance of security and integrity in our production environment, we meticulously replicate tests and reinforce safeguards prior to deployment. This rigorous process guarantees that any modifications adhere to our stringent quality benchmarks, thereby safeguarding against vulnerabilities and upholding a seamless user experience. Following this, we proceed to generate the Swagger and Redoc docs alongside the AWS Architecture Diagram for our application.
 
-### Deploying the Production Environment
-
-Firstly, commit and push your code to a new branch named `main` on GitHub
-
-```
-# Stage your changes
-git add .
-
-# Commit with a descriptive message
-git commit -m "Deploying the Production Environment"
-
-# Create/switch to 'main' branch.
-git checkout -b main
-
-# Push 'main' to remote.
-git push origin main
-```
-
-Following the branch setup, deploy your staging environment using the AWS CDK, adhering to the naming conventions provided by Forge.
-
-```
-cdk deploy Prod-Lambda-Forge-Demo-Stack
-```
-
-Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate your deployment process.
-
-![alt text](images/prod-pipeline-running.png)
+### Production Pipeline Workflow
 
 The following diagram visually represents the configuration established in AWS CodePipeline.
 
@@ -361,43 +463,80 @@ The following diagram visually represents the configuration established in AWS C
 ```mermaid
 graph TD;
     Source --> Build;
-    Build --> UpdatePipeline[Update Pipeline]
+    Build --> UpdatePipeline
     UpdatePipeline --> Assets
-    Assets --> UnitTests[Unit Tests]
-    Assets --> Coverage
-    Assets --> ValidateIntegrationTests[Validate Integration Tests]
-    UnitTests --> DeployStaging[Deploy Staging]
-    Coverage --> DeployStaging
-    ValidateIntegrationTests --> DeployStaging
-    DeployStaging --> IntegrationTests[Integration Tests]
-    IntegrationTests --> DeployProduction[Deploy Production]
+    Assets --> IntegrationTests
+    Assets --> UnitTests
+    IntegrationTests --> Deployment
+    UnitTests --> Deployment
+    Deployment --> Diagram
+    Deployment --> Redoc
+    Deployment --> Swagger
 ```
 
 </div>
 
-Upon the successful completion of the pipeline execution, you'll be able to observe a new Lambda function ready and deployed within your AWS Lambda console
-![alt text](images/prod-hello-world.png)
+### Deploying the Production Environment
 
-To verify the url created, navigate to the newly deployed Lambda function in the AWS Lambda console. Within the function, proceed to `Configurations -> Triggers`. Here, you'll find the URL for the new endpoint that has been activated as part of the deployment process.
+Deploy your production environment using the AWS CDK, adhering to the naming conventions.
 
-For this tutorial, the endpoint URL provided is:
+```
+cdk deploy Prod-Lambda-Forge-Demo-Stack
+```
 
-- [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world)
+Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate our deployment process.
+
+![alt text](images/prod-pipeline-running.png)
+
+In just a matter of minutes, the pipeline is expected to finish its run, seamlessly deploying our functions into the production environment.
+
+![alt text](images/prod-success.png)
+
+## Creating new Pipelines
+
+Feel free to create as many pipelines as you need. Just remember to instantiate them in the `app.py` file located at the root of your project.
+
+```python title="app.py" hl_lines="2-4 8-10"
+import aws_cdk as cdk
+from infra.stacks.dev_stack import DevStack
+from infra.stacks.staging_stack import StagingStack
+from infra.stacks.prod_stack import ProdStack
+
+app = cdk.App()
+
+DevStack(app)
+StagingStack(app)
+ProdStack(app)
+
+app.synth()
+```
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+You can deploy all pipelines at once by using the following command:
+
+```
+cdk deploy --all
+```
+
+</p>
+</div>
 
 ## Overview
 
 By adhering to the instructions outlined in this tutorial, you are now equipped with three distinct CI/CD pipelines. Each pipeline corresponds to a specific stage of the development lifecycle, directly linked to the `dev`, `staging`, and `main` branches in your GitHub repository.
 
-These pipelines ensure that changes made in each branch are automatically integrated and deployed to the appropriate environment, streamlining the process from development through to production.
+These pipelines ensure that changes made in each branch are automatically integrated and deployed to the appropriate environment, streamlining the process from development to production.
 
 ![alt text](images/success-pipelines.png)
 
-Furthermore, you have deployed three unique functions, each corresponding to a different environment:
+Furthermore, you have deployed three unique stack of functions, each corresponding to a different environment:
 
-- **Dev**: [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world)
-- **Staging**: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/hello_world)
-- **Prod**: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/hello_world)
+![alt text](images/deployed-hello-worlds.png)
 
-Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of development, staging, and production stages through your CI/CD workflows.
+- **Dev**: [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+- **Staging**: [https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world)
+- **Prod**: [https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world)
 
-Congratulations! 🎉 You've successfully deployed your Lambda function across three different environments using Lambda Forge! 🚀
+Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of environments through your CI/CD workflows.

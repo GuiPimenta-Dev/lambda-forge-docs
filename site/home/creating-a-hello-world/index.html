@@ -599,11 +599,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../multi-stage-environments/" class="md-nav__link">
+      <a href="../custom-codepipeline-steps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Multi-Stage Environments
+    CodeBuild Steps
   </span>
   
 
@@ -620,11 +620,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../custom-codepipeline-steps/" class="md-nav__link">
+      <a href="../multi-stage-environments/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Custom CodePipeline Steps
+    CodePipeline
   </span>
   
 
@@ -1131,27 +1131,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../articles/another.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WSS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../articles/tests-with-lambda-forge/" class="md-nav__link">
         
   
@@ -1447,7 +1426,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">})</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="p">}</span>
 </code></pre></div>
-<p>The <code>Input</code> and <code>Output</code> data classes are the entrypoint for the documentation creation process. However, since the project was launched with the <code>--no-docs</code> flag, we will temporarily skip the docs generation details.</p>
+<p>The <code>Input</code> and <code>Output</code> data classes are the entrypoint for the documentation creation process. However, we will temporarily skip the docs generation details as this will be covered on a dedicated session.</p>
 <p>Moving forward, we've successfully implemented a straightforward lambda function that outputs a basic JSON response: <code>{"message": "Hello World!"}</code>.</p>
 <h3 id="configuring-your-lambda-function-dependencies">Configuring Your Lambda Function Dependencies</h3>
 <h4 id="the-services-class">The Services Class</h4>
@@ -1544,7 +1523,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p><img alt="alt text" src="../images/only-dev-triggers.png" /></p>
 <p>For this tutorial, the Lambda function is accessible via the following URL:</p>
 <ul>
-<li><a href="https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
+<li><a href="https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
 </ul>
 <p>Congratulations! 🎉 You've successfully deployed your very first Hello World function using Lambda Forge! 🚀</p>
 
