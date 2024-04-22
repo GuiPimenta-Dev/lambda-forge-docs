@@ -563,15 +563,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#available-docs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Available Docs
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#api-documentation-with-swagger-and-redoc" class="md-nav__link">
     <span class="md-ellipsis">
       API Documentation with Swagger and ReDoc
@@ -581,18 +572,18 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </li>
       
         <li class="md-nav__item">
-  <a href="#sharing-knowledge-with-wikis" class="md-nav__link">
+  <a href="#setting-up-the-docs-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      Sharing Knowledge with Wikis
+      Setting Up the Docs Endpoints
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-the-docs-endpoints" class="md-nav__link">
+  <a href="#available-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Setting Up the Docs Endpoints
+      Available Docs
     </span>
   </a>
   
@@ -1235,15 +1226,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#available-docs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Available Docs
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#api-documentation-with-swagger-and-redoc" class="md-nav__link">
     <span class="md-ellipsis">
       API Documentation with Swagger and ReDoc
@@ -1253,18 +1235,18 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </li>
       
         <li class="md-nav__item">
-  <a href="#sharing-knowledge-with-wikis" class="md-nav__link">
+  <a href="#setting-up-the-docs-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      Sharing Knowledge with Wikis
+      Setting Up the Docs Endpoints
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-the-docs-endpoints" class="md-nav__link">
+  <a href="#available-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Setting Up the Docs Endpoints
+      Available Docs
     </span>
   </a>
   
@@ -1288,15 +1270,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <h1 id="generating-docs">Generating Docs</h1>
 <p>Lambda Forge excels not only in structuring Lambda functions for scalability but also in facilitating the automatic documentation of key project components. It simplifies the deployment of documents to the cloud, making them readily accessible via API Gateway.</p>
 <p>Documentation is seamlessly generated through the <code>generate_docs</code> step in CodePipeline and is then deployed to the S3 Bucket defined within your <code>cdk.json</code> file. This automated process ensures your project's documentation is always up-to-date and easily accessible.</p>
-<h2 id="available-docs">Available Docs</h2>
-<ul>
-<li>Swagger: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
-<li>Redoc: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc</a></li>
-<li>Diagram: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram</a></li>
-<li>Tests: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests</a></li>
-<li>Coverage: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage</a></li>
-<li>Wiki: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki</a></li>
-</ul>
 <h2 id="api-documentation-with-swagger-and-redoc">API Documentation with Swagger and ReDoc</h2>
 <p>An API document is a technical resource that provides instructions on how to effectively use and integrate with an API. It includes information about the API's functions, classes, return types, arguments, and more, as well as examples of requests and responses. Good API documentation is critical for developers to understand how to make calls to the API and what results they can expect.</p>
 <p>To automatically document your api endpoints with Swagger and Redoc, you should include the <code>Input</code> and <code>Output</code> dataclasses inside your <code>main.py</code> files. Case you have an endpoint that's expecting a path parameter, you can also include it in the <code>Path</code> dataclass.</p>
@@ -1332,67 +1305,46 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">:</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">pass</span> <span class="c1"># No fields are defined, implying the output is empty.</span>
 </code></pre></div>
-<h2 id="sharing-knowledge-with-wikis">Sharing Knowledge with Wikis</h2>
-<p>Facilitating effective knowledge sharing is essential in software development, as it significantly enhances team dynamics and improves communication. Recognizing this, Lambda Forge offers an innovative approach by automatically uploading markdown documents to the cloud. This capability ensures that team members can access crucial information swiftly and at any time, thus accelerating the sharing process and cultivating a collaborative work environment.</p>
-<p>To integrate a wiki into your project documentation, begin by preparing a markdown file within your project structure. This file should then be designated in the <code>generate_docs</code> step as an argument.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/prod_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-37">37</a></span>
-<span class="normal"><a href="#__codelineno-1-38">38</a></span>
-<span class="normal"><a href="#__codelineno-1-39">39</a></span>
-<span class="normal"><a href="#__codelineno-1-40">40</a></span>
-<span class="normal"><a href="#__codelineno-1-41">41</a></span>
-<span class="normal"><a href="#__codelineno-1-42">42</a></span>
-<span class="normal"><a href="#__codelineno-1-43">43</a></span>
-<span class="normal"><a href="#__codelineno-1-44">44</a></span>
-<span class="normal"><a href="#__codelineno-1-45">45</a></span>
-<span class="normal"><a href="#__codelineno-1-46">46</a></span>
-<span class="normal"><a href="#__codelineno-1-47">47</a></span>
-<span class="normal"><a href="#__codelineno-1-48">48</a></span>
-<span class="normal"><a href="#__codelineno-1-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-37" name="__codelineno-1-37"></a>        <span class="n">wikis</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38"></a>            <span class="p">{</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39"></a>                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Page1&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40"></a>                <span class="s2">&quot;file_path&quot;</span><span class="p">:</span> <span class="s2">&quot;docs/wikis/page1.md&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-41" name="__codelineno-1-41"></a>                <span class="s2">&quot;favicon&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.lambda-forge.com/images/favicon.png&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42"></a>            <span class="p">},</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43"></a>            <span class="p">{</span>
-<a id="__codelineno-1-44" name="__codelineno-1-44"></a>                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Page2&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-45" name="__codelineno-1-45"></a>                <span class="s2">&quot;file_path&quot;</span><span class="p">:</span> <span class="s2">&quot;docs/wikis/page2.md&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-46" name="__codelineno-1-46"></a>                <span class="s2">&quot;favicon&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.lambda-forge.com/images/favicon.png&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-47" name="__codelineno-1-47"></a>            <span class="p">}</span>
-<a id="__codelineno-1-48" name="__codelineno-1-48"></a>        <span class="p">]</span>
-<a id="__codelineno-1-49" name="__codelineno-1-49"></a>        <span class="n">generate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">(</span><span class="n">wikis</span><span class="o">=</span><span class="n">wikis</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<p>This setup not only simplifies the documentation process but also ensures that your team has a centralized, easily accessible knowledge base. By leveraging Lambda Forge, you're equipped to create a detailed, accessible, and visually appealing wiki that serves as a cornerstone for your project's knowledge management strategy, fostering enhanced communication and collaboration across your team.</p>
 <h2 id="setting-up-the-docs-endpoints">Setting Up the Docs Endpoints</h2>
 <p>The endpoints to visualize your docs are configured within <code>docs/config.py</code>. This configuration file allows you to specify the types of documents to be displayed and their presentation locations.</p>
-<p>Similar to function configurations, authorizers can be implemented to safeguard the access to your project's documentation, maintaining its confidentiality and integrity.</p>
-<div class="highlight"><span class="filename">docs/config.py</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">class</span> <span class="nc">DocsConfig</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="c1"># Public Swagger at /swagger</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/swagger&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="c1"># Private Swagger at /private/swagger</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/private/swagger&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="c1"># Redoc at /redoc</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/redoc&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;redoc&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="c1"># Architecture Diagram at /diagram</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/diagram&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;diagram&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="c1"># Tests Report at /tests</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/tests&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="c1"># Coverage Report at /coverage</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/coverage&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;coverage&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="c1"># Page1 Wiki at /page1</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/page1&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;Page1&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use the Wiki&#39;s title as mode</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="c1"># Page2 Wiki at /page2</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/page2&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;Page2&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use the Wiki&#39;s title as mode</span>
+<p>Similar to functions, <strong>authorizers can be implemented to safeguard the access to your project's documentation</strong>, maintaining its confidentiality and integrity.</p>
+<div class="highlight"><span class="filename">docs/config.py</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">class</span> <span class="nc">DocsConfig</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="c1"># Public Swagger at /swagger</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/swagger&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="c1"># Private Swagger at /private/swagger</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/private/swagger&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="c1"># Redoc at /redoc</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/redoc&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;redoc&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="c1"># Architecture Diagram at /diagram</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/diagram&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;diagram&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="c1"># Tests Report at /tests</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/tests&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="c1"># Coverage Report at /coverage</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/coverage&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;coverage&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="c1"># Page1 Wiki at /page1</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/page1&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;Page1&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use the Wiki&#39;s title as mode</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="c1"># Page2 Wiki at /page2</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/page2&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;Page2&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Use the Wiki&#39;s title as mode</span>
 </code></pre></div>
+<h2 id="available-docs">Available Docs</h2>
+<ul>
+<li>Swagger: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs</a></li>
+<li>Redoc: <a href="https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc">https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/docs/redoc</a></li>
+<li>Diagram: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/diagram</a></li>
+<li>Tests: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/tests</a></li>
+<li>Coverage: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/coverage</a></li>
+<li>Wiki: <a href="https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki">https://0muz5hqwf0.execute-api.us-east-2.amazonaws.com/dev/wiki</a></li>
+</ul>
 
 
 
