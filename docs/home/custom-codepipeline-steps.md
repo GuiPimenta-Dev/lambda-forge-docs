@@ -193,9 +193,9 @@ background-color: #dddddd;
 
 ## Custom Steps
 
-To facilitate extensive customization, Lambda Forge maintains a record of created functions. Whenever you execute the `cdk synth` command, it updates the list of functions in the `cdk.json` file.
+To support extensive customization, Lambda Forge keeps track of created functions. Each time you run the `cdk synth` command, it refreshes the function list in the `cdk.json` file.
 
-This feature is disabled by default. To enable it, ensure to include the `TRACK=true` environment variable.
+In order to prevent unnecessary cluttering of the `cdk.json` file, this feature is disabled by default. If you need to enable it for debugging purposes while creating your custom scripts, ensure to include the `TRACK=true` environment variable.
 
 ```title=".env"
 TRACK=true
