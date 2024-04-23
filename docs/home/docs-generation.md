@@ -57,25 +57,25 @@ from infra.services import Services
 class DocsConfig:
     def __init__(self, services: Services) -> None:
         # Public Swagger at /swagger
-        services.api_gateway.create_docs(endpoint="/swagger", mode="swagger", public=True)
+        services.api_gateway.create_docs(endpoint="/swagger", artifact="swagger", public=True)
 
         # Redoc at /redoc
-        services.api_gateway.create_docs(endpoint="/redoc", mode="redoc", public=True)
+        services.api_gateway.create_docs(endpoint="/redoc", artifact="redoc", public=True)
 
         # Architecture Diagram at /diagram
-        services.api_gateway.create_docs(endpoint="/diagram", mode="diagram", public=True)
+        services.api_gateway.create_docs(endpoint="/diagram", artifact="diagram", public=True)
 
         # Tests Report at /tests
-        services.api_gateway.create_docs(endpoint="/tests", mode="tests", public=True)
+        services.api_gateway.create_docs(endpoint="/tests", artifact="tests", public=True)
 
         # Coverage Report at /coverage
-        services.api_gateway.create_docs(endpoint="/coverage", mode="coverage", public=True)
+        services.api_gateway.create_docs(endpoint="/coverage", artifact="coverage", public=True)
 
         # Page1 Wiki at /page1
-        services.api_gateway.create_docs(endpoint="/page1", mode="Page1", public=True) # Use the Wiki's title as mode
+        services.api_gateway.create_docs(endpoint="/page1", artifact="Page1", public=True) # Use the Wiki's title as artifact
 
         # Page2 Wiki at /page2
-        services.api_gateway.create_docs(endpoint="/page2", mode="Page2", public=True) # Use the Wiki's title as mode
+        services.api_gateway.create_docs(endpoint="/page2", artifact="Page2", public=True) # Use the Wiki's title as artifact
 ```
 
 ## Available Docs
