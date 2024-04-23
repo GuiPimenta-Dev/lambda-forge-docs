@@ -201,7 +201,7 @@ In order to prevent unnecessary cluttering of the `cdk.json` file, this feature 
 TRACK=true
 ```
 
-Then run the cdk synth command:
+Then run the synth command:
 
 ```
 cdk synth
