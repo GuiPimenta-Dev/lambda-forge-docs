@@ -1507,8 +1507,8 @@ background-color: #dddddd;
 </html>
 
 <h2 id="custom-steps">Custom Steps</h2>
-<p>To facilitate extensive customization, Lambda Forge maintains a record of created functions. Whenever you execute the <code>cdk synth</code> command, it updates the list of functions in the <code>cdk.json</code> file.</p>
-<p>This feature is disabled by default. To enable it, ensure to include the <code>TRACK=true</code> environment variable.</p>
+<p>To support extensive customization, Lambda Forge keeps track of created functions. Each time you run the <code>cdk synth</code> command, it refreshes the function list in the <code>cdk.json</code> file.</p>
+<p>In order to prevent unnecessary cluttering of the <code>cdk.json</code> file, this feature is disabled by default. If you need to enable it for debugging purposes while creating your custom scripts, ensure to include the <code>TRACK=true</code> environment variable.</p>
 <div class="highlight"><span class="filename">.env</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>TRACK=true
 </code></pre></div>
 <p>Then run the cdk synth command:</p>
