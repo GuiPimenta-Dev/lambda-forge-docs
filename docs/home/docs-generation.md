@@ -72,10 +72,12 @@ class DocsConfig:
         services.api_gateway.create_docs(endpoint="/coverage", artifact="coverage", public=True)
 
         # Page1 Wiki at /page1
-        services.api_gateway.create_docs(endpoint="/page1", artifact="Page1", public=True) # Use the Wiki's title as artifact
+        # Use the Wiki's title as artifact
+        services.api_gateway.create_docs(endpoint="/page1", artifact="Page1", public=True)
 
         # Page2 Wiki at /page2
-        services.api_gateway.create_docs(endpoint="/page2", artifact="Page2", public=True) # Use the Wiki's title as artifact
+        # Use the Wiki's title as artifact
+        services.api_gateway.create_docs(endpoint="/page2", artifact="Page2", public=True)
 ```
 
 ## Available Docs
