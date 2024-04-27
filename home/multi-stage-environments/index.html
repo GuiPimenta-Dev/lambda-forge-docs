@@ -1100,27 +1100,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../examples/data-processing-pipeline/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Data Processing Pipeline
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/stock-price-tracker/" class="md-nav__link">
         
   
@@ -1865,15 +1844,15 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-3-36" name="__codelineno-3-36"></a>        <span class="n">steps</span> <span class="o">=</span> <span class="n">CodeBuildSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
 <a id="__codelineno-3-37" name="__codelineno-3-37"></a>
 <a id="__codelineno-3-38" name="__codelineno-3-38"></a>        <span class="c1"># pre</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_unit_tests</span><span class="p">()</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40"></a>        <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_coverage</span><span class="p">()</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">unit_tests</span><span class="p">()</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40"></a>        <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">coverage</span><span class="p">()</span>
 <a id="__codelineno-3-41" name="__codelineno-3-41"></a>        <span class="n">validate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_docs</span><span class="p">()</span>
 <a id="__codelineno-3-42" name="__codelineno-3-42"></a>        <span class="n">validate_integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_integration_tests</span><span class="p">()</span>
 <a id="__codelineno-3-43" name="__codelineno-3-43"></a>
 <a id="__codelineno-3-44" name="__codelineno-3-44"></a>        <span class="c1"># post</span>
 <a id="__codelineno-3-45" name="__codelineno-3-45"></a>        <span class="n">redoc</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">redoc</span><span class="p">()</span>
 <a id="__codelineno-3-46" name="__codelineno-3-46"></a>        <span class="n">swagger</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">swagger</span><span class="p">()</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">integration_tests</span><span class="p">()</span>
 <a id="__codelineno-3-48" name="__codelineno-3-48"></a>        <span class="n">tests_report</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">tests_report</span><span class="p">()</span>
 <a id="__codelineno-3-49" name="__codelineno-3-49"></a>        <span class="n">coverage_report</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">coverage_report</span><span class="p">()</span>
 <a id="__codelineno-3-50" name="__codelineno-3-50"></a>
@@ -1958,8 +1937,8 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <span class="normal"><a href="#__codelineno-4-72">72</a></span>
 <span class="normal"><a href="#__codelineno-4-73">73</a></span>
 <span class="normal"><a href="#__codelineno-4-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-38" name="__codelineno-4-38"></a>        <span class="c1"># pre</span>
-<a id="__codelineno-4-39" name="__codelineno-4-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_unit_tests</span><span class="p">()</span>
-<a id="__codelineno-4-40" name="__codelineno-4-40"></a>        <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_coverage</span><span class="p">()</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">unit_tests</span><span class="p">()</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40"></a>        <span class="n">coverage</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">coverage</span><span class="p">()</span>
 <a id="__codelineno-4-41" name="__codelineno-4-41"></a>        <span class="n">validate_docs</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_docs</span><span class="p">()</span>
 <a id="__codelineno-4-42" name="__codelineno-4-42"></a>        <span class="n">validate_integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">validate_integration_tests</span><span class="p">()</span>
 <a id="__codelineno-4-43" name="__codelineno-4-43"></a><span class="hll">        <span class="n">validate_todo</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">custom_step</span><span class="p">(</span>
@@ -1973,7 +1952,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-4-51" name="__codelineno-4-51"></a>        <span class="c1"># post</span>
 <a id="__codelineno-4-52" name="__codelineno-4-52"></a>        <span class="n">redoc</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">redoc</span><span class="p">()</span>
 <a id="__codelineno-4-53" name="__codelineno-4-53"></a>        <span class="n">swagger</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">swagger</span><span class="p">()</span>
-<a id="__codelineno-4-54" name="__codelineno-4-54"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">integration_tests</span><span class="p">()</span>
 <a id="__codelineno-4-55" name="__codelineno-4-55"></a>        <span class="n">tests_report</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">tests_report</span><span class="p">()</span>
 <a id="__codelineno-4-56" name="__codelineno-4-56"></a>        <span class="n">coverage_report</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">coverage_report</span><span class="p">()</span>
 <a id="__codelineno-4-57" name="__codelineno-4-57"></a>
@@ -2091,8 +2070,8 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>        <span class="n">steps</span> <span class="o">=</span> <span class="n">CodeBuildSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
 <a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
 <a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>        <span class="c1"># pre</span>
-<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_unit_tests</span><span class="p">()</span>
-<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">run_integration_tests</span><span class="p">()</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">unit_tests</span><span class="p">()</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">integration_tests</span><span class="p">()</span>
 <a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>
 <a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>        <span class="c1"># post</span>
 <a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>        <span class="n">diagram</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">diagram</span><span class="p">()</span>
