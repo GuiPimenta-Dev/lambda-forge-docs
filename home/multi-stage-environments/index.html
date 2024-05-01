@@ -1721,14 +1721,14 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </span><a id="__codelineno-2-46" name="__codelineno-2-46"></a><span class="hll">            <span class="p">}</span>
 </span><a id="__codelineno-2-47" name="__codelineno-2-47"></a><span class="hll">        <span class="p">]</span>
 </span><a id="__codelineno-2-48" name="__codelineno-2-48"></a><span class="hll">        <span class="n">wikis</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">wikis</span><span class="p">(</span><span class="n">wikis</span><span class="p">)</span>
-</span><a id="__codelineno-2-49" name="__codelineno-2-49"></a><span class="hll">
-</span><a id="__codelineno-2-50" name="__codelineno-2-50"></a><span class="hll">        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
-</span><a id="__codelineno-2-51" name="__codelineno-2-51"></a><span class="hll">            <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
-</span><a id="__codelineno-2-52" name="__codelineno-2-52"></a><span class="hll">            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
-</span><a id="__codelineno-2-53" name="__codelineno-2-53"></a><span class="hll">                <span class="n">redoc</span><span class="p">,</span>
-</span><a id="__codelineno-2-54" name="__codelineno-2-54"></a>                <span class="n">swagger</span><span class="p">,</span>
-<a id="__codelineno-2-55" name="__codelineno-2-55"></a>                <span class="n">wikis</span><span class="p">,</span>
-<a id="__codelineno-2-56" name="__codelineno-2-56"></a>            <span class="p">]</span>
+</span><a id="__codelineno-2-49" name="__codelineno-2-49"></a>
+<a id="__codelineno-2-50" name="__codelineno-2-50"></a>        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+<a id="__codelineno-2-51" name="__codelineno-2-51"></a>            <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
+<a id="__codelineno-2-52" name="__codelineno-2-52"></a>            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-2-53" name="__codelineno-2-53"></a>                <span class="n">redoc</span><span class="p">,</span>
+<a id="__codelineno-2-54" name="__codelineno-2-54"></a>                <span class="n">swagger</span><span class="p">,</span>
+<a id="__codelineno-2-55" name="__codelineno-2-55"></a><span class="hll">                <span class="n">wikis</span><span class="p">,</span>
+</span><a id="__codelineno-2-56" name="__codelineno-2-56"></a>            <span class="p">]</span>
 <a id="__codelineno-2-57" name="__codelineno-2-57"></a>        <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Below is the diagram illustrating the updated pipeline configuration:</p>
