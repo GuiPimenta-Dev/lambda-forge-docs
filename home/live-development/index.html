@@ -10,6 +10,10 @@
       
       
       
+        <link rel="prev" href="../lambda-layers/">
+      
+      
+        <link rel="next" href="../custom-codepipeline-steps/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -17,7 +21,7 @@
     
     
       
-        <title>OAuth2 Authentication with AWS Cognito - Lambda Forge</title>
+        <title>Live Development - Lambda Forge</title>
       
     
     
@@ -82,7 +86,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <div data-md-component="skip">
       
         
-        <a href="#oauth2-authentication-with-aws-cognito" class="md-skip">
+        <a href="#synchronizing-local-changes-with-aws-in-real-time" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +119,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              OAuth2 Authentication with AWS Cognito
+              Live Development
             
           </span>
         </div>
@@ -213,11 +217,13 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../home/getting-started/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../getting-started/" class="md-tabs__link">
           
   
   Docs
@@ -235,7 +241,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
     
       <li class="md-tabs__item">
-        <a href="../introduction/" class="md-tabs__link">
+        <a href="../../examples/introduction/" class="md-tabs__link">
           
   
   Example Projects
@@ -337,25 +343,30 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -366,7 +377,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Docs
@@ -380,7 +391,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/getting-started/" class="md-nav__link">
+      <a href="../getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -401,7 +412,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/creating-a-hello-world/" class="md-nav__link">
+      <a href="../creating-a-hello-world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -422,7 +433,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/securing-endpoints/" class="md-nav__link">
+      <a href="../securing-endpoints/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -443,7 +454,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/lambda-layers/" class="md-nav__link">
+      <a href="../lambda-layers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -461,10 +472,30 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../home/live-development/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Live Development
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -473,6 +504,35 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-development-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the Development Server
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -485,7 +545,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/custom-codepipeline-steps/" class="md-nav__link">
+      <a href="../custom-codepipeline-steps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -506,7 +566,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/multi-stage-environments/" class="md-nav__link">
+      <a href="../multi-stage-environments/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -527,7 +587,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/docs-generation/" class="md-nav__link">
+      <a href="../docs-generation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -548,7 +608,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../home/pre-commit-hooks/" class="md-nav__link">
+      <a href="../pre-commit-hooks/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -616,7 +676,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../introduction/" class="md-nav__link">
+      <a href="../../examples/introduction/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -677,7 +737,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../guess-the-number/" class="md-nav__link">
+      <a href="../../examples/guess-the-number/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -698,7 +758,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../url-shortener/" class="md-nav__link">
+      <a href="../../examples/url-shortener/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -719,7 +779,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../image-to-qr-code-converter/" class="md-nav__link">
+      <a href="../../examples/image-to-qr-code-converter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +848,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../jwt-authentication/" class="md-nav__link">
+      <a href="../../examples/jwt-authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +869,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../real-time-chat/" class="md-nav__link">
+      <a href="../../examples/real-time-chat/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -830,7 +890,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../web-scraper/" class="md-nav__link">
+      <a href="../../examples/web-scraper/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -899,7 +959,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../stock-price-tracker/" class="md-nav__link">
+      <a href="../../examples/stock-price-tracker/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1141,6 +1201,23 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-development-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the Development Server
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1154,8 +1231,77 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                   
 
 
-<h1 id="oauth2-authentication-with-aws-cognito">OAuth2 Authentication with AWS Cognito</h1>
-<p>Coming soon...</p>
+<h1 id="synchronizing-local-changes-with-aws-in-real-time">Synchronizing Local Changes with AWS in Real-Time</h1>
+<p>Working with AWS Lambda introduces unique challenges compared to traditional server-based setups. Lambda functions are ephemeral and event-driven, terminating immediately after their tasks are completed. This nature complicates local development and testing.</p>
+<p>To mitigate these issues, AWS developed the Serverless Application Model (SAM), which facilitates the deployment of serverless applications with YAML configurations and supports local emulation via the SAM CLI. However, SAM faces difficulties with complex applications, presents a steep learning curve, and its local testing features often fall short of replicating the complete AWS environment, potentially leading to inconsistencies.</p>
+<p>To improve the development experience, Lambda Forge introduces a different solution. Instead of trying to locally emulate Lambda functions, Lambda Forge deploys a stub function to AWS and utilizes the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">MQTT over Websockets</a> protocol to establish a connection to a local server running on the developer's machine. This configuration proxies requests intended for the AWS Lambda function directly to the local environment, thereby facilitating an accurate replication of cloud conditions and enabling seamless local development.</p>
+<h2 id="running-the-development-server">Running the Development Server</h2>
+<p>To start the live development server, simply run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forge live-server $FUNCTION-NAME
+</code></pre></div>
+<p>Lambda Forge automatically deploys a stub function that establishes a connection with your local machine. It also generates the necessary certificates to secure this connection and sets up an API Gateway endpoint to trigger your Lambda function. The endpoint will match the one specified in your <code>config.py</code> file and can be accessed via any HTTP method. If your Lambda function isn't linked to an API Gateway, the endpoint will default to the function's name.</p>
+<p>Once the connection is established, any request sent to the generated URL will be redirected to your local machine. This allows your local Lambda function to receive and process requests in real time, enabling you to update, test, and modify your code on the fly.</p>
+<p>Here's what you can expect to see in your terminal when running the <code>forge live-server HelloWorld</code> command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> _     _             ____                 _                                  _
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| |   (_)_   _____  |  _ \  _____   _____| | ___  _ __  _ __ ___   ___ _ __ | |_
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| |   | \ \ / / _ \ | | | |/ _ \ \ / / _ \ |/ _ \| &#39;_ \| &#39;_ ` _ \ / _ \ &#39;_ \| __|
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| |___| |\ V /  __/ | |_| |  __/\ V /  __/ | (_) | |_) | | | | | |  __/ | | | |_
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>|_____|_| \_/ \___| |____/ \___| \_/ \___|_|\___/| .__/|_| |_| |_|\___|_| |_|\__|
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                                 |_|
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Endpoint URL: https://dd6bufb2ib.execute-api.us-east-2.amazonaws.com/live/hello_world
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Connection Established
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>------------------------ + ------------------------
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>Request:
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>{
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    &quot;httpMethod&quot;: &quot;GET&quot;,
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    &quot;headers&quot;: null,
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    &quot;queryStringParameters&quot;: null,
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    &quot;pathParameters&quot;: null,
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    &quot;body&quot;: null
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>}
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>Response:
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>{
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    &quot;statusCode&quot;: 200,
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    &quot;body&quot;: &quot;{\&quot;message\&quot;: \&quot;Hello World!\&quot;}&quot;
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>}
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>------------------------ + ------------------------
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>Request:
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>{
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>    &quot;httpMethod&quot;: &quot;GET&quot;,
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>    &quot;headers&quot;: null,
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>    &quot;queryStringParameters&quot;: null,
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>    &quot;pathParameters&quot;: null,
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>    &quot;body&quot;: null
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>}
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>Response:
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>{
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>    &quot;statusCode&quot;: 200,
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>    &quot;body&quot;: &quot;{\&quot;message\&quot;: \&quot;Hello Lambda Forge Tutorial!\&quot;}&quot;
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>}
+</code></pre></div>
 
 
 
