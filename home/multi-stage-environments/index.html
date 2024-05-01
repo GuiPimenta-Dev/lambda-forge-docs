@@ -1684,11 +1684,10 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h3 id="adding-wikis">Adding Wikis</h3>
 <p>For project success through teamwork, prioritizing knowledge sharing is key. Leveraging wikis facilitates seamless information dissemination, ensuring everyone is on the same page.</p>
-<p>First, let's create some markdown files that we'll use for our documents.</p>
+<p>First, let's create a markdown file that we'll use as our document.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docs/
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── wikis/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    ├── page1.md
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    └── page2.md
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    └── wiki.md
 </code></pre></div>
 <p>Let's proceed by updating the pipeline to generate the S3 artifact containing our wikis.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/stacks/dev_stack.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-38">38</a></span>
