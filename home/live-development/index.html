@@ -1289,7 +1289,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </code></pre></div>
 <p>Lambda Forge automatically deploys a function that connects to your local machine and generates the necessary certificates to secure this connection. By default, it sets up an API Gateway endpoint to trigger the Lambda function. The endpoint is specified in your <code>config.py</code> file and can be accessed using any HTTP method. If the Lambda function isn’t linked to an API Gateway, the endpoint will default to the function's name.</p>
 <p>Once the connection is established, any request sent to the generated URL will be redirected to your local machine. This allows your local Lambda function to receive and process requests in real time, enabling you to update, test, and modify your code on the fly.</p>
-<p>Here's what you can expect to see in your terminal when running the <code>forge live-server HelloWorld</code> command:</p>
+<p>Below is demonstrated a live development server for the <code>HelloWorld</code> function:</p>
 <p><img alt="" src="../images/live-apigateway.gif" /></p>
 <p>Note that when the provided URL is accessed, the request is proxied to the local machine. This setup allows us to dynamically test and modify the response of the Lambda function in real-time, changing it from <code>Hello World!</code> to <code>Hello Lambda Forge Tutorial!</code>."</p>
 <p>While the API Gateway is the default trigger for the live development, it's not the only trigger option available.</p>
