@@ -2,106 +2,44 @@
 
 In this section, we will explore the development of a URL shortener. This utility enables users to input a lengthy URL, which the system then compresses into a more concise version.
 
-## Configuring DynamoDB Tables for Each Deployment Stage
+## Setting Up the DynamoDB Tables
 
-To ensure our application can operate smoothly across different environments, we'll create three separate DynamoDB tables on AWS DynamoDB console, each tailored for a distinct deployment stage: `Dev-URLs`, `Staging-URLs` and `Prod-URLs`.
+To begin, create three separate DynamoDB tables in the AWS Console to store URLs for different environments: `Dev-URLs`, `Staging-URLs`, and `Prod-URLs`.
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Throughout this tutorial, we'll utilize <b>PK</b> as the Partition Key for all of our DynamoDB tables.</p>
-</div>
+Next, open your project’s `cdk.json` file and incorporate the tables ARNs into the respective environment configurations. This setup ensures that each environment interacts only with its designated table, maintaining clear separation and organization.
 
-Having acquired the ARNs for each stage-specific table, our next step involves integrating these ARNs into the `cdk.json` file. This crucial configuration enables our Cloud Development Kit (CDK) setup to correctly reference the DynamoDB tables according to the deployment stage.
-
-Here's how to update your `cdk.json` file to include the DynamoDB table ARNs for development, staging, and production environments:
-
-```json title="cdk.json" linenums="51" hl_lines="3 8 13"
+```json title="cdk.json" linenums="51" hl_lines="4 10 16"
     "dev": {
       "arns": {
-        "urls_table": "$DEV-URLS-TABLE-ARN"
+        "numbers_table": "$DEV-NUMBERS-TABLE-ARN",
+        "urls_table": "$DEV-URLS-TABLE-ARN",
       }
     },
     "staging": {
       "arns": {
-        "urls_table": "$STAGING-URLS-TABLE-ARN"
+        "numbers_table": "$STAGING-NUMBERS-TABLE-ARN",
+        "urls_table": "$STAGING-URLS-TABLE-ARN",
       }
     },
     "prod": {
       "arns": {
-        "urls_table": "$PROD-URLS-TABLE-ARN"
+        "numbers_table": "$PROD-NUMBERS-TABLE-ARN",
+        "urls_table": "$PROD-URLS-TABLE-ARN",
       }
     }
 ```
 
-### Incorporating DynamoDB Into the Service Class
+Next, we need to create a new variable class within the DynamoDB class to reference our URLs tables.
 
-The subsequent phase in enhancing our application involves integrating the DynamoDB service within our service layer, enabling direct communication with DynamoDB tables. To accomplish this, utilize the following command:
-
-`forge service dynamo_db`
-
-This command creates a new service file named `dynamo_db.py` within the `infra/services` directory.
-
-```hl_lines="6"
-infra
-├── services
-    ├── __init__.py
-    ├── api_gateway.py
-    ├── aws_lambda.py
-    ├── dynamo_db.py
-    └── layers.py
-```
-
-Below is the updated structure of our Service class, now including the DynamoDB service, demonstrating the integration's completion:
-
-```python title="infra/services/__init__.py" hl_lines="12"
-from infra.services.dynamo_db import DynamoDB
-from infra.services.api_gateway import APIGateway
-from infra.services.aws_lambda import AWSLambda
-from infra.services.layers import Layers
-
-
-class Services:
-    def __init__(self, scope, context) -> None:
-        self.api_gateway = APIGateway(scope, context)
-        self.aws_lambda = AWSLambda(scope, context)
-        self.layers = Layers(scope)
-        self.dynamo_db = DynamoDB(scope, context)
-```
-
-Here is the newly established DynamoDB class:
-
-```python title="infra/services/dynamo_db.py"
-from aws_cdk import aws_dynamodb as dynamo_db
-from aws_cdk import aws_iam as iam
-
-
+```python title="infra/services/dynamo_db.py" hl_lines="10-14" linenums="5"
 class DynamoDB:
     def __init__(self, scope, context: dict) -> None:
 
-        # self.dynamo = dynamo_db.Table.from_table_arn(
-        #     scope,
-        #     "Dynamo",
-        #     context.resources["arns"]["dynamo_arn"],
-        # )
-        ...
-
-    @staticmethod
-    def add_query_permission(table, function):
-        function.add_to_role_policy(
-            iam.PolicyStatement(
-                actions=["dynamodb:Query"],
-                resources=[f"{table.table_arn}/index/*"],
-            )
+        self.numbers_table = dynamo_db.Table.from_table_arn(
+            scope,
+            "NumbersTable",
+            context.resources["arns"]["numbers_table"],
         )
-```
-
-Forge has already laid the groundwork by providing a commented code that outlines the structure for creating a DynamoDB table and retrieving its ARN from the `cdk.json` file. Additionally, it's worth noting that the DynamoDB class includes a specialized helper method aimed at streamlining the task of assigning query permissions.
-
-Let's refine the class variables to directly reference our URLs table.
-
-```python title="infra/services/dynamo_db.py" hl_lines="4-8" linenums="5"
-class DynamoDB:
-    def __init__(self, scope, context: dict) -> None:
 
         self.urls_table = dynamo_db.Table.from_table_arn(
             scope,
@@ -109,8 +47,6 @@ class DynamoDB:
             context.resources["arns"]["urls_table"],
         )
 ```
-
-The `context.resources` object on line 11 contains only the resources that are pertinent to the current stage. By tapping into this, we can dynamically tweak our AWS resources according to the specific stage we're operating in.
 
 ## Implementing the Shortener Function
 
@@ -187,22 +123,25 @@ Since we are operating in a multi-stage environment, this function is dynamicall
 
 To make this possible, we must incorporate the base URL into the `cdk.json` file and implement minor modifications. These adjustments will enable the base URL to be accessible within the `config.py` class, thereby allowing the function to access the appropriate base URL depending on the environment it's operating in.
 
-```json title="cdk.json" linenums="51" hl_lines="2 8 14"
+```json title="cdk.json" linenums="51" hl_lines="2 9 16"
     "dev": {
       "base_url": "https://api.lambda-forge.com/dev",
       "arns": {
+        "numbers_table": "$DEV-NUMBERS-TABLE-ARN",
         "urls_table": "$DEV-URLS-TABLE-ARN"
       }
     },
     "staging": {
       "base_url": "https://api.lambda-forge.com/staging",
       "arns": {
+        "numbers_table": "$STAGING-NUMBERS-TABLE-ARN",
         "urls_table": "$STAGING-URLS-TABLE-ARN"
       }
     },
     "prod": {
       "base_url": "https://api.lambda-forge.com",
       "arns": {
+        "numbers_table": "$PROD-NUMBERS-TABLE-ARN",
         "urls_table": "$PROD-URLS-TABLE-ARN"
       }
     }
@@ -217,13 +156,17 @@ Follow the article <a href="https://docs.lambda-forge.com/articles/locating-the-
 
 Initially, the `LambdaStack` class sends only the `self.services` as argument to the `ShortenerConfig` class. We must update it to also send the `context` parameter. This change allows the config class to access base URLs and dynamically set the correct environment variables during the function definition, enhancing its adaptability.
 
-```python title="infra/stacks/lambda_stack.py" hl_lines="9" linenums="19"
+```python title="infra/stacks/lambda_stack.py" hl_lines="13" linenums="19"
 class LambdaStack(Stack):
     def __init__(self, scope: Construct, context, **kwargs) -> None:
 
         super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
 
         self.services = Services(self, context)
+
+        # GuessTheNumber
+        MakeGuessConfig(self.services)
+        CreateGameConfig(self.services)
 
         # Urls
         ShortenerConfig(self.services, context)

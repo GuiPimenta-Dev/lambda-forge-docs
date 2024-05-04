@@ -27,7 +27,7 @@ import aws_cdk as cdk
 from aws_cdk import pipelines as pipelines
 from aws_cdk.pipelines import CodePipelineSource
 from constructs import Construct
-from lambda_forge import context
+from lambda_forge import context, CodeBuildSteps
 
 from infra.stages.deploy import DeployStage
 
@@ -58,6 +58,8 @@ class DevStack(cdk.Stack):
             pipeline_name=f"{context.stage}-{context.name}-Pipeline",
         )
 
+        steps = CodeBuildSteps(self, context, source)
+
         # post
         redoc = steps.redoc()
         swagger = steps.swagger()
@@ -73,7 +75,7 @@ class DevStack(cdk.Stack):
 
 On line 10, the `context` decorator assigns the stage name as `Dev` and configures the use of resources tagged as `dev` in the `cdk.json` file. Moreover, it imports some additional configuration variables from the `cdk.json` file, assigning them to the argument named `context`.
 
-Additionally, we incorporate the source code from the `dev` branch hosted on GitHub into the pipeline. Subsequently, we finalize the deployment of the Lambda functions by activating the `DeployStage` and generating `Swagger` and `Redoc` after the deployment.
+Additionally, we incorporate the source code from the `dev` branch hosted on GitHub into the pipeline. Subsequently, we finalize the deployment of the Lambda functions by activating the `DeployStage`. Post-deployment, we generate `Swagger` and `Redoc` documentation using a helper class provided by Lambda Forge. This class utilizes the public Docker image hosted on ECR described in the previous chapter to facilitate these operations.
 
 ### Dev Pipeline Workflow
 
@@ -97,30 +99,24 @@ graph TD;
 
 For project success through teamwork, prioritizing knowledge sharing is key. Leveraging wikis facilitates seamless information dissemination, ensuring everyone is on the same page.
 
-First, let's create some markdown files that we'll use for our documents.
+First, let's create a markdown file that we'll use as our document.
 
 ```
 docs/
 └── wikis/
-    ├── page1.md
-    └── page2.md
+    └── wiki.md
 ```
 
 Let's proceed by updating the pipeline to generate the S3 artifact containing our wikis.
 
-```python title="infra/stacks/dev_stack.py" linenums="38" hl_lines="4-16 23"
+```python title="infra/stacks/dev_stack.py" linenums="38" hl_lines="4-11 18"
         # post
         redoc = steps.redoc()
         swagger = steps.swagger()
         wikis = [
             {
-                "title": "Page1",
-                "file_path": "docs/wikis/page1.md",
-                "favicon": "https://docs.lambda-forge.com/images/favicon.png",
-            },
-            {
-                "title": "Page2",
-                "file_path": "docs/wikis/page2.md",
+                "title": "Wiki",
+                "file_path": "docs/wikis/wiki.md",
                 "favicon": "https://docs.lambda-forge.com/images/favicon.png",
             }
         ]
@@ -172,7 +168,7 @@ import aws_cdk as cdk
 from aws_cdk import pipelines as pipelines
 from aws_cdk.pipelines import CodePipelineSource
 from constructs import Construct
-from lambda_forge import Steps, context
+from lambda_forge import CodeBuildSteps, context
 
 from infra.stages.deploy import DeployStage
 
@@ -203,18 +199,18 @@ class StagingStack(cdk.Stack):
             pipeline_name=f"{context.stage}-{context.name}-Pipeline",
         )
 
-        steps = Steps(self, context, source)
+        steps = CodeBuildSteps(self, context, source)
 
         # pre
-        unit_tests = steps.run_unit_tests()
-        coverage = steps.run_coverage()
+        unit_tests = steps.unit_tests()
+        coverage = steps.coverage()
         validate_docs = steps.validate_docs()
         validate_integration_tests = steps.validate_integration_tests()
 
         # post
         redoc = steps.redoc()
         swagger = steps.swagger()
-        integration_tests = steps.run_integration_tests()
+        integration_tests = steps.integration_tests()
         tests_report = steps.tests_report()
         coverage_report = steps.coverage_report()
 
@@ -270,18 +266,24 @@ graph TD;
 
 Let's fine-tune our pipeline by incorporating the `ValidateTodo` step, which we devised during the previous session. This step will scan files for any TODO comments, promptly raising an error if one is detected.
 
-```python title="infra/stacks/staging_stack.py" linenums="38" hl_lines="6 22"
+```python title="infra/stacks/staging_stack.py" linenums="38" hl_lines="6-12 27"
         # pre
-        unit_tests = steps.run_unit_tests()
-        coverage = steps.run_coverage()
+        unit_tests = steps.unit_tests()
+        coverage = steps.coverage()
         validate_docs = steps.validate_docs()
         validate_integration_tests = steps.validate_integration_tests()
-        validate_todo = steps.validate_todo()
+        validate_todo = steps.custom_step(
+            name="ValidateTodo",
+            commands=[
+                "cdk synth",
+                "python infra/scripts/validate_todo.py"
+            ]
+        )
 
         # post
         redoc = steps.redoc()
         swagger = steps.swagger()
-        integration_tests = steps.run_integration_tests()
+        integration_tests = steps.integration_tests()
         tests_report = steps.tests_report()
         coverage_report = steps.coverage_report()
 
@@ -290,9 +292,9 @@ Let's fine-tune our pipeline by incorporating the `ValidateTodo` step, which we 
             pre=[
                 unit_tests,
                 coverage,
-                validate_integration_tests,
                 validate_docs,
                 validate_todo,
+                validate_integration_tests,
             ],
             post=[
                 redoc,
@@ -394,7 +396,7 @@ import aws_cdk as cdk
 from aws_cdk import pipelines
 from aws_cdk.pipelines import CodePipelineSource
 from constructs import Construct
-from lambda_forge import Steps, context, create_context
+from lambda_forge import CodeBuildSteps, context, create_context
 
 from infra.stages.deploy import DeployStage
 
@@ -425,11 +427,11 @@ class ProdStack(cdk.Stack):
             pipeline_name=f"{context.stage}-{context.name}-Pipeline",
         )
 
-        steps = Steps(self, context.staging, source)
+        steps = CodeBuildSteps(self, context, source)
 
         # pre
-        unit_tests = steps.run_unit_tests()
-        integration_tests = steps.run_integration_tests()
+        unit_tests = steps.unit_tests()
+        integration_tests = steps.integration_tests()
 
         # post
         diagram = steps.diagram()

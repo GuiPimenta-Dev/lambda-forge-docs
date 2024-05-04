@@ -39,10 +39,7 @@ Once you have obtained the ARNs for these tables, let's integrate them into the 
 
 Next, we'll create a new variable class within the DynamoDB class to reference our JWT tables.
 
-```python title="infra/services/dynamo_db.py" hl_lines="10-14" linenums="5"
-class DynamoDB:
-    def __init__(self, scope, context: dict) -> None:
-
+```python title="infra/services/dynamo_db.py" hl_lines="10-14" linenums="8"
         self.urls_table = dynamo_db.Table.from_table_arn(
             scope,
             "URLsTable",

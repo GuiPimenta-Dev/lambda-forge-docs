@@ -6,65 +6,9 @@ The CodeBuild step within the pipeline is crucial, since it is the component tha
 
 ## AWS CodeBuild
 
-In AWS CodeBuild, you have the flexibility to choose from a variety of setup options for your build environment. You can opt for AWS-managed images that come pre-equipped with tools for popular development environments, utilize a custom Docker image hosted on Amazon ECR or any other registry to tailor your environment to specific requirements, or precisely orchestrate your build steps through a buildspec.yml file. Each method is designed to cater to diverse project needs, offering everything from convenience to extensive customization, with Docker images providing the greatest scope for personalization.
+In AWS CodeBuild, you have the flexibility to choose from a variety of setup options for your build environment. You can opt for AWS-managed images that come pre-equipped with tools for popular development environments, utilize a custom Docker image hosted on Amazon ECR or any other registry to tailor your environment to specific requirements, or precisely orchestrate your build steps through a `buildspec.yml` file. Each method is designed to cater to diverse project needs, offering everything from convenience to extensive customization, with Docker images providing the greatest scope for personalization.
 
 To simplify setting up CodeBuild projects, we've prepared a public Docker image hosted on ECR. This image is pre-configured with all the necessary tools and includes custom Python scripts for validation and docs generation, streamlining your workflow. You can access our optimized build environment here: [https://gallery.ecr.aws/x8r4y7j7/lambda-forge](https://gallery.ecr.aws/x8r4y7j7/lambda-forge).
-
-## The CodeBuild Class
-
-To simplify and unify the process of creating new steps for the pipeline, we have developed a convenient helper class. This class is designed to assist in setting up new CodeBuild steps and is located at `infra/steps/codebuild.py`.
-
-```python title="infra/steps/codebuild.py" linenums="1"
-from aws_cdk import aws_codebuild as codebuild
-from aws_cdk import aws_iam as iam
-from aws_cdk import pipelines as pipelines
-
-
-class CodeBuild:
-    def __init__(self, scope, context, source) -> None:
-        self.scope = scope
-        self.context = context
-        self.source = source
-
-    def create_step(
-        self,
-        name,
-        commands,
-        install_commands=[],
-        env={},
-        partial_build_spec={},
-        permissions=[],
-        requirements="requirements.txt",
-    ):
-
-        PUBLIC_ECR = "public.ecr.aws/x8r4y7j7/lambda-forge:latest"
-
-        return pipelines.CodeBuildStep(
-            name,
-            input=self.source,
-            install_commands=[
-                "cp -r /lambda-forge/* .",
-                "forge layer --install",
-                f"pip install -r {requirements}",
-                *install_commands,
-            ],
-            env=env,
-            commands=commands,
-            build_environment=codebuild.BuildEnvironment(
-                build_image=codebuild.LinuxBuildImage.from_docker_registry(PUBLIC_ECR),
-                privileged=True,
-                compute_type=codebuild.ComputeType.SMALL,
-                environment_variables=env,
-            ),
-            partial_build_spec=codebuild.BuildSpec.from_object(partial_build_spec),
-            cache=codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
-            role_policy_statements=[*self.get_role_policy_statements(permissions)],
-        )
-
-    ...
-```
-
-This function leverages the Lambda Forge ECR public image, defined on line 23, ensuring that the pipeline has access to the custom scripts housed within the image. It seamlessly integrates custom Forge layers and installs your project's dependencies.
 
 In line with our commitment to transparency, the complete source code used to construct this Docker image is accessible in the following public repository: [https://github.com/GuiPimenta-Dev/lambda-forge-ecr](https://github.com/GuiPimenta-Dev/lambda-forge-ecr).
 
@@ -251,7 +195,7 @@ This list of functions can now be leveraged to add new and tailored steps to you
 
 For instance, let's create a straightforward custom script that iterates over each file described in the functions list. It will raise an error if it encounters a comment `# TODO`, thereby preventing the pipeline from proceeding if a TODO is included as a comment.
 
-First, create a new file at `infra/scripts/validate_todo.py`:
+Let's create a new file at `infra/scripts/validate_todo.py`:
 
 ```python title="infra/scripts/validate_todo.py"
 import json
@@ -275,21 +219,5 @@ if __name__ == "__main__":
     json_file_path = "cdk.json"
     check_functions_for_todo(json_file_path)
 ```
-
-Next, let's create a new custom step in `infra/steps/__init__.py`:
-
-```python title="infra/steps/__init__.py" linenums="164"
-
-  def validate_todo(self):
-        return self.codebuild.create_step(
-            name="ValidateTodo",
-            commands=[
-                "cdk synth",
-                "python infra/scripts/validate_todo.py",
-            ],
-        )
-```
-
-With our newly created custom step at our disposal, our pipeline gains a significant boost in capability.
 
 In the upcoming section, we'll dive into the seamless integration of these steps into our multi-stage pipelines, unlocking a world of possibilities for streamlining our deployment processes.

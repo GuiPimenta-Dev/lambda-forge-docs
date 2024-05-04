@@ -25,6 +25,7 @@ nav:
       - Creating a Hello World: home/creating-a-hello-world.md
       - Securing Endpoints: home/securing-endpoints.md
       - Lambda Layers: home/lambda-layers.md
+      - Live Development: home/live-development.md
       - CodeBuild Steps: home/custom-codepipeline-steps.md
       - CodePipeline: home/multi-stage-environments.md
       - Docs Generation: home/docs-generation.md
@@ -42,7 +43,7 @@ nav:
           - Web Scraper: examples/web-scraper.md
       - Advanced:
           # - AI Telegram Bot: examples/ai-telegram-bot.md
-          - Data Processing Pipeline: examples/data-processing-pipeline.md
+          # - Data Processing Pipeline: examples/data-processing-pipeline.md
           - Stock Price Tracker: examples/stock-price-tracker.md
   - Articles:
       - Custom Domain Name: articles/custom-domain-name.md

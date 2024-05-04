@@ -104,7 +104,7 @@ In this section, we will develop a real-time chat application using WebSockets, 
     				</div>
     		</div>
     	</main>
-    	<script>const BASE_URL = 'wss://2clnav84i7.execute-api.us-east-2.amazonaws.com/dev/';
+    	<script>const BASE_URL = 'wss://tq4hgk0jxd.execute-api.us-east-2.amazonaws.com/dev/';
 
     		// SOCKET 1
     		const sendButton1 = document.getElementById('sendMessage1');

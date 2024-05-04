@@ -470,6 +470,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
+      <a href="../../home/live-development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Live Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../home/custom-codepipeline-steps/" class="md-nav__link">
         
   
@@ -1030,27 +1051,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../data-processing-pipeline/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Data Processing Pipeline
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../stock-price-tracker/" class="md-nav__link">
         
   
@@ -1459,10 +1459,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Next, we'll create a new variable class within the DynamoDB class to reference our JWT tables.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/dynamo_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/dynamo_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-1-10">10</a></span>
 <span class="normal"><a href="#__codelineno-1-11">11</a></span>
@@ -1472,19 +1469,16 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <span class="normal"><a href="#__codelineno-1-15">15</a></span>
 <span class="normal"><a href="#__codelineno-1-16">16</a></span>
 <span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="k">class</span> <span class="nc">DynamoDB</span><span class="p">:</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">urls_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-8" name="__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">urls_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a>            <span class="n">scope</span><span class="p">,</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a>            <span class="s2">&quot;URLsTable&quot;</span><span class="p">,</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11"></a>            <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;urls_table&quot;</span><span class="p">],</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="p">)</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">auth_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
-</span><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
-</span><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="hll">            <span class="s2">&quot;AuthTable&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="hll">            <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;auth_table&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_table</span> <span class="o">=</span> <span class="n">dynamo_db</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_table_arn</span><span class="p">(</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>            <span class="n">scope</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>            <span class="s2">&quot;AuthTable&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="hll">            <span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;auth_table&quot;</span><span class="p">],</span>
 </span><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="hll">        <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="implementing-password-hashing-with-kms">Implementing Password Hashing with KMS</h2>

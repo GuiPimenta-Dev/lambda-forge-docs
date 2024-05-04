@@ -10,7 +10,7 @@
       
       
       
-        <link rel="prev" href="../lambda-layers/">
+        <link rel="prev" href="../live-development/">
       
       
         <link rel="next" href="../multi-stage-environments/">
@@ -472,6 +472,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../live-development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Live Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -524,15 +545,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   <a href="#aws-codebuild" class="md-nav__link">
     <span class="md-ellipsis">
       AWS CodeBuild
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-codebuild-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      The CodeBuild Class
     </span>
   </a>
   
@@ -965,27 +977,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../../examples/data-processing-pipeline/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Data Processing Pipeline
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../examples/stock-price-tracker/" class="md-nav__link">
         
   
@@ -1244,15 +1235,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-codebuild-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      The CodeBuild Class
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#default-steps" class="md-nav__link">
     <span class="md-ellipsis">
       Default Steps
@@ -1289,141 +1271,44 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p>AWS CodePipeline is a continuous integration and continuous deployment (CI/CD) tool that automates the steps required to release a new version of software. It connects directly to a GitHub repository, or other version control systems, to monitor for any changes in the codebase. Upon detecting changes, the pipeline automatically triggers a series of predefined steps that can include building the code, running tests, and deploying the code to various environments.</p>
 <p>The CodeBuild step within the pipeline is crucial, since it is the component that actually compiles the source code, runs tests, and produces ready-to-deploy software packages. Each step ensures that only code that passes all defined quality checks and tests is moved forward in the pipeline, leading towards deployment.</p>
 <h2 id="aws-codebuild">AWS CodeBuild</h2>
-<p>In AWS CodeBuild, you have the flexibility to choose from a variety of setup options for your build environment. You can opt for AWS-managed images that come pre-equipped with tools for popular development environments, utilize a custom Docker image hosted on Amazon ECR or any other registry to tailor your environment to specific requirements, or precisely orchestrate your build steps through a buildspec.yml file. Each method is designed to cater to diverse project needs, offering everything from convenience to extensive customization, with Docker images providing the greatest scope for personalization.</p>
+<p>In AWS CodeBuild, you have the flexibility to choose from a variety of setup options for your build environment. You can opt for AWS-managed images that come pre-equipped with tools for popular development environments, utilize a custom Docker image hosted on Amazon ECR or any other registry to tailor your environment to specific requirements, or precisely orchestrate your build steps through a <code>buildspec.yml</code> file. Each method is designed to cater to diverse project needs, offering everything from convenience to extensive customization, with Docker images providing the greatest scope for personalization.</p>
 <p>To simplify setting up CodeBuild projects, we've prepared a public Docker image hosted on ECR. This image is pre-configured with all the necessary tools and includes custom Python scripts for validation and docs generation, streamlining your workflow. You can access our optimized build environment here: <a href="https://gallery.ecr.aws/x8r4y7j7/lambda-forge">https://gallery.ecr.aws/x8r4y7j7/lambda-forge</a>.</p>
-<h2 id="the-codebuild-class">The CodeBuild Class</h2>
-<p>To simplify and unify the process of creating new steps for the pipeline, we have developed a convenient helper class. This class is designed to assist in setting up new CodeBuild steps and is located at <code>infra/steps/codebuild.py</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/steps/codebuild.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_codebuild</span> <span class="k">as</span> <span class="n">codebuild</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">pipelines</span> <span class="k">as</span> <span class="n">pipelines</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="k">class</span> <span class="nc">CodeBuild</span><span class="p">:</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    <span class="k">def</span> <span class="nf">create_step</span><span class="p">(</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a>        <span class="bp">self</span><span class="p">,</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>        <span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>        <span class="n">commands</span><span class="p">,</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="n">install_commands</span><span class="o">=</span><span class="p">[],</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>        <span class="n">env</span><span class="o">=</span><span class="p">{},</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="n">partial_build_spec</span><span class="o">=</span><span class="p">{},</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a>        <span class="n">permissions</span><span class="o">=</span><span class="p">[],</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a>        <span class="n">requirements</span><span class="o">=</span><span class="s2">&quot;requirements.txt&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="p">):</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a>        <span class="n">PUBLIC_ECR</span> <span class="o">=</span> <span class="s2">&quot;public.ecr.aws/x8r4y7j7/lambda-forge:latest&quot;</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>        <span class="k">return</span> <span class="n">pipelines</span><span class="o">.</span><span class="n">CodeBuildStep</span><span class="p">(</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a>            <span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a>            <span class="nb">input</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a>            <span class="n">install_commands</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a>                <span class="s2">&quot;cp -r /lambda-forge/* .&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>                <span class="s2">&quot;forge layer --install&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>                <span class="sa">f</span><span class="s2">&quot;pip install -r </span><span class="si">{</span><span class="n">requirements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>                <span class="o">*</span><span class="n">install_commands</span><span class="p">,</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a>            <span class="p">],</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>            <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a>            <span class="n">commands</span><span class="o">=</span><span class="n">commands</span><span class="p">,</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a>            <span class="n">build_environment</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildEnvironment</span><span class="p">(</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a>                <span class="n">build_image</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">LinuxBuildImage</span><span class="o">.</span><span class="n">from_docker_registry</span><span class="p">(</span><span class="n">PUBLIC_ECR</span><span class="p">),</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a>                <span class="n">privileged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a>                <span class="n">compute_type</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">ComputeType</span><span class="o">.</span><span class="n">SMALL</span><span class="p">,</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a>                <span class="n">environment_variables</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>            <span class="p">),</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a>            <span class="n">partial_build_spec</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildSpec</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">partial_build_spec</span><span class="p">),</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a>            <span class="n">cache</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">Cache</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="n">codebuild</span><span class="o">.</span><span class="n">LocalCacheMode</span><span class="o">.</span><span class="n">DOCKER_LAYER</span><span class="p">,</span> <span class="n">codebuild</span><span class="o">.</span><span class="n">LocalCacheMode</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">),</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a>            <span class="n">role_policy_statements</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">get_role_policy_statements</span><span class="p">(</span><span class="n">permissions</span><span class="p">)],</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a>        <span class="p">)</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="o">...</span>
-</code></pre></div></td></tr></table></div>
-<p>This function leverages the Lambda Forge ECR public image, defined on line 23, ensuring that the pipeline has access to the custom scripts housed within the image. It seamlessly integrates custom Forge layers and installs your project's dependencies.</p>
 <p>In line with our commitment to transparency, the complete source code used to construct this Docker image is accessible in the following public repository: <a href="https://github.com/GuiPimenta-Dev/lambda-forge-ecr">https://github.com/GuiPimenta-Dev/lambda-forge-ecr</a>.</p>
 <p>For those interested in customizing further, you're encouraged to use this image as a foundation to build your own project-specific private image. The necessary steps and configurations can be found in the Dockerfile provided below.</p>
-<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/lambda-forge</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/lambda-forge
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c"># Install nvm with Node.js and npm</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NODE_VERSION</span><span class="o">=</span><span class="m">16</span>.13.0
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>jq
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NVM_DIR</span><span class="o">=</span>/root/.nvm
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span>install<span class="w"> </span><span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span>use<span class="w"> </span>v<span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span><span class="nb">alias</span><span class="w"> </span>default<span class="w"> </span>v<span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/root/.nvm/versions/node/v</span><span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span><span class="s2">/bin/:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span><span class="s2">&quot;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">RUN</span><span class="w"> </span>node<span class="w"> </span>--version
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>--version
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c"># Install Node.js dependencies</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gnupg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://deb.nodesource.com/setup_14.x<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nodejs<span class="w"> </span>graphviz<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>aws-cdk<span class="w"> </span>redoc-cli<span class="w"> </span>cdk-dia
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="c"># Install Python dependencies</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyyaml<span class="w"> </span>pytest-html<span class="w"> </span>coverage<span class="w"> </span>awscli<span class="w"> </span><span class="nv">boto3</span><span class="o">==</span><span class="m">1</span>.33.2<span class="w"> </span><span class="nv">botocore</span><span class="o">==</span><span class="m">1</span>.33.2<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>base-requirements.txt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>lambda-forge<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--extra-index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--upgrade
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="c"># Set environment variables</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">TRACK</span><span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/lambda-forge</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/lambda-forge
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c"># Install nvm with Node.js and npm</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NODE_VERSION</span><span class="o">=</span><span class="m">16</span>.13.0
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>jq
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">NVM_DIR</span><span class="o">=</span>/root/.nvm
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span>install<span class="w"> </span><span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span>use<span class="w"> </span>v<span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span><span class="nb">alias</span><span class="w"> </span>default<span class="w"> </span>v<span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/root/.nvm/versions/node/v</span><span class="si">${</span><span class="nv">NODE_VERSION</span><span class="si">}</span><span class="s2">/bin/:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">RUN</span><span class="w"> </span>node<span class="w"> </span>--version
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>--version
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c"># Install Node.js dependencies</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gnupg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://deb.nodesource.com/setup_14.x<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash<span class="w"> </span>-<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nodejs<span class="w"> </span>graphviz<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>aws-cdk<span class="w"> </span>redoc-cli<span class="w"> </span>cdk-dia
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c"># Install Python dependencies</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyyaml<span class="w"> </span>pytest-html<span class="w"> </span>coverage<span class="w"> </span>awscli<span class="w"> </span><span class="nv">boto3</span><span class="o">==</span><span class="m">1</span>.33.2<span class="w"> </span><span class="nv">botocore</span><span class="o">==</span><span class="m">1</span>.33.2<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>base-requirements.txt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>lambda-forge<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--extra-index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--upgrade
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c"># Set environment variables</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">TRACK</span><span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <h2 id="default-steps">Default Steps</h2>
 <p>As previously mentioned, the public image we used to create the container includes some python scripts that can be utilized as steps in your local projects. Whether you choose to use them is entirely up to you. Each step is defined in the <code>infra/steps/__init__.py</code> file.</p>
@@ -1509,124 +1394,106 @@ background-color: #dddddd;
 <h2 id="custom-steps">Custom Steps</h2>
 <p>To support extensive customization, Lambda Forge keeps track of created functions. Each time you run the <code>cdk synth</code> command, it refreshes the function list in the <code>cdk.json</code> file.</p>
 <p>In order to prevent unnecessary cluttering of the <code>cdk.json</code> file, this feature is disabled by default. If you need to enable it for debugging purposes while creating your custom scripts, ensure to include the <code>TRACK=true</code> environment variable.</p>
-<div class="highlight"><span class="filename">.env</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>TRACK=true
+<div class="highlight"><span class="filename">.env</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TRACK=true
 </code></pre></div>
 <p>Then run the synth command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cdk synth
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cdk synth
 </code></pre></div>
 <p>You'll notice a new <code>functions</code> key within your <code>cdk.json</code> file.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-60">60</a></span>
-<span class="normal"><a href="#__codelineno-4-61">61</a></span>
-<span class="normal"><a href="#__codelineno-4-62">62</a></span>
-<span class="normal"><a href="#__codelineno-4-63">63</a></span>
-<span class="normal"><a href="#__codelineno-4-64">64</a></span>
-<span class="normal"><a href="#__codelineno-4-65">65</a></span>
-<span class="normal"><a href="#__codelineno-4-66">66</a></span>
-<span class="normal"><a href="#__codelineno-4-67">67</a></span>
-<span class="normal"><a href="#__codelineno-4-68">68</a></span>
-<span class="normal"><a href="#__codelineno-4-69">69</a></span>
-<span class="normal"><a href="#__codelineno-4-70">70</a></span>
-<span class="normal"><a href="#__codelineno-4-71">71</a></span>
-<span class="normal"><a href="#__codelineno-4-72">72</a></span>
-<span class="normal"><a href="#__codelineno-4-73">73</a></span>
-<span class="normal"><a href="#__codelineno-4-74">74</a></span>
-<span class="normal"><a href="#__codelineno-4-75">75</a></span>
-<span class="normal"><a href="#__codelineno-4-76">76</a></span>
-<span class="normal"><a href="#__codelineno-4-77">77</a></span>
-<span class="normal"><a href="#__codelineno-4-78">78</a></span>
-<span class="normal"><a href="#__codelineno-4-79">79</a></span>
-<span class="normal"><a href="#__codelineno-4-80">80</a></span>
-<span class="normal"><a href="#__codelineno-4-81">81</a></span>
-<span class="normal"><a href="#__codelineno-4-82">82</a></span>
-<span class="normal"><a href="#__codelineno-4-83">83</a></span>
-<span class="normal"><a href="#__codelineno-4-84">84</a></span>
-<span class="normal"><a href="#__codelineno-4-85">85</a></span>
-<span class="normal"><a href="#__codelineno-4-86">86</a></span>
-<span class="normal"><a href="#__codelineno-4-87">87</a></span>
-<span class="normal"><a href="#__codelineno-4-88">88</a></span>
-<span class="normal"><a href="#__codelineno-4-89">89</a></span>
-<span class="normal"><a href="#__codelineno-4-90">90</a></span>
-<span class="normal"><a href="#__codelineno-4-91">91</a></span>
-<span class="normal"><a href="#__codelineno-4-92">92</a></span>
-<span class="normal"><a href="#__codelineno-4-93">93</a></span>
-<span class="normal"><a href="#__codelineno-4-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-60" name="__codelineno-4-60"></a><span class="w">  </span><span class="nt">&quot;functions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-4-61" name="__codelineno-4-61"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-4-62" name="__codelineno-4-62"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-63" name="__codelineno-4-63"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-64" name="__codelineno-4-64"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span>
-<a id="__codelineno-4-65" name="__codelineno-4-65"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-4-66" name="__codelineno-4-66"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-4-67" name="__codelineno-4-67"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-68" name="__codelineno-4-68"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-69" name="__codelineno-4-69"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A simple hello world&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-70" name="__codelineno-4-70"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-71" name="__codelineno-4-71"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/hello_world&quot;</span>
-<a id="__codelineno-4-72" name="__codelineno-4-72"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-4-73" name="__codelineno-4-73"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-4-74" name="__codelineno-4-74"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-75" name="__codelineno-4-75"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-76" name="__codelineno-4-76"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-77" name="__codelineno-4-77"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-78" name="__codelineno-4-78"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/private&quot;</span>
-<a id="__codelineno-4-79" name="__codelineno-4-79"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-4-80" name="__codelineno-4-80"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-4-81" name="__codelineno-4-81"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;External&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-82" name="__codelineno-4-82"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/external&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-83" name="__codelineno-4-83"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function that uses an external library&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-84" name="__codelineno-4-84"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-85" name="__codelineno-4-85"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/external&quot;</span>
-<a id="__codelineno-4-86" name="__codelineno-4-86"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-4-87" name="__codelineno-4-87"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-4-88" name="__codelineno-4-88"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-89" name="__codelineno-4-89"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/custom&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-90" name="__codelineno-4-90"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function to make use of the custom layer&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-91" name="__codelineno-4-91"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-92" name="__codelineno-4-92"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/custom&quot;</span>
-<a id="__codelineno-4-93" name="__codelineno-4-93"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-4-94" name="__codelineno-4-94"></a><span class="w">        </span><span class="p">]</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-60">60</a></span>
+<span class="normal"><a href="#__codelineno-3-61">61</a></span>
+<span class="normal"><a href="#__codelineno-3-62">62</a></span>
+<span class="normal"><a href="#__codelineno-3-63">63</a></span>
+<span class="normal"><a href="#__codelineno-3-64">64</a></span>
+<span class="normal"><a href="#__codelineno-3-65">65</a></span>
+<span class="normal"><a href="#__codelineno-3-66">66</a></span>
+<span class="normal"><a href="#__codelineno-3-67">67</a></span>
+<span class="normal"><a href="#__codelineno-3-68">68</a></span>
+<span class="normal"><a href="#__codelineno-3-69">69</a></span>
+<span class="normal"><a href="#__codelineno-3-70">70</a></span>
+<span class="normal"><a href="#__codelineno-3-71">71</a></span>
+<span class="normal"><a href="#__codelineno-3-72">72</a></span>
+<span class="normal"><a href="#__codelineno-3-73">73</a></span>
+<span class="normal"><a href="#__codelineno-3-74">74</a></span>
+<span class="normal"><a href="#__codelineno-3-75">75</a></span>
+<span class="normal"><a href="#__codelineno-3-76">76</a></span>
+<span class="normal"><a href="#__codelineno-3-77">77</a></span>
+<span class="normal"><a href="#__codelineno-3-78">78</a></span>
+<span class="normal"><a href="#__codelineno-3-79">79</a></span>
+<span class="normal"><a href="#__codelineno-3-80">80</a></span>
+<span class="normal"><a href="#__codelineno-3-81">81</a></span>
+<span class="normal"><a href="#__codelineno-3-82">82</a></span>
+<span class="normal"><a href="#__codelineno-3-83">83</a></span>
+<span class="normal"><a href="#__codelineno-3-84">84</a></span>
+<span class="normal"><a href="#__codelineno-3-85">85</a></span>
+<span class="normal"><a href="#__codelineno-3-86">86</a></span>
+<span class="normal"><a href="#__codelineno-3-87">87</a></span>
+<span class="normal"><a href="#__codelineno-3-88">88</a></span>
+<span class="normal"><a href="#__codelineno-3-89">89</a></span>
+<span class="normal"><a href="#__codelineno-3-90">90</a></span>
+<span class="normal"><a href="#__codelineno-3-91">91</a></span>
+<span class="normal"><a href="#__codelineno-3-92">92</a></span>
+<span class="normal"><a href="#__codelineno-3-93">93</a></span>
+<span class="normal"><a href="#__codelineno-3-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-60" name="__codelineno-3-60"></a><span class="w">  </span><span class="nt">&quot;functions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-63" name="__codelineno-3-63"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-64" name="__codelineno-3-64"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span>
+<a id="__codelineno-3-65" name="__codelineno-3-65"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-3-66" name="__codelineno-3-66"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-3-67" name="__codelineno-3-67"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-68" name="__codelineno-3-68"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-69" name="__codelineno-3-69"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A simple hello world&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-70" name="__codelineno-3-70"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-71" name="__codelineno-3-71"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/hello_world&quot;</span>
+<a id="__codelineno-3-72" name="__codelineno-3-72"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-3-73" name="__codelineno-3-73"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-3-74" name="__codelineno-3-74"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-75" name="__codelineno-3-75"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-76" name="__codelineno-3-76"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-77" name="__codelineno-3-77"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-78" name="__codelineno-3-78"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/private&quot;</span>
+<a id="__codelineno-3-79" name="__codelineno-3-79"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-3-80" name="__codelineno-3-80"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-3-81" name="__codelineno-3-81"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;External&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-82" name="__codelineno-3-82"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/external&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-83" name="__codelineno-3-83"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function that uses an external library&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-84" name="__codelineno-3-84"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-85" name="__codelineno-3-85"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/external&quot;</span>
+<a id="__codelineno-3-86" name="__codelineno-3-86"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-3-87" name="__codelineno-3-87"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-3-88" name="__codelineno-3-88"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-89" name="__codelineno-3-89"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/custom&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-90" name="__codelineno-3-90"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function to make use of the custom layer&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-91" name="__codelineno-3-91"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-92" name="__codelineno-3-92"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/custom&quot;</span>
+<a id="__codelineno-3-93" name="__codelineno-3-93"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-3-94" name="__codelineno-3-94"></a><span class="w">        </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This list of functions can now be leveraged to add new and tailored steps to your application.</p>
 <p>For instance, let's create a straightforward custom script that iterates over each file described in the functions list. It will raise an error if it encounters a comment <code># TODO</code>, thereby preventing the pipeline from proceeding if a TODO is included as a comment.</p>
-<p>First, create a new file at <code>infra/scripts/validate_todo.py</code>:</p>
-<div class="highlight"><span class="filename">infra/scripts/validate_todo.py</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">def</span> <span class="nf">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">functions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;functions&quot;</span><span class="p">,</span> <span class="p">[])</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            <span class="k">if</span> <span class="s1">&#39;# TODO&#39;</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO found in file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No TODO found in any files.&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="n">json_file_path</span> <span class="o">=</span> <span class="s2">&quot;cdk.json&quot;</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="n">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file_path</span><span class="p">)</span>
+<p>Let's create a new file at <code>infra/scripts/validate_todo.py</code>:</p>
+<div class="highlight"><span class="filename">infra/scripts/validate_todo.py</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">def</span> <span class="nf">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">functions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;functions&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="k">if</span> <span class="s1">&#39;# TODO&#39;</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO found in file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No TODO found in any files.&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">json_file_path</span> <span class="o">=</span> <span class="s2">&quot;cdk.json&quot;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file_path</span><span class="p">)</span>
 </code></pre></div>
-<p>Next, let's create a new custom step in <code>infra/steps/__init__.py</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/steps/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-164">164</a></span>
-<span class="normal"><a href="#__codelineno-6-165">165</a></span>
-<span class="normal"><a href="#__codelineno-6-166">166</a></span>
-<span class="normal"><a href="#__codelineno-6-167">167</a></span>
-<span class="normal"><a href="#__codelineno-6-168">168</a></span>
-<span class="normal"><a href="#__codelineno-6-169">169</a></span>
-<span class="normal"><a href="#__codelineno-6-170">170</a></span>
-<span class="normal"><a href="#__codelineno-6-171">171</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-164" name="__codelineno-6-164"></a>  <span class="k">def</span> <span class="nf">validate_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-6-165" name="__codelineno-6-165"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">codebuild</span><span class="o">.</span><span class="n">create_step</span><span class="p">(</span>
-<a id="__codelineno-6-166" name="__codelineno-6-166"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ValidateTodo&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-167" name="__codelineno-6-167"></a>            <span class="n">commands</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-6-168" name="__codelineno-6-168"></a>                <span class="s2">&quot;cdk synth&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-169" name="__codelineno-6-169"></a>                <span class="s2">&quot;python infra/scripts/validate_todo.py&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-170" name="__codelineno-6-170"></a>            <span class="p">],</span>
-<a id="__codelineno-6-171" name="__codelineno-6-171"></a>        <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<p>With our newly created custom step at our disposal, our pipeline gains a significant boost in capability.</p>
 <p>In the upcoming section, we'll dive into the seamless integration of these steps into our multi-stage pipelines, unlocking a world of possibilities for streamlining our deployment processes.</p>
 
 

@@ -71,7 +71,7 @@ Traditionally, working with Lambda layers introduces complexity during developme
 In case you need to reinstall the custom layers into your virtual environment, use the command:
 
 ```
-forge layers --install
+forge layer --install
 ```
 
 </div>
