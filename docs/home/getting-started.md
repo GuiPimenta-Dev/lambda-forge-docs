@@ -69,12 +69,14 @@ Here's a concise list of the commands supported by Forge:
 
 ```
 Commands:
-  authorizer      Create a new authorizer
-  function        Create a new function
-  layer           Create a new layer
-  live-server     Create a new development server
-  project         Create a new project
-  service         Create a new AWS service
+  authorizer   Generates an authorizer for AWS Lambda functions.
+  doc          Creates a new doc template for the project.
+  function     Creates a Lambda function with a predefined structure and...
+  layer        Creates and installs a new Lambda layer.
+  live-server  Starts a live development environment for the specified...
+  project      Initializes a new AWS Lambda project with a specified...
+  service      Scaffolds the structure for a specified AWS service...
+  trigger      Triggers the specified AWS service integration.
 ```
 
 For a comprehensive list of configurations that each Forge command supports, you can refer to the command line help by running:
@@ -101,23 +103,10 @@ In the upcoming sections of this tutorial, we'll explore each of these component
 
 ```
 .
-├── authorizers
-│   └── __init__.py
-│
-├── docs
-│   ├── __init__.py
-│   └── config.py
-│
-├── functions
-│   └── __init__.py
-│
 ├── infra
 │   ├── __init__.py
 │   ├── services
-│   │   ├── __init__.py
-│   │   ├── api_gateway.py
-│   │   ├── aws_lambda.py
-│   │   └── layers.py
+│   │   └── __init__.py
 │   ├── stacks
 │   │   ├── __init__.py
 │   │   ├── dev_stack.py
@@ -128,13 +117,12 @@ In the upcoming sections of this tutorial, we'll explore each of these component
 │       ├── __init__.py
 │       └── deploy.py
 │
-├── layers
-│   └── __init__.py
-│
-├── cdk.json
+├── .coveragerc
+├── .gitignore
 ├── app.py
-├── README.md
+├── cdk.json
 ├── pytest.ini
+├── README.md
 └── requirements.txt
 ```
 

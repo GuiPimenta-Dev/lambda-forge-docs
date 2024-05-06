@@ -45,13 +45,13 @@ nav:
           # - AI Telegram Bot: examples/ai-telegram-bot.md
           # - Data Processing Pipeline: examples/data-processing-pipeline.md
           - Stock Price Tracker: examples/stock-price-tracker.md
-  - Articles:
-      - Custom Domain Name: articles/custom-domain-name.md
-      - Mocks for Unit Testing: articles/tests-with-lambda-forge.md
-      - External Library as Layers: articles/deploying-external-library-as-layers.md
-      - Api Gateway Base URL: articles/locating-the-base-url.md
-      - JSON Web Tokens: articles/json-web-tokens.md
-      - WebSockets: articles/understanding-websockets.md
+  # - Articles:
+  #     - Custom Domain Name: articles/custom-domain-name.md
+  #     - Mocks for Unit Testing: articles/tests-with-lambda-forge.md
+  #     - External Library as Layers: articles/deploying-external-library-as-layers.md
+  #     - Api Gateway Base URL: articles/locating-the-base-url.md
+  #     - JSON Web Tokens: articles/json-web-tokens.md
+  #     - WebSockets: articles/understanding-websockets.md
   - License: license/license.md
 
 markdown_extensions:

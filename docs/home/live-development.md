@@ -18,7 +18,7 @@ Lambda Forge automatically deploys a function that connects to your local machin
 
 Once the connection is established, any request sent to the generated URL will be redirected to your local machine. This allows your local Lambda function to receive and process requests in real time, enabling you to update, test, and modify your code on the fly.
 
-Here's what you can expect to see in your terminal when running the `forge live-server HelloWorld` command:
+Below is demonstrated a live development server for the `HelloWorld` function:
 
 ![](images/live-apigateway.gif)
 
@@ -43,8 +43,6 @@ To trigger a service, use the following command:
 forge trigger $SERVICE_NAME
 ```
 
-Replace $SERVICE_NAME with the name of the service you wish to trigger.
-
 ### Live Development with SNS
 
 In your terminal, enter the following command to activate SNS as the trigger:
@@ -59,7 +57,7 @@ Open a new terminal tab and start the live server by running:
 forge live-server HelloWorld --trigger sns
 ```
 
-The commands above will set up two separate processes in different terminal tabs. Below, we illustrate how messages sent through the SNS trigger are processed by the live server.
+Those commands are going to set up two separate processes in different terminal tabs. Below, we illustrate how messages sent through the SNS trigger are processed by the live server.
 
 ![](images/sns-trigger.gif)
 ![](images/sns-live.gif)
