@@ -71,7 +71,7 @@ Traditionally, working with Lambda layers introduces complexity during developme
 In case you need to reinstall the custom layers into your virtual environment, use the command:
 
 ```
-forge layers --install
+forge layer --install
 ```
 
 </div>
@@ -165,7 +165,7 @@ Once you've committed and pushed your code to GitHub and the pipeline has succes
 
 The URL for this tutorial is:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/custom](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/custom)
+- [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/custom](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/custom)
 
 ## AWS Lambda Development with External Libraries
 
@@ -319,4 +319,4 @@ Once you've committed and pushed your code to GitHub and the pipeline has succes
 
 For this tutorial, the generated URL is:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/external](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/external)
+- [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/external](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/external)

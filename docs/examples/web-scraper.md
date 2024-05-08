@@ -667,7 +667,7 @@ Additionally, this function will be configured with two distinct triggers: an SN
 
 Now we can also test new endpoints to list the scraped data.
 
-- Dev: [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/books)
+- Dev: [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/books](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/books)
 - Staging: [https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books](https://8kwcovaj0f.execute-api.us-east-2.amazonaws.com/staging/books)
 - Prod: [https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books](https://s6zqhu2pg1.execute-api.us-east-2.amazonaws.com/prod/books)
 
