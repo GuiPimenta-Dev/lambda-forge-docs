@@ -20,38 +20,38 @@ theme:
 
 nav:
   - Home: index.md
-  - Docs: 
-    - Getting Started: home/getting-started.md
-    - Creating a Hello World: home/creating-a-hello-world.md
-    - Securing Endpoints: home/securing-endpoints.md
-    - Lambda Layers: home/lambda-layers.md
-    - Multi-Stage Environments: home/multi-stage-environments.md
-    - Custom CodePipeline Steps: home/custom-codepipeline-steps.md
-    - Docs Generation: home/docs-generation.md
-    - Pre-Commit Hooks: home/pre-commit-hooks.md
+  - Docs:
+      - Getting Started: home/getting-started.md
+      - Creating a Hello World: home/creating-a-hello-world.md
+      - Securing Endpoints: home/securing-endpoints.md
+      - Lambda Layers: home/lambda-layers.md
+      - Live Development: home/live-development.md
+      - CodeBuild Steps: home/custom-codepipeline-steps.md
+      - CodePipeline: home/multi-stage-environments.md
+      - Docs Generation: home/docs-generation.md
+      - Pre-Commit Hooks: home/pre-commit-hooks.md
   - Example Projects:
-    - Introduction: examples/introduction.md
-    - Begginer:
-      - Guess The Number: examples/guess-the-number.md
-      - URL Shortener: examples/url-shortener.md
-      - Image to QR Code: examples/image-to-qr-code-converter.md
-    - Intermediate:
-      - JWT Authentication: examples/jwt-authentication.md
-      # - OAuth2 Authentication: examples/oauth2-authentication.md
-      - Real-Time Chat: examples/real-time-chat.md
-      - Web Scraper: examples/web-scraper.md
-    - Advanced:
-      # - AI Telegram Bot: examples/ai-telegram-bot.md
-      - Data Processing Pipeline: examples/data-processing-pipeline.md
-      - Stock Price Tracker: examples/stock-price-tracker.md
-  - Articles:
-    - Custom Domain Name: articles/custom-domain-name.md
-    - WSS: articles/another.md
-    - Mocks for Unit Testing: articles/tests-with-lambda-forge.md
-    - External Library as Layers: articles/deploying-external-library-as-layers.md
-    - Api Gateway Base URL: articles/locating-the-base-url.md
-    - JSON Web Tokens: articles/json-web-tokens.md
-    - WebSockets: articles/understanding-websockets.md
+      - Introduction: examples/introduction.md
+      - Begginer:
+          - Guess The Number: examples/guess-the-number.md
+          - URL Shortener: examples/url-shortener.md
+          - Image to QR Code: examples/image-to-qr-code-converter.md
+      - Intermediate:
+          - JWT Authentication: examples/jwt-authentication.md
+          # - OAuth2 Authentication: examples/oauth2-authentication.md
+          - Real-Time Chat: examples/real-time-chat.md
+          - Web Scraper: examples/web-scraper.md
+      - Advanced:
+          # - AI Telegram Bot: examples/ai-telegram-bot.md
+          # - Data Processing Pipeline: examples/data-processing-pipeline.md
+          - Stock Price Tracker: examples/stock-price-tracker.md
+  # - Articles:
+  #     - Custom Domain Name: articles/custom-domain-name.md
+  #     - Mocks for Unit Testing: articles/tests-with-lambda-forge.md
+  #     - External Library as Layers: articles/deploying-external-library-as-layers.md
+  #     - Api Gateway Base URL: articles/locating-the-base-url.md
+  #     - JSON Web Tokens: articles/json-web-tokens.md
+  #     - WebSockets: articles/understanding-websockets.md
   - License: license/license.md
 
 markdown_extensions:
@@ -71,9 +71,9 @@ markdown_extensions:
   - pymdownx.emoji
   - pymdownx.superfences:
       custom_fences:
-          - name: mermaid
-            class: mermaid
-            format: !!python/name:pymdownx.superfences.fence_div_format
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
 
 extra_css:
   - https://unpkg.com/mermaid@8.5.1/dist/mermaid.css
@@ -90,4 +90,3 @@ extra:
       link: "https://github.com/GuiPimenta-Dev"
     - icon: fontawesome/brands/linkedin
       link: "https://www.linkedin.com/in/guilhermealvespimenta/"
-

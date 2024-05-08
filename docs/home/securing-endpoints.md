@@ -241,7 +241,7 @@ This operation will automatically initiate our development pipeline.
 
 After the pipeline completes successfully, the private Lambda function becomes operational:
 
-- Dev: [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private)
+- Dev: [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private)
 
 Direct access to these URLs through a web browser will display an unauthorized access message:
 
@@ -255,7 +255,7 @@ However, access is granted when including the necessary secret in the request he
 
 ```
 curl --request GET \
-  --url https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/private \
+  --url https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private \
   --header 'secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8'
 ```
 

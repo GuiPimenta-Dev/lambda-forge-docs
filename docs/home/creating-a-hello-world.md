@@ -10,7 +10,7 @@ forge function hello_world --method "GET" --description "A simple hello world" -
 
 This command prompts Lambda Forge to initiate a new Lambda function located in the `hello_world` directory. The `--method` parameter defines the HTTP method accessible for this function.. The `--description` option provides a concise summary of the function’s intent, and the `--public` flag ensures the function is openly accessible, allowing it to be invoked by anyone who has the URL.
 
-### Understanding the Function Structure
+## Function Structure
 
 When you create a new function with Lambda Forge, it not only simplifies the creation process but also sets up a robust and organized file structure for your function. This structure is designed to support best practices in software development, including separation of concerns, configuration management, and testing. Let's break down the structure of the automatically generated hello_world function:
 
@@ -31,6 +31,73 @@ functions/
 - `integration.py` Contains integration tests that simulate the interaction of your function with external services or resources.
 - `main.py` This is where the core logic of your Lambda function resides. The handler function, which AWS Lambda invokes when the function is executed, is defined here.
 - `unit.py` Contains unit tests for your function. Unit tests focus on testing individual parts of the function's code in isolation, ensuring that each component behaves as expected.
+
+## The Services Class
+
+Every Lambda function interacts with AWS resources, which should each be defined in separate classes within the `infra/services` folder. When you initiate a new project using `forge project`, this directory is automatically created and populated with three service directories: `api_gateway`, `aws_lambda`, and `layers`. Each file contains template code to facilitate the creation of a Lambda function and its integration with API Gateway.
+
+```
+infra
+├── services
+    ├── __init__.py
+    ├── api_gateway.py
+    ├── aws_lambda.py
+    └── layers.py
+```
+
+You can use the command `forge service $SERVICE` to create a new service. For instance when we run the command `forge service dynamo_db`, the folder would be automatically updated as follows.
+
+```hl_lines="6"
+infra
+├── services
+    ├── __init__.py
+    ├── api_gateway.py
+    ├── aws_lambda.py
+    ├── dynamo_db.py
+    └── layers.py
+```
+
+Within the `infra/services/__init__.py` file, you'll find the `Services` class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources directly from each `config.py` files.
+
+```python title="infra/services/__init__.py"
+from infra.services.api_gateway import APIGateway
+from infra.services.aws_lambda import AWSLambda
+from infra.services.layers import Layers
+
+class Services:
+
+    def __init__(self, scope, context) -> None:
+        self.api_gateway = APIGateway(scope, context)
+        self.aws_lambda = AWSLambda(scope, context)
+        self.layers = Layers(scope)
+```
+
+## The LambdaStack Class
+
+Every Lambda Function must be initialized in the `infra/stacks/lambda_stack.py` file. When you run the command `forge function`, Forge automatically add it for you.
+
+Note in the code snippet below that the services class is injected to the Config files of each Lambda Function allowing them to access the AWS resources when configurating it.
+
+```python
+from aws_cdk import Stack
+from constructs import Construct
+from lambda_forge import release
+
+from functions.hello_world.config import HelloWorldConfig
+from infra.services import Services
+
+
+@release
+class LambdaStack(Stack):
+    def __init__(self, scope: Construct, context, **kwargs) -> None:
+
+        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
+
+        self.services = Services(self, context)
+
+        # HelloWorld
+        HelloWorldConfig(self.services)
+```
 
 ### Implementing the Hello World Function
 
@@ -56,34 +123,15 @@ def lambda_handler(event, context):
     }
 ```
 
-The `Input` and `Output` data classes are the entrypoint for the documentation creation process. However, since the project was launched with the `--no-docs` flag, we will temporarily skip the docs generation details.
+The `Input` and `Output` data classes are the entrypoint for the documentation creation process. However, we will temporarily skip the docs generation details as this will be covered on a dedicated session.
 
 Moving forward, we've successfully implemented a straightforward lambda function that outputs a basic JSON response: `{"message": "Hello World!"}`.
 
-### Configuring Your Lambda Function Dependencies
-
-#### The Services Class
-
-Within the `infra/services/__init__.py` file, you'll find the Services class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources directly from your `config.py` files.
-
-```python title="infra/services/__init__.py"
-from infra.services.api_gateway import APIGateway
-from infra.services.aws_lambda import AWSLambda
-from infra.services.layers import Layers
-
-class Services:
-
-    def __init__(self, scope, context) -> None:
-        self.api_gateway = APIGateway(scope, context)
-        self.aws_lambda = AWSLambda(scope, context)
-        self.layers = Layers(scope)
-```
-
-#### Utilizing the Services Class in config.py
+### Configuring The Lambda Function
 
 In our Lambda Forge projects, the `config.py` file plays a crucial role in defining and configuring the dependencies required by a Lambda function.
 
-By passing an instance of Services to our configuration classes, we can seamlessly create and manage resources such as Lambda functions and API Gateway endpoints.
+By passing an instance of the Services class to our configuration classes, we can seamlessly create and manage resources such as Lambda functions and API Gateway endpoints.
 
 ```python title="functions/hello_world/config.py"
 from infra.services import Services
@@ -104,7 +152,7 @@ The Forge CLI has significantly simplified the setup by automatically tailoring 
 
 Additionally, it sets up the function to respond to GET requests at the `/hello_world` path and designates it as a public endpoint, making it accessible without authentication.
 
-## Deploying Your Lambda Function
+## Deploying The Lambda Function
 
 To deploy your Lambda function, you should integrate the Config class within the `infra/stacks/lambda_stack.py` file.
 
@@ -194,6 +242,6 @@ Select the function, then navigate to `Configurations -> Triggers`. Here, you wi
 
 For this tutorial, the Lambda function is accessible via the following URL:
 
-- [https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://gxjca0e395.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+- [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world)
 
 Congratulations! 🎉 You've successfully deployed your very first Hello World function using Lambda Forge! 🚀
