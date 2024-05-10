@@ -1094,7 +1094,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p>To improve the development experience, Lambda Forge introduces a different solution. Instead of trying to locally emulate Lambda functions, Lambda Forge deploys a stub function to AWS and utilizes the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">MQTT over Websockets</a> protocol to establish a connection to a local server running on the developer's machine. This configuration proxies requests intended for the AWS Lambda function directly to the local environment, thereby facilitating an accurate replication of cloud conditions and enabling seamless local development.</p>
 <h2 id="live-development">Live Development</h2>
 <p>To start the live development server, simply run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forge live-server $FUNCTION-NAME
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forge live $FUNCTION-NAME
 </code></pre></div>
 <p>Lambda Forge automatically deploys a function that connects to your local machine and generates the necessary certificates to secure this connection. By default, it sets up an API Gateway endpoint to trigger the Lambda function. The endpoint is specified in your <code>config.py</code> file and can be accessed using any HTTP method. If the Lambda function isn’t linked to an API Gateway, the endpoint will default to the function's name.</p>
 <p>Once the connection is established, any request sent to the generated URL will be redirected to your local machine. This allows your local Lambda function to receive and process requests in real time, enabling you to update, test, and modify your code on the fly.</p>
@@ -1121,7 +1121,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>forge trigger sns
 </code></pre></div>
 <p>Open a new terminal tab and start the live server by running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>forge live-server HelloWorld --trigger sns
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>forge live HelloWorld --trigger sns
 </code></pre></div>
 <p>Those commands are going to set up two separate processes in different terminal tabs. Below, we illustrate how messages sent through the SNS trigger are processed by the live server.</p>
 <p><img alt="" src="../images/sns-trigger.gif" />
