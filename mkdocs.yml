@@ -24,12 +24,12 @@ nav:
       - Getting Started: home/getting-started.md
       - Creating a Hello World: home/creating-a-hello-world.md
       - Securing Endpoints: home/securing-endpoints.md
+      - AWS Services: home/aws-services.md
       - Lambda Layers: home/lambda-layers.md
       - Live Development: home/live-development.md
       - CodeBuild Steps: home/custom-codepipeline-steps.md
       - CodePipeline: home/multi-stage-environments.md
       - Docs Generation: home/docs-generation.md
-      - Pre-Commit Hooks: home/pre-commit-hooks.md
   - Example Projects:
       - Introduction: examples/introduction.md
       - Begginer:
