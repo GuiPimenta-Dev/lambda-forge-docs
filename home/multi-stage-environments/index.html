@@ -394,6 +394,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
+      <a href="../aws-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../creating-a-hello-world/" class="md-nav__link">
         
   
@@ -420,27 +441,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     Securing Endpoints
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aws-services/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AWS Services
   </span>
   
 
@@ -1820,7 +1820,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h3 id="deploying-the-staging-environment">Deploying the Staging Environment</h3>
 <p>Next, let's deploy the staging environment with CDK, adhering to the naming conventions established by Forge:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cdk deploy Staging-Lambda-Forge-Demo-Stack
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>forge deploy --stack Staging
 </code></pre></div>
 <p>After some minutes, a new pipeline named <code>Staging-Lambda-Forge-Demo-Stack</code> is created on AWS CodePipeline.</p>
 <p><img alt="alt text" src="../images/staging-running-only.png" /></p>
@@ -1932,7 +1932,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h3 id="deploying-the-production-environment">Deploying the Production Environment</h3>
 <p>Deploy your production environment using the AWS CDK, adhering to the naming conventions.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cdk deploy Prod-Lambda-Forge-Demo-Stack
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>forge deploy --stack Prod
 </code></pre></div>
 <p>Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate our deployment process.</p>
 <p><img alt="alt text" src="../images/prod-pipeline-running.png" /></p>
@@ -1958,7 +1958,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p>
 You can deploy all pipelines at once by using the following command:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cdk deploy --all
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge deploy --all
 </code></pre></div>
 
 </p>
