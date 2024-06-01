@@ -10,10 +10,10 @@
       
       
       
-        <link rel="prev" href="../securing-endpoints/">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../lambda-layers/">
+        <link rel="next" href="../creating-a-hello-world/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -86,7 +86,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     <div data-md-component="skip">
       
         
-        <a href="#aws-services" class="md-skip">
+        <a href="#integrating-aws-services-to-lambda-functions" class="md-skip">
           Skip to content
         </a>
       
@@ -391,6 +391,85 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    AWS Services
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Services Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-aws-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating AWS Services
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
@@ -424,37 +503,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    AWS Services
-  </span>
-  
-
-      </a>
-      
     </li>
   
 
@@ -971,6 +1019,32 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-services-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Services Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-aws-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating AWS Services
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -984,8 +1058,39 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                   
 
 
-<h1 id="aws-services">AWS Services</h1>
-<p>Coming soon...</p>
+<h1 id="integrating-aws-services-to-lambda-functions">Integrating AWS Services to Lambda Functions</h1>
+<p>On a daily basis, our Lambda functions frequently interact with various AWS services. With AWS offering over 200 services, connecting these functions to leverage different services, creating triggers, and assigning the proper permissions can be quite challenging. To address this complexity and to create a scalable architecture that can evolve over time, Lambda Forge employs dependency injection. This approach injects each service with its single responsibility into our functions, simplifying management and enhancing scalability.</p>
+<h2 id="the-services-class">The Services Class</h2>
+<p>Every AWS resources is defined in separate classes within the <code>infra/services</code> folder. When you initiate a new project using <code>forge project</code>, this directory is automatically created and populated with two service directories: <code>api_gateway</code> and <code>aws_lambda</code>. Each file contains template code to facilitate the creation of a Lambda function and its integration with API Gateway.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>infra
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── services
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ├── __init__.py
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    ├── api_gateway.py
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    └── aws_lambda.py
+</code></pre></div>
+<p>Within the <code>infra/services/__init__.py</code> file, you'll find the <code>Services</code> class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources.</p>
+<div class="highlight"><span class="filename">infra/services/__init__.py</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">infra.services.api_gateway</span> <span class="kn">import</span> <span class="n">APIGateway</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">infra.services.aws_lambda</span> <span class="kn">import</span> <span class="n">AWSLambda</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">class</span> <span class="nc">Services</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">api_gateway</span> <span class="o">=</span> <span class="n">APIGateway</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="creating-aws-services">Creating AWS Services</h2>
+<p>Lambda Forge provides some AWS service classes with boilerplate code commonly used with Lambda functions. You can easily create these classes using the command:</p>
+<p><code>$forge service $SERVICE</code></p>
+<p>For example, to create a class for handling DynamoDB configurations, simply run the command <code>forge service dynamodb</code>. This command will automatically update your folder structure as follows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>infra
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>└── services
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    ├── __init__.py
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    ├── api_gateway.py
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    ├── aws_lambda.py
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="hll">    └── dynamodb.py
+</span></code></pre></div>
+<p>You have the flexibility to use the <code>DynamoDB</code> class generated by Lambda Forge or create your own class to manage the configurations related to that service. The classes provided by Lambda Forge already include some boilerplate code, which streamlines the process of working with that service.</p>
+<p><mark>Keep in mind that while AWS offers over 200 services, Lambda Forge does not provide encapsulation for every AWS service by default. However, you can easily create your own custom classes using AWS CDK to handle these responsibilities.</mark> Simply follow the architecture provided by Lambda Forge, which adheres to the Single Responsibility Principle and Dependency Injection. By doing so, you can seamlessly integrate your custom service classes into the existing framework.</p>
 
 
 

@@ -1,6 +1,6 @@
 # Creating a Public Hello World Function With API Gateway
 
-Creating a public "Hello World" function is a fantastic way to get started with Lambda Forge. This function will serve as a simple demonstration of Lambda Forge's ability to quickly deploy serverless functions accessible via an HTTP endpoint.
+Creating a Hello World function is a great way to get started with Lambda Forge. This function will serve as a simple demonstration of Lambda Forge's ability to quickly deploy serverless functions accessible via an HTTP endpoint.
 
 Here's how you can create your first public Hello World function.
 
@@ -32,62 +32,21 @@ functions/
 - `main.py` This is where the core logic of your Lambda function resides. The handler function, which AWS Lambda invokes when the function is executed, is defined here.
 - `unit.py` Contains unit tests for your function. Unit tests focus on testing individual parts of the function's code in isolation, ensuring that each component behaves as expected.
 
-## The Services Class
 
-Every Lambda function interacts with AWS resources, which should each be defined in separate classes within the `infra/services` folder. When you initiate a new project using `forge project`, this directory is automatically created and populated with three service directories: `api_gateway`, `aws_lambda`, and `layers`. Each file contains template code to facilitate the creation of a Lambda function and its integration with API Gateway.
-
-```
-infra
-├── services
-    ├── __init__.py
-    ├── api_gateway.py
-    ├── aws_lambda.py
-    └── layers.py
-```
-
-You can use the command `forge service $SERVICE` to create a new service. For instance when we run the command `forge service dynamo_db`, the folder would be automatically updated as follows.
-
-```hl_lines="6"
-infra
-├── services
-    ├── __init__.py
-    ├── api_gateway.py
-    ├── aws_lambda.py
-    ├── dynamo_db.py
-    └── layers.py
-```
-
-Within the `infra/services/__init__.py` file, you'll find the `Services` class, a comprehensive resource manager designed to streamline the interaction with AWS services. This class acts as a dependency injector, enabling the easy and efficient configuration of AWS resources directly from each `config.py` files.
-
-```python title="infra/services/__init__.py"
-from infra.services.api_gateway import APIGateway
-from infra.services.aws_lambda import AWSLambda
-from infra.services.layers import Layers
-
-class Services:
-
-    def __init__(self, scope, context) -> None:
-        self.api_gateway = APIGateway(scope, context)
-        self.aws_lambda = AWSLambda(scope, context)
-        self.layers = Layers(scope)
-```
-
-## The LambdaStack Class
+## The Lambda Stack Class
 
 Every Lambda Function must be initialized in the `infra/stacks/lambda_stack.py` file. When you run the command `forge function`, Forge automatically add it for you.
 
-Note in the code snippet below that the services class is injected to the Config files of each Lambda Function allowing them to access the AWS resources when configurating it.
+Note in the code snippet below that the `Services` class is injected to the Config files of each Lambda Function allowing them to access the AWS resources.
 
 ```python
 from aws_cdk import Stack
 from constructs import Construct
-from lambda_forge import release
 
 from functions.hello_world.config import HelloWorldConfig
 from infra.services import Services
 
 
-@release
 class LambdaStack(Stack):
     def __init__(self, scope: Construct, context, **kwargs) -> None:
 
@@ -221,7 +180,7 @@ The project name is defined within the `cdk.json` file, linking each resource di
 Deploy the Dev Stack by running the following command in your terminal:
 
 ```
-cdk deploy Dev-Lambda-Forge-Demo-Stack
+forge deploy --stack Dev
 ```
 
 Following a successful deployment, a new pipeline will be created with the name `Dev-Lambda-Forge-Demo-Pipeline`. Access your AWS CodePipeline console to view it.

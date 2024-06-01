@@ -122,20 +122,6 @@ def lambda_handler(event, context):
     return {"statusCode": 200, "body": json.dumps({"message": message})}
 ```
 
-Also, update the unit tests to expect the correct output message:
-
-```python title="functions/layers/custom/unit.py" hl_lines="8"
-import json
-from .main import lambda_handler
-
-def test_lambda_handler():
-
-    response = lambda_handler(None, None)
-
-    assert response["body"] == json.dumps({"message": "Hello from my_custom_layer layer!"})
-
-```
-
 Finally, configure the function to make use of the `my_custom_layer` layer:
 
 ```python title="functions/layers/custom/config.py" hl_lines="11"

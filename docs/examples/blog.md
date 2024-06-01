@@ -1,3 +1,3 @@
-# A Serverless Blog Application using AWS Cognito, Amazon RDS, VPCs and S3
+# A Serverless Blog Application using AWS Cognito, Dynamo DB and S3
 
 Coming soon...

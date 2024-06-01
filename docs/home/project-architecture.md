@@ -1,3 +1,0 @@
-# Understanding the Lambda Forge Architecture
-
-Coming soon...

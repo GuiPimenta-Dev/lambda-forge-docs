@@ -50,7 +50,7 @@ source venv/bin/activate
 ## Install lambda-forge
 
 ```
-pip install lambda-forge --extra-index-url https://pypi.org/simple --extra-index-url https://test.pypi.org/simple/
+pip install lambda-forge
 ```
 
 ### Forge CLI
@@ -69,14 +69,16 @@ Here's a concise list of the commands supported by Forge:
 
 ```
 Commands:
-  authorizer   Generates an authorizer for AWS Lambda functions.
-  doc          Creates a new doc template for the project.
-  function     Creates a Lambda function with a predefined structure and...
-  layer        Creates and installs a new Lambda layer.
-  live         Starts a live development environment for the specified...
-  project      Initializes a new AWS Lambda project with a specified...
-  service      Scaffolds the structure for a specified AWS service...
-  trigger      Triggers the specified AWS service integration.
+  authorizer  Generates an authorizer for AWS Lambda functions.
+  deploy      Deploys a stack to AWS
+  diagram     Create a diagram of the project in png format
+  doc         Creates a new doc template for the project.
+  function    Creates a Lambda function with a predefined structure and...
+  layer       Creates and installs a new Lambda layer.
+  live        Starts a live development environment for the specified...
+  project     Initializes a new AWS Lambda project with a specified...
+  service     Scaffolds the structure for a specified AWS service...
+  test        Run the tests or coverage of the project
 ```
 
 For a comprehensive list of configurations that each Forge command supports, you can refer to the command line help by running:
@@ -90,10 +92,10 @@ Later in this tutorial, we'll delve into the specifics of each command. But for 
 Start a new project named `lambda-forge-demo`.
 
 ```
-forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET"
+forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET" --account "$AWS-ACCOUNT"
 ```
 
-Make sure to replace `$GITHUB-OWNER` and `$GITHUB-REPO` with the actual GitHub owner and the name of an empty repository and the `$S3-BUCKET` with the name of an empty S3 bucket.
+Make sure to replace `$GITHUB-OWNER` and `$GITHUB-REPO` with the actual GitHub owner and the name of an empty repository and the `$S3-BUCKET` with the name of a S3 bucket and the `$AWS-ACCOUNT` with your AWS Account ID.
 
 ### Project Structure
 
@@ -103,10 +105,16 @@ In the upcoming sections of this tutorial, we'll explore each of these component
 
 ```
 .
+├── docs
+│   ├── __init__.py
+│   └── config.py
+│
 ├── infra
 │   ├── __init__.py
 │   ├── services
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── aws_lambda.py
+│   │   └── api_gateway.py
 │   ├── stacks
 │   │   ├── __init__.py
 │   │   ├── dev_stack.py
@@ -137,5 +145,4 @@ The `cdk.json` file, located at the root of your directory, serves as the centra
       "name": "$GITHUB-REPO"
     },
     "bucket": "$S3-BUCKET",
-    "coverage": 80,
 ```

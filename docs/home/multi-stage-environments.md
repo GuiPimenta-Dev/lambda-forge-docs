@@ -339,7 +339,7 @@ graph TD;
 Next, let's deploy the staging environment with CDK, adhering to the naming conventions established by Forge:
 
 ```
-cdk deploy Staging-Lambda-Forge-Demo-Stack
+forge deploy --stack Staging
 ```
 
 After some minutes, a new pipeline named `Staging-Lambda-Forge-Demo-Stack` is created on AWS CodePipeline.
@@ -483,7 +483,7 @@ graph TD;
 Deploy your production environment using the AWS CDK, adhering to the naming conventions.
 
 ```
-cdk deploy Prod-Lambda-Forge-Demo-Stack
+forge deploy --stack Prod
 ```
 
 Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate our deployment process.
@@ -519,7 +519,7 @@ app.synth()
 You can deploy all pipelines at once by using the following command:
 
 ```
-cdk deploy --all
+forge deploy --all
 ```
 
 </p>
