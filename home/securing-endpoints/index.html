@@ -13,7 +13,7 @@
         <link rel="prev" href="../creating-a-hello-world/">
       
       
-        <link rel="next" href="../lambda-layers/">
+        <link rel="next" href="../aws-services/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -394,27 +394,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../aws-services/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AWS Services
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../creating-a-hello-world/" class="md-nav__link">
         
   
@@ -587,6 +566,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -949,27 +949,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     Real-Time Chat
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/web-scraper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Web Scraper
   </span>
   
 
@@ -1373,7 +1352,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    └── unit.py
 </code></pre></div>
 <h3 id="implementing-the-function">Implementing the Function</h3>
-<p>Let's make some adjustments to the response returned by this Lambda function:</p>
+<p>This function will also output a <code>{"message": "Hello World!"}</code> message, making it identical to our existing function. The only distinction lies in its configuration.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/private/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-13">13</a></span>
 <span class="normal"><a href="#__codelineno-7-14">14</a></span>
 <span class="normal"><a href="#__codelineno-7-15">15</a></span>
@@ -1383,46 +1362,35 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a>
 <a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="k">return</span> <span class="p">{</span>
 <a id="__codelineno-7-16" name="__codelineno-7-16"></a>        <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll">        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello From Private!&quot;</span><span class="p">})</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll">        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">})</span>
 </span><a id="__codelineno-7-18" name="__codelineno-7-18"></a>    <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Rather than displaying the message <code>Hello World!</code>, we will now return <code>Hello From Private!</code>.</p>
-<p>Additionally, let's revise the unit tests to accurately represent the modifications we've implemented in our code.</p>
-<div class="highlight"><span class="filename">functions/private/unit.py</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">lambda_handler</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span> <span class="nf">test_lambda_handler</span><span class="p">():</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">lambda_handler</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="hll">    <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello From Private!&quot;</span><span class="p">})</span>
-</span></code></pre></div>
 <h3 id="configuring-the-function-as-private">Configuring the Function as Private</h3>
 <p>To configure the function as private, we must link it to the authorizer by passing the authorizer's name, established during its creation, to the <code>create_endpoint</code> method.</p>
-<div class="highlight"><span class="filename">functions/private/config.py</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">class</span> <span class="nc">PrivateConfig</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="p">)</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">)</span>
+<div class="highlight"><span class="filename">functions/private/config.py</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">class</span> <span class="nc">PrivateConfig</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        <span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">authorizer</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <p>This configuration file establishes a new private function that is secured with the <code>secrets</code> authorizer and accessible via a GET request at the <code>/private</code> endpoint.</p>
 <h2 id="deployment-process-for-both-authorizer-and-function">Deployment Process for Both Authorizer and Function</h2>
 <p>As the next step, let's proceed to upload our updates to GitHub.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Add all changes to the staging area</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Commit the staged changes with a clear message</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Implemented a private function with an authorizer&quot;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># Push the committed changes to the &#39;dev&#39; branch</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Add all changes to the staging area</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>git<span class="w"> </span>add<span class="w"> </span>.
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Commit the staged changes with a clear message</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Implemented a private function with an authorizer&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># Push the committed changes to the &#39;dev&#39; branch</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>dev
 </code></pre></div>
 <p>This operation will automatically initiate our development pipeline.</p>
 <p><img alt="Dev Pipeline Triggered" src="../images/only-dev-pipeline.png" /></p>
@@ -1431,53 +1399,53 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <li>Dev: <a href="https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private">https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private</a></li>
 </ul>
 <p>Direct access to these URLs through a web browser will display an unauthorized access message:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;Message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User is not authorized to access this resource with an explicit deny&quot;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">&quot;Message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User is not authorized to access this resource with an explicit deny&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
 </code></pre></div>
 <p>However, access is granted when including the necessary secret in the request header. Below is how to use <code>curl</code> to access the Lambda function:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl --request GET \
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  --url https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private \
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  --header &#39;secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&#39;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl --request GET \
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  --url https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/private \
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  --header &#39;secret: CRMdDRMA4iW4xo9l38pACls7zsHYfp8T7TLXtucysb2lB5XBVFn8&#39;
 </code></pre></div>
 <p>Upon running the curl command, you will receive the following response:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello From Private!&quot;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello From Private!&quot;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
 </code></pre></div>
 <p>This validates the functionality of our authorizer, effectively securing the private Lambda function to ensure access is only available to those possessing the correct secret header.</p>
 <h2 id="setting-a-default-authorizer">Setting a Default Authorizer</h2>
 <p>Lambda Forge automatically considers all functions as private unless specified otherwise. This means functions are generally expected to require an authorizer for access control, unless they are explicitly marked as public.</p>
 <p>To facilitate easier management and to obviate the need for specifying an authorizer for each Lambda function individually, Lambda Forge allows for the designation of a default authorizer. This default authorizer is automatically applied to all non-public Lambda functions, streamlining the configuration process for securing access.</p>
 <p>To set an authorizer as the default, you can use the <code>default=True</code> argument in the <code>create_authorizer</code> method when defining your authorizer.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">authorizers/secret/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">authorizers/secret/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-6" name="__codelineno-13-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>        <span class="p">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_authorizer</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Next, we'll update the Private Function configuration to no longer directly associate it with the <code>secrets</code> authorizer.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/private/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-14-10">10</a></span>
 <span class="normal"><a href="#__codelineno-14-11">11</a></span>
 <span class="normal"><a href="#__codelineno-14-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-6" name="__codelineno-14-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
 <a id="__codelineno-14-10" name="__codelineno-14-10"></a>        <span class="p">)</span>
 <a id="__codelineno-14-11" name="__codelineno-14-11"></a>
-<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_authorizer</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></code></pre></div></td></tr></table></div>
-<p>Next, we'll update the Private Function configuration to no longer directly associate it with the <code>secrets</code> authorizer.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">functions/private/config.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-15-10">10</a></span>
-<span class="normal"><a href="#__codelineno-15-11">11</a></span>
-<span class="normal"><a href="#__codelineno-15-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-6" name="__codelineno-15-6"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a>        <span class="p">)</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a>
-<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/private&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Having designated the <code>secret</code>authorizer as the default, any function not explicitly linked to a particular authorizer and not flagged as public, such as this one, will inherently be protected by the <code>secret</code> authorizer by default.</p>
 

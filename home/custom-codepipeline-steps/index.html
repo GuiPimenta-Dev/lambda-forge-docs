@@ -394,27 +394,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../aws-services/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AWS Services
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../creating-a-hello-world/" class="md-nav__link">
         
   
@@ -441,6 +420,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     Securing Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
   </span>
   
 
@@ -883,27 +883,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/web-scraper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Web Scraper
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1082,7 +1061,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <h2 id="aws-codebuild">AWS CodeBuild</h2>
 <p>In AWS CodeBuild, you have the flexibility to choose from a variety of setup options for your build environment. You can opt for AWS-managed images that come pre-equipped with tools for popular development environments, utilize a custom Docker image hosted on Amazon ECR or any other registry to tailor your environment to specific requirements, or precisely orchestrate your build steps through a <code>buildspec.yml</code> file. Each method is designed to cater to diverse project needs, offering everything from convenience to extensive customization, with Docker images providing the greatest scope for personalization.</p>
 <p>To simplify setting up CodeBuild projects, we've prepared a public Docker image hosted on ECR. This image is pre-configured with all the necessary tools and includes custom Python scripts for validation and docs generation, streamlining your workflow. You can access our optimized build environment here: <a href="https://gallery.ecr.aws/x8r4y7j7/lambda-forge">https://gallery.ecr.aws/x8r4y7j7/lambda-forge</a>.</p>
-<p>In line with our commitment to transparency, the complete source code used to construct this Docker image is accessible in the following public repository: <a href="https://github.com/GuiPimenta-Dev/lambda-forge-ecr">https://github.com/GuiPimenta-Dev/lambda-forge-ecr</a>.</p>
 <p>For those interested in customizing further, you're encouraged to use this image as a foundation to build your own project-specific private image. The necessary steps and configurations can be found in the Dockerfile provided below.</p>
 <div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -1162,7 +1140,7 @@ background-color: #dddddd;
   </tr>
   <tr>
     <td>ValidateIntegrationTests</td>
-    <td>Validates if for each api gateway endpoint it has at least one integration test decorated with the pytest.mark.integration decorator</td>
+    <td>Ensure that each API Gateway endpoint has at least one integration test decorated with pytest.mark.integration</td>
   </tr>
   <tr>
     <td>IntegrationTests</td>
@@ -1198,107 +1176,27 @@ background-color: #dddddd;
 </html>
 
 <h2 id="custom-steps">Custom Steps</h2>
-<p>To support extensive customization, Lambda Forge keeps track of created functions. Each time you run the <code>cdk synth</code> command, it refreshes the function list in the <code>cdk.json</code> file.</p>
-<p>In order to prevent unnecessary cluttering of the <code>cdk.json</code> file, this feature is disabled by default. If you need to enable it for debugging purposes while creating your custom scripts, ensure to include the <code>TRACK=true</code> environment variable.</p>
-<div class="highlight"><span class="filename">.env</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TRACK=true
-</code></pre></div>
-<p>Then run the synth command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cdk synth
-</code></pre></div>
-<p>You'll notice a new <code>functions</code> key within your <code>cdk.json</code> file.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-60">60</a></span>
-<span class="normal"><a href="#__codelineno-3-61">61</a></span>
-<span class="normal"><a href="#__codelineno-3-62">62</a></span>
-<span class="normal"><a href="#__codelineno-3-63">63</a></span>
-<span class="normal"><a href="#__codelineno-3-64">64</a></span>
-<span class="normal"><a href="#__codelineno-3-65">65</a></span>
-<span class="normal"><a href="#__codelineno-3-66">66</a></span>
-<span class="normal"><a href="#__codelineno-3-67">67</a></span>
-<span class="normal"><a href="#__codelineno-3-68">68</a></span>
-<span class="normal"><a href="#__codelineno-3-69">69</a></span>
-<span class="normal"><a href="#__codelineno-3-70">70</a></span>
-<span class="normal"><a href="#__codelineno-3-71">71</a></span>
-<span class="normal"><a href="#__codelineno-3-72">72</a></span>
-<span class="normal"><a href="#__codelineno-3-73">73</a></span>
-<span class="normal"><a href="#__codelineno-3-74">74</a></span>
-<span class="normal"><a href="#__codelineno-3-75">75</a></span>
-<span class="normal"><a href="#__codelineno-3-76">76</a></span>
-<span class="normal"><a href="#__codelineno-3-77">77</a></span>
-<span class="normal"><a href="#__codelineno-3-78">78</a></span>
-<span class="normal"><a href="#__codelineno-3-79">79</a></span>
-<span class="normal"><a href="#__codelineno-3-80">80</a></span>
-<span class="normal"><a href="#__codelineno-3-81">81</a></span>
-<span class="normal"><a href="#__codelineno-3-82">82</a></span>
-<span class="normal"><a href="#__codelineno-3-83">83</a></span>
-<span class="normal"><a href="#__codelineno-3-84">84</a></span>
-<span class="normal"><a href="#__codelineno-3-85">85</a></span>
-<span class="normal"><a href="#__codelineno-3-86">86</a></span>
-<span class="normal"><a href="#__codelineno-3-87">87</a></span>
-<span class="normal"><a href="#__codelineno-3-88">88</a></span>
-<span class="normal"><a href="#__codelineno-3-89">89</a></span>
-<span class="normal"><a href="#__codelineno-3-90">90</a></span>
-<span class="normal"><a href="#__codelineno-3-91">91</a></span>
-<span class="normal"><a href="#__codelineno-3-92">92</a></span>
-<span class="normal"><a href="#__codelineno-3-93">93</a></span>
-<span class="normal"><a href="#__codelineno-3-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-60" name="__codelineno-3-60"></a><span class="w">  </span><span class="nt">&quot;functions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-61" name="__codelineno-3-61"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-3-62" name="__codelineno-3-62"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-63" name="__codelineno-3-63"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-64" name="__codelineno-3-64"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span>
-<a id="__codelineno-3-65" name="__codelineno-3-65"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-3-66" name="__codelineno-3-66"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-3-67" name="__codelineno-3-67"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-68" name="__codelineno-3-68"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-69" name="__codelineno-3-69"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A simple hello world&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-70" name="__codelineno-3-70"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-71" name="__codelineno-3-71"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/hello_world&quot;</span>
-<a id="__codelineno-3-72" name="__codelineno-3-72"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-3-73" name="__codelineno-3-73"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-3-74" name="__codelineno-3-74"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-75" name="__codelineno-3-75"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-76" name="__codelineno-3-76"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-77" name="__codelineno-3-77"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-78" name="__codelineno-3-78"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/private&quot;</span>
-<a id="__codelineno-3-79" name="__codelineno-3-79"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-3-80" name="__codelineno-3-80"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-3-81" name="__codelineno-3-81"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;External&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-82" name="__codelineno-3-82"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/external&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-83" name="__codelineno-3-83"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function that uses an external library&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-84" name="__codelineno-3-84"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-85" name="__codelineno-3-85"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/external&quot;</span>
-<a id="__codelineno-3-86" name="__codelineno-3-86"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-3-87" name="__codelineno-3-87"></a><span class="w">            </span><span class="p">{</span>
-<a id="__codelineno-3-88" name="__codelineno-3-88"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-89" name="__codelineno-3-89"></a><span class="w">                </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/custom&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-90" name="__codelineno-3-90"></a><span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A function to make use of the custom layer&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-91" name="__codelineno-3-91"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-92" name="__codelineno-3-92"></a><span class="w">                </span><span class="nt">&quot;endpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/layers/custom&quot;</span>
-<a id="__codelineno-3-93" name="__codelineno-3-93"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-3-94" name="__codelineno-3-94"></a><span class="w">        </span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-<p>This list of functions can now be leveraged to add new and tailored steps to your application.</p>
-<p>For instance, let's create a straightforward custom script that iterates over each file described in the functions list. It will raise an error if it encounters a comment <code># TODO</code>, thereby preventing the pipeline from proceeding if a TODO is included as a comment.</p>
+<p>Lambda Forge enables you to design custom pipeline steps, allowing you to create proprietary scripts for validating your specific requirements.</p>
+<p>For example, let's craft a simple custom script that traverses each file listed in the <code>functions.json</code> file. This script will trigger an error if it detects a <code># TODO</code> comment, halting the pipeline to ensure that no pending tasks are overlooked.</p>
 <p>Let's create a new file at <code>infra/scripts/validate_todo.py</code>:</p>
-<div class="highlight"><span class="filename">infra/scripts/validate_todo.py</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">def</span> <span class="nf">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">functions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;functions&quot;</span><span class="p">,</span> <span class="p">[])</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="k">if</span> <span class="s1">&#39;# TODO&#39;</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO found in file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No TODO found in any files.&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">json_file_path</span> <span class="o">=</span> <span class="s2">&quot;cdk.json&quot;</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file_path</span><span class="p">)</span>
+<div class="highlight"><span class="filename">infra/scripts/validate_todo.py</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">def</span> <span class="nf">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">functions</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="k">if</span> <span class="s1">&#39;# TODO&#39;</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO found in file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No TODO found in any files.&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">json_file_path</span> <span class="o">=</span> <span class="s2">&quot;functions.json&quot;</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">check_functions_for_todo</span><span class="p">(</span><span class="n">json_file_path</span><span class="p">)</span>
 </code></pre></div>
 <p>In the upcoming section, we'll dive into the seamless integration of these steps into our multi-stage pipelines, unlocking a world of possibilities for streamlining our deployment processes.</p>
 

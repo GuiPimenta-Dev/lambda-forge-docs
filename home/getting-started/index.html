@@ -13,7 +13,7 @@
         <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../aws-services/">
+        <link rel="next" href="../creating-a-hello-world/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -551,27 +551,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   
     <li class="md-nav__item">
-      <a href="../aws-services/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AWS Services
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../creating-a-hello-world/" class="md-nav__link">
         
   
@@ -598,6 +577,27 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
   
   <span class="md-ellipsis">
     Securing Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
   </span>
   
 
@@ -973,27 +973,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/web-scraper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Web Scraper
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1313,9 +1292,10 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p>Later in this tutorial, we'll delve into the specifics of each command. But for now, let's kickstart by establishing the foundation of our project.</p>
 <h2 id="create-a-new-project">Create a New Project</h2>
 <p>Start a new project named <code>lambda-forge-demo</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>forge project lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --bucket &quot;$S3-BUCKET&quot; --account &quot;$AWS-ACCOUNT&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>forge project --name lambda-forge-demo --repo-owner &quot;$GITHUB-OWNER&quot; --repo-name &quot;$GITHUB-REPO&quot; --bucket &quot;$S3-BUCKET&quot; --account &quot;$AWS-ACCOUNT&quot;
 </code></pre></div>
 <p>Make sure to replace <code>$GITHUB-OWNER</code> and <code>$GITHUB-REPO</code> with the actual GitHub owner and the name of an empty repository and the <code>$S3-BUCKET</code> with the name of a S3 bucket and the <code>$AWS-ACCOUNT</code> with your AWS Account ID.</p>
+<p>Alternatively, you can also run <code>forge project</code> to create the project in interactive mode.</p>
 <h3 id="project-structure">Project Structure</h3>
 <p>Upon creatig your project, some directories and files are automatically generated for you. This initial structure is designed to streamline the setup process and provide a solid foundation for further development.</p>
 <p>In the upcoming sections of this tutorial, we'll explore each of these components in detail. For now, familiarize yourself with the foundational structure that should resemble the following:</p>
@@ -1356,8 +1336,8 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <span class="normal"><a href="#__codelineno-8-45">45</a></span>
 <span class="normal"><a href="#__codelineno-8-46">46</a></span>
 <span class="normal"><a href="#__codelineno-8-47">47</a></span>
-<span class="normal"><a href="#__codelineno-8-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">    </span><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="normal"><a href="#__codelineno-8-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">    </span><span class="nt">&quot;region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$AWS-REGION&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">    </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$AWS-ACCOUNT&quot;</span><span class="p">,</span>
 <a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lambda-Forge-Demo&quot;</span><span class="p">,</span>
 <a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">    </span><span class="nt">&quot;repo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="w">      </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$GITHUB-OWNER&quot;</span><span class="p">,</span>
