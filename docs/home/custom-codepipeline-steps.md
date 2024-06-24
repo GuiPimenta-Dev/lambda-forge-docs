@@ -10,8 +10,6 @@ In AWS CodeBuild, you have the flexibility to choose from a variety of setup opt
 
 To simplify setting up CodeBuild projects, we've prepared a public Docker image hosted on ECR. This image is pre-configured with all the necessary tools and includes custom Python scripts for validation and docs generation, streamlining your workflow. You can access our optimized build environment here: [https://gallery.ecr.aws/x8r4y7j7/lambda-forge](https://gallery.ecr.aws/x8r4y7j7/lambda-forge).
 
-In line with our commitment to transparency, the complete source code used to construct this Docker image is accessible in the following public repository: [https://github.com/GuiPimenta-Dev/lambda-forge-ecr](https://github.com/GuiPimenta-Dev/lambda-forge-ecr).
-
 For those interested in customizing further, you're encouraged to use this image as a foundation to build your own project-specific private image. The necessary steps and configurations can be found in the Dockerfile provided below.
 
 ```Dockerfile title="Dockerfile"
@@ -97,7 +95,7 @@ background-color: #dddddd;
   </tr>
   <tr>
     <td>ValidateIntegrationTests</td>
-    <td>Validates if for each api gateway endpoint it has at least one integration test decorated with the pytest.mark.integration decorator</td>
+    <td>Ensure that each API Gateway endpoint has at least one integration test decorated with pytest.mark.integration</td>
   </tr>
   <tr>
     <td>IntegrationTests</td>
@@ -134,63 +132,9 @@ background-color: #dddddd;
 
 ## Custom Steps
 
-To support extensive customization, Lambda Forge keeps track of created functions. Each time you run the `cdk synth` command, it refreshes the function list in the `cdk.json` file.
+Lambda Forge enables you to design custom pipeline steps, allowing you to create proprietary scripts for validating your specific requirements.
 
-In order to prevent unnecessary cluttering of the `cdk.json` file, this feature is disabled by default. If you need to enable it for debugging purposes while creating your custom scripts, ensure to include the `TRACK=true` environment variable.
-
-```title=".env"
-TRACK=true
-```
-
-Then run the synth command:
-
-```
-cdk synth
-```
-
-You'll notice a new `functions` key within your `cdk.json` file.
-
-```json title="cdk.json" linenums="60"
-  "functions": [
-            {
-                "name": "SecretAuthorizer",
-                "path": "./authorizers/secret",
-                "description": "An authorizer to validate requests based on a secret present on the headers"
-            },
-            {
-                "name": "HelloWorld",
-                "path": "./functions/hello_world",
-                "description": "A simple hello world",
-                "method": "GET",
-                "endpoint": "/hello_world"
-            },
-            {
-                "name": "Private",
-                "path": "./functions/private",
-                "description": "A private function",
-                "method": "GET",
-                "endpoint": "/private"
-            },
-            {
-                "name": "External",
-                "path": "./functions/external",
-                "description": "A function that uses an external library",
-                "method": "GET",
-                "endpoint": "/layers/external"
-            },
-            {
-                "name": "Custom",
-                "path": "./functions/custom",
-                "description": "A function to make use of the custom layer",
-                "method": "GET",
-                "endpoint": "/layers/custom"
-            }
-        ]
-```
-
-This list of functions can now be leveraged to add new and tailored steps to your application.
-
-For instance, let's create a straightforward custom script that iterates over each file described in the functions list. It will raise an error if it encounters a comment `# TODO`, thereby preventing the pipeline from proceeding if a TODO is included as a comment.
+For example, let's craft a simple custom script that traverses each file listed in the `functions.json` file. This script will trigger an error if it detects a `# TODO` comment, halting the pipeline to ensure that no pending tasks are overlooked.
 
 Let's create a new file at `infra/scripts/validate_todo.py`:
 
@@ -199,11 +143,9 @@ import json
 import os
 
 def check_functions_for_todo(json_file):
-    with open(json_file, 'r') as f:
-        data = json.load(f)
-
-    functions = data.get("functions", [])
-
+    
+    functions = json.load(open(json_file, 'r'))
+    
     for function in functions:
         path = function.get("path", "")
         with open(path, 'r') as file:
@@ -213,7 +155,7 @@ def check_functions_for_todo(json_file):
     print("No TODO found in any files.")
 
 if __name__ == "__main__":
-    json_file_path = "cdk.json"
+    json_file_path = "functions.json"
     check_functions_for_todo(json_file_path)
 ```
 

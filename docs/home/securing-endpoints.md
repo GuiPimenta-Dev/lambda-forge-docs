@@ -173,30 +173,15 @@ functions
 
 ### Implementing the Function
 
-Let's make some adjustments to the response returned by this Lambda function:
+This function will also output a `{"message": "Hello World!"}` message, making it identical to our existing function. The only distinction lies in its configuration.
 
 ```python title="functions/private/main.py" linenums="13" hl_lines="5"
 def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps({"message": "Hello From Private!"})
+        "body": json.dumps({"message": "Hello World!"})
     }
-```
-
-Rather than displaying the message `Hello World!`, we will now return `Hello From Private!`.
-
-Additionally, let's revise the unit tests to accurately represent the modifications we've implemented in our code.
-
-```python title="functions/private/unit.py" hl_lines="8"
-import json
-from .main import lambda_handler
-
-def test_lambda_handler():
-
-    response = lambda_handler(None, None)
-
-    assert response["body"] == json.dumps({"message": "Hello From Private!"})
 ```
 
 ### Configuring the Function as Private

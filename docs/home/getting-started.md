@@ -92,10 +92,12 @@ Later in this tutorial, we'll delve into the specifics of each command. But for 
 Start a new project named `lambda-forge-demo`.
 
 ```
-forge project lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET" --account "$AWS-ACCOUNT"
+forge project --name lambda-forge-demo --repo-owner "$GITHUB-OWNER" --repo-name "$GITHUB-REPO" --bucket "$S3-BUCKET" --account "$AWS-ACCOUNT"
 ```
 
 Make sure to replace `$GITHUB-OWNER` and `$GITHUB-REPO` with the actual GitHub owner and the name of an empty repository and the `$S3-BUCKET` with the name of a S3 bucket and the `$AWS-ACCOUNT` with your AWS Account ID.
+
+Alternatively, you can also run `forge project` to create the project in interactive mode.
 
 ### Project Structure
 
@@ -137,8 +139,8 @@ In the upcoming sections of this tutorial, we'll explore each of these component
 The `cdk.json` file, located at the root of your directory, serves as the central configuration hub for Lambda Forge projects. When you run the `forge project` command, Forge automatically applies the informed settings into the cdk.json file.
 
 ```json title="cdk.json" linenums="41"
-    "region": "us-east-2",
-    "account": "",
+    "region": "$AWS-REGION",
+    "account": "$AWS-ACCOUNT",
     "name": "Lambda-Forge-Demo",
     "repo": {
       "owner": "$GITHUB-OWNER",

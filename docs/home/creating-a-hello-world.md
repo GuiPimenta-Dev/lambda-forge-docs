@@ -26,41 +26,15 @@ functions/
 
 - `functions/` This directory is the root folder for all your Lambda functions. Each function has its own subdirectory within this folder.
 - `hello_world/` The hello_world subdirectory contains all the necessary files for your function to run, be configured, and tested.
-- `__init__.py` This file marks the directory as a Python package, allowing its modules to be imported elsewhere.
 - `config.py` Holds the configuration settings for the function. These might include environment variables, resource identifiers, and other parameters critical for the function's operation.
 - `integration.py` Contains integration tests that simulate the interaction of your function with external services or resources.
 - `main.py` This is where the core logic of your Lambda function resides. The handler function, which AWS Lambda invokes when the function is executed, is defined here.
 - `unit.py` Contains unit tests for your function. Unit tests focus on testing individual parts of the function's code in isolation, ensuring that each component behaves as expected.
 
 
-## The Lambda Stack Class
+## Implementing the Hello World Function
 
-Every Lambda Function must be initialized in the `infra/stacks/lambda_stack.py` file. When you run the command `forge function`, Forge automatically add it for you.
-
-Note in the code snippet below that the `Services` class is injected to the Config files of each Lambda Function allowing them to access the AWS resources.
-
-```python
-from aws_cdk import Stack
-from constructs import Construct
-
-from functions.hello_world.config import HelloWorldConfig
-from infra.services import Services
-
-
-class LambdaStack(Stack):
-    def __init__(self, scope: Construct, context, **kwargs) -> None:
-
-        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
-
-        self.services = Services(self, context)
-
-        # HelloWorld
-        HelloWorldConfig(self.services)
-```
-
-### Implementing the Hello World Function
-
-The Lambda function's implementation should be in the `main.py` file. Below is an example showcasing our simple HelloWorld function:
+The Lambda function's implementation should be in the `main.py` file. Below is an example showcasing our simple Hello World function:
 
 ```python title="functions/hello_world/main.py"
 import json
@@ -86,12 +60,59 @@ The `Input` and `Output` data classes are the entrypoint for the documentation c
 
 Moving forward, we've successfully implemented a straightforward lambda function that outputs a basic JSON response: `{"message": "Hello World!"}`.
 
-### Configuring The Lambda Function
+## The Lambda Stack Class
+
+The Lambda Stack class handles the deployment of Lambda Functions. To deploy a function, you must instantiate its config class within the Lambda Stack class.
+
+<div class="admonition note">
+    <p class="admonition-title">Note</p>
+    <p>
+    When you run the <b>forge function</b> command, the config classes are automatically integrated here for you.
+</p>
+</div>
+
+
+
+The Config classes require the Services Class to interact with AWS resources. Although we'll discuss AWS Services in detail later, for now, note that in the `infra/services/__init__.py` file, you'll find a Services class that acts as a factory for all AWS services.
+
+```python title="infra/services/__init__.py" 
+from infra.services.api_gateway import APIGateway
+from infra.services.aws_lambda import AWSLambda
+
+class Services:
+
+    def __init__(self, scope, context) -> None:
+        self.api_gateway = APIGateway(scope, context)
+        self.aws_lambda = AWSLambda(scope, context)
+```
+
+The Lambda Stack automatically injects the Services class into the Config classes of each Lambda:
+
+
+```python title="infra/stacks/lambda_stack.py" hl_lines="15"
+from aws_cdk import Stack
+from constructs import Construct
+from infra.services import Services
+from functions.hello_world.config import HelloWorldConfig
+
+
+class LambdaStack(Stack):
+    def __init__(self, scope: Construct, context, **kwargs) -> None:
+
+        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
+
+        self.services = Services(self, context)
+
+        # HelloWorld
+        HelloWorldConfig(self.services)
+```
+
+## Configuring The Lambda Function
 
 In our Lambda Forge projects, the `config.py` file plays a crucial role in defining and configuring the dependencies required by a Lambda function.
 
-By passing an instance of the Services class to our configuration classes, we can seamlessly create and manage resources such as Lambda functions and API Gateway endpoints.
 
+The Services class is automatically injected in the Config class of all Lambdas autoamtically by the Lambda Stack class that 
 ```python title="functions/hello_world/config.py"
 from infra.services import Services
 
@@ -111,33 +132,7 @@ The Forge CLI has significantly simplified the setup by automatically tailoring 
 
 Additionally, it sets up the function to respond to GET requests at the `/hello_world` path and designates it as a public endpoint, making it accessible without authentication.
 
-## Deploying The Lambda Function
-
-To deploy your Lambda function, you should integrate the Config class within the `infra/stacks/lambda_stack.py` file.
-
-The Forge CLI streamlines this process by automatically incorporating it for you.
-
-```python title="infra/stacks/lambda_stack.py" hl_lines="17"
-from aws_cdk import Stack
-from constructs import Construct
-from infra.services import Services
-from lambda_forge import release
-from functions.hello_world.config import HelloWorldConfig
-
-
-@release
-class LambdaStack(Stack):
-    def __init__(self, scope: Construct, context, **kwargs) -> None:
-
-        super().__init__(scope, f"{context.name}-Lambda-Stack", **kwargs)
-
-        self.services = Services(self, context)
-
-        # HelloWorld
-        HelloWorldConfig(self.services)
-```
-
-### Push Your Code To Github
+## Pushing the Code to Github
 
 With all the required settings now in place, we're ready to upload our code to the GitHub repository.
 
@@ -161,21 +156,7 @@ git checkout -b dev
 git push -u origin dev
 ```
 
-### Deploying the Stacks
-
-Lambda Forge ensures that every resource it creates on AWS follows a naming convention that integrates the deployment stage, the project name, and the resource name. This approach guarantees a consistent and clear identification methodology throughout the project.
-
-The project name is defined within the `cdk.json` file, linking each resource directly to its associated project and stage for easy management and recognition.
-
-```json hl_lines="3" title="cdk.json"
-    "region": "us-east-2",
-    "account": "",
-    "name": "Lambda-Forge-Demo",
-    "repo": {
-      "owner": "$GITHUB-OWNER",
-      "name": "$GITHUB-REPO"
-    },
-```
+## Deploying the Stacks
 
 Deploy the Dev Stack by running the following command in your terminal:
 
@@ -183,13 +164,26 @@ Deploy the Dev Stack by running the following command in your terminal:
 forge deploy --stack Dev
 ```
 
+Lambda Forge ensures that every resource it creates on AWS follows a naming convention that integrates the deployment stage, the project name, and the resource name. This approach guarantees a consistent and clear identification methodology throughout the project.
+
+The project name is defined within the `cdk.json` file, linking each resource directly to its associated project and stage for easy management and recognition.
+
+```json hl_lines="3" title="cdk.json"
+    "region": "$AWS-REGION",
+    "account": "$AWS-ACCOUNT",
+    "name": "Lambda-Forge-Demo",
+    "repo": {
+      "owner": "$GITHUB-OWNER",
+      "name": "$GITHUB-REPO"
+    },
+```
+
+
 Following a successful deployment, a new pipeline will be created with the name `Dev-Lambda-Forge-Demo-Pipeline`. Access your AWS CodePipeline console to view it.
 
 ![Dev Pipeline Triggered](images/only-dev-pipeline.png)
 
 In a dedicated session, we'll delve into the specifics of the pipelines generated, including a closer examination of the development pipeline.
-
-By default, Lambda Forge does not incorporate any steps for code validation in the dev pipeline. Instead, it seamlessly integrates Github with AWS CodePipeline. This means that once code is pushed to GitHub, it triggers the pipeline, leading to automatic deployment upon the completion of the execution process.
 
 After the pipeline execution concludes, proceed to your AWS Lambda console and locate the `Dev-Lambda-Forge-Demo-HelloWorld` function.
 

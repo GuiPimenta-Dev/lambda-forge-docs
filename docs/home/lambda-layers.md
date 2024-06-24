@@ -47,7 +47,7 @@ Additionally, Forge sets the new custom layer in the Layers class.
 
 ```python title="infra/services/layers.py" hl_lines="8-14"
 from aws_cdk import aws_lambda as _lambda
-from lambda_forge import Path
+from lambda_forge.path import Path
 
 
 class Layers:
@@ -159,19 +159,26 @@ In software development, using external libraries is a common practice to extend
 
 To illustrate this scenario, we will develop a new lambda function aimed to parsing the data retrieved from the external API [https://randomuser.me/api/](https://randomuser.me/api/), a public service for generating random fake user data. Since the `requests` library is not inherently included in Python, it will be necessary to integrate it as a layer in our lambda function.
 
+To create an external layer, run the following command in your terminal:
+
+```
+forge layer --external $LAYER
+```
+
 ### Incorporating Requests from Public Layers
 
-The `requests` library is widely used and recognized for its utility. Fortunately, AWS Lambda offers this library as public layers, simplifying the process of integrating them into your projects without the need to create custom layers.
+To create a new layer for the requests library, simply run:
 
-For projects utilizing Python 3.9, we can leverage the specific Amazon Resource Names (ARNs) for the requests library made available through Klayers. This provides an efficient way to add these libraries to your Lambda functions. You can explore the complete list of public layers for Python 3.9 in the us-east-2 region [here](https://api.klayers.cloud//api/v2/p3.9/layers/latest/us-east-2/json).
+```
+forge layer --external requests
+```
 
-Here is the ARN you'll need:
+Lambda Forge will automatically create and deploy this layer to AWS, additionally it updates the `Layer` class to utilize your newly created layer.
 
-- Requests: `arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19`
+```python title="infra/services/layers.py" hl_lines="12-16" linenums="6"
 
-Let's proceed by manually incorporating it into our Layers class.
-
-```python title="infra/services/layers.py" hl_lines="9-13" linenums="8"
+class Layers:
+    def __init__(self, scope) -> None:
 
         self.my_custom_layer = _lambda.LayerVersion(
             scope,
@@ -180,18 +187,12 @@ Let's proceed by manually incorporating it into our Layers class.
             compatible_runtimes=[_lambda.Runtime.PYTHON_3_9],
             description='',
          )
-
+        
         self.requests_layer = _lambda.LayerVersion.from_layer_version_arn(
             scope,
-            id="RequestsLayer",
-            layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19",
-        )
-```
-
-Additionally, include it in the `requirements.txt` file.
-
-```txt title="requirements.txt" linenums="16"
-requests==2.28.1
+            id='RequestsLayer',
+            layer_version_arn='arn:aws:lambda:us-east-2:211125768252:layer:requests:1',
+         )
 ```
 
 ### Creating a Lambda Function Utilizing the Requests Library
