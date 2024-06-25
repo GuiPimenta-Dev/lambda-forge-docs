@@ -10,10 +10,10 @@
       
       
       
-        <link rel="prev" href="../getting-started/">
+        <link rel="prev" href="../securing-endpoints/">
       
       
-        <link rel="next" href="../creating-a-hello-world/">
+        <link rel="next" href="../lambda-layers/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -391,6 +391,48 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating-a-hello-world/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a Hello World
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../securing-endpoints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Securing Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -455,54 +497,45 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Creating AWS Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-creating-an-sns-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Creating an SNS Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-hello-world-function-to-also-be-triggered-by-sns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Hello World Function to also be Triggered by SNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking-the-triggers-and-invocations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracking the Triggers and Invocations
+    </span>
+  </a>
+  
 </li>
       
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../creating-a-hello-world/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Creating a Hello World
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../securing-endpoints/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Securing Endpoints
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -874,27 +907,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/web-scraper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Web Scraper
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1041,6 +1053,39 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Creating AWS Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-creating-an-sns-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Creating an SNS Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-hello-world-function-to-also-be-triggered-by-sns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Hello World Function to also be Triggered by SNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking-the-triggers-and-invocations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracking the Triggers and Invocations
+    </span>
+  </a>
+  
 </li>
       
     </ul>
@@ -1059,7 +1104,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 
 <h1 id="integrating-aws-services-to-lambda-functions">Integrating AWS Services to Lambda Functions</h1>
-<p>On a daily basis, our Lambda functions frequently interact with various AWS services. With AWS offering over 200 services, connecting these functions to leverage different services, creating triggers, and assigning the proper permissions can be quite challenging. To address this complexity and to create a scalable architecture that can evolve over time, Lambda Forge employs dependency injection. This approach injects each service with its single responsibility into our functions, simplifying management and enhancing scalability.</p>
+<p>Lambda functions frequently interact with various AWS services. With AWS offering over 200 services, connecting these functions to leverage different services, creating triggers, and assigning the proper permissions can be quite challenging. To address this complexity and to create a scalable architecture that can evolve over time, Lambda Forge employs dependency injection. This approach injects each service with its single responsibility into our functions, simplifying management and enhancing scalability.</p>
 <h2 id="the-services-class">The Services Class</h2>
 <p>Every AWS resources is defined in separate classes within the <code>infra/services</code> folder. When you initiate a new project using <code>forge project</code>, this directory is automatically created and populated with two service directories: <code>api_gateway</code> and <code>aws_lambda</code>. Each file contains template code to facilitate the creation of a Lambda function and its integration with API Gateway.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>infra
@@ -1079,18 +1124,183 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">aws_lambda</span> <span class="o">=</span> <span class="n">AWSLambda</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="creating-aws-services">Creating AWS Services</h2>
-<p>Lambda Forge provides some AWS service classes with boilerplate code commonly used with Lambda functions. You can easily create these classes using the command:</p>
-<p><code>$forge service $SERVICE</code></p>
-<p>For example, to create a class for handling DynamoDB configurations, simply run the command <code>forge service dynamodb</code>. This command will automatically update your folder structure as follows:</p>
+<p>Lambda Forge simplifies working with AWS Lambda functions by providing pre-built classes for common AWS services. To create these classes, use the following command:</p>
+<p><code>forge service $SERVICE</code></p>
+<p>Lambda Forge currently has built-in classes for the following AWS services:</p>
+<ul>
+<li>API Gateway</li>
+<li>AWS Lambdas</li>
+<li>Cognito</li>
+<li>DynamoDB</li>
+<li>Event Bridge</li>
+<li>KMS</li>
+<li>Secrets Manager</li>
+<li>S3</li>
+<li>SNS</li>
+<li>SQS</li>
+<li>Websockets</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+You can create your own custom classes using CDK for handling other AWS services by following the architecture set by Lambda Forge, which adheres to the Single Responsibility Principle and Dependency Injection. This approach allows you to seamlessly integrate your custom service class into the existing framework.
+</p>
+</div>
+
+<h3 id="example-creating-an-sns-class">Example: Creating an SNS Class</h3>
+<p>To create a class for handling SNS configurations, run <code>forge service sns</code>. This command will update your folder structure as shown below:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>infra
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>└── services
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    ├── __init__.py
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    ├── api_gateway.py
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    ├── aws_lambda.py
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="hll">    └── dynamodb.py
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="hll">    └── sns.py
 </span></code></pre></div>
-<p>You have the flexibility to use the <code>DynamoDB</code> class generated by Lambda Forge or create your own class to manage the configurations related to that service. The classes provided by Lambda Forge already include some boilerplate code, which streamlines the process of working with that service.</p>
-<p><mark>Keep in mind that while AWS offers over 200 services, Lambda Forge does not provide encapsulation for every AWS service by default. However, you can easily create your own custom classes using AWS CDK to handle these responsibilities.</mark> Simply follow the architecture provided by Lambda Forge, which adheres to the Single Responsibility Principle and Dependency Injection. By doing so, you can seamlessly integrate your custom service classes into the existing framework.</p>
+<p>Here's an example of the SNS class provided by Lambda Forge:</p>
+<div class="highlight"><span class="filename">infra/services/sns.py</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_lambda_event_sources</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_sns</span> <span class="k">as</span> <span class="n">sns</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">from</span> <span class="nn">lambda_forge.trackers</span> <span class="kn">import</span> <span class="n">invoke</span><span class="p">,</span> <span class="n">trigger</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">class</span> <span class="nc">SNS</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="c1"># self.sns_topic = sns.Topic.from_topic_arn(</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="c1">#     scope,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="c1">#     id=&quot;SNSTopic&quot;,</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="c1">#     topic_arn=context.resources[&quot;arns&quot;][&quot;sns_topic_arn&quot;],</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="c1"># )</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="o">...</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="nd">@trigger</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;sns&quot;</span><span class="p">,</span> <span class="n">trigger</span><span class="o">=</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="s2">&quot;function&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">def</span> <span class="nf">create_trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">topic</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="n">sns_subscription</span> <span class="o">=</span> <span class="n">aws_lambda_event_sources</span><span class="o">.</span><span class="n">SnsEventSource</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="n">function</span><span class="o">.</span><span class="n">add_event_source</span><span class="p">(</span><span class="n">sns_subscription</span><span class="p">)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="nd">@invoke</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;sns&quot;</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="s2">&quot;function&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="k">def</span> <span class="nf">grant_publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="n">topic</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">)</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>        <span class="n">topic</span><span class="o">.</span><span class="n">grant_publish</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</code></pre></div>
+<p>The SNS class provided by Forge includes methods for triggering a lambda and granting it permission to consume a topic. These methods are designed to keep track of these events using the <code>trigger</code> and <code>invoke</code> decorators.</p>
+<h3 id="updating-hello-world-function-to-also-be-triggered-by-sns">Updating Hello World Function to also be Triggered by SNS</h3>
+<p>For example, let's update our already existent <code>Hello World</code> function to be triggered by both the API Gateway and the SNS topic. </p>
+<p>In order to do so, we need modify the SNS class adding the ARN of the real topic from AWS:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">infra/services/sns.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="k">class</span> <span class="nc">SNS</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">hello_world_topic</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">Topic</span><span class="o">.</span><span class="n">from_topic_arn</span><span class="p">(</span>
+</span><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="hll">            <span class="n">scope</span><span class="p">,</span>
+</span><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="hll">            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;HelloWorldTopic&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="hll">            <span class="n">topic_arn</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="s2">&quot;arns&quot;</span><span class="p">][</span><span class="s2">&quot;hello_world_topic&quot;</span><span class="p">],</span>
+</span><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="hll">        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Now we need to define the topic arns for each environment in the <code>cdk.json</code> file:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-50">50</a></span>
+<span class="normal"><a href="#__codelineno-5-51">51</a></span>
+<span class="normal"><a href="#__codelineno-5-52">52</a></span>
+<span class="normal"><a href="#__codelineno-5-53">53</a></span>
+<span class="normal"><a href="#__codelineno-5-54">54</a></span>
+<span class="normal"><a href="#__codelineno-5-55">55</a></span>
+<span class="normal"><a href="#__codelineno-5-56">56</a></span>
+<span class="normal"><a href="#__codelineno-5-57">57</a></span>
+<span class="normal"><a href="#__codelineno-5-58">58</a></span>
+<span class="normal"><a href="#__codelineno-5-59">59</a></span>
+<span class="normal"><a href="#__codelineno-5-60">60</a></span>
+<span class="normal"><a href="#__codelineno-5-61">61</a></span>
+<span class="normal"><a href="#__codelineno-5-62">62</a></span>
+<span class="normal"><a href="#__codelineno-5-63">63</a></span>
+<span class="normal"><a href="#__codelineno-5-64">64</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-50" name="__codelineno-5-50"></a><span class="w">    </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-51" name="__codelineno-5-51"></a><span class="w">      </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-52" name="__codelineno-5-52"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;hello_world_topic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$DEV-SNS-TOPIC&quot;</span>
+</span><a id="__codelineno-5-53" name="__codelineno-5-53"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-5-54" name="__codelineno-5-54"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-5-55" name="__codelineno-5-55"></a><span class="w">    </span><span class="nt">&quot;staging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-56" name="__codelineno-5-56"></a><span class="w">        </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-57" name="__codelineno-5-57"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;hello_world_topic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$STAGING-SNS-TOPIC&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-58" name="__codelineno-5-58"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-59" name="__codelineno-5-59"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-5-60" name="__codelineno-5-60"></a><span class="w">    </span><span class="nt">&quot;prod&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-61" name="__codelineno-5-61"></a><span class="w">        </span><span class="nt">&quot;arns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-62" name="__codelineno-5-62"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;hello_world_topic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$PROD-SNS-TOPIC&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-5-63" name="__codelineno-5-63"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-64" name="__codelineno-5-64"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Now, change the existing <code>config.py</code> file to also use the new SNS topic:</p>
+<div class="highlight"><span class="filename">functions/hello_world/config.py</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">class</span> <span class="nc">HelloWorldConfig</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">:</span> <span class="n">Services</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">function</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">aws_lambda</span><span class="o">.</span><span class="n">create_function</span><span class="p">(</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A simple hello world&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="p">)</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/hello_world&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="hll">        <span class="n">services</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="s2">&quot;hello_world_topic&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Now our hello world function can be triggered by two different sources.</p>
+<h2 id="tracking-the-triggers-and-invocations">Tracking the Triggers and Invocations</h2>
+<p>Every time we run the command <code>cdk synth</code>, Lambda Forge tracks the trigger and invocations for each lambda and generate a json file called <code>functions.json</code> file at the root of your project.</p>
+<div class="highlight"><span class="filename">functions.json</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">[</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./authorizers/secret&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An authorizer to validate requests based on a secret present on the headers&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nt">&quot;triggers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="nt">&quot;invocations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloWorld&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/hello_world&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A simple hello world&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="nt">&quot;triggers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">                </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api_gateway&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">                </span><span class="nt">&quot;trigger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/hello_world&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">                </span><span class="nt">&quot;public&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">                </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sns&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">                </span><span class="nt">&quot;trigger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hello_world_topic&quot;</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">        </span><span class="nt">&quot;invocations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Private&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./functions/private&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A private function&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="w">        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">        </span><span class="nt">&quot;triggers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">                </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api_gateway&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">                </span><span class="nt">&quot;trigger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/private&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="w">                </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">                </span><span class="nt">&quot;public&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="w">        </span><span class="nt">&quot;invocations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>The <code>functions.json</code> file is essential to Lambda Forge, serving as a crucial component for many of its features, including documentation generation and custom CodePipeline steps.</p>
 
 
 
