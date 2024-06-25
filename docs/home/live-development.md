@@ -1,7 +1,13 @@
 # Synchronizing Local Changes with AWS in Real-Time
 
-Coming Soon...
-<!-- Working with AWS Lambda introduces unique challenges compared to traditional server-based setups. Lambda functions are ephemeral and event-driven, terminating immediately after their tasks are completed. This nature complicates local development and testing.
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This part of the doc is very outdated and will be updated soon!</p>
+</div>
+
+
+Working with AWS Lambda introduces unique challenges compared to traditional server-based setups. Lambda functions are ephemeral and event-driven, terminating immediately after their tasks are completed. This nature complicates local development and testing.
 
 To mitigate these issues, AWS developed the Serverless Application Model (SAM), which facilitates the deployment of serverless applications with YAML configurations and supports local emulation via the SAM CLI. However, SAM faces difficulties with complex applications, presents a steep learning curve, and its local testing features often fall short of replicating the complete AWS environment, potentially leading to inconsistencies.
 
@@ -66,4 +72,4 @@ Those commands are going to set up two separate processes in different terminal 
 ![](images/sns-trigger.gif)
 ![](images/sns-live.gif)
 
-When you send a message to the SNS trigger, it is automatically forwarded to the live topic and subsequently processed by the associated Lambda function. This ensures seamless integration and handling within your live development session. -->
+When you send a message to the SNS trigger, it is automatically forwarded to the live topic and subsequently processed by the associated Lambda function. This ensures seamless integration and handling within your live development session. 
