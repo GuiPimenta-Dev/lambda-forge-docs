@@ -1255,7 +1255,7 @@ You can create your own custom classes using CDK for handling other AWS services
 </span></code></pre></div>
 <p>Now our hello world function can be triggered by two different sources.</p>
 <h2 id="tracking-the-triggers-and-invocations">Tracking the Triggers and Invocations</h2>
-<p>Every time we run the command <code>cdk synth</code>, Lambda Forge tracks the trigger and invocations for each lambda and generate a json file called <code>functions.json</code> file at the root of your project.</p>
+<p>Every time we run the command <code>cdk synth</code>, Lambda Forge tracks the trigger and invocations for each lambda defined in your Lambda Stack and generate a json file called <code>functions.json</code> file at the root of your project.</p>
 <div class="highlight"><span class="filename">functions.json</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">[</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretAuthorizer&quot;</span><span class="p">,</span>
