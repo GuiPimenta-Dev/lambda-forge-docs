@@ -13,7 +13,7 @@
 		></script>
 	</head>
 	<body class="">
-		<main class="px-2 py-6 h-[350px] relative">
+		<main class="px-2 py-6 h-[450px] relative">
 			<div id="main-page" class="p- mb-24">
 				<div class="flex gap-3 flex-col">
 					<div>

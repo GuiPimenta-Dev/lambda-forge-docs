@@ -15,7 +15,7 @@
 	<body class="200">
 		<main
 			id="set-range-page"
-			class=" bg-white py-4 px-2 h-[300px] flex flex-col justify-around"
+			class=" bg-white py-6 px-2 h-[350px] flex flex-col justify-around"
 		>
 			<p class="font-bold text-xl text-center">
 				Type the range number you want to guess:
@@ -611,7 +611,7 @@ This request generates the following response, including a unique Game ID:
 
 ```json
 {
-  "game_id": "794eb9ec-79ae-4b56-9523-2fc8d38c341a"
+	"game_id": "794eb9ec-79ae-4b56-9523-2fc8d38c341a"
 }
 ```
 
@@ -630,7 +630,7 @@ Response:
 
 ```json
 {
-  "answer": "higher"
+	"answer": "higher"
 }
 ```
 
@@ -645,7 +645,7 @@ Response:
 
 ```json
 {
-  "answer": "lower"
+	"answer": "lower"
 }
 ```
 
@@ -662,7 +662,7 @@ Response:
 
 ```json
 {
-  "answer": "correct"
+	"answer": "correct"
 }
 ```
 
