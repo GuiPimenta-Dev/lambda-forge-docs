@@ -26,7 +26,7 @@ As illustrated in the image above, Lambda Forge sets up real AWS endpoints for l
 By calling these endpoints or the SNS topic, the requests sent to the cloud will be proxied to your local machine. For instance, when sending requests to the `Hello World` function and modifying its responses, you can observe live reloading during development. 
 
 
-<img src="https://i.ibb.co/W07LM8Z/live-server.gif" width=900>
+<img src="https://i.ibb.co/6sRcyxF/live-server.gif" width=900>
 
 ## Live Logs
 
