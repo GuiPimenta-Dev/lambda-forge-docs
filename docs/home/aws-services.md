@@ -165,7 +165,7 @@ Now our hello world function can be triggered by two different sources.
 
 ## Tracking the Triggers and Invocations
 
-Every time we run the command `cdk synth`, Lambda Forge tracks the trigger and invocations for each lambda and generate a json file called `functions.json` file at the root of your project.
+Every time we run the command `cdk synth`, Lambda Forge tracks the trigger and invocations for each lambda defined in your Lambda Stack and generate a json file called `functions.json` file at the root of your project.
 
 ```json title="functions.json"
 [
