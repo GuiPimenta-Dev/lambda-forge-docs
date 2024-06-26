@@ -1108,7 +1108,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h3 id="setting-up-the-docs-endpoints">Setting Up the Docs Endpoints</h3>
 <p>The endpoints to visualize your docs are configured within <code>docs/config.py</code>. This configuration file allows you to specify the types of documents to be displayed and their presentation locations.</p>
-<p><mark>Similar to functions, authorizers can be implemented to safeguard the access to your project's documentation, maintaining its confidentiality and integrity.</mark></p>
+<p>Similar to functions, authorizers can be implemented to safeguard the access to your project's documentation, maintaining its confidentiality and integrity.</p>
 <div class="highlight"><span class="filename">docs/config.py</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">infra.services</span> <span class="kn">import</span> <span class="n">Services</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">class</span> <span class="nc">DocsConfig</span><span class="p">:</span>
@@ -1136,7 +1136,6 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">services</span><span class="o">.</span><span class="n">api_gateway</span><span class="o">.</span><span class="n">create_docs</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/wiki&quot;</span><span class="p">,</span> <span class="n">artifact</span><span class="o">=</span><span class="s2">&quot;Wiki&quot;</span><span class="p">,</span> <span class="n">public</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="api-documentation-with-swagger-and-redoc">API Documentation with Swagger and ReDoc</h2>
-<p>An API document is a technical resource that provides instructions on how to effectively use and integrate with an API. It includes information about the API's functions, classes, return types, arguments, and more, as well as examples of requests and responses. Good API documentation is critical for developers to understand how to make calls to the API and what results they can expect.</p>
 <p>To automatically document your api endpoints with Swagger and Redoc, you should include the <code>Input</code> and <code>Output</code> dataclasses inside your <code>main.py</code> files. Case you have an endpoint that's expecting a path parameter, you can also include it in the <code>Path</code> dataclass.</p>
 <p>The code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
