@@ -71,6 +71,7 @@ Here's a concise list of the commands supported by Forge:
 Commands:
   authorizer  Generates an authorizer for AWS Lambda functions.
   deploy      Deploys a stack to AWS
+  describe    List the outputs of the stacks on AWS CloudFormation
   diagram     Create a diagram of the project in png format
   doc         Creates a new doc template for the project.
   function    Creates a Lambda function with a predefined structure and...
