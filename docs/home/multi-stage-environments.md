@@ -256,7 +256,7 @@ graph TD;
 
 Let's fine-tune our pipeline by incorporating the `ValidateTodo` step, which we devised during the previous session. This step will scan files for any TODO comments, promptly raising an error if one is detected.
 
-```python title="infra/stacks/staging_stack.py" linenums="38" hl_lines="6-9 27"
+```python title="infra/stacks/staging_stack.py" linenums="38" hl_lines="6-9 24"
         # pre
         unit_tests = steps.unit_tests()
         coverage = steps.coverage()
@@ -359,15 +359,36 @@ Note that, this integration test is actually sending a `GET` request to the depl
 
 ### Resolving the Initial Staging Deployment Error
 
-To address this issue, we need to set up the BASE URL specifically for the integration tests. Follow the guidelines provided in the [Locating The Api Gateway Base URL on CloudFormation](https://docs.lambda-forge.com/articles/locating-the-base-url/") article to find your base URL.
+To address the initial staging deployment error, we need to configure the BASE URL specifically for the integration tests.
 
-Having the BASE URL, it must then be incorporated into your `cdk.json` file under the `base_url` key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.
+First, run the following command to list all variables from your CloudFormation stacks:
 
-```json title="cdk.json" linenums="50"
-    "base_url": "https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging"
+```
+forge describe
 ```
 
-Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.
+Upon running the command, the variables will be listed in your terminal:
+
+```
+Stack Name: Dev-Lambda-Forge-Demo-Lambda-Stack
+BASE-URL: https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/
+
+
+Stack Name: Staging-Lambda-Forge-Demo-Lambda-Stack
+BASE-URL: https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/
+
+
+Stack Name: Prod-Lambda-Forge-Demo-Lambda-Stack
+BASE-URL: https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/
+```
+
+With the BASE URL identified, incorporate it into your `cdk.json` file under the `base_url` key. This adjustment ensures that all integration tests can interact seamlessly with the staging environment for automated testing.
+
+```json title="cdk.json" linenums="50"
+    "base_url": "https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/"
+```
+
+Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub. Following these adjustments, the pipeline should successfully complete its run.
 
 ![alt text](images/staging-success.png)
 
@@ -519,8 +540,8 @@ Furthermore, you have deployed three unique stack of functions, each correspondi
 
 ![alt text](images/deployed-hello-worlds.png)
 
-- **Dev**: [https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world)
-- **Staging**: [https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world)
-- **Prod**: [https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world)
+- **Dev**: [https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/hello_world](https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/hello_world)
+- **Staging**: [https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/hello_world](https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/hello_world)
+- **Prod**: [https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/hello_world](https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/hello_world)
 
 Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of environments through your CI/CD workflows.

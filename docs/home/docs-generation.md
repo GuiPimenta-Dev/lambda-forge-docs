@@ -31,7 +31,7 @@ To automatically document your api endpoints with Swagger and Redoc, you should 
 
 The code snippet below demonstrates all the types of data you can expect to work with, including simple data types, lists, custom objects, optional fields, and literal types, offering a clear understanding of the input and output contracts for the API.
 
-```python
+```python title="main.py"
 from dataclasses import dataclass
 from typing import List, Optional, Literal
 
@@ -59,6 +59,13 @@ class Input:
 @dataclass
 class Output:
     pass 
+
+def lambda_handler(event, context):
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Hello Docs!"})
+    }
 ```
 
 ## Diagram
