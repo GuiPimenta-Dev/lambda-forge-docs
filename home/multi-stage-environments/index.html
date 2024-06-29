@@ -1734,11 +1734,11 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <a id="__codelineno-4-58" name="__codelineno-4-58"></a>                <span class="n">unit_tests</span><span class="p">,</span>
 <a id="__codelineno-4-59" name="__codelineno-4-59"></a>                <span class="n">coverage</span><span class="p">,</span>
 <a id="__codelineno-4-60" name="__codelineno-4-60"></a>                <span class="n">validate_docs</span><span class="p">,</span>
-<a id="__codelineno-4-61" name="__codelineno-4-61"></a>                <span class="n">validate_todo</span><span class="p">,</span>
-<a id="__codelineno-4-62" name="__codelineno-4-62"></a>                <span class="n">validate_integration_tests</span><span class="p">,</span>
+<a id="__codelineno-4-61" name="__codelineno-4-61"></a><span class="hll">                <span class="n">validate_todo</span><span class="p">,</span>
+</span><a id="__codelineno-4-62" name="__codelineno-4-62"></a>                <span class="n">validate_integration_tests</span><span class="p">,</span>
 <a id="__codelineno-4-63" name="__codelineno-4-63"></a>            <span class="p">],</span>
-<a id="__codelineno-4-64" name="__codelineno-4-64"></a><span class="hll">            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
-</span><a id="__codelineno-4-65" name="__codelineno-4-65"></a>                <span class="n">redoc</span><span class="p">,</span>
+<a id="__codelineno-4-64" name="__codelineno-4-64"></a>            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-4-65" name="__codelineno-4-65"></a>                <span class="n">redoc</span><span class="p">,</span>
 <a id="__codelineno-4-66" name="__codelineno-4-66"></a>                <span class="n">swagger</span><span class="p">,</span>
 <a id="__codelineno-4-67" name="__codelineno-4-67"></a>                <span class="n">integration_tests</span><span class="p">,</span>
 <a id="__codelineno-4-68" name="__codelineno-4-68"></a>                <span class="n">tests_report</span><span class="p">,</span>
@@ -1795,69 +1795,84 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p><mark><strong>However, given this is our initial deployment, the BASE URL has not been established yet, leading the IntegrationTests step to fail.</strong></mark></p>
 <p><img alt="alt text" src="../images/integrations-failed.png" /></p>
 <h3 id="resolving-the-initial-staging-deployment-error">Resolving the Initial Staging Deployment Error</h3>
-<p>To address this issue, we need to set up the BASE URL specifically for the integration tests. Follow the guidelines provided in the <a href="https://docs.lambda-forge.com/articles/locating-the-base-url/&quot;">Locating The Api Gateway Base URL on CloudFormation</a> article to find your base URL.</p>
-<p>Having the BASE URL, it must then be incorporated into your <code>cdk.json</code> file under the <code>base_url</code> key. This adjustment ensures that all integration tests can interact with the staging environment seamlessly for automated testing.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-50" name="__codelineno-7-50"></a><span class="w">    </span><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging&quot;</span>
+<p>To address the initial staging deployment error, we need to configure the BASE URL specifically for the integration tests.</p>
+<p>First, run the following command to list all variables from your CloudFormation stacks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>forge describe
+</code></pre></div>
+<p>Upon running the command, the variables will be listed in your terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Stack Name: Dev-Lambda-Forge-Demo-Lambda-Stack
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>BASE-URL: https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Stack Name: Staging-Lambda-Forge-Demo-Lambda-Stack
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>BASE-URL: https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>Stack Name: Prod-Lambda-Forge-Demo-Lambda-Stack
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>BASE-URL: https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/
+</code></pre></div>
+<p>With the BASE URL identified, incorporate it into your <code>cdk.json</code> file under the <code>base_url</code> key. This adjustment ensures that all integration tests can interact seamlessly with the staging environment for automated testing.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cdk.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="w">    </span><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/&quot;</span>
 </code></pre></div></td></tr></table></div>
-<p>Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub once again. Following these adjustments, the pipeline should successfully complete its run.</p>
+<p>Once the base URL is properly configured for the integration tests, commit your changes and push the updated code to GitHub. Following these adjustments, the pipeline should successfully complete its run.</p>
 <p><img alt="alt text" src="../images/staging-success.png" /></p>
 <h2 id="production-environment">Production Environment</h2>
 <p>The <code>Production</code> environment represents the phase where the tested and stable version of the software is deployed. This version is accessible to end-users and operates within the live environment. It is imperative that this stage remains the most safeguarded, permitting only fully vetted and secure code to be deployed. This precaution helps in minimizing the risk of exposing end-users to bugs or undesirable functionalities, ensuring a seamless and reliable user experience.</p>
 <h3 id="production-environment-configuration">Production Environment Configuration</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_codebuild</span> <span class="k">as</span> <span class="n">codebuild</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">pipelines</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">from</span> <span class="nn">aws_cdk.pipelines</span> <span class="kn">import</span> <span class="n">CodePipelineSource</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kn">from</span> <span class="nn">infra.stages.deploy</span> <span class="kn">import</span> <span class="n">DeployStage</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="kn">from</span> <span class="nn">lambda_forge.constants</span> <span class="kn">import</span> <span class="n">ECR</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="kn">from</span> <span class="nn">lambda_forge.context</span> <span class="kn">import</span> <span class="n">context</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="kn">from</span> <span class="nn">lambda_forge.steps</span> <span class="kn">import</span> <span class="n">CodeBuildSteps</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nd">@context</span><span class="p">(</span><span class="n">stage</span><span class="o">=</span><span class="s2">&quot;Prod&quot;</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="k">class</span> <span class="nc">ProdStack</span><span class="p">(</span><span class="n">cdk</span><span class="o">.</span><span class="n">Stack</span><span class="p">):</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">create_id</span><span class="p">(</span><span class="s2">&quot;Stack&quot;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="n">source</span> <span class="o">=</span> <span class="n">CodePipelineSource</span><span class="o">.</span><span class="n">git_hub</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipelines</span><span class="o">.</span><span class="n">CodePipeline</span><span class="p">(</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>            <span class="bp">self</span><span class="p">,</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>            <span class="s2">&quot;Pipeline&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>            <span class="n">pipeline_name</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">create_id</span><span class="p">(</span><span class="s2">&quot;Pipeline&quot;</span><span class="p">),</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>            <span class="n">synth</span><span class="o">=</span><span class="n">pipelines</span><span class="o">.</span><span class="n">ShellStep</span><span class="p">(</span><span class="s2">&quot;Synth&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cdk synth&quot;</span><span class="p">]),</span>
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>            <span class="n">code_build_defaults</span><span class="o">=</span><span class="n">pipelines</span><span class="o">.</span><span class="n">CodeBuildOptions</span><span class="p">(</span>
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>                <span class="n">build_environment</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildEnvironment</span><span class="p">(</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>                    <span class="n">build_image</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">LinuxBuildImage</span><span class="o">.</span><span class="n">from_docker_registry</span><span class="p">(</span><span class="n">ECR</span><span class="o">.</span><span class="n">LATEST</span><span class="p">),</span>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>                <span class="p">)</span>
-<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>            <span class="p">),</span>
-<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>        <span class="p">)</span>
-<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>
-<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>        <span class="n">steps</span> <span class="o">=</span> <span class="n">CodeBuildSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
-<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>
-<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>        <span class="c1"># pre</span>
-<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">unit_tests</span><span class="p">()</span>
-<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">integration_tests</span><span class="p">()</span>
-<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
-<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>        <span class="c1"># post</span>
-<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>        <span class="n">diagram</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">diagram</span><span class="p">()</span>
-<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>        <span class="n">redoc</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">redoc</span><span class="p">()</span>
-<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>        <span class="n">swagger</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">swagger</span><span class="p">()</span>
-<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>
-<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
-<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>            <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
-<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>            <span class="n">pre</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>                <span class="n">unit_tests</span><span class="p">,</span>
-<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>                <span class="n">integration_tests</span><span class="p">,</span>
-<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>            <span class="p">],</span>
-<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>                <span class="n">diagram</span><span class="p">,</span>
-<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>                <span class="n">redoc</span><span class="p">,</span>
-<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>                <span class="n">swagger</span><span class="p">,</span>
-<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>            <span class="p">],</span>
-<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>        <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">aws_codebuild</span> <span class="k">as</span> <span class="n">codebuild</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="n">pipelines</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span> <span class="nn">aws_cdk.pipelines</span> <span class="kn">import</span> <span class="n">CodePipelineSource</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span> <span class="nn">infra.stages.deploy</span> <span class="kn">import</span> <span class="n">DeployStage</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="kn">from</span> <span class="nn">lambda_forge.constants</span> <span class="kn">import</span> <span class="n">ECR</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="kn">from</span> <span class="nn">lambda_forge.context</span> <span class="kn">import</span> <span class="n">context</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="kn">from</span> <span class="nn">lambda_forge.steps</span> <span class="kn">import</span> <span class="n">CodeBuildSteps</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="nd">@context</span><span class="p">(</span><span class="n">stage</span><span class="o">=</span><span class="s2">&quot;Prod&quot;</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="k">class</span> <span class="nc">ProdStack</span><span class="p">(</span><span class="n">cdk</span><span class="o">.</span><span class="n">Stack</span><span class="p">):</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">create_id</span><span class="p">(</span><span class="s2">&quot;Stack&quot;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="n">source</span> <span class="o">=</span> <span class="n">CodePipelineSource</span><span class="o">.</span><span class="n">git_hub</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">repo</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipelines</span><span class="o">.</span><span class="n">CodePipeline</span><span class="p">(</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>            <span class="bp">self</span><span class="p">,</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>            <span class="s2">&quot;Pipeline&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>            <span class="n">pipeline_name</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">create_id</span><span class="p">(</span><span class="s2">&quot;Pipeline&quot;</span><span class="p">),</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>            <span class="n">synth</span><span class="o">=</span><span class="n">pipelines</span><span class="o">.</span><span class="n">ShellStep</span><span class="p">(</span><span class="s2">&quot;Synth&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cdk synth&quot;</span><span class="p">]),</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>            <span class="n">code_build_defaults</span><span class="o">=</span><span class="n">pipelines</span><span class="o">.</span><span class="n">CodeBuildOptions</span><span class="p">(</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>                <span class="n">build_environment</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildEnvironment</span><span class="p">(</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>                    <span class="n">build_image</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">LinuxBuildImage</span><span class="o">.</span><span class="n">from_docker_registry</span><span class="p">(</span><span class="n">ECR</span><span class="o">.</span><span class="n">LATEST</span><span class="p">),</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>                <span class="p">)</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>            <span class="p">),</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>        <span class="p">)</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>        <span class="n">steps</span> <span class="o">=</span> <span class="n">CodeBuildSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>        <span class="c1"># pre</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>        <span class="n">unit_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">unit_tests</span><span class="p">()</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>        <span class="n">integration_tests</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">integration_tests</span><span class="p">()</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>        <span class="c1"># post</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>        <span class="n">diagram</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">diagram</span><span class="p">()</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>        <span class="n">redoc</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">redoc</span><span class="p">()</span>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>        <span class="n">swagger</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">swagger</span><span class="p">()</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>            <span class="n">DeployStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>            <span class="n">pre</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>                <span class="n">unit_tests</span><span class="p">,</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>                <span class="n">integration_tests</span><span class="p">,</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>            <span class="p">],</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>            <span class="n">post</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>                <span class="n">diagram</span><span class="p">,</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>                <span class="n">redoc</span><span class="p">,</span>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>                <span class="n">swagger</span><span class="p">,</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>            <span class="p">],</span>
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>        <span class="p">)</span>
 </code></pre></div>
 <p>This environment is named <code>Prod</code> and the resources used are provenient from the <code>prod</code> key in the <code>cdk.json</code> file. Additionally, the <code>main</code> branch on GitHub is being used to trigger the pipeline.</p>
 <p>Considering the paramount importance of security and integrity in our production environment, we meticulously replicate tests and reinforce safeguards prior to deployment. This rigorous process guarantees that any modifications adhere to our stringent quality benchmarks, thereby safeguarding against vulnerabilities and upholding a seamless user experience. Following this, we proceed to generate the Swagger and Redoc docs alongside the AWS Architecture Diagram for our application.</p>
@@ -1881,7 +1896,7 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 
 <h3 id="deploying-the-production-environment">Deploying the Production Environment</h3>
 <p>Deploy your production environment using the AWS CDK, adhering to the naming conventions.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>forge deploy --stack Prod
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge deploy --stack Prod
 </code></pre></div>
 <p>Executing this command initiates the creation of a new pipeline in AWS CodePipeline, designed to automate our deployment process.</p>
 <p><img alt="alt text" src="../images/prod-pipeline-running.png" /></p>
@@ -1889,25 +1904,25 @@ if (typeof window !== 'undefined' && window.location.href.includes('127.0.0.1'))
 <p><img alt="alt text" src="../images/prod-success.png" /></p>
 <h2 id="creating-new-pipelines">Creating new Pipelines</h2>
 <p>Feel free to create as many pipelines as you need. Just remember to instantiate them in the <code>app.py</code> file located at the root of your project.</p>
-<div class="highlight"><span class="filename">app.py</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.dev_stack</span> <span class="kn">import</span> <span class="n">DevStack</span>
-</span><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.staging_stack</span> <span class="kn">import</span> <span class="n">StagingStack</span>
-</span><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.prod_stack</span> <span class="kn">import</span> <span class="n">ProdStack</span>
-</span><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">app</span> <span class="o">=</span> <span class="n">cdk</span><span class="o">.</span><span class="n">App</span><span class="p">()</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="hll"><span class="n">DevStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="hll"><span class="n">StagingStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="hll"><span class="n">ProdStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">app</span><span class="o">.</span><span class="n">synth</span><span class="p">()</span>
+<div class="highlight"><span class="filename">app.py</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span> <span class="nn">aws_cdk</span> <span class="k">as</span> <span class="nn">cdk</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.dev_stack</span> <span class="kn">import</span> <span class="n">DevStack</span>
+</span><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.staging_stack</span> <span class="kn">import</span> <span class="n">StagingStack</span>
+</span><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="hll"><span class="kn">from</span> <span class="nn">infra.stacks.prod_stack</span> <span class="kn">import</span> <span class="n">ProdStack</span>
+</span><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">app</span> <span class="o">=</span> <span class="n">cdk</span><span class="o">.</span><span class="n">App</span><span class="p">()</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="hll"><span class="n">DevStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="hll"><span class="n">StagingStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="hll"><span class="n">ProdStack</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="n">app</span><span class="o">.</span><span class="n">synth</span><span class="p">()</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>
 You can deploy all pipelines at once by using the following command:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>forge deploy --all
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>forge deploy --all
 </code></pre></div>
 
 </p>
@@ -1920,9 +1935,9 @@ You can deploy all pipelines at once by using the following command:
 <p>Furthermore, you have deployed three unique stack of functions, each corresponding to a different environment:</p>
 <p><img alt="alt text" src="../images/deployed-hello-worlds.png" /></p>
 <ul>
-<li><strong>Dev</strong>: <a href="https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://tbd4it3lph.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
-<li><strong>Staging</strong>: <a href="https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://01gezhxsf2.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
-<li><strong>Prod</strong>: <a href="https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://n5lzkkuj51.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
+<li><strong>Dev</strong>: <a href="https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/hello_world">https://zo3691q3pd.execute-api.us-east-2.amazonaws.com/dev/hello_world</a></li>
+<li><strong>Staging</strong>: <a href="https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/hello_world">https://qkaer0f0q5.execute-api.us-east-2.amazonaws.com/staging/hello_world</a></li>
+<li><strong>Prod</strong>: <a href="https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/hello_world">https://byi76zqidj.execute-api.us-east-2.amazonaws.com/prod/hello_world</a></li>
 </ul>
 <p>Each link directs you to the corresponding function deployed within its respective environment, demonstrating the successful separation and management of environments through your CI/CD workflows.</p>
 
