@@ -195,21 +195,7 @@ Every time we run the command `cdk synth`, Lambda Forge tracks the trigger and i
             }
         ],
         "invocations": []
-    },
-    {
-        "name": "Private",
-        "path": "./functions/private",
-        "description": "A private function",
-        "timeout": 60,
-        "triggers": [
-            {
-                "service": "api_gateway",
-                "trigger": "/private",
-                "method": "GET",
-                "public": false
-            }
-        ],
-        "invocations": []
+    }
     }
 ```
 

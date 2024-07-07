@@ -364,7 +364,7 @@ To address the initial staging deployment error, we need to configure the BASE U
 First, run the following command to list all variables from your CloudFormation stacks:
 
 ```
-forge describe
+forge output
 ```
 
 Upon running the command, the variables will be listed in your terminal:
