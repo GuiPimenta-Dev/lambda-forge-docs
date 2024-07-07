@@ -36,17 +36,34 @@ Lambda Forge simplifies working with AWS Lambda functions by providing pre-built
 
 Lambda Forge currently has built-in classes for the following AWS services:
 
-- API Gateway
-- AWS Lambdas
-- Cognito
-- DynamoDB
-- Event Bridge
-- KMS
-- Secrets Manager
-- S3
-- SNS
-- SQS
-- Websockets
+<div align="center">
+<table>
+  <tr>
+    <td>API Gateway</td>
+    <td>Lambda Layers</td>
+  </tr>
+  <tr>
+    <td>AWS Lambdas</td>
+    <td>KMS</td>
+  </tr>
+  <tr>
+    <td>Cognito</td>
+    <td>S3</td>
+  </tr>
+  <tr>
+    <td>DynamoDB</td>
+    <td>Secrets Manager</td>
+  </tr>
+  <tr>
+    <td>Event Bridge</td>
+    <td>SNS</td>
+  </tr>
+  <tr>
+    <td>Websockets</td>
+    <td>SQS</td>
+  </tr>
+</table>
+</div>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
