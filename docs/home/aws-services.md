@@ -170,14 +170,6 @@ Every time we run the command `cdk synth`, Lambda Forge tracks the trigger and i
 ```json title="functions.json"
 [
     {
-        "name": "SecretAuthorizer",
-        "path": "./authorizers/secret",
-        "description": "An authorizer to validate requests based on a secret present on the headers",
-        "timeout": 60,
-        "triggers": [],
-        "invocations": []
-    },
-    {
         "name": "HelloWorld",
         "path": "./functions/hello_world",
         "description": "A simple hello world",
@@ -196,7 +188,7 @@ Every time we run the command `cdk synth`, Lambda Forge tracks the trigger and i
         ],
         "invocations": []
     }
-    }
+]
 ```
 
 The `functions.json` file is essential to Lambda Forge, serving as a crucial component for many of its features, including documentation generation and custom CodePipeline steps.
